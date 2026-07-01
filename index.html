@@ -108,6 +108,22 @@ body {
 .r-actions { padding:0 16px; }
 .btn-restart { display:block; width:100%; padding:15px; border:2px solid #ddd; background:transparent; color:#7a7a8a; border-radius:50px; font-size:15px; font-weight:600; cursor:pointer; text-align:center; }
 .btn-restart:active { background:#f5f3f0; }
+.r-pair-box { border-radius:10px; overflow:hidden; margin-top:10px; }
+#result.warm .r-pair-box { border:1px solid #f0e0d0; }
+#result.cool .r-pair-box { border:1px solid #d0dce8; }
+.r-pair-box .plbl { padding:8px 14px; font-size:10px; font-weight:600; letter-spacing:1px; }
+#result.warm .r-pair-box .plbl { background:#f5efe6; border-bottom:1px solid #f0e0d0; color:#7a7a8a; }
+#result.cool .r-pair-box .plbl { background:#e8eef6; border-bottom:1px solid #d0dce8; color:#7a7a8a; }
+.r-pair-item { padding:8px 14px; font-size:12px; color:#2d2d3a; line-height:1.5; }
+#result.warm .r-pair-item { border-bottom:1px solid #f0e0d0; }
+#result.cool .r-pair-item { border-bottom:1px solid #d0dce8; }
+.r-pair-item:last-child { border:none; }
+.r-pair-name { font-weight:700; margin-bottom:2px; font-size:13px; }
+.r-pair-tag { display:inline-block; font-size:10px; padding:1px 7px; border-radius:5px; margin-left:5px; font-weight:600; }
+.r-pair-tag.best { background:#e8f5e8; color:#27ae60; }
+.r-pair-tag.challenge { background:#ffe8e8; color:#c0392b; }
+.r-pair-tag.mirror { background:#e8f4f8; color:#2980b9; }
+.r-pair-text { font-size:12px; color:#7a7a8a; line-height:1.5; }
 .r-footer { text-align:center; font-size:11px; color:#7a7a8a; padding:16px; opacity:0.4; }
 </style>
 </head>
@@ -267,7 +283,13 @@ RESULT_DATA['yang-male']={
   challenge:'如果我示弱了，谁来扛？',
   growth:'学习"被接住"——脆弱不是崩塌，是另一种力量',
   steps:['从最小的事练习表达"我需要你"','觉察"过度负责=控制"的模式','区分"扛起责任"和"扛起一切"'],
-  match:'女阴 - 连接者', matchWhy:'她给你柔软，你给她安全'
+  relationMode:'你习惯站在"保护者/给予者"的位置。你很难开口要，但会在关键时刻顶上。你不是不会爱，而是习惯用行动代替表达。',
+  bestMatch:{name:'女阴 - 连接者',why:'阴阳互补——她给你柔软和接纳，你给她安全感和方向'},
+  pairGuide:[
+    {target:'女阴 - 连接者',tag:'best',tagText:'最佳拍档',text:'最经典的阴阳平衡。她擅长连接和付出，你擅长担当和保护。但需警惕：她的"付出"被你当成理所当然。'},
+    {target:'女阳 - 破局者',tag:'challenge',tagText:'强强相遇',text:'两个阳性内核容易成为战友，也可能变成权力博弈。课题是：不要竞争谁更强大，学会互相钦佩。'},
+    {target:'男阴 - 深潜者',tag:'mirror',tagText:'镜像对照',text:'你们都习惯沉默，但他向内、你向外。事业上你冲锋他兜底；亲密关系中，你们需要一个人先开口。'}
+  ]
 };
 RESULT_DATA['yang-female']={
   type:'女阳 - 破局者', sub:'打破框架的人',
@@ -278,7 +300,13 @@ RESULT_DATA['yang-female']={
   challenge:'无法接受自己的脆弱——"如果我连这点事都搞不定，我还有什么价值？"',
   growth:'自然地流露脆弱——示弱不是软弱，是最高级别的向下兼容',
   steps:['反复背诵"示弱不是软弱"','找一个安全的"接住者"练习示弱','区分"坚强"和"僵硬"'],
-  match:'男阴 - 深潜者', matchWhy:'他理解你的深度，你带他走出内耗'
+  relationMode:'你需要平等、空间和被看见。你讨厌被控制，也讨厌被当成"该温柔一点"的女人。你的课题不是变得柔软，而是找到能接住你强度的人。',
+  bestMatch:{name:'男阴 - 深潜者',why:'阴阳互补——他理解你的深度，你带他走出内耗'},
+  pairGuide:[
+    {target:'男阴 - 深潜者',tag:'best',tagText:'最佳拍档',text:'你最互补的配对。你负责破局和行动，他负责深度感受和连接。他能接住你的强度，你能把他从过度思考中拉出来。'},
+    {target:'男阳 - 承重者',tag:'challenge',tagText:'强强相遇',text:'两个阳性内核容易互相欣赏，也可能暗暗较劲。相处关键是：不抢方向盘，你拼你的局，他守他的城。'},
+    {target:'女阴 - 连接者',tag:'mirror',tagText:'镜像对照',text:'她是你"不愿意成为"的自己——柔软、依赖、会撒娇。反过来，你是她羡慕的样子。你们可以互相学习，但别互相评判。'}
+  ]
 };
 RESULT_DATA['yin-female']={
   type:'女阴 - 连接者', sub:'用心连接的人',
@@ -289,7 +317,13 @@ RESULT_DATA['yin-female']={
   challenge:'"我不配得被爱"——总觉得必须付出点什么才有资格被爱',
   growth:'从"付出更多"到"允许被爱"',
   steps:['觉察"牺牲式付出=控制"的模式','练习直接表达需求','建立边界不是为了推开别人，而是让自己站得更稳'],
-  match:'男阳 - 承重者', matchWhy:'他给你安全感，你给他被需要的感觉'
+  relationMode:'你习惯用"给"来换取"留"。你渴望被需要、被珍惜，却常常因为不敢直接表达需求而委屈。你不是黏人，你只是想要确定感。',
+  bestMatch:{name:'男阳 - 承重者',why:'阴阳互补——他给你安全感，你给他被需要的感觉'},
+  pairGuide:[
+    {target:'男阳 - 承重者',tag:'best',tagText:'最佳拍档',text:'经典的阴阳平衡。你的柔软和付出正好是他的解药，他的稳重和担当正好是你的安全感。但要小心：不要把"付出"当成控制他的筹码。'},
+    {target:'男阴 - 深潜者',tag:'mirror',tagText:'镜像对照',text:'你们都敏感、都怕被抛弃，都容易想太多。你们能深度理解彼此，但也可能一起沉入情绪漩涡。'},
+    {target:'女阳 - 破局者',tag:'challenge',tagText:'能量相反',text:'她是你羡慕的样子——独立、有边界、不讨好。相处时互相欣赏，不要互相改造。'}
+  ]
 };
 RESULT_DATA['yin-male']={
   type:'男阴 - 深潜者', sub:'潜入深处的人',
@@ -300,7 +334,13 @@ RESULT_DATA['yin-male']={
   challenge:'怕的不是爱，是爱了之后被伤害',
   growth:'从过度思考转向有边界的信任流动——敏感不是缺陷，是超能力',
   steps:['区分"融合"和"吞噬"','觉察"死循环套娃"——先做一步','把敏感从"负担"重新定义为"天线"'],
-  match:'女阳 - 破局者', matchWhy:'她带你走出去，你接住她的脆弱'
+  relationMode:'你渴望深度连接，却又害怕交付后被伤害。你常常"想靠近又退缩"，不是不爱，是太怕受伤。你需要一个能看穿你沉默的人。',
+  bestMatch:{name:'女阳 - 破局者',why:'阴阳互补——她带你走出去，你接住她的脆弱'},
+  pairGuide:[
+    {target:'女阳 - 破局者',tag:'best',tagText:'最佳拍档',text:'你最互补的配对。她的阳性能量带你从过度思考走向行动，你的阴性能量让她学会自然流露脆弱。她是你的铠甲，你是她的港湾。'},
+    {target:'女阴 - 连接者',tag:'mirror',tagText:'镜像对照',text:'你们都敏感、都需要安全感。你们能建立很深的情感连接，但也可能因为太像而互相内耗。'},
+    {target:'男阳 - 承重者',tag:'challenge',tagText:'能量相反',text:'你们像磁铁的两极。他习惯"扛"，你习惯"想"。事业上他是前锋你是谋士；亲密关系中需要有人先跨出一步。'}
+  ]
 };
 
 // ===== SHOW RESULT =====
@@ -356,7 +396,11 @@ function showResult() {
     stepsHtml+'</div>'+
 
     '<div class="r-card"><div class="r-card-title">&#127754; 关系层面 <span class="line"></span></div>'+
-    '<div class="r-evo-box"><div class="lbl">最佳拍档</div><div class="txt"><strong>'+data.match+'</strong> — '+data.matchWhy+'</div></div></div>';
+    '<div class="r-evo-box" style="margin-bottom:12px;"><div class="lbl">关系模式</div><div class="txt">'+data.relationMode+'</div></div>'+
+    '<div class="r-evo-box" style="margin-bottom:10px;"><div class="lbl">最佳拍档</div><div class="txt"><strong>'+data.bestMatch.name+'</strong> &mdash; '+data.bestMatch.why+'</div></div>'+
+    '<div class="r-pair-box"><div class="plbl">配对指引</div>'+
+    data.pairGuide.map(function(p){return '<div class="r-pair-item"><div class="r-pair-name">'+p.target+'<span class="r-pair-tag '+p.tag+'">'+p.tagText+'</span></div><div class="r-pair-text">'+p.text+'</div></div>';}).join('')+
+    '</div></div>';
 
   document.getElementById('quiz').style.display='none';
   document.getElementById('result').style.display='block';

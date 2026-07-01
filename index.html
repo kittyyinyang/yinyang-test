@@ -71,7 +71,7 @@ body {
 .r-banner { position:relative; width:100%; min-height:340px; overflow:hidden; }
 .r-banner.warm { background:linear-gradient(135deg,#2d1b0e,#5a3a1a); }
 .r-banner.cool { background:linear-gradient(135deg,#0f1a2e,#1a2a4a); }
-.r-banner img { width:100%; height:340px; object-fit:cover; display:block; }
+.r-banner img { width:100%; height:340px; object-fit:cover; display:block; opacity:0; transition:opacity 0.5s ease; }
 .r-banner.warm::after, .r-banner.cool::after { content:''; position:absolute; top:0; left:0; right:0; bottom:0; pointer-events:none; }
 .r-banner.warm::after { background:linear-gradient(180deg,rgba(90,50,20,0.35) 0%,transparent 35%,rgba(45,27,14,0.45) 100%); }
 .r-banner.cool::after { background:linear-gradient(180deg,rgba(20,40,80,0.35) 0%,transparent 35%,rgba(15,26,46,0.45) 100%); }
@@ -194,7 +194,7 @@ body {
 
 <div id="result" class="result-wrap warm">
   <div class="r-banner" id="resultBanner">
-    <img class="" id="resultPortrait" src="" alt="" style="display:none;">
+    <img class="" id="resultPortrait" src="" alt="">
     <div class="r-banner-overlay">
       <div class="r-type" id="resultType"></div>
       <div class="r-sub" id="resultSubtype"></div>
@@ -240,10 +240,6 @@ var state = { step:'gender', gender:'', currentQ:-1, answers:{}, shuffled:{} };
 function shuffleArray(a) { var b=[...a]; for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;} return b; }
 
 function startQuiz() {
-  // Preload character portraits in background while user answers
-  var imgs = ['male-yang.jpg?v=1','male-yin.jpg?v=1','female-yang.jpg?v=1','female-yin.jpg?v=1'];
-  for(var i=0;i<imgs.length;i++){var a=new Image();a.src='images/'+imgs[i];}
-  // Show quiz
   document.getElementById('cover').style.display='none';
   document.getElementById('quiz').style.display='block';
   renderGender();
@@ -525,7 +521,7 @@ function showResult() {
   pMap['yin-female']='images/female-yin.jpg?v=1';
   pMap['yin-male']='images/male-yin.jpg?v=1';
   var pImg=document.getElementById('resultPortrait');
-  if(pMap[key]){pImg.src=pMap[key];pImg.style.display='block';pImg.onerror=function(){this.style.display='none';};}
+  if(pMap[key]){pImg.src=pMap[key];pImg.style.display='block';pImg.onload=function(){this.style.opacity='1';};pImg.onerror=function(){this.style.display='none';};}
 
   // Radar chart
   var dimScores = calcDimScores();
@@ -575,6 +571,11 @@ function restart() {
   document.getElementById('cover').style.display='flex';
   window.scrollTo(0,0);
 }
+// Preload all character portraits as soon as page loads
+(function(){
+  var imgs=['male-yang.jpg?v=1','male-yin.jpg?v=1','female-yang.jpg?v=1','female-yin.jpg?v=1'];
+  for(var i=0;i<imgs.length;i++){var a=new Image();a.src='images/'+imgs[i];}
+})();
 </script>
 </body>
 </html>

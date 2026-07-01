@@ -200,7 +200,9 @@ var QUESTIONS = [
 ];
 
 // ===== ENGINE =====
-var state = { step:'gender', gender:'', currentQ:-1, answers:{} };
+var state = { step:'gender', gender:'', currentQ:-1, answers:{}, shuffled:{} };
+
+function shuffleArray(a) { var b=[...a]; for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;} return b; }
 
 function shuffleArray(a) { var b=[...a]; for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;} return b; }
 
@@ -239,7 +241,10 @@ function startQuizCore() {
 function showQ(idx) {
   var q=QUESTIONS[idx];
   var c=document.getElementById('questionContainer');
-  var opts=q.opts.map(function(o,i){
+  // Shuffle once and reuse
+  if(!state.shuffled[q.id]) state.shuffled[q.id]=shuffleArray(q.opts);
+  var display=state.shuffled[q.id];
+  var opts=display.map(function(o,i){
     var sel=state.answers[q.id]===o.v?'selected':'';
     return '<button class="q-option '+sel+'" onclick="pickA(\''+q.id+'\','+o.v+',this)"><span class="opt-label">'+String.fromCharCode(65+i)+'</span>'+o.t+'</button>';
   }).join('');
@@ -408,7 +413,7 @@ function showResult() {
 }
 
 function restart() {
-  state={step:'gender',gender:'',currentQ:-1,answers:{}};
+  state={step:'gender',gender:'',currentQ:-1,answers:{},shuffled:{}};
   document.getElementById('result').style.display='none';
   document.getElementById('quiz').style.display='none';
   document.getElementById('cover').style.display='flex';

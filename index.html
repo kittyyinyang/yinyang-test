@@ -2,719 +2,159 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta property="og:title" content="阴阳人格 · 你的能量内核是阴还是阳？">
-<meta property="og:description" content="10道题精准定位你的能量内核">
-<meta property="og:type" content="website">
 <title>阴阳人格 · 能量内核测评</title>
 <style>
-:root {
-  --deep-blue: #1a1a2e; --warm-gold: #d4a574; --moon-white: #f0e6d3;
-  --cream-bg: #faf8f5; --text-dark: #2d2d3a; --text-gray: #7a7a8a;
-}
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
-  background:var(--cream-bg); color:var(--text-dark);
-  line-height:1.6; min-height:100vh; -webkit-font-smoothing:antialiased;
+  background:#faf8f5; color:#2d2d3a; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
 }
-
-/* ── SPLASH ── */
-/* ── COVER (Simplified) ── */
 #cover {
   min-height:100vh; display:flex; flex-direction:column;
-  align-items:center; justify-content:flex-end;
-  padding:40px 24px 44px; text-align:center;
-  position:relative;
-  background:linear-gradient(165deg,#080812,#12102a,#1a0f20,#0e0a18);
-  color:var(--moon-white);
-  z-index:1;
+  align-items:center; justify-content:center;
+  background:linear-gradient(165deg,#080812,#12102a,#1a0f20);
+  color:#f0e6d3; padding:40px 24px;
 }
-.cv-moon { font-size:48px; margin-bottom:8px; line-height:1; }
-.cv-hook { font-size:24px; font-weight:700; line-height:1.4; margin-bottom:6px; }
-.cv-hook .hl { color:#d4a574; }
-.cv-hook-sub { font-size:13px; color:rgba(240,230,211,0.4); line-height:1.5; margin-bottom:16px; max-width:300px; }
+.cover-icon { font-size:48px; margin-bottom:8px; }
+.cover-title { font-size:24px; font-weight:700; line-height:1.4; margin-bottom:6px; }
+.cover-title .hl { color:#d4a574; }
+.cover-sub { font-size:13px; color:rgba(240,230,211,0.4); line-height:1.5; margin-bottom:24px; }
 .btn-start {
   background:linear-gradient(135deg,#d4a574,#c89058); color:#0a0a16;
   border:none; padding:14px 44px; border-radius:50px;
   font-size:16px; font-weight:700; cursor:pointer; letter-spacing:1px;
   box-shadow:0 4px 20px rgba(212,165,116,0.2);
-  transition:all 0.2s; margin-bottom:16px;
 }
 .btn-start:active { transform:scale(0.97); }
-.cv-bottom { font-size:10px; color:rgba(240,230,211,0.15); letter-spacing:1px; margin-bottom:8px; }
+.cover-foot { font-size:10px; color:rgba(240,230,211,0.15); margin-top:24px; }
 
-/* ── QUIZ ── */
-#quiz { display:none; padding:0; max-width:600px; margin:0 auto; }
-.quiz-header { position:sticky; top:0; z-index:100; background:rgba(250,248,245,0.95); backdrop-filter:blur(10px); padding:16px 20px 12px; border-bottom:1px solid rgba(0,0,0,0.04); }
-.progress-bar { background:#e8e4de; height:3px; border-radius:2px; overflow:hidden; }
-.progress-fill { height:100%; background:linear-gradient(90deg,var(--warm-gold),#c4955a); border-radius:2px; transition:width 0.4s ease; width:0%; }
-.quiz-meta { display:flex; justify-content:space-between; font-size:12px; color:var(--text-gray); margin-top:8px; }
-.q-container { padding:16px 20px 120px; }
-.q-card { background:#fff; border-radius:16px; padding:28px 24px; box-shadow:0 2px 16px rgba(0,0,0,0.06); margin-bottom:16px; display:none; animation:fadeUp 0.35s ease; }
-.q-card.active { display:block; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
-.q-header { display:flex; align-items:center; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
-.q-badge { display:inline-block; padding:3px 12px; border-radius:8px; font-size:11px; font-weight:600; }
-.q-badge.rel { background:#fce8ec; color:#c05060; }
-.q-badge.soc { background:#e8eff8; color:#5078b0; }
-.q-badge.inner { background:#ede8f5; color:#8068a0; }
-.q-badge.bound { background:#e8f2e8; color:#508060; }
-.q-badge.decision { background:#f5ede0; color:#a07040; }
-.q-text { font-size:17px; font-weight:600; margin-bottom:20px; line-height:1.5; }
-.q-option { display:block; width:100%; padding:14px 16px; margin-bottom:10px; border:2px solid #eee; border-radius:12px; background:#fafafa; font-size:15px; text-align:left; cursor:pointer; transition:all 0.2s; color:var(--text-dark); line-height:1.4; }
-.q-option:active { transform:scale(0.98); }
-.q-option.selected { border-color:var(--warm-gold); background:#fef9f5; box-shadow:0 0 0 2px rgba(212,165,116,0.15); }
-.q-option .opt-label { display:inline-block; width:24px; height:24px; line-height:24px; text-align:center; border-radius:50%; background:#eee; font-size:12px; font-weight:600; margin-right:10px; color:var(--text-gray); transition:all 0.2s; }
-.q-option.selected .opt-label { background:var(--warm-gold); color:#fff; }
-.q-nav { position:fixed; bottom:0; left:0; right:0; background:rgba(250,248,245,0.95); backdrop-filter:blur(10px); padding:12px 20px; display:flex; gap:12px; border-top:1px solid rgba(0,0,0,0.04); max-width:600px; margin:0 auto; }
-.btn-prev, .btn-next { flex:1; padding:14px; border:none; border-radius:50px; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.2s; }
-.btn-prev { background:#eee; color:var(--text-gray); }
-.btn-prev:active { background:#e0dcd6; }
-.btn-next { background:linear-gradient(135deg,var(--warm-gold),#c4955a); color:#1a1a2e; }
+#quiz { display:none; padding:20px; max-width:600px; margin:0 auto; }
+.q-text { font-size:17px; font-weight:600; margin-bottom:16px; line-height:1.5; }
+.q-option { display:block; width:100%; padding:14px 16px; margin-bottom:10px; border:2px solid #eee; border-radius:12px; background:#fafafa; font-size:15px; text-align:left; cursor:pointer; color:#2d2d3a; }
+.q-option.selected { border-color:#d4a574; background:#fef9f5; }
+.q-nav { margin-top:16px; }
+.btn-next { background:linear-gradient(135deg,#d4a574,#c4955a); color:#1a1a2e; border:none; padding:14px 24px; border-radius:50px; font-size:15px; font-weight:600; cursor:pointer; width:100%; }
 .btn-next:disabled { opacity:0.35; cursor:not-allowed; }
-.btn-next:active:not(:disabled) { transform:scale(0.97); }
 
-/* ── RESULT ── */
-#result { display:none; padding:0 0 40px; max-width:600px; margin:0 auto; }
-#result.result-wrap.warm { --pg-bg:#faf3ec; --card-bg:#fffcf8; --card-border:rgba(196,122,58,0.08); --accent:#c47a3a; --accent-soft:#f5e6d0; --accent-light:#fef9f2; --accent-border:#f0e0d0; --evo-bg:#fdf6ee; --evo-border:#f5e8d8; --rel-bg:#fdf6ee; --rel-border:#f0e0d0; --rel-label:#f5efe6; }
-#result.result-wrap.cool { --pg-bg:#eef0f4; --card-bg:#f7f8fc; --card-border:rgba(74,106,154,0.08); --accent:#4a6a9a; --accent-soft:#d0dcee; --accent-light:#f0f4fa; --accent-border:#d0dce8; --evo-bg:#eef4fa; --evo-border:#d8e0ee; --rel-bg:#eef4fa; --rel-border:#d0dce8; --rel-label:#e8eef6; }
-.r-banner { position:relative; width:100%; min-height:340px; overflow:hidden; }
-.r-banner.warm { background:linear-gradient(135deg,#2d1b0e,#5a3a1a); }
-.r-banner.cool { background:linear-gradient(135deg,#0f1a2e,#1a2a4a); }
-.r-banner-img { width:100%; height:340px; object-fit:cover; display:block; }
-.r-banner.warm::after, .r-banner.cool::after { content:''; position:absolute; top:0; left:0; right:0; bottom:0; pointer-events:none; }
-.r-banner.warm::after { background:linear-gradient(180deg,rgba(90,50,20,0.35) 0%,transparent 35%,rgba(45,27,14,0.45) 100%); }
-.r-banner.cool::after { background:linear-gradient(180deg,rgba(20,40,80,0.35) 0%,transparent 35%,rgba(15,26,46,0.45) 100%); }
-.r-banner.warm .r-banner-overlay { background:linear-gradient(0deg,rgba(45,27,14,0.95) 0%,rgba(45,27,14,0.45) 55%,transparent 100%); }
-.r-banner.cool .r-banner-overlay { background:linear-gradient(0deg,rgba(15,26,46,0.95) 0%,rgba(15,26,46,0.45) 55%,transparent 100%); }
-.r-banner-overlay { position:absolute; bottom:0; left:0; right:0; padding:60px 24px 24px; text-align:center; color:#fff; }
-.r-icon { font-size:36px; margin-bottom:4px; }
-.r-type { font-size:24px; font-weight:700; letter-spacing:2px; text-shadow:0 2px 8px rgba(0,0,0,0.5); }
-.r-sub { font-size:12px; opacity:0.75; margin-top:4px; letter-spacing:1px; }
-.r-slogan { font-size:15px; font-weight:500; margin-top:8px; line-height:1.5; opacity:0.9; font-style:italic; text-shadow:0 1px 6px rgba(0,0,0,0.5); }
-.r-conf-badge { display:inline-block; margin-top:8px; padding:3px 12px; border-radius:10px; font-size:11px; font-weight:600; }
-.r-conf-badge.high { background:rgba(46,204,113,0.3); color:#8eecb5; }
-.r-conf-badge.mid { background:rgba(243,156,18,0.3); color:#f5c86a; }
-.r-energy { background:var(--card-bg); border-radius:16px; margin:-20px 16px 12px; padding:20px 20px 16px; box-shadow:0 -4px 20px rgba(0,0,0,0.06); position:relative; }
-.r-energy-title { font-size:13px; font-weight:600; color:var(--text-gray); text-align:center; margin-bottom:14px; letter-spacing:1px; }
-.energy-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-.energy-label { font-size:13px; font-weight:600; width:32px; text-align:center; flex-shrink:0; }
-.energy-label.yin { color:#4a6a9a; } .energy-label.yang { color:#c47a3a; }
-.energy-track { flex:1; height:8px; background:#eee; border-radius:4px; overflow:hidden; }
-.energy-fill { height:100%; border-radius:4px; transition:width 1s ease; }
-.energy-fill.yin { background:linear-gradient(90deg,#6a8aba,#4a6a9a); }
-.energy-fill.yang { background:linear-gradient(90deg,#e8a060,#c47a3a); }
-.energy-pct { font-size:13px; font-weight:700; width:42px; text-align:right; flex-shrink:0; }
-.energy-pct.yin { color:#4a6a9a; } .energy-pct.yang { color:#c47a3a; }
-.energy-verdict { text-align:center; font-size:11px; color:#aaa; margin-top:10px; letter-spacing:0.5px; }
-
-/* ── Radar Chart ── */
-.r-radar { margin:0 16px 12px; background:var(--card-bg); border-radius:16px; padding:20px; box-shadow:0 2px 12px rgba(0,0,0,0.05); }
-.r-radar-title { font-size:13px; font-weight:600; color:var(--text-gray); text-align:center; margin-bottom:14px; letter-spacing:1px; }
-.radar-container { position:relative; width:100%; max-width:320px; margin:0 auto; }
-.radar-container svg { width:100%; height:auto; }
-.radar-legend { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-top:10px; }
-.radar-legend-item { display:flex; align-items:center; gap:4px; font-size:11px; color:var(--text-gray); }
-.radar-legend-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
-#result.result-wrap.warm .radar-legend-dot.yang-dot { background:#c47a3a; }
-#result.result-wrap.cool .radar-legend-dot.yang-dot { background:#4a6a9a; }
-.radar-legend-dot.yin-dot { background:#d0d0d8; }
-
-/* ── Content Cards ── */
-#result.result-wrap.warm .r-content { background:var(--pg-bg); margin:0 -16px; padding:12px 16px; }
-#result.result-wrap.cool .r-content { background:var(--pg-bg); margin:0 -16px; padding:12px 16px; }
-.r-card { background:var(--card-bg); border-radius:16px; padding:20px; margin-bottom:12px; box-shadow:0 2px 12px rgba(0,0,0,0.05); }
-#result.result-wrap.warm .r-card { border:1px solid var(--card-border); }
-#result.result-wrap.cool .r-card { border:1px solid var(--card-border); }
-.r-card-title { font-size:14px; font-weight:700; color:var(--accent); margin-bottom:12px; letter-spacing:1px; display:flex; align-items:center; gap:6px; }
-.r-card-title .line { flex:1; height:1px; }
-#result.result-wrap.warm .r-card-title .line { background:var(--accent-border); }
-#result.result-wrap.cool .r-card-title .line { background:var(--accent-border); }
-.r-core-desc { font-size:14px; color:var(--text-dark); font-weight:600; margin-bottom:10px; line-height:1.5; }
-.r-traits { list-style:none; padding:0; }
-.r-traits li { padding:8px 0 8px 22px; position:relative; font-size:13px; color:var(--text-gray); border-bottom:1px solid #f8f5f0; line-height:1.5; }
-.r-traits li:last-child { border:none; }
-.r-traits li::before { content:'◆'; position:absolute; left:0; color:var(--accent); font-size:8px; top:10px; }
-.r-trait-highlight { padding:10px 14px; border-radius:0 10px 10px 0; margin:8px 0; font-size:13px; color:var(--text-gray); line-height:1.6; font-weight:500; }
-#result.result-wrap.warm .r-trait-highlight { background:var(--accent-light); border-left:3px solid var(--accent); }
-#result.result-wrap.cool .r-trait-highlight { background:var(--accent-light); border-left:3px solid var(--accent); }
-.r-evo-challenge { border-radius:12px; padding:14px 16px; margin-bottom:8px; }
-#result.result-wrap.warm .r-evo-challenge { background:var(--evo-bg); border:1px solid var(--evo-border); }
-#result.result-wrap.cool .r-evo-challenge { background:var(--evo-bg); border:1px solid var(--evo-border); }
-.r-evo-challenge .label { font-size:11px; font-weight:600; color:var(--accent); letter-spacing:1px; margin-bottom:4px; }
-.r-evo-challenge .text { font-size:14px; color:var(--text-dark); line-height:1.5; font-weight:500; }
-.r-evo-arrow { text-align:center; padding:6px 0; font-size:20px; color:var(--accent); }
-.r-evo-growth { border-radius:12px; padding:14px 16px; }
-#result.result-wrap.warm .r-evo-growth { background:var(--evo-bg); border:1px solid var(--evo-border); }
-#result.result-wrap.cool .r-evo-growth { background:var(--evo-bg); border:1px solid var(--evo-border); }
-.r-evo-growth .label { font-size:11px; font-weight:600; color:var(--accent); letter-spacing:1px; margin-bottom:4px; }
-.r-evo-growth .text { font-size:14px; color:var(--text-dark); line-height:1.5; font-weight:500; }
-.r-evo-steps { margin-top:10px; }
-.r-evo-steps .step { font-size:12px; color:var(--text-gray); padding:5px 0 5px 18px; position:relative; line-height:1.5; }
-.r-evo-steps .step::before { content:'→'; position:absolute; left:0; color:var(--accent); font-size:12px; }
-.r-relation-mode { border-radius:12px; padding:12px 16px; margin-bottom:12px; }
-#result.result-wrap.warm .r-relation-mode { background:var(--rel-bg); }
-#result.result-wrap.cool .r-relation-mode { background:var(--rel-bg); }
-.r-relation-mode .label, .r-best-match .label, .r-pair-guide .label { font-size:11px; font-weight:600; color:var(--text-gray); letter-spacing:1px; margin-bottom:4px; }
-.r-relation-mode .text { font-size:13px; color:var(--text-dark); line-height:1.6; }
-.r-best-match { display:flex; align-items:center; gap:10px; border-radius:12px; padding:12px 16px; margin-bottom:12px; }
-#result.result-wrap.warm .r-best-match { background:var(--rel-bg); border:1px solid var(--rel-border); }
-#result.result-wrap.cool .r-best-match { background:var(--rel-bg); border:1px solid var(--rel-border); }
-.r-best-match .icon { font-size:24px; }
-.r-best-match .info { flex:1; }
-.r-best-match .name { font-size:14px; font-weight:700; color:var(--text-dark); }
-.r-best-match .why { font-size:12px; color:var(--text-gray); margin-top:2px; }
-.r-pair-guide { border-radius:12px; overflow:hidden; }
-#result.result-wrap.warm .r-pair-guide { border:1px solid var(--rel-border); }
-#result.result-wrap.cool .r-pair-guide { border:1px solid var(--rel-border); }
-.r-pair-guide .label { padding:10px 16px; margin:0; }
-#result.result-wrap.warm .r-pair-guide .label { background:var(--rel-label); border-bottom:1px solid var(--rel-border); }
-#result.result-wrap.cool .r-pair-guide .label { background:var(--rel-label); border-bottom:1px solid var(--rel-border); }
-.r-pair-item { padding:10px 16px; }
-#result.result-wrap.warm .r-pair-item { border-bottom:1px solid var(--rel-border); }
-#result.result-wrap.cool .r-pair-item { border-bottom:1px solid var(--rel-border); }
-.r-pair-item:last-child { border-bottom:none; }
-.r-pair-name { font-size:13px; font-weight:700; color:var(--text-dark); margin-bottom:3px; }
-.r-pair-text { font-size:12px; color:var(--text-gray); line-height:1.5; }
-.r-pair-tag { display:inline-block; font-size:10px; padding:2px 8px; border-radius:6px; margin-left:6px; font-weight:600; }
-.r-pair-tag.best { background:#e8f5e8; color:#27ae60; }
-.r-pair-tag.challenge { background:#ffe8e8; color:#c0392b; }
-.r-pair-tag.mirror { background:#e8f4f8; color:#2980b9; }
-.r-actions { padding:0 16px; }
-.btn-share, .btn-restart { display:block; width:100%; padding:15px; border:none; border-radius:50px; font-size:16px; font-weight:600; cursor:pointer; transition:all 0.2s; text-align:center; margin-bottom:10px; }
-.btn-share { background:linear-gradient(135deg,var(--warm-gold),#c4955a); color:#1a1a2e; }
-.btn-share:active { transform:scale(0.97); }
-.btn-restart { border:2px solid #ddd; background:transparent; color:var(--text-gray); }
-.btn-restart:active { background:#f5f3f0; }
-.r-footer { text-align:center; font-size:11px; color:var(--text-gray); padding:20px; opacity:0.4; }
-#toast { position:fixed; bottom:80px; left:50%; transform:translateX(-50%); background:rgba(26,26,46,0.9); color:#fff; padding:12px 24px; border-radius:12px; font-size:14px; opacity:0; transition:opacity 0.3s; z-index:9999; pointer-events:none; white-space:nowrap; backdrop-filter:blur(10px); }
-#toast.show { opacity:1; }
+#result { display:none; max-width:600px; margin:0 auto; padding:20px; }
+.r-type { font-size:24px; font-weight:700; margin-bottom:10px; }
+.r-slogan { font-size:14px; font-style:italic; color:#666; margin-bottom:16px; }
+.r-card { background:#fff; border-radius:12px; padding:16px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.r-card h3 { font-size:14px; color:#c47a3a; margin-bottom:8px; }
+.r-trait { padding:4px 0; font-size:13px; color:#7a7a8a; }
+.r-actions { margin-top:16px; }
+.btn-restart { border:2px solid #ddd; background:transparent; color:#7a7a8a; padding:14px; border-radius:50px; font-size:15px; width:100%; cursor:pointer; text-align:center; display:block; }
 </style>
 </head>
 <body>
+
 <div id="cover">
-  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-    <div class="cv-moon">🌙</div>
-    <div class="cv-hook">为什么你总在关系里<br>反复<em class="hl">猜对方在想什么</em>？</div>
-    <div class="cv-hook-sub">不是你太敏感——是你们的能量内核不同</div>
-  </div>
-  <button class="btn-start" onclick="startQuiz()">开始测试 ▶</button>
-  <div class="cv-bottom">阴阳人格 · 能量内核测评 V5.4</div>
+  <div class="cover-icon">&#127769;</div>
+  <div class="cover-title">为什么你总在关系里<br>反复<em class="hl">猜对方在想什么</em>？</div>
+  <div class="cover-sub">不是你太敏感——是你们的能量内核不同</div>
+  <button class="btn-start" onclick="startQuiz()">开始测试</button>
+  <div class="cover-foot">阴阳人格 · 能量内核测评 V5.4</div>
 </div>
 
 <div id="quiz">
-  <div class="quiz-header">
-    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="quiz-meta">
-      <span id="progressText"></span>
-      <span id="progressPhase"></span>
-    </div>
-  </div>
-  <div class="q-container" id="questionContainer"></div>
+  <div class="q-text" id="quizText"></div>
+  <div id="quizOptions"></div>
   <div class="q-nav">
-    <button class="btn-prev" id="btnPrev" onclick="prevQuestion()" style="display:none;">← 上一题</button>
-    <button class="btn-next" id="btnNext" onclick="nextQuestion()">下一题 →</button>
+    <button class="btn-next" id="btnNext" onclick="nextQuestion()" disabled>下一题</button>
   </div>
 </div>
 
 <div id="result">
-  <div class="r-banner" id="resultBanner">
-    <img class="r-banner-img" id="resultPortrait" src="" alt="" style="display:none;">
-    <div class="r-banner-overlay" id="resultOverlay">
-      <div class="r-icon" id="resultIcon"></div>
-      <div class="r-type" id="resultType"></div>
-      <div class="r-sub" id="resultSubtype"></div>
-      <div class="r-slogan" id="resultSlogan"></div>
-      <div class="r-conf-badge" id="resultConf"></div>
-    </div>
-  </div>
-  <div id="resultContent"></div>
+  <div class="r-type" id="rType"></div>
+  <div class="r-slogan" id="rSlogan"></div>
+  <div id="rContent"></div>
   <div class="r-actions">
-    <button class="btn-share" onclick="shareResult()">📤 分享结果到群里</button>
     <button class="btn-restart" onclick="restart()">重新测试</button>
   </div>
-  <div class="r-footer">阴阳人格 · V5.4 &nbsp;|&nbsp; by Kitty的破局日记</div>
 </div>
 
-<div id="toast"></div>
-
 <script>
-// ===== 1. GENDER QUESTION =====
-const GENDER_Q = {
-  id:'gender', text:'你的生理性别是？',
-  options:[{text:'男',value:'male'},{text:'女',value:'female'}],
-  shuffle:false
-};
+var state = { step: 0, answers: [] };
 
-// ===== 2. QUESTIONS (V5.4 - 10 Core Questions) =====
-const DIMS = { rel:[], soc:[], inner:[], bound:[], decision:[] };
-const QUESTIONS = [
-  // ❤️ 情感关系 Q1-Q2
-  { id:'q1', text:'当你被一个你在乎的人冷落或忽视时——你的本能更接近？',
-    dim:'rel', options:[
-      {text:'反复琢磨——"我是不是哪里做错了"，然后可能会用测试的方式确认', value:0},
-      {text:'直接问或者直接翻篇——"有问题说问题，不说就当没事"', value:1}
-    ]},
-  { id:'q2', text:'一段重要的关系走到终点后——你内心的状态更接近？',
-    dim:'rel', options:[
-      {text:'反复回忆和复盘——在心里重放每个节点，想找出"为什么"和"如果当初"', value:0},
-      {text:'难过归难过，但会让自己往前走——在心里告诉自己"结束了就是结束了"', value:1}
-    ]},
-  // 🤝 社会人际 Q3-Q4
-  { id:'q3', text:'当你被误解时——你内心的状态更接近？',
-    dim:'soc', options:[
-      {text:'很在意对方怎么看自己——会反复解释和自证，"不是这样的，你听我说"，必须确保对方没有看错你', value:0},
-      {text:'会澄清事实——"你说的不对，事实是这样的"，但说清楚就够了，对方接不接受不强求', value:1}
-    ]},
-  { id:'q4', text:'约好的朋友临时放了你鸽子——你的第一反应更接近？',
-    dim:'soc', options:[
-      {text:'会难过或生气——"他是不是不在乎我"、"我的时间就不重要吗"', value:0},
-      {text:'有点不爽但很快就好了——"算了，我自己也能安排"', value:1}
-    ]},
-  // 🧠 内心消化 Q5-Q6
-  { id:'q5', text:'当心里有件事让你不太舒服时——你内心的状态更接近？',
-    dim:'inner', options:[
-      {text:'它会一直卡在那里，时不时冒出来——你在反复消化、琢磨、回想', value:0},
-      {text:'虽然不舒服，但不会让它一直占据你——你倾向于让这件事翻篇', value:1}
-    ]},
-  { id:'q6', text:'做了一个重要的决定之后——你内心的状态更接近？',
-    dim:'inner', options:[
-      {text:'会反复回头看——"选错了怎么办"、"另一个会不会更好"', value:0},
-      {text:'决定了就往前走——错了再改，不后悔', value:1}
-    ]},
-  // 🛡️ 边界博弈 Q7-Q8
-  { id:'q7', text:'当你在乎的人让你失望后——你消化这件事的方式更接近？',
-    dim:'bound', options:[
-      {text:'在心里反复琢磨——"是不是我哪里不够好"、"他为什么这样对我"，会从自己身上找原因', value:0},
-      {text:'在心里形成一个判断——"原来他是这样的人"、"这不是我想要的"，然后想接下来怎么办', value:1}
-    ]},
-  { id:'q8', text:'当别人对你提出期待，且你知道拒绝会让对方失望时——你内心的第一反应更接近？',
-    dim:'bound', options:[
-      {text:'先考虑对方的感受——不想让人失望，会先顺应，再慢慢找机会按自己的来', value:0},
-      {text:'先考虑自己的意愿——不想委屈自己，会直接表达"我做不到"或"我不想"', value:1}
-    ]},
-  // 🧭 决策冒险 Q9-Q10
-  { id:'q9', text:'当你对现状不太满意，但改变有风险、维持又可以再拖一阵——你内心的本能更接近？',
-    dim:'decision', options:[
-      {text:'倾向于先维持现状——虽然不舒服，但至少是已知的、安全的，等到忍不了了再说', value:0},
-      {text:'倾向于主动求变——不破不立，再差也不会比困在这里差，总得试试', value:1}
-    ]},
-  { id:'q10', text:'当你在两个都不错（或都不太差）的选项中做取舍时——你内心的模式更接近？',
-    dim:'decision', options:[
-      {text:'反复权衡——怕选错，想把所有可能性都想清楚了再定', value:0},
-      {text:'先选再说——相信行动比完美的选择更重要，选了再把它变成对的', value:1}
-    ]}
+var QUESTIONS = [
+  { text: '当你被一个你在乎的人冷落或忽视时——你的本能更接近？',
+    opts: ['反复琢磨——是不是我哪里做错了', '直接问或者直接翻篇'] },
+  { text: '一段重要的关系走到终点后——你内心的状态更接近？',
+    opts: ['反复回忆和复盘', '难过归难过但会让自己往前走'] },
+  { text: '当你被误解时——你内心的状态更接近？',
+    opts: ['反复解释和自证，必须确保对方没有看错你', '澄清事实，但说清楚就够了'] },
+  { text: '约好的朋友临时放了你鸽子——你的第一反应更接近？',
+    opts: ['会难过或生气', '有点不爽但很快就好了'] },
+  { text: '当心里有件事让你不太舒服时——你内心的状态更接近？',
+    opts: ['它会一直卡在那里反复消化', '虽然不舒服但会让它翻篇'] },
+  { text: '做了一个重要的决定之后——你内心的状态更接近？',
+    opts: ['会反复回头看', '决定了就往前走'] },
+  { text: '当你在乎的人让你失望后——你消化这件事的方式更接近？',
+    opts: ['从自己身上找原因', '在心里形成判断然后想怎么办'] },
+  { text: '当别人对你提出期待且拒绝会让对方失望时——你内心的第一反应更接近？',
+    opts: ['先考虑对方感受，先顺应', '先考虑自己意愿，直接表达'] },
+  { text: '当你对现状不太满意，但改变有风险——你内心的本能更接近？',
+    opts: ['先维持现状', '主动求变'] },
+  { text: '当你在两个都不错的选项中做取舍时——你内心的模式更接近？',
+    opts: ['反复权衡怕选错', '先选再说'] }
 ];
-
-// Index dimensions
-QUESTIONS.forEach(q => { DIMS[q.dim].push(q.id); });
-
-// ===== 3. TEST ENGINE =====
-let state = { step:'gender', gender:null, currentQ:-1, answers:{} };
-
-function shuffleArray(arr) { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 
 function startQuiz() {
   document.getElementById('cover').style.display = 'none';
   document.getElementById('quiz').style.display = 'block';
-  renderGenderQuestion();
-  window.scrollTo(0,0);
+  state.step = 0;
+  showQuestion();
 }
 
-function renderGenderQuestion() {
-  state.step='gender'; state.currentQ=-1;
-  renderCard(GENDER_Q);
-  updateProgress(0,'第一步：基本信息');
-  document.getElementById('btnPrev').style.display = 'none';
-}
-
-const dimLabels = { rel:'❤️ 情感关系', soc:'🤝 社会人际', inner:'🧠 内心消化', bound:'🛡️ 边界博弈', decision:'🧭 决策冒险' };
-const dimClasses = { rel:'rel', soc:'soc', inner:'inner', bound:'bound', decision:'decision' };
-
-function renderCard(qData) {
-  const container = document.getElementById('questionContainer');
-  let displayOpts = qData.options;
-  if (qData.shuffle !== false) displayOpts = shuffleArray(qData.options);
-
-  const optsHtml = displayOpts.map((opt,oi) => {
-    const qId = qData.id;
-    const answered = state.answers[qId] !== undefined;
-    const selected = answered && state.answers[qId] == opt.value ? 'selected' : '';
-    return `<button class="q-option ${selected}" onclick="selectOption('${qId}',${oi},'${opt.value}')">
-      <span class="opt-label">${String.fromCharCode(65+oi)}</span>${opt.text}
-    </button>`;
-  }).join('');
-
-  let phaseBadge = state.step === 'gender' ? '📋 基本信息' : '⚡ 能量探测';
-  // Add dimension badge if available
-  if (state.step === 'core' && qData.dim && dimLabels[qData.dim]) {
-    phaseBadge = `<span class="q-badge ${dimClasses[qData.dim]}">${dimLabels[qData.dim]}</span>`;
+function showQuestion() {
+  var q = QUESTIONS[state.step];
+  document.getElementById('quizText').textContent = q.text;
+  var html = '';
+  for (var i = 0; i < q.opts.length; i++) {
+    html += '<button class="q-option" onclick="pickAnswer(' + state.step + ',' + i + ',this)">' + q.opts[i] + '</button>';
   }
-
-  container.innerHTML = `<div class="q-card active">
-    <div class="q-header">${phaseBadge}</div>
-    <div class="q-text">${qData.text}</div>
-    ${optsHtml}
-  </div>`;
-
-  container.scrollIntoView({ behavior:'smooth', block:'start' });
-  document.getElementById('btnNext').disabled = state.answers[qData.id] === undefined;
+  document.getElementById('quizOptions').innerHTML = html;
+  document.getElementById('btnNext').disabled = true;
 }
 
-function selectOption(qId,optIdx,optVal) {
-  state.answers[qId] = optVal;
-  document.querySelectorAll('.q-option').forEach((btn,i)=>{ btn.classList.toggle('selected', i===optIdx); });
+function pickAnswer(qi, oi, btn) {
+  state.answers[qi] = oi;
+  var btns = document.querySelectorAll('.q-option');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('selected');
+  btn.classList.add('selected');
   document.getElementById('btnNext').disabled = false;
 }
 
-function updateProgress(pct,phase) {
-  document.getElementById('progressFill').style.width = Math.min(pct,100)+'%';
-  document.getElementById('progressPhase').innerHTML = phase || '';
-}
-
 function nextQuestion() {
-  if (state.step === 'gender') {
-    state.gender = state.answers['gender'];
-    state.step = 'core'; state.currentQ = 0;
-    renderCard(QUESTIONS[0]);
-    updateProgress(5,'⚡ 能量探测中...');
-    document.getElementById('btnPrev').style.display = 'none';
-    document.getElementById('progressText').textContent = '第 1 / 10 题';
-    return;
-  }
-  if (state.step === 'core') {
-    if (state.currentQ < QUESTIONS.length - 1) {
-      state.currentQ++;
-      renderCard(QUESTIONS[state.currentQ]);
-      const pct = 5 + ((state.currentQ+1)/QUESTIONS.length)*85;
-      updateProgress(pct,'⚡ 能量探测中...');
-      document.getElementById('progressText').textContent = `第 ${state.currentQ+1} / ${QUESTIONS.length} 题`;
-      document.getElementById('btnPrev').style.display = state.currentQ > 0 ? '' : 'none';
-    } else {
-      showResult();
-    }
+  state.step++;
+  if (state.step < QUESTIONS.length) {
+    showQuestion();
+  } else {
+    showResult();
   }
 }
 
-function prevQuestion() {
-  if (state.step === 'core' && state.currentQ > 0) {
-    state.currentQ--;
-    renderCard(QUESTIONS[state.currentQ]);
-    const pct = 5 + ((state.currentQ+1)/QUESTIONS.length)*85;
-    updateProgress(pct,'⚡ 能量探测中...');
-    document.getElementById('progressText').textContent = `第 ${state.currentQ+1} / ${QUESTIONS.length} 题`;
-    document.getElementById('btnPrev').style.display = state.currentQ > 0 ? '' : 'none';
-  }
-}
-
-// ===== 4. CALCULATION =====
-function calcResult() {
-  let yang=0, yin=0;
-  for (const q of QUESTIONS) {
-    const val = state.answers[q.id];
-    if (val !== undefined) {
-      if (val > 0.5) yang++; else yin++;
-    }
-  }
-  const total = yang + yin;
-  const pct = total > 0 ? yang/total : 0.5;
-  const isYang = pct >= 0.5;
-  const decisive = Math.abs(pct - 0.5) >= 0.2;
-
-  // Dimension scores
-  const dimScores = {};
-  const dimNames = { rel:'❤️ 情感关系', soc:'🤝 社会人际', inner:'🧠 内心消化', bound:'🛡️ 边界博弈', decision:'🧭 决策冒险' };
-  for (const [key,qs] of Object.entries(DIMS)) {
-    let y=0, n=0;
-    for (const q of qs) {
-      if (state.answers[q] !== undefined) { n++; if (state.answers[q] > 0.5) y++; }
-    }
-    dimScores[key] = { label: dimNames[key], score: n > 0 ? y/n : 0.5, yang: y, total: n };
-  }
-
-  return { yang, yin, total, pct, isYang, decisive, dimScores };
-}
-
-// ===== 5. RADAR CHART SVG =====
-function renderRadar(scores) {
-  const size = 240;
-  const cx = size/2, cy = size/2;
-  const r = 90; // max radius
-  const levels = 4;
-  const keys = ['rel','soc','inner','bound','decision'];
-  const angles = [0, 72, 144, 216, 288].map(d => d * Math.PI / 180);
-  // Reorder so first point is at top: rotate by -90deg
-  // 情感关系 at top
-  const angleOffsets = [-90, -90+72, -90+144, -90+216, -90+288].map(d => d * Math.PI / 180);
-
-  let svg = `<svg viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">`;
-
-  // Grid
-  for (let l = 1; l <= levels; l++) {
-    const lr = (r/levels) * l;
-    let pts = angleOffsets.map(a => {
-      const x = cx + lr * Math.cos(a);
-      const y = cy + lr * Math.sin(a);
-      return `${x},${y}`;
-    }).join(' ');
-    svg += `<polygon points="${pts}" fill="none" stroke="#eee" stroke-width="0.8"/>`;
-  }
-
-  // Axes
-  angleOffsets.forEach(a => {
-    const x = cx + r * Math.cos(a);
-    const y = cy + r * Math.sin(a);
-    svg += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#e4e0da" stroke-width="0.8"/>`;
-  });
-
-  // Data
-  const isWarm = document.getElementById('result').classList.contains('warm');
-  const dataColor = isWarm ? '#c47a3a' : '#4a6a9a';
-  const fillColor = isWarm ? 'rgba(196,122,58,0.12)' : 'rgba(74,106,154,0.12)';
-  const gridColor = isWarm ? '#e8ddd2' : '#d8dce8';
-  const labelColor = isWarm ? '#a08060' : '#607090';
-
-  // Data polygon
-  let dataPts = keys.map((k,i) => {
-    const val = (scores[k]?.score || 0.5);
-    const dist = r * val;
-    const x = cx + dist * Math.cos(angleOffsets[i]);
-    const y = cy + dist * Math.sin(angleOffsets[i]);
-    return {x,y,val};
-  });
-  let ptsStr = dataPts.map(p => `${p.x},${p.y}`).join(' ');
-  svg += `<polygon points="${ptsStr}" fill="${fillColor}" stroke="${dataColor}" stroke-width="1.5" stroke-linejoin="round"/>`;
-
-  // Data points
-  dataPts.forEach(p => {
-    svg += `<circle cx="${p.x}" cy="${p.y}" r="3" fill="${dataColor}"/>`;
-  });
-
-  // Labels
-  const labelNames = ['情感关系','社会人际','内心消化','边界博弈','决策冒险'];
-  const labelR = r + 22;
-  angleOffsets.forEach((a,i) => {
-    const x = cx + labelR * Math.cos(a);
-    const y = cy + labelR * Math.sin(a);
-    const anchor = a === 0 ? 'middle' : (a < Math.PI ? 'start' : 'end');
-    const dy = a === 0 ? '-0.3em' : (Math.abs(a - Math.PI) < 0.01 ? '0.6em' : '0.3em');
-    svg += `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-size="10" fill="${labelColor}" font-weight="500">${labelNames[i]}</text>`;
-  });
-
-  // Percentage at center
-  const totalScore = scores.total > 0 ? Math.round(scores.yang / scores.total * 100) : 50;
-  svg += `<text x="${cx}" y="${cy-4}" text-anchor="middle" font-size="22" font-weight="700" fill="${dataColor}">${totalScore}%</text>`;
-  svg += `<text x="${cx}" y="${cy+14}" text-anchor="middle" font-size="10" fill="${labelColor}">阳性能量</text>`;
-
-  svg += '</svg>';
-  return svg;
-}
-
-// ===== 6. SHOW RESULT =====
 function showResult() {
-  const r = calcResult();
-  const gender = state.gender;
-  const isYang = r.isYang;
-
-  const key = isYang && gender==='male' ? 'yang-male' :
-              isYang && gender==='female' ? 'yang-female' :
-              !isYang && gender==='female' ? 'yin-female' : 'yin-male';
-  const data = RESULT_DATA[key];
-  const isWarm = key==='yang-male'||key==='yang-female';
-  document.getElementById('result').className = 'result-wrap '+(isWarm?'warm':'cool');
-  document.getElementById('resultBanner').className = 'r-banner '+(isWarm?'warm':'cool');
-
-  document.getElementById('resultIcon').textContent = data.icon;
-  document.getElementById('resultType').textContent = data.type;
-  document.getElementById('resultSubtype').textContent = data.subtype;
-  document.getElementById('resultSlogan').textContent = data.slogan;
-
-  const pctR = Math.round(r.pct*100);
-  const verdictText = r.isYang ? `内核判定：<strong>阳性能量</strong>（${r.yang}/10 题）` : `内核判定：<strong>阴性能量</strong>（${r.yin}/10 题）`;
-  const confLabel = r.decisive
-    ? `✦ ${verdictText} · 判定明确`
-    : `⚡ ${verdictText} · 倾向清晰`;
-  document.getElementById('resultConf').innerHTML = confLabel;
-  document.getElementById('resultConf').className = 'r-conf-badge '+(r.decisive?'high':'mid');
-
-  const pMap = {'yang-male':'images/male-yang.png?v=4','yang-female':'images/female-yang.png?v=4',
-                'yin-female':'images/female-yin.png?v=4','yin-male':'images/male-yin.png?v=4'};
-  const pImg = document.getElementById('resultPortrait');
-  if (pMap[key]) { pImg.src=pMap[key]; pImg.style.display='block'; pImg.onerror=function(){this.style.display='none';}; }
-
-  const verdictText = r.isYang ? `内核判定：<strong>阳性能量</strong>（${r.yang}/10 题）` : `内核判定：<strong>阴性能量</strong>（${r.yin}/10 题）`;
-
-  const energyHtml = `<div class="r-energy">
-    <div class="r-energy-title">⚖️ 内核判定</div>
-    <div style="text-align:center;padding:4px 0 12px;font-size:24px;font-weight:700;color:${isWarm?'#c47a3a':'#4a6a9a'}">${r.isYang?'☀️ 阳性能量':'🌙 阴性能量'}</div>
-    <div style="text-align:center;font-size:13px;color:var(--text-gray);margin-bottom:4px;">${r.yang} 票阳 · ${r.yin} 票阴 ${r.decisive?'· 判定明确':'· 倾向清晰'}</div>
-    <div style="text-align:center;font-size:12px;color:#aaa;padding:6px 12px;background:${isWarm?'#fef9f5':'#f0f4fa'};border-radius:8px;line-height:1.5;">你的内核能量是${r.isYang?'阳':'阴'}——这不是说你没有${r.isYang?'阴':'阳'}的那一面，<br>而是你面对核心冲突时的第一反应是${r.isYang?'直面':'观察'}。</div>
-  </div>`;
-
-  // Radar chart
-  const radarSvg = renderRadar(Object.assign({total:r.total,yang:r.yang}, r.dimScores));
-  const radarHtml = `<div class="r-radar">
-    <div class="r-radar-title">📊 五维能量分布</div>
-    <div class="radar-container">${radarSvg}</div>
-    <div class="radar-legend">
-      <div class="radar-legend-item"><span class="radar-legend-dot yang-dot"></span>各维度阳倾向</div>
-      <div class="radar-legend-item"><span class="radar-legend-dot yin-dot"></span>各维度阴倾向</div>
-    </div>
-  </div>`;
-
-  const traitsHtml = data.traits.map(t=>`<li>${t}</li>`).join('');
-  const stepsHtml = data.steps.map(s=>`<div class="step">${s}</div>`).join('');
-  const pairGuideHtml = data.pairGuide.map(p=>`<div class="r-pair-item"><div class="r-pair-name">${p.target}<span class="r-pair-tag ${p.tag}">${p.tagText}</span></div><div class="r-pair-text">${p.text}</div></div>`).join('');
-
-  document.getElementById('resultContent').innerHTML = `
-    ${energyHtml}
-    ${radarHtml}
-    <div class="r-content">
-      <div class="r-card">
-        <div class="r-card-title">🎨 人格底色 <span class="line"></span></div>
-        <div class="r-core-desc">${data.coreDesc}</div>
-        <div class="r-trait-highlight">${data.highlight}</div>
-        <ul class="r-traits">${traitsHtml}</ul>
-      </div>
-      <div class="r-card">
-        <div class="r-card-title">🌱 进化课题 → 成长方向 <span class="line"></span></div>
-        <div class="r-evo-challenge"><div class="label">◆ 课题</div><div class="text">${data.challenge}</div></div>
-        <div class="r-evo-arrow">↓</div>
-        <div class="r-evo-growth"><div class="label">→ 成长方向</div><div class="text">${data.growth}</div><div class="r-evo-steps">${stepsHtml}</div></div>
-      </div>
-      <div class="r-card">
-        <div class="r-card-title">🌊 关系层面 <span class="line"></span></div>
-        <div class="r-relation-mode"><div class="label">关系模式</div><div class="text">${data.relationMode}</div></div>
-        <div class="r-best-match"><div class="icon">💫</div><div class="info"><div class="name">${data.bestMatch.name}</div><div class="why">${data.bestMatch.why}</div></div></div>
-        <div class="r-pair-guide"><div class="label">配对指引</div>${pairGuideHtml}</div>
-      </div>
-    </div>`;
-
+  var yang = 0;
+  for (var i = 0; i < state.answers.length; i++) {
+    if (state.answers[i] === 0) yang++; // yang is first option
+  }
+  var isYang = yang >= 5;
   document.getElementById('quiz').style.display = 'none';
   document.getElementById('result').style.display = 'block';
-  window.scrollTo(0,0);
+  document.getElementById('rType').textContent = isYang ? '阳性能量' : '阴性能量';
+  document.getElementById('rSlogan').textContent = yang + '/10 阳 判定明确';
+  document.getElementById('rContent').innerHTML =
+    '<div class="r-card"><h3>人格底色</h3><p class="r-trait">你的内核能量是' + (isYang ? '阳' : '阴') + '。这不是说你没有' + (isYang ? '阴' : '阳') + '的那一面，而是你面对核心冲突时的第一反应是' + (isYang ? '直面' : '观察') + '。</p></div>';
 }
 
-function shareResult() {
-  const url = window.location.href;
-  const type = document.getElementById('resultType').textContent;
-  const text = `🌙 我测完了！我是${type}\n\n10道题精准定位，测测你是什么？👇\n${url}`;
-  if (navigator.share) { navigator.share({title:'阴阳人格·能量内核测试',text,url}).catch(()=>copyLink(text)); }
-  else { copyLink(text); }
-}
-function copyLink(t) {
-  if (navigator.clipboard?.writeText) { navigator.clipboard.writeText(t).then(()=>showToast('✅ 已复制！粘贴到群里分享')).catch(()=>fallbackCopy(t)); }
-  else { fallbackCopy(t); }
-}
-function fallbackCopy(t) {
-  const ta=document.createElement('textarea'); ta.value=t; ta.style.cssText='position:fixed;opacity:0;';
-  document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-  showToast('✅ 已复制！粘贴到群里分享');
-}
-function showToast(msg) {
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  clearTimeout(t._timer); t._timer=setTimeout(()=>t.classList.remove('show'),2500);
-}
 function restart() {
-  state={step:'gender',gender:null,currentQ:-1,answers:{}};
-  document.getElementById('result').style.display='none'; document.getElementById('quiz').style.display='none'; document.getElementById('cover').style.display='flex';
-  window.scrollTo(0,0);
+  state = { step: 0, answers: [] };
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('cover').style.display = 'flex';
 }
-</script><script>
-// ===== 7. RESULT DATA =====
-const RESULT_DATA = {
-  'yang-male': {
-    icon:'🌞', type:'男阳 · 承重者', subtype:'扛起一切的人',
-    slogan:'"所有人都觉得我扛得住，只有我知道我也想被接住。"',
-    coreDesc:'守护者 · 建造者',
-    traits:[
-      '信任壁垒：信任是一面砖墙——一块砖一块砖垒起来，一件事就能崩塌，百件事才能重建',
-      '底色：用"扛"代替"说"——行动即存在，存在即责任',
-      '隐藏恐惧：无能=不被爱——所以必须永远强大、永远正确',
-      '独特认同：通过被需要来确认自我价值——"如果我不扛了，我还是谁？"'
-    ],
-    highlight:'最特殊之处：极度的自我保护机制——不是不愿意信任，是信任崩塌后的重建成本太高，索性不建了',
-    challenge:'如果我示弱了，谁来扛？——无法接受的不是失败，是"被看见失败"',
-    growth:'学习"被接住"——脆弱不是崩塌，是另一种力量',
-    steps:['从最小的事开始练习表达"我需要你"——哪怕只是让伴侣递杯水','觉察"过度负责=控制"的模式——放手不是失职，是信任的开始','区分"扛起责任"和"扛起一切"——你不必为所有人的情绪买单'],
-    relationMode:'你习惯站在"保护者/给予者"的位置。你很难开口要，但会在关键时刻顶上。你不是不会爱，而是习惯用行动代替表达。',
-    bestMatch:{name:'女阴 · 连接者',why:'阴阳互补——她给你柔软和接纳，你给她安全感和方向'},
-    pairGuide:[
-      {target:'女阴 · 连接者',tag:'best',tagText:'最佳拍档',text:'最经典的阴阳平衡。她擅长连接和付出，你擅长担当和保护。但需警惕：她的"付出"被你当成理所当然。'},
-      {target:'女阳 · 破局者',tag:'challenge',tagText:'强强相遇',text:'两个阳性内核容易成为战友，也可能变成权力博弈。课题是：不要竞争谁更强大，学会互相钦佩。'},
-      {target:'男阴 · 深潜者',tag:'mirror',tagText:'镜像对照',text:'你们都习惯沉默，但他向内、你向外。事业上你冲锋他兜底；亲密关系中，你们需要一个人先开口。'}
-    ]
-  },
-  'yang-female': {
-    icon:'☀️', type:'女阳 · 破局者', subtype:'打破框架的人',
-    slogan:'"我不是太强势，我只是不想为任何人缩小自己。"',
-    coreDesc:'战士 · 破局者',
-    traits:[
-      '女性身体+男性内核——天然的反叛符号，从出生就在对抗"你应该怎样"',
-      '底色：用"搞定事情"来证明自我价值——"我能行，我不需要任何人"',
-      '隐藏恐惧：示弱=被吞噬——"如果我示弱了，谁替我扛？谁能接住我？"',
-      '独特拉扯：在"我不需要任何人"的铠甲和"其实我也需要被接住"的渴望之间反复横跳'
-    ],
-    highlight:'她不是"太强势"，她只是太早学会了自己扛——女阳的坚硬不是攻击，是防御',
-    challenge:'无法接受自己的无能、脆弱——"如果我连这点事都搞不定，我还有什么价值？"',
-    growth:'通过阴性能量的生发，自然地流露脆弱——示弱不是软弱，是最高级别的向下兼容',
-    steps:['反复背诵："示弱不是软弱，是最高级别的向下兼容"——这需要练，不是道理懂了就能做到','找一个安全的"接住者"练习示弱——先在小事上说"我不行，你来帮我"','区分"坚强"和"僵硬"——真正的力量是柔韧的，像竹子一样能弯能直'],
-    relationMode:'你需要平等、空间和被看见。你讨厌被控制，也讨厌被当成"该温柔一点"的女人。你的课题不是变得柔软，而是找到能接住你强度的人。',
-    bestMatch:{name:'男阴 · 深潜者',why:'阴阳互补——他理解你的深度，你带他走出内耗'},
-    pairGuide:[
-      {target:'男阴 · 深潜者',tag:'best',tagText:'最佳拍档',text:'你最互补的配对。你负责破局和行动，他负责深度感受和连接。他能接住你的强度，你能把他从过度思考中拉出来。'},
-      {target:'男阳 · 承重者',tag:'challenge',tagText:'强强相遇',text:'两个阳性内核容易互相欣赏，也可能暗暗较劲。相处关键是：不抢方向盘，你拼你的局，他守他的城。'},
-      {target:'女阴 · 连接者',tag:'mirror',tagText:'镜像对照',text:'她是你"不愿意成为"的自己——柔软、依赖、会撒娇。反过来，你是她羡慕的样子。你们可以互相学习，但别互相评判。'}
-    ]
-  },
-  'yin-female': {
-    icon:'🌙', type:'女阴 · 连接者', subtype:'用心连接的人',
-    slogan:'"你不需要证明自己值得被爱——你本来就值得。"',
-    coreDesc:'滋养者 · 连接者',
-    traits:[
-      '用付出来确认关系安全——"我给了这么多，你就不会离开我了吧？"',
-      '底色：关系即存在——通过被爱来确认自我，没有连接就没有安全感',
-      '隐藏恐惧：不被爱=不存在——测试行为的背后是"怕被抛弃"的深层恐惧',
-      '独特模式：过度关注他人需求而忽视自我——"先把他照顾好，我的感受不重要"'
-    ],
-    highlight:'最特殊之处：她的付出里藏着一句未说出口的话——"我给了你这么多，现在换你留下，好吗？"',
-    challenge:'"我不配得被爱"——总觉得必须付出点什么才有资格被爱',
-    growth:'从"付出更多"到"允许被爱"——你不需要先付出来换取被爱的资格',
-    steps:['觉察"牺牲式付出=控制"的模式——付出背后的潜台词可能是"你看我付出了这么多"','练习直接表达需求，而不是用测试和暗示——"我想要"和"我需要"不是羞耻的事','建立边界不是为了推开别人，而是让自己站得更稳——边界不是墙，是门'],
-    relationMode:'你习惯用"给"来换取"留"。你渴望被需要、被珍惜，却常常因为不敢直接表达需求而委屈。你不是黏人，你只是想要确定感。',
-    bestMatch:{name:'男阳 · 承重者',why:'阴阳互补——他给你安全感，你给他被需要的感觉'},
-    pairGuide:[
-      {target:'男阳 · 承重者',tag:'best',tagText:'最佳拍档',text:'经典的阴阳平衡。你的柔软和付出正好是他的解药，他的稳重和担当正好是你的安全感。但要小心：不要把"付出"当成控制他的筹码。'},
-      {target:'男阴 · 深潜者',tag:'mirror',tagText:'镜像对照',text:'你们都敏感、都怕被抛弃，都容易想太多。你们能深度理解彼此，但也可能一起沉入情绪漩涡。'},
-      {target:'女阳 · 破局者',tag:'challenge',tagText:'能量相反',text:'她是你羡慕的样子——独立、有边界、不讨好。相处时，她可能会嫌你"想太多"，你可能会觉得她"太硬"。互相欣赏，不要互相改造。'}
-    ]
-  },
-  'yin-male': {
-    icon:'🌑', type:'男阴 · 深潜者', subtype:'潜入深处的人',
-    slogan:'"我不是高冷，我只是怕一动真情就收不回来。"',
-    coreDesc:'敏感者 · 深度连接者',
-    traits:[
-      '敏感+社会期待的双重挤压——双重枷锁，既要面对自己的敏感，又要面对"男人不该这样"',
-      '底色：过度思考代替行动——"想清楚再做"的真相往往是"怕做错、怕被评判"',
-      '隐藏恐惧：畏惧交付——"如果我把真心交出去，被伤害了怎么办？"',
-      '独特拉扯：在"渴望深度连接"和"害怕被吞噬"之间反复横跳'
-    ],
-    highlight:'他不是高冷，他体内的两股力量自己都搞不定自己——推和拉同时存在，不是故意的',
-    challenge:'畏惧受伤，不敢交付——怕的不是爱，是爱了之后被伤害',
-    growth:'从过度思考转向有边界的信任流动——敏感不是缺陷，是超能力',
-    steps:['区分"融合"和"吞噬"——健康的连接是两个人的靠近，不是一个人消失','觉察"死循环套娃"——想了三层就不想了，先做一步，做比想重要','把敏感从"负担"重新定义为"天线"——你能察觉到别人察觉不到的信号，这是天赋'],
-    relationMode:'你渴望深度连接，却又害怕交付后被伤害。你常常"想靠近又退缩"，不是不爱，是太怕受伤。你需要一个能看穿你沉默的人。',
-    bestMatch:{name:'女阳 · 破局者',why:'阴阳互补——她带你走出去，你接住她的脆弱'},
-    pairGuide:[
-      {target:'女阳 · 破局者',tag:'best',tagText:'最佳拍档',text:'你最互补的配对。她的阳性能量带你从过度思考走向行动，你的阴性能量让她学会自然流露脆弱。她是你的铠甲，你是她的港湾。'},
-      {target:'女阴 · 连接者',tag:'mirror',tagText:'镜像对照',text:'你们都敏感、都需要安全感。你们能建立很深的情感连接，但也可能因为太像而互相内耗。课题是：谁来当那个先稳定下来的人？'},
-      {target:'男阳 · 承重者',tag:'challenge',tagText:'能量相反',text:'你们像磁铁的两极。他习惯"扛"，你习惯"想"。事业上他是前锋你是谋士；亲密关系中，他不懂你的敏感，你不懂他的沉默。'}
-    ]
-  }
-};
 </script>
 </body>
 </html>

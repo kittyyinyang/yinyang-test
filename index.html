@@ -240,6 +240,10 @@ var state = { step:'gender', gender:'', currentQ:-1, answers:{}, shuffled:{} };
 function shuffleArray(a) { var b=[...a]; for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;} return b; }
 
 function startQuiz() {
+  // Preload character portraits in background while user answers
+  var imgs = ['male-yang.jpg?v=1','male-yin.jpg?v=1','female-yang.jpg?v=1','female-yin.jpg?v=1'];
+  for(var i=0;i<imgs.length;i++){var a=new Image();a.src='images/'+imgs[i];}
+  // Show quiz
   document.getElementById('cover').style.display='none';
   document.getElementById('quiz').style.display='block';
   renderGender();
@@ -516,10 +520,10 @@ function showResult() {
   document.getElementById('resultVerdict').className='r-verdict '+(decisive?'high':'mid');
 
   var pMap={};
-  pMap['yang-male']='images/male-yang.png?v=4';
-  pMap['yang-female']='images/female-yang.png?v=4';
-  pMap['yin-female']='images/female-yin.png?v=4';
-  pMap['yin-male']='images/male-yin.png?v=4';
+  pMap['yang-male']='images/male-yang.jpg?v=1';
+  pMap['yang-female']='images/female-yang.jpg?v=1';
+  pMap['yin-female']='images/female-yin.jpg?v=1';
+  pMap['yin-male']='images/male-yin.jpg?v=1';
   var pImg=document.getElementById('resultPortrait');
   if(pMap[key]){pImg.src=pMap[key];pImg.style.display='block';pImg.onerror=function(){this.style.display='none';};}
 

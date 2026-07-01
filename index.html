@@ -62,69 +62,104 @@ body {
 .btn-next { flex:1; padding:14px; border:none; border-radius:50px; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.2s; background:linear-gradient(135deg,#d4a574,#c4955a); color:#1a1a2e; }
 .btn-next:disabled { opacity:0.35; cursor:not-allowed; }
 
-/* ── Result ── */
-#result { display:none; max-width:600px; margin:0 auto; padding:0 0 40px; }
-.r-banner { position:relative; width:100%; min-height:300px; overflow:hidden; }
+/* ── RESULT (rich version from V5.4 backup) ── */
+#result { display:none; padding:0 0 40px; max-width:600px; margin:0 auto; }
+#result.result-wrap.warm { --pg-bg:#faf3ec; --card-bg:#fffcf8; --card-border:rgba(196,122,58,0.08); --accent:#c47a3a; --accent-soft:#f5e6d0; --accent-light:#fef9f2; --accent-border:#f0e0d0; --evo-bg:#fdf6ee; --evo-border:#f5e8d8; --rel-bg:#fdf6ee; --rel-border:#f0e0d0; --rel-label:#f5efe6; }
+#result.result-wrap.cool { --pg-bg:#eef0f4; --card-bg:#f7f8fc; --card-border:rgba(74,106,154,0.08); --accent:#4a6a9a; --accent-soft:#d0dcee; --accent-light:#f0f4fa; --accent-border:#d0dce8; --evo-bg:#eef4fa; --evo-border:#d8e0ee; --rel-bg:#eef4fa; --rel-border:#d0dce8; --rel-label:#e8eef6; }
+
+/* Banner */
+.r-banner { position:relative; width:100%; min-height:340px; overflow:hidden; }
 .r-banner.warm { background:linear-gradient(135deg,#2d1b0e,#5a3a1a); }
 .r-banner.cool { background:linear-gradient(135deg,#0f1a2e,#1a2a4a); }
-.r-banner img { width:100%; height:300px; object-fit:cover; display:block; }
-.r-banner-overlay { position:absolute; bottom:0; left:0; right:0; padding:50px 20px 20px; text-align:center; color:#fff; }
+.r-banner img { width:100%; height:340px; object-fit:cover; display:block; }
+.r-banner.warm::after, .r-banner.cool::after { content:''; position:absolute; top:0; left:0; right:0; bottom:0; pointer-events:none; }
+.r-banner.warm::after { background:linear-gradient(180deg,rgba(90,50,20,0.35) 0%,transparent 35%,rgba(45,27,14,0.45) 100%); }
+.r-banner.cool::after { background:linear-gradient(180deg,rgba(20,40,80,0.35) 0%,transparent 35%,rgba(15,26,46,0.45) 100%); }
 .r-banner.warm .r-banner-overlay { background:linear-gradient(0deg,rgba(45,27,14,0.95) 0%,rgba(45,27,14,0.45) 55%,transparent 100%); }
 .r-banner.cool .r-banner-overlay { background:linear-gradient(0deg,rgba(15,26,46,0.95) 0%,rgba(15,26,46,0.45) 55%,transparent 100%); }
-.r-type { font-size:22px; font-weight:700; letter-spacing:2px; text-shadow:0 2px 8px rgba(0,0,0,0.5); }
-.r-sub { font-size:12px; opacity:0.75; margin-top:2px; letter-spacing:1px; }
-.r-slogan { font-size:14px; font-weight:500; margin-top:6px; font-style:italic; opacity:0.9; }
+.r-banner-overlay { position:absolute; bottom:0; left:0; right:0; padding:60px 24px 24px; text-align:center; color:#fff; }
+.r-type { font-size:24px; font-weight:700; letter-spacing:2px; text-shadow:0 2px 8px rgba(0,0,0,0.5); }
+.r-sub { font-size:12px; opacity:0.75; margin-top:4px; letter-spacing:1px; }
+.r-slogan { font-size:15px; font-weight:500; margin-top:8px; line-height:1.5; opacity:0.9; font-style:italic; text-shadow:0 1px 6px rgba(0,0,0,0.5); }
 .r-verdict { display:inline-block; margin-top:8px; padding:3px 12px; border-radius:10px; font-size:11px; font-weight:600; }
 .r-verdict.high { background:rgba(46,204,113,0.3); color:#8eecb5; }
 .r-verdict.mid { background:rgba(243,156,18,0.3); color:#f5c86a; }
 
-.r-card-wrap { padding:4px 16px 0; }
-.r-card { background:#fff; border-radius:16px; padding:18px 20px; margin-bottom:12px; box-shadow:0 2px 12px rgba(0,0,0,0.05); }
-#result.warm .r-card { border:1px solid rgba(196,122,58,0.08); }
-#result.cool .r-card { border:1px solid rgba(74,106,154,0.08); }
-.r-card-title { font-size:13px; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:6px; letter-spacing:1px; }
-#result.warm .r-card-title { color:#c47a3a; }
-#result.cool .r-card-title { color:#4a6a9a; }
+/* Radar chart */
+.r-radar { margin:0 16px 12px; background:var(--card-bg); border-radius:16px; padding:20px; box-shadow:0 2px 12px rgba(0,0,0,0.05); }
+.r-radar-title { font-size:13px; font-weight:600; color:#7a7a8a; text-align:center; margin-bottom:14px; letter-spacing:1px; }
+.radar-container { position:relative; width:100%; max-width:320px; margin:0 auto; }
+.radar-container svg { width:100%; height:auto; }
+.radar-legend { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-top:10px; }
+.radar-legend-item { display:flex; align-items:center; gap:4px; font-size:11px; color:#7a7a8a; }
+.radar-legend-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+#result.result-wrap.warm .radar-legend-dot.yang-dot { background:#c47a3a; }
+#result.result-wrap.cool .radar-legend-dot.yang-dot { background:#4a6a9a; }
+.radar-legend-dot.yin-dot { background:#d0d0d8; }
+
+/* Content cards */
+.r-content { padding:12px 16px; }
+#result.result-wrap.warm .r-content { background:var(--pg-bg); }
+#result.result-wrap.cool .r-content { background:var(--pg-bg); }
+.r-card { background:var(--card-bg); border-radius:16px; padding:20px; margin-bottom:12px; box-shadow:0 2px 12px rgba(0,0,0,0.05); }
+#result.result-wrap.warm .r-card { border:1px solid var(--card-border); }
+#result.result-wrap.cool .r-card { border:1px solid var(--card-border); }
+.r-card-title { font-size:14px; font-weight:700; color:var(--accent); margin-bottom:12px; letter-spacing:1px; display:flex; align-items:center; gap:6px; }
 .r-card-title .line { flex:1; height:1px; }
-#result.warm .r-card-title .line { background:#f0e0d0; }
-#result.cool .r-card-title .line { background:#d0dce8; }
-.r-desc { font-size:14px; font-weight:600; margin-bottom:8px; }
-.r-highlight { padding:8px 12px; border-radius:0 8px 8px 0; margin:6px 0; font-size:13px; color:#7a7a8a; line-height:1.5; }
-#result.warm .r-highlight { background:#fef9f2; border-left:3px solid #c47a3a; }
-#result.cool .r-highlight { background:#f0f4fa; border-left:3px solid #4a6a9a; }
-.r-trait { padding:6px 0 6px 20px; font-size:13px; color:#7a7a8a; border-bottom:1px solid #f5f3f0; line-height:1.4; }
+#result.result-wrap.warm .r-card-title .line { background:var(--accent-border); }
+#result.result-wrap.cool .r-card-title .line { background:var(--accent-border); }
+.r-desc { font-size:14px; color:#2d2d3a; font-weight:600; margin-bottom:10px; line-height:1.5; }
+.r-highlight { padding:8px 12px; border-radius:0 8px 8px 0; margin:6px 0; font-size:13px; color:#7a7a8a; line-height:1.6; font-weight:500; }
+#result.result-wrap.warm .r-highlight { background:var(--accent-light); border-left:3px solid var(--accent); }
+#result.result-wrap.cool .r-highlight { background:var(--accent-light); border-left:3px solid var(--accent); }
+.r-trait { padding:8px 0 8px 22px; position:relative; font-size:13px; color:#7a7a8a; border-bottom:1px solid #f8f5f0; line-height:1.5; }
 .r-trait:last-child { border:none; }
-.r-evo-box { border-radius:10px; padding:12px 14px; margin-bottom:6px; }
-#result.warm .r-evo-box { background:#fdf6ee; border:1px solid #f5e8d8; }
-#result.cool .r-evo-box { background:#eef4fa; border:1px solid #d8e0ee; }
-.r-evo-box .lbl { font-size:10px; font-weight:600; letter-spacing:1px; margin-bottom:3px; }
-#result.warm .r-evo-box .lbl { color:#c47a3a; }
-#result.cool .r-evo-box .lbl { color:#4a6a9a; }
-.r-evo-box .txt { font-size:13px; line-height:1.5; font-weight:500; }
-.r-arrow { text-align:center; padding:4px 0; font-size:16px; }
-#result.warm .r-arrow { color:#c47a3a; }
-#result.cool .r-arrow { color:#4a6a9a; }
-.r-step { font-size:12px; color:#7a7a8a; padding:4px 0 4px 16px; line-height:1.4; }
-.r-actions { padding:0 16px; }
-.btn-restart { display:block; width:100%; padding:15px; border:2px solid #ddd; background:transparent; color:#7a7a8a; border-radius:50px; font-size:15px; font-weight:600; cursor:pointer; text-align:center; }
-.btn-restart:active { background:#f5f3f0; }
-.r-pair-box { border-radius:10px; overflow:hidden; margin-top:10px; }
-#result.warm .r-pair-box { border:1px solid #f0e0d0; }
-#result.cool .r-pair-box { border:1px solid #d0dce8; }
-.r-pair-box .plbl { padding:8px 14px; font-size:10px; font-weight:600; letter-spacing:1px; }
-#result.warm .r-pair-box .plbl { background:#f5efe6; border-bottom:1px solid #f0e0d0; color:#7a7a8a; }
-#result.cool .r-pair-box .plbl { background:#e8eef6; border-bottom:1px solid #d0dce8; color:#7a7a8a; }
-.r-pair-item { padding:8px 14px; font-size:12px; color:#2d2d3a; line-height:1.5; }
-#result.warm .r-pair-item { border-bottom:1px solid #f0e0d0; }
-#result.cool .r-pair-item { border-bottom:1px solid #d0dce8; }
-.r-pair-item:last-child { border:none; }
-.r-pair-name { font-weight:700; margin-bottom:2px; font-size:13px; }
-.r-pair-tag { display:inline-block; font-size:10px; padding:1px 7px; border-radius:5px; margin-left:5px; font-weight:600; }
+.r-trait::before { content:'\25C6'; position:absolute; left:0; color:var(--accent); font-size:8px; top:10px; }
+
+/* Evolution section */
+.r-evo-box { border-radius:12px; padding:14px 16px; margin-bottom:8px; }
+#result.result-wrap.warm .r-evo-box { background:var(--evo-bg); border:1px solid var(--evo-border); }
+#result.result-wrap.cool .r-evo-box { background:var(--evo-bg); border:1px solid var(--evo-border); }
+.r-evo-box .lbl { font-size:11px; font-weight:600; color:var(--accent); letter-spacing:1px; margin-bottom:4px; }
+.r-evo-box .txt { font-size:14px; color:#2d2d3a; line-height:1.5; font-weight:500; }
+.r-arrow { text-align:center; padding:6px 0; font-size:20px; color:var(--accent); }
+.r-step { font-size:12px; color:#7a7a8a; padding:5px 0 5px 18px; position:relative; line-height:1.5; }
+.r-step::before { content:'\2192'; position:absolute; left:0; color:var(--accent); font-size:12px; }
+
+/* Relationship section */
+.r-relation-box { border-radius:12px; padding:12px 16px; margin-bottom:12px; }
+#result.result-wrap.warm .r-relation-box { background:var(--rel-bg); }
+#result.result-wrap.cool .r-relation-box { background:var(--rel-bg); }
+.r-relation-box .lbl, .r-best-box .lbl { font-size:11px; font-weight:600; color:#7a7a8a; letter-spacing:1px; margin-bottom:4px; }
+.r-relation-box .txt { font-size:13px; color:#2d2d3a; line-height:1.6; }
+.r-best-box { display:flex; align-items:center; gap:10px; border-radius:12px; padding:12px 16px; margin-bottom:12px; }
+#result.result-wrap.warm .r-best-box { background:var(--rel-bg); border:1px solid var(--rel-border); }
+#result.result-wrap.cool .r-best-box { background:var(--rel-bg); border:1px solid var(--rel-border); }
+.r-best-box .info { flex:1; }
+.r-best-box .name { font-size:14px; font-weight:700; color:#2d2d3a; }
+.r-best-box .why { font-size:12px; color:#7a7a8a; margin-top:2px; }
+.r-pair-box { border-radius:12px; overflow:hidden; }
+#result.result-wrap.warm .r-pair-box { border:1px solid var(--rel-border); }
+#result.result-wrap.cool .r-pair-box { border:1px solid var(--rel-border); }
+.r-pair-box .plbl { padding:10px 16px; font-size:11px; font-weight:600; letter-spacing:1px; }
+#result.result-wrap.warm .r-pair-box .plbl { background:var(--rel-label); border-bottom:1px solid var(--rel-border); color:#7a7a8a; }
+#result.result-wrap.cool .r-pair-box .plbl { background:var(--rel-label); border-bottom:1px solid var(--rel-border); color:#7a7a8a; }
+.r-pair-item { padding:10px 16px; }
+#result.result-wrap.warm .r-pair-item { border-bottom:1px solid var(--rel-border); }
+#result.result-wrap.cool .r-pair-item { border-bottom:1px solid var(--rel-border); }
+.r-pair-item:last-child { border-bottom:none; }
+.r-pair-name { font-size:13px; font-weight:700; color:#2d2d3a; margin-bottom:3px; }
+.r-pair-tag { display:inline-block; font-size:10px; padding:2px 8px; border-radius:6px; margin-left:6px; font-weight:600; }
 .r-pair-tag.best { background:#e8f5e8; color:#27ae60; }
 .r-pair-tag.challenge { background:#ffe8e8; color:#c0392b; }
 .r-pair-tag.mirror { background:#e8f4f8; color:#2980b9; }
 .r-pair-text { font-size:12px; color:#7a7a8a; line-height:1.5; }
-.r-footer { text-align:center; font-size:11px; color:#7a7a8a; padding:16px; opacity:0.4; }
+
+/* Actions & footer */
+.r-actions { padding:0 16px; }
+.btn-restart { display:block; width:100%; padding:15px; border:2px solid #ddd; background:transparent; color:#7a7a8a; border-radius:50px; font-size:15px; font-weight:600; cursor:pointer; text-align:center; transition:all 0.2s; }
+.btn-restart:active { background:#f5f3f0; }
+.r-footer { text-align:center; font-size:11px; color:#7a7a8a; padding:20px; opacity:0.4; }
 </style>
 </head>
 <body>
@@ -157,7 +192,7 @@ body {
   </div>
 </div>
 
-<div id="result">
+<div id="result" class="result-wrap warm">
   <div class="r-banner" id="resultBanner">
     <img class="" id="resultPortrait" src="" alt="" style="display:none;">
     <div class="r-banner-overlay">
@@ -167,11 +202,11 @@ body {
       <div class="r-verdict" id="resultVerdict"></div>
     </div>
   </div>
-  <div class="r-card-wrap" id="resultContent"></div>
+  <div id="resultContent"></div>
   <div class="r-actions">
-    <button class="btn-restart" onclick="restart()">重新测试</button>
+    <button class="btn-restart" onclick="restart()">&#x91CD;&#x65B0;&#x6D4B;&#x8BD5;</button>
   </div>
-  <div class="r-footer">阴阳人格 · V5.4</div>
+  <div class="r-footer">&#x9634;&#x9633;&#x4EBA;&#x683C; · V5.4</div>
 </div>
 
 <script>
@@ -201,8 +236,6 @@ var QUESTIONS = [
 
 // ===== ENGINE =====
 var state = { step:'gender', gender:'', currentQ:-1, answers:{}, shuffled:{} };
-
-function shuffleArray(a) { var b=[...a]; for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;} return b; }
 
 function shuffleArray(a) { var b=[...a]; for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;} return b; }
 
@@ -348,9 +381,86 @@ RESULT_DATA['yin-male']={
   ]
 };
 
+// ===== DIMENSION SCORES (for radar) =====
+var DIMS = { rel:['q1','q2'], soc:['q3','q4'], inner:['q5','q6'], bound:['q7','q8'], decision:['q9','q10'] };
+var DIM_LABELS = { rel:'\u2764\uFE0F \u60C5\u611F\u5173\u7CFB', soc:'\uD83E\uDD1D \u793E\u4F1A\u4EBA\u9645', inner:'\uD83E\uDDE0 \u5185\u5FC3\u6D88\u5316', bound:'\uD83D\uDEE1\uFE0F \u8FB9\u754C\u535A\u5F08', decision:'\uD83E\uDDED \u51B3\u7B56\u5192\u9669' };
+
+function calcDimScores() {
+  var ds = {};
+  for (var key in DIMS) {
+    var qs = DIMS[key];
+    var y = 0, n = 0;
+    for (var i = 0; i < qs.length; i++) {
+      if (state.answers[qs[i]] !== undefined) { n++; if (state.answers[qs[i]] > 0.5) y++; }
+    }
+    ds[key] = { label: DIM_LABELS[key], score: n > 0 ? y/n : 0.5, yang: y, total: n };
+  }
+  return ds;
+}
+
+// ===== RADAR CHART SVG =====
+function renderRadar(scores) {
+  var size = 240, cx = size/2, cy = size/2, r = 90;
+  var keys = ['rel','soc','inner','bound','decision'];
+  var angleOffsets = [-90, -90+72, -90+144, -90+216, -90+288].map(function(d){return d*Math.PI/180;});
+  var isWarm = document.getElementById('result').classList.contains('warm');
+  var dataColor = isWarm ? '#c47a3a' : '#4a6a9a';
+  var fillColor = isWarm ? 'rgba(196,122,58,0.12)' : 'rgba(74,106,154,0.12)';
+  var labelColor = isWarm ? '#a08060' : '#607090';
+
+  var svg = '<svg viewBox="0 0 '+size+' '+size+'" xmlns="http://www.w3.org/2000/svg">';
+
+  // Grid
+  for (var l = 1; l <= 4; l++) {
+    var lr = (r/4)*l;
+    var pts = angleOffsets.map(function(a){
+      var x = cx + lr * Math.cos(a);
+      var y = cy + lr * Math.sin(a);
+      return x+','+y;
+    }).join(' ');
+    svg += '<polygon points="'+pts+'" fill="none" stroke="#eee" stroke-width="0.8"/>';
+  }
+
+  // Axes
+  angleOffsets.forEach(function(a){
+    svg += '<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+r*Math.cos(a))+'" y2="'+(cy+r*Math.sin(a))+'" stroke="#e4e0da" stroke-width="0.8"/>';
+  });
+
+  // Data polygon
+  var dataPts = keys.map(function(k,i){
+    var val = (scores[k]&&scores[k].score!==undefined) ? scores[k].score : 0.5;
+    var dist = r * val;
+    return {x: cx+dist*Math.cos(angleOffsets[i]), y: cy+dist*Math.sin(angleOffsets[i]), val:val};
+  });
+  var ptsStr = dataPts.map(function(p){return p.x+','+p.y;}).join(' ');
+  svg += '<polygon points="'+ptsStr+'" fill="'+fillColor+'" stroke="'+dataColor+'" stroke-width="1.5" stroke-linejoin="round"/>';
+  dataPts.forEach(function(p){
+    svg += '<circle cx="'+p.x+'" cy="'+p.y+'" r="3" fill="'+dataColor+'"/>';
+  });
+
+  // Labels
+  var labelNames = ['\u60C5\u611F\u5173\u7CFB','\u793E\u4F1A\u4EBA\u9645','\u5185\u5FC3\u6D88\u5316','\u8FB9\u754C\u535A\u5F08','\u51B3\u7B56\u5192\u9669'];
+  var labelR = r + 22;
+  angleOffsets.forEach(function(a,i){
+    var x = cx + labelR * Math.cos(a);
+    var y = cy + labelR * Math.sin(a);
+    svg += '<text x="'+x+'" y="'+y+'" text-anchor="middle" dominant-baseline="central" font-size="10" fill="'+labelColor+'" font-weight="500">'+labelNames[i]+'</text>';
+  });
+
+  // Center score
+  var totalYang = 0, totalN = 0;
+  for (var k in scores) { totalYang += scores[k].yang || 0; totalN += scores[k].total || 0; }
+  var totalScore = totalN > 0 ? Math.round(totalYang/totalN*100) : 50;
+  svg += '<text x="'+cx+'" y="'+(cy-4)+'" text-anchor="middle" font-size="22" font-weight="700" fill="'+dataColor+'">'+totalScore+'%</text>';
+  svg += '<text x="'+cx+'" y="'+(cy+14)+'" text-anchor="middle" font-size="10" fill="'+labelColor+'">\u9633\u6027\u80FD\u91CF</text>';
+
+  svg += '</svg>';
+  return svg;
+}
+
 // ===== SHOW RESULT =====
 function showResult() {
-  var yang=0,yin=0;
+  var yang=0, yin=0;
   for(var i=0;i<QUESTIONS.length;i++){
     var v=state.answers[QUESTIONS[i].id];
     if(v!==undefined){if(v>0.5)yang++;else yin++;}
@@ -365,12 +475,12 @@ function showResult() {
   else key='yin-male';
   var data=RESULT_DATA[key];
   var isWarm=key==='yang-male'||key==='yang-female';
-  document.getElementById('result').className=isWarm?'warm':'cool';
+  document.getElementById('result').className='result-wrap '+(isWarm?'warm':'cool');
   document.getElementById('resultBanner').className='r-banner '+(isWarm?'warm':'cool');
   document.getElementById('resultType').textContent=data.type;
   document.getElementById('resultSubtype').textContent=data.sub;
   document.getElementById('resultSlogan').textContent=data.slogan;
-  document.getElementById('resultVerdict').textContent=yang+'阳/'+yin+'阴 '+(decisive?'判定明确':'倾向清晰');
+  document.getElementById('resultVerdict').innerHTML=(isYang?'\u9633\u6027\u80FD\u91CF ('+yang+'/10)':'\u9634\u6027\u80FD\u91CF ('+yin+'/10)')+' \u00B7 '+(decisive?'判定明确':'倾向清晰');
   document.getElementById('resultVerdict').className='r-verdict '+(decisive?'high':'mid');
 
   var pMap={};
@@ -379,33 +489,43 @@ function showResult() {
   pMap['yin-female']='images/female-yin.png?v=4';
   pMap['yin-male']='images/male-yin.png?v=4';
   var pImg=document.getElementById('resultPortrait');
-  if(pMap[key]){pImg.src=pMap[key];pImg.style.display='block';}
+  if(pMap[key]){pImg.src=pMap[key];pImg.style.display='block';pImg.onerror=function(){this.style.display='none';};}
 
-  var stepsHtml=data.steps.map(function(s){return '<div class="r-step">&#8594; '+s+'</div>';}).join('');
+  // Radar chart
+  var dimScores = calcDimScores();
+  var radarSvg = renderRadar(dimScores);
+  var radarHtml = '<div class="r-radar"><div class="r-radar-title">\u2B50 \u4E94\u7EF4\u80FD\u91CF\u5206\u5E03</div><div class="radar-container">'+radarSvg+'</div><div class="radar-legend"><div class="radar-legend-item"><span class="radar-legend-dot yang-dot"></span>\u5404\u7EF4\u5EA6\u9633\u503E\u5411</div><div class="radar-legend-item"><span class="radar-legend-dot yin-dot"></span>\u5404\u7EF4\u5EA6\u9634\u503E\u5411</div></div></div>';
+
+  // Content cards
+  var stepsHtml=data.steps.map(function(s){return '<div class="r-step">'+s+'</div>';}).join('');
+  var traitsHtml=data.traits.map(function(t){return '<div class="r-trait">'+t+'</div>';}).join('');
+  var pairGuideHtml=data.pairGuide.map(function(p){return '<div class="r-pair-item"><div class="r-pair-name">'+p.target+'<span class="r-pair-tag '+p.tag+'">'+p.tagText+'</span></div><div class="r-pair-text">'+p.text+'</div></div>';}).join('');
 
   document.getElementById('resultContent').innerHTML=
-    '<div class="r-card"><div class="r-card-title">&#9889; 内核判定 <span class="line"></span></div>'+
-    '<div style="font-size:22px;font-weight:700;margin-bottom:6px;color:'+(isWarm?'#c47a3a':'#4a6a9a')+'">'+(isYang?'阳性能量':'阴性能量')+'</div>'+
-    '<div style="font-size:13px;color:#7a7a8a;">'+yang+'/'+total+' 阳 '+(decisive?'判定明确':'倾向清晰')+'</div>'+
-    '<div style="font-size:12px;color:#aaa;margin-top:8px;padding:8px 12px;background:'+(isWarm?'#fef9f5':'#f0f4fa')+';border-radius:8px;line-height:1.5;">你的内核能量是'+(isYang?'阳':'阴')+'——这不是说你没有'+(isYang?'阴':'阳')+'的那一面，而是你面对核心冲突时的第一反应是'+(isYang?'直面':'观察')+'。</div></div>'+
+    // Verdict card (simplified - no percentage bars)
+    '<div class="r-card"><div class="r-card-title">\u2696\uFE0F \u5185\u6838\u5224\u5B9A <span class="line"></span></div>'+
+    '<div style="text-align:center;padding:4px 0 12px;font-size:24px;font-weight:700;color:'+(isWarm?'#c47a3a':'#4a6a9a')+'">'+(isYang?'\u2600\uFE0F \u9633\u6027\u80FD\u91CF':'\uD83C\uDF19 \u9634\u6027\u80FD\u91CF')+'</div>'+
+    '<div style="text-align:center;font-size:13px;color:#7a7a8a;margin-bottom:4px;">'+yang+' \u7968\u9633 &middot; '+yin+' \u7968\u9634 '+(decisive?'\u00B7 \u5224\u5B9A\u660E\u786E':'\u00B7 \u503E\u5411\u6E05\u6670')+'</div>'+
+    '<div style="text-align:center;font-size:12px;color:#aaa;padding:8px 12px;background:'+(isWarm?'#fef9f5':'#f0f4fa')+';border-radius:8px;line-height:1.5;">\u4F60\u7684\u5185\u6838\u80FD\u91CF\u662F'+(isYang?'\u9633':'\u9634')+'——这不是说你没有'+(isYang?'\u9634':'\u9633')+'的那一面，<br>\u800C\u662F\u4F60\u9762\u5BF9\u6838\u5FC3\u51B2\u7A81\u65F6\u7684\u7B2C\u4E00\u53CD\u5E94\u662F'+(isYang?'\u76F4\u9762':'\u89C2\u5BDF')+'。</div></div>'+
 
-    '<div class="r-card"><div class="r-card-title">&#9733; 人格底色 <span class="line"></span></div>'+
-    '<div class="r-desc">'+data.core+'</div>'+
-    '<div class="r-highlight">'+data.highlight+'</div>'+
-    data.traits.map(function(t){return '<div class="r-trait">&#9670; '+t+'</div>';}).join('')+'</div>'+
+    radarHtml+
 
-    '<div class="r-card"><div class="r-card-title">&#127793; 成长方向 <span class="line"></span></div>'+
-    '<div class="r-evo-box"><div class="lbl">课题</div><div class="txt">'+data.challenge+'</div></div>'+
-    '<div class="r-arrow">&#8595;</div>'+
-    '<div class="r-evo-box"><div class="lbl">成长方向</div><div class="txt">'+data.growth+'</div></div>'+
-    stepsHtml+'</div>'+
+    '<div class="r-content">'+
+      '<div class="r-card"><div class="r-card-title">\uD83C\uDFA8 \u4EBA\u683C\u5E95\u8272 <span class="line"></span></div>'+
+      '<div class="r-desc">'+data.core+'</div>'+
+      '<div class="r-highlight">'+data.highlight+'</div>'+
+      traitsHtml+'</div>'+
 
-    '<div class="r-card"><div class="r-card-title">&#127754; 关系层面 <span class="line"></span></div>'+
-    '<div class="r-evo-box" style="margin-bottom:12px;"><div class="lbl">关系模式</div><div class="txt">'+data.relationMode+'</div></div>'+
-    '<div class="r-evo-box" style="margin-bottom:10px;"><div class="lbl">最佳拍档</div><div class="txt"><strong>'+data.bestMatch.name+'</strong> &mdash; '+data.bestMatch.why+'</div></div>'+
-    '<div class="r-pair-box"><div class="plbl">配对指引</div>'+
-    data.pairGuide.map(function(p){return '<div class="r-pair-item"><div class="r-pair-name">'+p.target+'<span class="r-pair-tag '+p.tag+'">'+p.tagText+'</span></div><div class="r-pair-text">'+p.text+'</div></div>';}).join('')+
-    '</div></div>';
+      '<div class="r-card"><div class="r-card-title">\uD83C\uDF31 \u8FDB\u5316\u8BFE\u9898 &rarr; \u6210\u957F\u65B9\u5411 <span class="line"></span></div>'+
+      '<div class="r-evo-box"><div class="lbl">\u25C6 \u8BFE\u9898</div><div class="txt">'+data.challenge+'</div></div>'+
+      '<div class="r-arrow">\u2193</div>'+
+      '<div class="r-evo-box"><div class="lbl">\u2192 \u6210\u957F\u65B9\u5411</div><div class="txt">'+data.growth+'</div>'+stepsHtml+'</div></div>'+
+
+      '<div class="r-card"><div class="r-card-title">\uD83C\uDF0A \u5173\u7CFB\u5C42\u9762 <span class="line"></span></div>'+
+      '<div class="r-relation-box"><div class="lbl">\u5173\u7CFB\u6A21\u5F0F</div><div class="txt">'+data.relationMode+'</div></div>'+
+      '<div class="r-best-box"><div class="info"><div class="name">\uD83D\uDCAB '+data.bestMatch.name+'</div><div class="why">'+data.bestMatch.why+'</div></div></div>'+
+      '<div class="r-pair-box"><div class="plbl">\u914D\u5BF9\u6307\u5F15</div>'+pairGuideHtml+'</div></div>'+
+    '</div>';
 
   document.getElementById('quiz').style.display='none';
   document.getElementById('result').style.display='block';

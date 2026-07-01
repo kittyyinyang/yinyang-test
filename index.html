@@ -234,7 +234,7 @@ body {
     <div class="cv-circle moon">🌙<span class="label">阴 · 观察</span></div>
   </div>
   <div class="cv-compat">测完你就知道——<span class="match">谁和你同频</span>，<br><span class="drain">谁让你心累</span></div>
-  <button class="btn-start" onclick="startQuiz()">免费测你的能量类型 →</button>
+  <button class="btn-start" id="btnStart">免费测你的能量类型 →</button>
   <div class="cover-bottom">@ 你的好友来测，看你们搭不搭 ✦ 阴阳人格 · V5.4</div>
 </div>
 
@@ -748,6 +748,10 @@ const RESULT_DATA = {
     ]
   }
 };
+document.addEventListener('DOMContentLoaded', function() {
+  var btn = document.getElementById('btnStart');
+  if (btn) btn.onclick = startQuiz;
+});
 </script>
 </body>
 </html>

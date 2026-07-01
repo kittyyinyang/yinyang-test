@@ -678,7 +678,15 @@ function restart() {
   window.scrollTo(0,0);
 }
 
-setTimeout(()=>document.getElementById('splash').classList.add('hide'),600);
+// 更稳的 splash 隐藏逻辑：DOM 准备好就隐藏 + 最大等待500ms + 点击可跳过
+function hideSplash() {
+  const s = document.getElementById('splash');
+  if (s && !s.classList.contains('hide')) s.classList.add('hide');
+}
+document.addEventListener('DOMContentLoaded', hideSplash);
+window.addEventListener('load', hideSplash);
+setTimeout(hideSplash, 500);
+document.getElementById('splash').addEventListener('click', hideSplash);
 
 // ===== 7. RESULT DATA =====
 const RESULT_DATA = {

@@ -155,7 +155,35 @@ body {
 .r-pair-tag.mirror { background:#e8f4f8; color:#2980b9; }
 .r-pair-text { font-size:12px; color:#7a7a8a; line-height:1.5; }
 
+.r-pair-text { font-size:12px; color:#7a7a8a; line-height:1.5; }
+
+/* 核心信念（V5.11 扩充） */
+.r-belief { background:var(--accent-light); border-left:4px solid var(--accent); border-radius:0 10px 10px 0; padding:12px 14px; margin-top:4px; }
+.r-belief .b-root { font-size:14px; font-weight:700; color:var(--accent); margin-bottom:6px; }
+.r-belief .b-row { font-size:12.5px; color:#5a5a6a; margin-bottom:5px; line-height:1.55; }
+.r-belief .b-row b { color:#444; }
+.r-belief .b-dir { font-size:12.5px; color:#5a5a6a; margin-top:6px; padding-top:6px; border-top:1px dashed var(--accent-border); line-height:1.55; }
+.r-belief .b-dir b { color:var(--accent); }
+
+/* 觉察课题（V5.11 扩充） */
+.r-lesson { margin:4px 0; padding-left:2px; }
+.r-lesson li { margin:0 0 9px 18px; font-size:13.5px; color:#5a5a6a; line-height:1.6; }
+.r-lesson li::marker { color:var(--accent); }
+
+/* 成长工具箱（V5.11 通用） */
+.toolbox { background:linear-gradient(135deg,#2f3640,#3d4654); color:#eee; border-radius:16px; padding:26px 22px; margin:24px 16px; max-width:600px; box-shadow:0 6px 20px rgba(0,0,0,.18); }
+.toolbox h2 { color:#ffd98a; font-size:18px; margin-bottom:4px; letter-spacing:1px; }
+.toolbox .ts { color:#aab; font-size:12.5px; margin-bottom:14px; line-height:1.6; }
+.tb-sec { margin-top:14px; }
+.tb-sec h3 { color:#ffce7a; font-size:14.5px; margin-bottom:7px; }
+.tb-sec ul { margin-left:20px; font-size:13.5px; color:#dfe3ea; line-height:1.55; }
+.tb-sec li { margin-bottom:6px; }
+.tb-sec b { color:#ffe0a3; }
+.formula { background:rgba(255,255,255,.06); border-radius:8px; padding:10px 12px; font-size:12.5px; color:#ffd98a; margin-top:10px; line-height:1.6; }
+.selfchk { font-size:12.5px; color:#cdd3dc; margin-top:10px; line-height:1.6; }
+
 /* Actions & footer */
+
 .r-actions { padding:0 16px; }
 .btn-restart { display:block; width:100%; padding:15px; border:2px solid #ddd; background:transparent; color:#7a7a8a; border-radius:50px; font-size:15px; font-weight:600; cursor:pointer; text-align:center; transition:all 0.2s; }
 .btn-restart:active { background:#f5f3f0; }
@@ -206,7 +234,7 @@ body {
   <div class="r-actions">
     <button class="btn-restart" onclick="restart()">&#x91CD;&#x65B0;&#x6D4B;&#x8BD5;</button>
   </div>
-  <div class="r-footer">&#x9634;&#x9633;&#x4EBA;&#x683C; · V5.4</div>
+  <div class="r-footer">&#x9634;&#x9633;&#x4EBA;&#x683C; · V5.11</div>
 </div>
 
 <script>
@@ -324,9 +352,27 @@ RESULT_DATA['yang-male']={
     '隐藏恐惧：无能=不被爱——所以必须永远强大、永远正确',
     '独特认同：通过被需要来确认自我价值——"如果我不扛了，我还是谁？"'
   ],
-  challenge:'如果我示弱了，谁来扛？——无法接受的不是失败，是"被看见失败"',
-  growth:'学习"被接住"——脆弱不是崩塌，是另一种力量',
-  steps:['从最小的事开始练习表达"我需要你"——哪怕只是让伴侣递杯水','觉察"过度负责=控制"的模式——放手不是失职，是信任的开始','区分"扛起责任"和"扛起一切"——你不必为所有人的情绪买单'],
+  belief:{
+    root:'无能恐惧',
+    rootDesc:'"如果我没能力，就不配被爱"',
+    deepest:'最深恐惧不是"不被爱"，而是"无能=不被爱"——一旦暴露弱点，就等于失去价值与被连接的资格。',
+    trigger:'被触及时反应：向外行动——用"我必须更强、更正确"去盖过恐惧，而不是面对它。',
+    direction:'我的存在本身就有价值，不需要用"强大正确"来换。'
+  },
+  lessons:[
+    '你用"扛"代替"说"，把脆弱锁进壳里——你不是不需要被接住，是不敢让任何人看见"被接住"的自己。',
+    '你的控制（服从性测试、制定规则）底层代码是"别挑战我"；当关系威胁掌控感，你会推开甚至进入对抗，却错过真正的连接。',
+    '你把"被需要"当成唯一价值证明："如果我不扛了，我还是谁？"——于是替所有人扛，却耗尽自己。',
+    '方向：脆弱不是崩塌，是另一种力量；你不必用"永远强大"来确认自己值得被爱。'
+  ],
+  growthDir:'阳者学柔 · 从"一个人扛"走向"敢被接住"，让刚与柔共存',
+  steps:[
+    '学习"被接住"：从最小的事练习说"我需要你"——哪怕只是让伴侣递杯水。',
+    '觉察"过度负责=控制"：放手不是失职，是信任的开始；你不必为所有人的情绪买单。',
+    '练习"臣服"：不是变弱，是把控制权交给值得信任的人——对他人的臣服是你的最高信任认证与终极勇气。',
+    '给防御留出口：在唯一信任的人面前允许自己放下防备（不是表演强大），用轻松的方式化解紧绷。',
+    '区分"扛责任"与"扛一切"：建立柔韧边界，像竹子能弯能直。'
+  ],
   relationMode:'你习惯站在"保护者/给予者"的位置。你很难开口要，但会在关键时刻顶上。你不是不会爱，而是习惯用行动代替表达。',
   bestMatch:{name:'女阴 · 连接者',why:'阴阳互补——她给你柔软和接纳，你给她安全感和方向'},
   pairGuide:[
@@ -346,12 +392,26 @@ RESULT_DATA['yang-female']={
     '隐藏恐惧：示弱=被吞噬——"如果我示弱了，谁替我扛？谁能接住我？"',
     '独特拉扯：在"我不需要任何人"的铠甲和"其实我也需要被接住"的渴望之间反复横跳'
   ],
-  challenge:'无法接受自己的无能、脆弱——"如果我连这点事都搞不定，我还有什么价值？"',
-  growth:'通过阴性能量的生发，自然地流露脆弱——示弱不是软弱，是最高级别的向下兼容',
+  belief:{
+    root:'无能恐惧 + 独立自爱的本能',
+    rootDesc:'底色"我能行，我不需要任何人"，叠加"女性身份 vs 阳性本质"的内在冲突',
+    deepest:'最深恐惧：示弱=被吞噬——"如果我示弱了，谁替我扛？谁接得住我？"',
+    trigger:'被触及时反应：用"搞定事情"证明价值，把真实脆弱越锁越深。',
+    direction:'我的强不是错，柔也不是弱；刚柔并济才是完整的我。'
+  },
+  lessons:[
+    '你太早学会自己扛，坚硬是防御不是攻击；但铠甲之下是"其实我也需要被接住"的渴望，二者反复横跳。',
+    '你怕示弱=被吞噬、被当成"不够女人"，于是用"搞定事情"证明价值，却把真正的脆弱越锁越深。',
+    '与女性群体的疏离感、被误读为"太强势"——你卡在"独立"与"被接纳"的拉扯里。',
+    '方向：示弱不是软弱，是最高级别的向下兼容；刚柔并济才是完整。'
+  ],
+  growthDir:'阳者学柔 · 在"能扛"之外，允许自己也被接住',
   steps:[
-    '反复背诵："示弱不是软弱，是最高级别的向下兼容"——这需要练，不是道理懂了就能做到',
-    '找一个安全的"接住者"练习示弱——先在小事上说"我不行，你来帮我"',
-    '区分"坚强"和"僵硬"——真正的力量是柔韧的，像竹子一样能弯能直'
+    '练习"示弱=最高级别的向下兼容"：先在小事上说"我不行，你来帮我"——这需要练，不是道理懂了就成。',
+    '接纳"女性身份与阳性内核的共存"：你的强不是错，柔也不是弱。',
+    '找到理解与欣赏你的人群（尤其能接住你强度的人），平衡独立与连接。',
+    '区分"坚强"与"僵硬"：真正的力量是柔韧的，像竹子能弯能直。',
+    '把"较劲"升华为创造与突破：用建设性方式释放攻击性。'
   ],
   relationMode:'你需要平等、空间和被看见。你讨厌被控制，也讨厌被当成"该温柔一点"的女人。你的课题不是变得柔软，而是找到能接住你强度的人。',
   bestMatch:{name:'男阴 · 深潜者',why:'阴阳互补——他理解你的深度，你带他走出内耗'},
@@ -372,12 +432,26 @@ RESULT_DATA['yin-female']={
     '隐藏恐惧：不被爱=不存在——测试行为的背后是"怕被抛弃"的深层恐惧',
     '独特模式：过度关注他人需求而忽视自我——"先把他照顾好，我的感受不重要"'
   ],
-  challenge:'"我不配得被爱"——总觉得必须付出点什么才有资格被爱',
-  growth:'从"付出更多"到"允许被爱"——你不需要先付出来换取被爱的资格',
+  belief:{
+    root:'不配得信念',
+    rootDesc:'"我本身不值得被爱"',
+    deepest:'最深恐惧不是孤独，而是"不被爱=不存在"；反复测试，背后是"怕被抛弃"。',
+    trigger:'被触及时反应：向内归因——"你看，我果然不配"（测试越狠，越在验证恐惧）。',
+    direction:'我本身就值得，不需要先付出来换取被爱的资格。'
+  },
+  lessons:[
+    '你的"试探/作"本质是控制——你以为是确认爱，对方感受到的是"你在测试我的底线"。这是阴阳冲突最根本的认知错位。',
+    '你容易把自己放进受害者位置，启动卡普曼戏剧三角（受害者-拯救者-加害者），把身边人卷进无限循环。',
+    '边界感弱，因为自我价值与"被需要"深度绑定："如果我说不，他可能就不再需要我了"——于是用自我牺牲换取存在感。',
+    '方向：从"不配得"走向"配得"——你不需要先付出来换被爱的资格。'
+  ],
+  growthDir:'阴者学刚 · 从"用付出去换爱"走向"我本身就值得"',
   steps:[
-    '觉察"牺牲式付出=控制"的模式——付出背后的潜台词可能是"你看我付出了这么多"',
-    '练习直接表达需求，而不是用测试和暗示——"我想要"和"我需要"不是羞耻的事',
-    '建立边界不是为了推开别人，而是让自己站得更稳——边界不是墙，是门'
+    '从"不配得"走向"配得"：你不需要先付出来换被爱的资格。',
+    '从"测试验证"走向"信任接纳"：直接表达需求（"我想要""我需要"不是羞耻），而非暗示和试探。',
+    '从"受害者心态"走向"自我负责"：放下卡普曼三角，不做自己人生的加害者。',
+    '建立边界=释放攻击性：不是刻薄，而是敢于说"我不喜欢这样"；边界不是墙，是门。',
+    '把"付出"从控制筹码转为真实滋养：允许自己也被接住、被爱。'
   ],
   relationMode:'你习惯用"给"来换取"留"。你渴望被需要、被珍惜，却常常因为不敢直接表达需求而委屈。你不是黏人，你只是想要确定感。',
   bestMatch:{name:'男阳 · 承重者',why:'阴阳互补——他给你安全感，你给他被需要的感觉'},
@@ -398,19 +472,33 @@ RESULT_DATA['yin-male']={
     '隐藏恐惧：畏惧交付——"如果我把真心交出去，被伤害了怎么办？"',
     '独特拉扯：在"渴望深度连接"和"害怕被吞噬"之间反复横跳'
   ],
-  challenge:'畏惧受伤，不敢交付——怕的不是爱，是爱了之后被伤害',
-  growth:'从过度思考转向有边界的信任流动——敏感不是缺陷，是超能力',
+  belief:{
+    root:'不配得信念 + 社会规训"男人要坚强"的双重枷锁',
+    rootDesc:'底色敏感内向，但社会要求向外释放——两股力量同时拉扯',
+    deepest:'最深恐惧：畏惧交付——"如果我把真心交出去，被伤害了怎么办？"',
+    trigger:'被触及时反应：用暗示、回避、消失代替直接；戴一层"阳壳"保护自己。',
+    direction:'我本身就值得，不需要证明；敏感是天线不是缺陷。'
+  },
+  lessons:[
+    '你戴一层"阳壳"：表面镇定随和，内部翻涌——不是高冷，是"用尽全力控制自己不要陷进去"。',
+    '推拉并行：一股力量推、一股力量拉，不是故意玩弄，是你体内的两股力量自己都搞不定自己。',
+    '讨好型假自体：为维持多个"人设"消耗大量能量；怕交付后被伤，于是用暗示、回避、消失代替直接。',
+    '方向：敏感不是缺陷，是超能力；有边界地信任流动，不必装阳。'
+  ],
+  growthDir:'阴者学刚 · 兼学阳的行动——温柔而坚定，既能深潜也能上岸',
   steps:[
-    '区分"融合"和"吞噬"——健康的连接是两个人的靠近，不是一个人消失',
-    '觉察"死循环套娃"——想了三层就不想了，先做一步，做比想重要',
-    '把敏感从"负担"重新定义为"天线"——你能察觉到别人察觉不到的信号，这是天赋'
+    '建立自信，接纳独特性：你的敏感是优势不是弱点。',
+    '发展适度的行动力与决断力：区分"融合"与"吞噬"，先做一步，做比想重要。',
+    '学会直接表达需求与感受：从"暗示"走向"说出口"。',
+    '把敏感从"负担"重定义为"天线"：你能察觉别人察觉不到的信号，是天赋。',
+    '从阴站走向阴阳平衡：既能深潜也能上岸，温柔而坚定。'
   ],
   relationMode:'你渴望深度连接，却又害怕交付后被伤害。你常常"想靠近又退缩"，不是不爱，是太怕受伤。你需要一个能看穿你沉默的人。',
   bestMatch:{name:'女阳 · 破局者',why:'阴阳互补——她带你走出去，你接住她的脆弱'},
   pairGuide:[
     {target:'女阳 · 破局者',tag:'best',tagText:'最佳拍档',text:'你最互补的配对。她的阳性能量带你从过度思考走向行动，你的阴性能量让她学会自然流露脆弱。她是你的铠甲，你是她的港湾。'},
     {target:'女阴 · 连接者',tag:'mirror',tagText:'镜像对照',text:'你们都敏感、都需要安全感。你们能建立很深的情感连接，但也可能因为太像而互相内耗。课题是：谁来当那个先稳定下来的人？'},
-    {target:'男阳 · 承重者',tag:'challenge',tagText:'能量相反',text:'你们像磁铁的两极。他习惯"扛"，你习惯"想"。事业上他是前锋你是谋士；亲密关系中，他不懂你的敏感，你不懂你的沉默。'}
+    {target:'男阳 · 承重者',tag:'challenge',tagText:'能量相反',text:'你们像磁铁的两极。他习惯"扛"，你习惯"想"。事业上他是前锋你是谋士；亲密关系中，他不懂你的敏感，你不懂他的沉默。'}
   ]
 };
 
@@ -491,6 +579,9 @@ function renderRadar(scores) {
   return svg;
 }
 
+// ===== GROWTH TOOLBOX (common) =====
+var TOOLBOX_HTML = '<div class="toolbox"><h2>成长工具箱 · 觉察 — 创伤 — 信念</h2><div class="ts">无论你是哪一种人格，通往自我和解的路都有一条共通的方法线：先看见反应，再挖到伤，最后松动信念。这套觉察方法来自我们的直播间。</div><div class="tb-sec"><h3>① 觉察 · 看见反应，而不是评判反应</h3><ul><li><b>觉察念头模式</b>：区分“事实”与“故事”。对方晚回消息是事实；“他不在乎我了”是你自己编的故事。</li><li><b>识别情绪触发点</b>：不压抑情绪，而是看见情绪背后的信息——情绪是身体在说话。</li><li><b>随时自问</b>：此刻我被触发了吗？我看见的是事实，还是我加的戏？这个反应，指向我心里哪一处旧伤？</li></ul></div><div class="tb-sec"><h3>② 创伤 · 每个强烈反应背后，都有一处没愈合的伤</h3><ul><li><b>完美镜像触发</b>：最亲近的人一句话，常常精准踩中你旧有的创伤——因为你们相遇的设计，本就是彼此照见、加速清醒。</li><li><b>震荡期</b>：自我探索初期，会经历“触发→释放情绪→回溯→挖到最源头的伤与信念→让它在被看见中松动”的循环。每次恢复的基线都比上次略高一点，是螺旋上升，不是失败。</li><li><b>核心原则</b>：“苦不能白吃”——每一次触发都是一份礼物，把礼物挖干净再走。</li></ul></div><div class="tb-sec"><h3>③ 信念 · 最底层的驱动力，是自动运行的核心程序</h3><ul><li><b>阳性核心信念</b>：“只有靠自己才靠得住”“求助没有用”“信任必须 earned”。</li><li><b>阴性核心信念</b>：“我不配得被爱”“我需要牺牲自己才值得被爱”“情绪越激烈=越爱我”。</li><li><b>松动它</b>：信念在后台自动运行，你往往察觉不到它。改变一个核心信念，就等于改变了整座上层建筑的根基。试着质疑它：这是事实，还是我被植入的故事？</li></ul><div class="formula">事实 + 故事（搅在一起） → 觉察把它们分开 → 伤被看见 → 信念松动 → 反应自然改变</div><div class="selfchk">自测：同一个触发点再来时，你的情绪波动是不是更轻了？如果是，你正在成长，不是走错了路。</div></div>';
+
 // ===== SHOW RESULT =====
 function showResult() {
   var yang=0, yin=0;
@@ -533,6 +624,8 @@ function showResult() {
   var stepsHtml=data.steps.map(function(s){return '<div class="r-step">'+s+'</div>';}).join('');
   var traitsHtml=data.traits.map(function(t){return '<div class="r-trait">'+t+'</div>';}).join('');
   var pairGuideHtml=data.pairGuide.map(function(p){return '<div class="r-pair-item"><div class="r-pair-name">'+p.target+'<span class="r-pair-tag '+p.tag+'">'+p.tagText+'</span></div><div class="r-pair-text">'+p.text+'</div></div>';}).join('');
+  var beliefHtml='<div class="r-belief"><div class="b-root">核心信念 · '+data.belief.root+'</div><div class="b-row"><b>根：</b>'+data.belief.rootDesc+'</div><div class="b-row"><b>最深的恐惧：</b>'+data.belief.deepest+'</div><div class="b-row"><b>被触及时：</b>'+data.belief.trigger+'</div><div class="b-dir"><b>转化方向：</b>'+data.belief.direction+'</div></div>';
+  var lessonsHtml='<ul class="r-lesson">' + data.lessons.map(function(l){return '<li>'+l+'</li>';}).join('') + '</ul>';
 
   document.getElementById('resultContent').innerHTML=
     // Verdict card (simplified - no percentage bars)
@@ -544,21 +637,23 @@ function showResult() {
     radarHtml+
 
     '<div class="r-content">'+
+      '<div class="r-card"><div class="r-card-title">\uD83E\uDDEC \u6838\u5FC3\u4FE1\u5FF5\uFF08\u6839\uFF09 <span class="line"></span></div>'+beliefHtml+'</div>'+
       '<div class="r-card"><div class="r-card-title">\uD83C\uDFA8 \u4EBA\u683C\u5E95\u8272 <span class="line"></span></div>'+
       '<div class="r-desc">'+data.core+'</div>'+
       '<div class="r-highlight">'+data.highlight+'</div>'+
       traitsHtml+'</div>'+
 
       '<div class="r-card"><div class="r-card-title">\uD83C\uDF31 \u8FDB\u5316\u8BFE\u9898 &rarr; \u6210\u957F\u65B9\u5411 <span class="line"></span></div>'+
-      '<div class="r-evo-box"><div class="lbl">\u25C6 \u8BFE\u9898</div><div class="txt">'+data.challenge+'</div></div>'+
+      '<div class="r-evo-box"><div class="lbl">\u25C6 \u4F60\u7684\u8BFE\u9898 The Lesson</div>'+lessonsHtml+'</div>'+
       '<div class="r-arrow">\u2193</div>'+
-      '<div class="r-evo-box"><div class="lbl">\u2192 \u6210\u957F\u65B9\u5411</div><div class="txt">'+data.growth+'</div>'+stepsHtml+'</div></div>'+
+      '<div class="r-evo-box"><div class="lbl">\u2192 \u6210\u957F\u65B9\u5411</div><div class="txt" style="margin-bottom:8px">'+data.growthDir+'</div>'+stepsHtml+'</div></div>'+
 
       '<div class="r-card"><div class="r-card-title">\uD83C\uDF0A \u5173\u7CFB\u5C42\u9762 <span class="line"></span></div>'+
       '<div class="r-relation-box"><div class="lbl">\u5173\u7CFB\u6A21\u5F0F</div><div class="txt">'+data.relationMode+'</div></div>'+
       '<div class="r-best-box"><div class="info"><div class="name">\uD83D\uDCAB '+data.bestMatch.name+'</div><div class="why">'+data.bestMatch.why+'</div></div></div>'+
       '<div class="r-pair-box"><div class="plbl">\u914D\u5BF9\u6307\u5F15</div>'+pairGuideHtml+'</div></div>'+
-    '</div>';
+    '</div>'+
+    TOOLBOX_HTML;
 
   document.getElementById('quiz').style.display='none';
   document.getElementById('result').style.display='block';

@@ -120,7 +120,7 @@ body {
 .r-evo-box { border-radius:12px; padding:14px 16px; margin-bottom:8px; }
 #result.result-wrap.warm .r-evo-box { background:var(--evo-bg); border:1px solid var(--evo-border); }
 #result.result-wrap.cool .r-evo-box { background:var(--evo-bg); border:1px solid var(--evo-border); }
-.r-evo-box .lbl { font-size:12px; font-weight:600; color:var(--accent); letter-spacing:1px; margin-bottom:4px; }
+.r-evo-box .lbl { font-size:14px; font-weight:600; color:var(--accent); letter-spacing:1px; margin-bottom:4px; }
 .r-evo-box .txt { font-size:15px; color:#2d2d3a; line-height:1.5; font-weight:500; }
 .r-arrow { text-align:center; padding:6px 0; font-size:20px; color:var(--accent); }
 .r-step { font-size:13.5px; color:#7a7a8a; padding:5px 0 5px 18px; position:relative; line-height:1.5; }
@@ -188,6 +188,8 @@ body {
 .r-vote-tag.yang { color:#c47a3a; background:rgba(196,122,58,0.10); }
 .r-vote-tag.yin { color:#4a6a9a; background:rgba(74,106,154,0.10); }
 .r-vote-qs { color:#5a5a6a; font-size:13px; }
+
+.r-trait b, .r-lesson li b, .r-step b { color:#3a3a4a; font-weight:700; }
 
 /* Actions & footer */
 
@@ -587,7 +589,7 @@ function renderRadar(scores) {
 }
 
 // ===== GROWTH TOOLBOX (common) =====
-var TOOLBOX_HTML = '<div class="toolbox"><h2>成长工具箱 · 觉察 — 创伤 — 信念</h2><div class="ts">无论你是哪一种人格，通往自我和解的路都有一条共通的方法线：先看见反应，再挖到伤，最后松动信念。</div><div class="tb-sec"><h3>① 觉察 · 看见反应，而不是评判反应</h3><ul><li><b>觉察念头模式</b>：区分“事实”与“故事”。对方晚回消息是事实；“他不在乎我了”是你自己编的故事。</li><li><b>识别情绪触发点</b>：不压抑情绪，而是看见情绪背后的信息——情绪是身体在说话。</li><li><b>随时自问</b>：此刻我被触发了吗？我看见的是事实，还是我加的戏？这个反应，指向我心里哪一处旧伤？</li></ul></div><div class="tb-sec"><h3>② 创伤 · 每个强烈反应背后，都有一处没愈合的伤</h3><ul><li><b>完美镜像触发</b>：最亲近的人一句话，常常精准踩中你旧有的创伤——因为你们相遇的设计，本就是彼此照见、加速清醒。</li><li><b>震荡期</b>：自我探索初期，会经历“触发→释放情绪→回溯→挖到最源头的伤与信念→让它在被看见中松动”的循环。每次恢复的基线都比上次略高一点，是螺旋上升，不是失败。</li><li><b>核心原则</b>：“苦不能白吃”——每一次触发都是一份礼物，把礼物挖干净再走。</li></ul></div><div class="tb-sec"><h3>③ 信念 · 最底层的驱动力，是自动运行的核心程序</h3><ul><li><b>阳性核心信念</b>：“只有靠自己才靠得住”“求助没有用”“信任必须 earned”。</li><li><b>阴性核心信念</b>：“我不配得被爱”“我需要牺牲自己才值得被爱”“情绪越激烈=越爱我”。</li><li><b>松动它</b>：信念在后台自动运行，你往往察觉不到它。改变一个核心信念，就等于改变了整座上层建筑的根基。试着质疑它：这是事实，还是我被植入的故事？</li></ul><div class="formula">事实 + 故事（搅在一起） → 觉察把它们分开 → 伤被看见 → 信念松动 → 反应自然改变</div><div class="selfchk">自测：同一个触发点再来时，你的情绪波动是不是更轻了？如果是，你正在成长，不是走错了路。</div></div>';
+var TOOLBOX_HTML = '<div class="toolbox"><h2>成长工具箱 · 觉察 — 创伤 — 信念</h2><div class="ts">无论你是哪一种人格，通往自我和解的路都有一条共通的方法线：先看见反应，再挖到伤，最后松动信念。</div><div class="tb-sec"><h3>① 觉察 · 看见反应，而不是评判反应</h3><ul><li><b>觉察念头模式</b>：区分“事实”与“故事”。对方晚回消息是事实；“他不在乎我了”是你自己编的故事。</li><li><b>识别情绪触发点</b>：不压抑情绪，而是看见情绪背后的信息——情绪是身体在说话。</li><li><b>随时自问</b>：此刻我被触发了吗？我看见的是事实，还是我加的戏？这个反应，指向我心里哪一处旧伤？</li></ul></div><div class="tb-sec"><h3>② 创伤 · 每个强烈反应背后，都有一处没愈合的伤</h3><ul><li><b>完美镜像触发</b>：最亲近的人一句话，常常精准踩中你旧有的创伤——因为你们相遇的设计，本就是彼此照见、加速清醒。</li><li><b>震荡期</b>：自我探索初期，会经历“触发→释放情绪→回溯→挖到最源头的伤与信念→让它在被看见中松动”的循环。每次恢复的基线都比上次略高一点，是螺旋上升，不是失败。</li><li><b>核心原则</b>：“苦不能白吃”——每一次触发都是一份礼物，把礼物挖干净再走。</li></ul></div><div class="tb-sec"><h3>③ 信念 · 最底层的驱动力，是自动运行的核心程序</h3><ul><li><b>阳性核心信念</b>：“只有靠自己才靠得住”“求助没有用”“信任必须靠自己挣得”。</li><li><b>阴性核心信念</b>：“我不配得被爱”“我需要牺牲自己才值得被爱”“情绪越激烈=越爱我”。</li><li><b>松动它</b>：信念在后台自动运行，你往往察觉不到它。改变一个核心信念，就等于改变了整座上层建筑的根基。试着质疑它：这是事实，还是我被植入的故事？</li></ul><div class="formula">事实 + 故事（搅在一起） → 觉察把它们分开 → 伤被看见 → 信念松动 → 反应自然改变</div><div class="selfchk">自测：同一个触发点再来时，你的情绪波动是不是更轻了？如果是，你正在成长，不是走错了路。</div></div>';
 
 // ===== SHOW RESULT =====
 function showResult() {
@@ -625,7 +627,11 @@ function showResult() {
   // (五维能量分布雷达图已按需求移除)
 
   // Content cards
-  var stepsHtml=data.steps.map(function(s){return '<div class="r-step">'+s+'</div>';}).join('');
+  var stepsHtml=data.steps.map(function(s){
+    var idx=s.indexOf('\uFF1A');
+    if(idx>0){ return '<div class="r-step"><b>'+s.substring(0,idx)+'</b>'+s.substring(idx)+'</div>'; }
+    return '<div class="r-step">'+s+'</div>';
+  }).join('');
   var traitsHtml=data.traits.map(function(t){
     var idx=t.indexOf('\u2014\u2014');
     if(idx<0) idx=t.indexOf('\uFF1A');
@@ -634,7 +640,12 @@ function showResult() {
   }).join('');
   var pairGuideHtml=data.pairGuide.map(function(p){return '<div class="r-pair-item"><div class="r-pair-name">'+p.target+'<span class="r-pair-tag '+p.tag+'">'+p.tagText+'</span></div><div class="r-pair-text">'+p.text+'</div></div>';}).join('');
   var beliefHtml='<div class="r-belief"><div class="b-root">核心信念 · '+data.belief.root+'</div><div class="b-row"><b>根：</b>'+data.belief.rootDesc+'</div><div class="b-row"><b>最深的恐惧：</b>'+data.belief.deepest+'</div><div class="b-row"><b>被触及时：</b>'+data.belief.trigger+'</div><div class="b-dir"><b>转化方向：</b>'+data.belief.direction+'</div></div>';
-  var lessonsHtml='<ul class="r-lesson">' + data.lessons.map(function(l){return '<li>'+l+'</li>';}).join('') + '</ul>';
+  var lessonsHtml='<ul class="r-lesson">' + data.lessons.map(function(l){
+    var idx=l.indexOf('\u2014\u2014');
+    if(idx<0) idx=l.indexOf('\uFF1A');
+    if(idx>0){ return '<li><b>'+l.substring(0,idx)+'</b>'+l.substring(idx)+'</li>'; }
+    return '<li>'+l+'</li>';
+  }).join('') + '</ul>';
 
   document.getElementById('resultContent').innerHTML=
     // Verdict card (simplified - no percentage bars)

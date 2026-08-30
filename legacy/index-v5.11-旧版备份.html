@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>阴阳人格 · 能量内核测评</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
+  background:#faf8f5; color:#2d2d3a; line-height:1.6; min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── Cover ── */
+#cover {
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:flex-end;
+  padding:40px 24px 44px; text-align:center;
+  background:linear-gradient(165deg,#080812,#12102a,#1a0f20,#0e0a18);
+  color:#f0e6d3; position:relative;
+}
+.cv-icon { font-size:48px; margin-bottom:8px; line-height:1; }
+.cv-hook { font-size:24px; font-weight:700; line-height:1.4; margin-bottom:6px; }
+.cv-hook .hl { color:#d4a574; }
+.cv-sub { font-size:13px; color:rgba(240,230,211,0.4); line-height:1.5; margin-bottom:16px; max-width:300px; }
+.cv-pair { display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:12px; }
+.cv-dot { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:700; }
+.cv-dot.sun { background:rgba(196,122,58,0.15); border:1.5px solid rgba(196,122,58,0.3); color:#d4a574; }
+.cv-dot.moon { background:rgba(74,106,154,0.15); border:1.5px solid rgba(74,106,154,0.3); color:#7a9aba; }
+.cv-link { color:rgba(240,230,211,0.15); font-size:18px; }
+.cv-compat { font-size:13px; color:rgba(240,230,211,0.3); line-height:1.5; margin-bottom:20px; }
+.cv-compat .m { color:#d4a574; font-weight:600; }
+.cv-compat .d { color:rgba(160,190,220,0.5); font-weight:600; }
+.btn-start {
+  background:linear-gradient(135deg,#d4a574,#c89058); color:#0a0a16;
+  border:none; padding:14px 44px; border-radius:50px;
+  font-size:16px; font-weight:700; cursor:pointer; letter-spacing:1px;
+  box-shadow:0 4px 20px rgba(212,165,116,0.2);
+  transition:transform 0.2s;
+}
+.btn-start:active { transform:scale(0.97); }
+.cv-bottom { font-size:10px; color:rgba(240,230,211,0.1); margin-top:8px; letter-spacing:1px; }
+
+/* ── Quiz ── */
+#quiz { display:none; max-width:600px; margin:0 auto; }
+.quiz-header { position:sticky; top:0; z-index:10; background:rgba(250,248,245,0.95); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); padding:14px 20px 10px; border-bottom:1px solid rgba(0,0,0,0.04); }
+.progress-bar { background:#e8e4de; height:3px; border-radius:2px; overflow:hidden; }
+.progress-fill { height:100%; background:linear-gradient(90deg,#d4a574,#c4955a); border-radius:2px; transition:width 0.4s; width:0%; }
+.quiz-meta { display:flex; justify-content:space-between; font-size:12px; color:#7a7a8a; margin-top:6px; }
+.q-container { padding:16px 20px 120px; }
+.q-card { background:#fff; border-radius:16px; padding:28px 24px; box-shadow:0 2px 16px rgba(0,0,0,0.06); margin-bottom:16px; display:none; }
+.q-card.active { display:block; }
+.q-header { font-size:12px; font-weight:600; color:#a09080; margin-bottom:12px; letter-spacing:1px; }
+.q-text { font-size:17px; font-weight:600; margin-bottom:20px; line-height:1.5; }
+.q-option { display:block; width:100%; padding:14px 16px; margin-bottom:10px; border:2px solid #eee; border-radius:12px; background:#fafafa; font-size:15px; text-align:left; cursor:pointer; color:#2d2d3a; line-height:1.4; transition:all 0.2s; }
+.q-option:active { transform:scale(0.98); }
+.q-option.selected { border-color:#d4a574; background:#fef9f5; box-shadow:0 0 0 2px rgba(212,165,116,0.15); }
+.q-option .opt-label { display:inline-block; width:24px; height:24px; line-height:24px; text-align:center; border-radius:50%; background:#eee; font-size:12px; font-weight:600; margin-right:10px; color:#7a7a8a; }
+.q-option.selected .opt-label { background:#d4a574; color:#fff; }
+.q-nav { position:fixed; bottom:0; left:0; right:0; background:rgba(250,248,245,0.95); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); padding:12px 20px; display:flex; gap:12px; border-top:1px solid rgba(0,0,0,0.04); max-width:600px; margin:0 auto; }
+.btn-next { flex:1; padding:14px; border:none; border-radius:50px; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.2s; background:linear-gradient(135deg,#d4a574,#c4955a); color:#1a1a2e; }
+.btn-next:disabled { opacity:0.35; cursor:not-allowed; }
+
+/* ── RESULT (rich version from V5.4 backup) ── */
+#result { display:none; padding:0 0 40px; max-width:600px; margin:0 auto; }
+#result.result-wrap.warm { --pg-bg:#faf3ec; --card-bg:#fffcf8; --card-border:rgba(196,122,58,0.08); --accent:#c47a3a; --accent-soft:#f5e6d0; --accent-light:#fef9f2; --accent-border:#f0e0d0; --evo-bg:#fdf6ee; --evo-border:#f5e8d8; --rel-bg:#fdf6ee; --rel-border:#f0e0d0; --rel-label:#f5efe6; }
+#result.result-wrap.cool { --pg-bg:#eef0f4; --card-bg:#f7f8fc; --card-border:rgba(74,106,154,0.08); --accent:#4a6a9a; --accent-soft:#d0dcee; --accent-light:#f0f4fa; --accent-border:#d0dce8; --evo-bg:#eef4fa; --evo-border:#d8e0ee; --rel-bg:#eef4fa; --rel-border:#d0dce8; --rel-label:#e8eef6; }
+
+/* Banner */
+.r-banner { position:relative; width:100%; min-height:340px; overflow:hidden; }
+.r-banner.warm { background:linear-gradient(135deg,#2d1b0e,#5a3a1a); }
+.r-banner.cool { background:linear-gradient(135deg,#0f1a2e,#1a2a4a); }
+.r-banner img { width:100%; height:340px; object-fit:cover; display:block; opacity:0; transition:opacity 0.5s ease; }
+.r-banner.warm::after, .r-banner.cool::after { content:''; position:absolute; top:0; left:0; right:0; bottom:0; pointer-events:none; }
+.r-banner.warm::after { background:linear-gradient(180deg,rgba(90,50,20,0.35) 0%,transparent 35%,rgba(45,27,14,0.45) 100%); }
+.r-banner.cool::after { background:linear-gradient(180deg,rgba(20,40,80,0.35) 0%,transparent 35%,rgba(15,26,46,0.45) 100%); }
+.r-banner.warm .r-banner-overlay { background:linear-gradient(0deg,rgba(45,27,14,0.95) 0%,rgba(45,27,14,0.45) 55%,transparent 100%); }
+.r-banner.cool .r-banner-overlay { background:linear-gradient(0deg,rgba(15,26,46,0.95) 0%,rgba(15,26,46,0.45) 55%,transparent 100%); }
+.r-banner-overlay { position:absolute; bottom:0; left:0; right:0; padding:60px 24px 24px; text-align:center; color:#fff; }
+.r-type { font-size:24px; font-weight:700; letter-spacing:2px; text-shadow:0 2px 8px rgba(0,0,0,0.5); }
+.r-sub { font-size:12px; opacity:0.75; margin-top:4px; letter-spacing:1px; }
+.r-slogan { font-size:15px; font-weight:500; margin-top:8px; line-height:1.5; opacity:0.9; font-style:italic; text-shadow:0 1px 6px rgba(0,0,0,0.5); }
+.r-verdict { display:inline-block; margin-top:8px; padding:3px 12px; border-radius:10px; font-size:11px; font-weight:600; }
+.r-verdict.high { background:rgba(46,204,113,0.3); color:#8eecb5; }
+.r-verdict.mid { background:rgba(243,156,18,0.3); color:#f5c86a; }
+
+/* Radar chart */
+.r-radar { margin:0 16px 12px; background:var(--card-bg); border-radius:16px; padding:20px; box-shadow:0 2px 12px rgba(0,0,0,0.05); }
+.r-radar-title { font-size:13px; font-weight:600; color:#7a7a8a; text-align:center; margin-bottom:14px; letter-spacing:1px; }
+.radar-container { position:relative; width:100%; max-width:320px; margin:0 auto; }
+.radar-container svg { width:100%; height:auto; }
+.radar-legend { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-top:10px; }
+.radar-legend-item { display:flex; align-items:center; gap:4px; font-size:11px; color:#7a7a8a; }
+.radar-legend-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+#result.result-wrap.warm .radar-legend-dot.yang-dot { background:#c47a3a; }
+#result.result-wrap.cool .radar-legend-dot.yang-dot { background:#4a6a9a; }
+.radar-legend-dot.yin-dot { background:#d0d0d8; }
+
+/* Content cards */
+.r-content { padding:12px 16px; }
+#result.result-wrap.warm .r-content { background:var(--pg-bg); }
+#result.result-wrap.cool .r-content { background:var(--pg-bg); }
+.r-card { background:var(--card-bg); border-radius:16px; padding:20px; margin-bottom:12px; box-shadow:0 2px 12px rgba(0,0,0,0.05); }
+#result.result-wrap.warm .r-card { border:1px solid var(--card-border); }
+#result.result-wrap.cool .r-card { border:1px solid var(--card-border); }
+.r-card-title { font-size:15px; font-weight:700; color:var(--accent); margin-bottom:12px; letter-spacing:1px; display:flex; align-items:center; gap:6px; }
+.r-card-title .line { flex:1; height:1px; }
+#result.result-wrap.warm .r-card-title .line { background:var(--accent-border); }
+#result.result-wrap.cool .r-card-title .line { background:var(--accent-border); }
+.r-desc { font-size:15px; color:#2d2d3a; font-weight:600; margin-bottom:10px; line-height:1.5; }
+.r-highlight { padding:8px 12px; border-radius:0 8px 8px 0; margin:6px 0; font-size:14px; color:#7a7a8a; line-height:1.6; font-weight:500; }
+#result.result-wrap.warm .r-highlight { background:var(--accent-light); border-left:3px solid var(--accent); }
+#result.result-wrap.cool .r-highlight { background:var(--accent-light); border-left:3px solid var(--accent); }
+.r-trait { padding:8px 0 8px 22px; position:relative; font-size:14px; color:#7a7a8a; border-bottom:1px solid #f8f5f0; line-height:1.5; }
+.r-trait:last-child { border:none; }
+.r-trait::before { content:'\25C6'; position:absolute; left:0; color:var(--accent); font-size:8px; top:10px; }
+
+/* Evolution section */
+.r-evo-box { border-radius:12px; padding:14px 16px; margin-bottom:8px; }
+#result.result-wrap.warm .r-evo-box { background:var(--evo-bg); border:1px solid var(--evo-border); }
+#result.result-wrap.cool .r-evo-box { background:var(--evo-bg); border:1px solid var(--evo-border); }
+.r-evo-box .lbl { font-size:14px; font-weight:600; color:var(--accent); letter-spacing:1px; margin-bottom:4px; }
+.r-evo-box .txt { font-size:15px; color:#2d2d3a; line-height:1.5; font-weight:500; }
+.r-arrow { text-align:center; padding:6px 0; font-size:20px; color:var(--accent); }
+.r-step { font-size:13.5px; color:#7a7a8a; padding:5px 0 5px 18px; position:relative; line-height:1.5; }
+.r-step::before { content:'\2192'; position:absolute; left:0; color:var(--accent); font-size:12px; }
+
+/* Relationship section */
+.r-relation-box { border-radius:12px; padding:12px 16px; margin-bottom:12px; }
+#result.result-wrap.warm .r-relation-box { background:var(--rel-bg); }
+#result.result-wrap.cool .r-relation-box { background:var(--rel-bg); }
+.r-relation-box .lbl, .r-best-box .lbl { font-size:11px; font-weight:600; color:#7a7a8a; letter-spacing:1px; margin-bottom:4px; }
+.r-relation-box .txt { font-size:14px; color:#2d2d3a; line-height:1.6; }
+.r-best-box { display:flex; align-items:center; gap:10px; border-radius:12px; padding:12px 16px; margin-bottom:12px; }
+#result.result-wrap.warm .r-best-box { background:var(--rel-bg); border:1px solid var(--rel-border); }
+#result.result-wrap.cool .r-best-box { background:var(--rel-bg); border:1px solid var(--rel-border); }
+.r-best-box .info { flex:1; }
+.r-best-box .name { font-size:15px; font-weight:700; color:#2d2d3a; }
+.r-best-box .why { font-size:13px; color:#7a7a8a; margin-top:2px; }
+.r-pair-box { border-radius:12px; overflow:hidden; }
+#result.result-wrap.warm .r-pair-box { border:1px solid var(--rel-border); }
+#result.result-wrap.cool .r-pair-box { border:1px solid var(--rel-border); }
+.r-pair-box .plbl { padding:10px 16px; font-size:12px; font-weight:600; letter-spacing:1px; }
+#result.result-wrap.warm .r-pair-box .plbl { background:var(--rel-label); border-bottom:1px solid var(--rel-border); color:#7a7a8a; }
+#result.result-wrap.cool .r-pair-box .plbl { background:var(--rel-label); border-bottom:1px solid var(--rel-border); color:#7a7a8a; }
+.r-pair-item { padding:10px 16px; }
+#result.result-wrap.warm .r-pair-item { border-bottom:1px solid var(--rel-border); }
+#result.result-wrap.cool .r-pair-item { border-bottom:1px solid var(--rel-border); }
+.r-pair-item:last-child { border-bottom:none; }
+.r-pair-name { font-size:14px; font-weight:700; color:#2d2d3a; margin-bottom:3px; }
+.r-pair-tag { display:inline-block; font-size:11px; padding:2px 8px; border-radius:6px; margin-left:6px; font-weight:600; }
+.r-pair-tag.best { background:#e8f5e8; color:#27ae60; }
+.r-pair-tag.challenge { background:#ffe8e8; color:#c0392b; }
+.r-pair-tag.mirror { background:#e8f4f8; color:#2980b9; }
+.r-pair-text { font-size:13.5px; color:#7a7a8a; line-height:1.5; }
+
+.r-pair-text { font-size:12px; color:#7a7a8a; line-height:1.5; }
+
+/* 核心信念（V5.11 扩充） */
+.r-belief { background:var(--accent-light); border-left:4px solid var(--accent); border-radius:0 10px 10px 0; padding:12px 14px; margin-top:4px; }
+.r-belief .b-root { font-size:15px; font-weight:700; color:var(--accent); margin-bottom:6px; }
+.r-belief .b-row { font-size:14px; color:#5a5a6a; margin-bottom:5px; line-height:1.55; }
+.r-belief .b-row b { color:#444; }
+.r-belief .b-dir { font-size:14px; color:#5a5a6a; margin-top:6px; padding-top:6px; border-top:1px dashed var(--accent-border); line-height:1.55; }
+.r-belief .b-dir b { color:var(--accent); }
+
+/* 觉察课题（V5.11 扩充） */
+.r-lesson { margin:4px 0; padding-left:2px; }
+.r-lesson li { margin:0 0 9px 18px; font-size:14.5px; color:#5a5a6a; line-height:1.6; }
+.r-lesson li::marker { color:var(--accent); }
+
+/* 成长工具箱（V5.11 通用） */
+.toolbox { background:linear-gradient(135deg,#2f3640,#3d4654); color:#eee; border-radius:16px; padding:26px 22px; margin:24px 16px; max-width:600px; box-shadow:0 6px 20px rgba(0,0,0,.18); }
+.toolbox h2 { color:#ffd98a; font-size:18px; margin-bottom:4px; letter-spacing:1px; }
+.toolbox .ts { color:#aab; font-size:13.5px; margin-bottom:14px; line-height:1.6; }
+.tb-sec { margin-top:14px; }
+.tb-sec h3 { color:#ffce7a; font-size:15.5px; margin-bottom:7px; }
+.tb-sec ul { margin-left:20px; font-size:14.5px; color:#dfe3ea; line-height:1.55; }
+.tb-sec li { margin-bottom:6px; }
+.tb-sec b { color:#ffe0a3; }
+.formula { background:rgba(255,255,255,.06); border-radius:8px; padding:10px 12px; font-size:13.5px; color:#ffd98a; margin-top:10px; line-height:1.6; }
+.selfchk { font-size:13.5px; color:#cdd3dc; margin-top:10px; line-height:1.6; }
+
+.r-votes { margin:10px 0 4px; }
+.r-vote-row { display:flex; align-items:baseline; gap:8px; font-size:13px; line-height:1.9; flex-wrap:wrap; }
+.r-vote-tag { font-weight:700; flex-shrink:0; padding:1px 8px; border-radius:6px; }
+.r-vote-tag.yang { color:#c47a3a; background:rgba(196,122,58,0.10); }
+.r-vote-tag.yin { color:#4a6a9a; background:rgba(74,106,154,0.10); }
+.r-vote-qs { color:#5a5a6a; font-size:13px; }
+
+.r-trait b, .r-lesson li b, .r-step b { color:#3a3a4a; font-weight:700; }
+
+/* V5.14 结果页文本两端对齐 */
+.r-highlight, .r-trait, .r-evo-box .txt, .r-step, .r-relation-box .txt, .r-pair-text, .r-belief .b-row, .r-belief .b-dir, .r-lesson li, .r-desc, .toolbox .ts, .tb-sec ul, .formula, .selfchk { text-align:justify; text-justify:inter-character; text-align-last:left; }
+
+/* Actions & footer */
+
+.r-actions { padding:0 16px; }
+.btn-restart { display:block; width:100%; padding:15px; border:2px solid #ddd; background:transparent; color:#7a7a8a; border-radius:50px; font-size:15px; font-weight:600; cursor:pointer; text-align:center; transition:all 0.2s; }
+.btn-restart:active { background:#f5f3f0; }
+.r-footer { text-align:center; font-size:11px; color:#7a7a8a; padding:20px; opacity:0.4; }
+</style>
+</head>
+<body>
+
+<div id="cover">
+  <div class="cv-icon">&#127769;</div>
+  <div class="cv-hook">为什么你总在关系里<br>反复<em class="hl">猜对方在想什么</em>？</div>
+  <div class="cv-sub">不是你太敏感——是你们的能量内核<br>本来就不在一个频道上</div>
+  <div class="cv-pair">
+    <div class="cv-dot sun">阳</div>
+    <div class="cv-link">&#x27F7;</div>
+    <div class="cv-dot moon">阴</div>
+  </div>
+  <div class="cv-compat">测完你就知道——<span class="m">谁和你同频</span>，<br><span class="d">谁让你心累</span></div>
+  <button class="btn-start" onclick="startQuiz()">免费测你的能量类型</button>
+  <div class="cv-bottom">阴阳人格 · 能量内核测评 V5.4</div>
+</div>
+
+<div id="quiz">
+  <div class="quiz-header">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="quiz-meta">
+      <span id="progressText"></span>
+      <span id="progressPhase"></span>
+    </div>
+  </div>
+  <div class="q-container" id="questionContainer"></div>
+  <div class="q-nav">
+    <button class="btn-next" id="btnNext" onclick="nextQuestion()" disabled>下一题</button>
+  </div>
+</div>
+
+<div id="result" class="result-wrap warm">
+  <div class="r-banner" id="resultBanner">
+    <img class="" id="resultPortrait" src="" alt="">
+    <div class="r-banner-overlay">
+      <div class="r-type" id="resultType"></div>
+      <div class="r-sub" id="resultSubtype"></div>
+      <div class="r-slogan" id="resultSlogan"></div>
+      <div class="r-verdict" id="resultVerdict"></div>
+    </div>
+  </div>
+  <div id="resultContent"></div>
+  <div class="r-actions">
+    <button class="btn-restart" onclick="restart()">&#x91CD;&#x65B0;&#x6D4B;&#x8BD5;</button>
+  </div>
+  <div class="r-footer">&#x9634;&#x9633;&#x4EBA;&#x683C; · V5.11</div>
+</div>
+
+<script>
+// ===== QUESTIONS =====
+// ===== QUESTIONS =====
+var QUESTIONS = [
+  { id:'q1', text:'当你被亲密关系里在乎的人冷落或忽视时——你的本能更接近？',
+    opts:[{t:'被冷落的瞬间，我最先感到的是“他是不是没那么在意我了”——连接感一空，我就忍不住怀疑是不是自己不够好',v:0},{t:'我先把事实摆平：有误会就说开，我不让误会过夜——掰清楚了就翻篇，不把情绪晾在那儿内耗',v:1},{t:'我不会让任何人看出我被影响——表面照常，心里却反复确认“他到底什么意思”，这份不安我只自己消化',v:0}] },
+  { id:'q2', text:'一段重要的关系走到终点后——你内心的状态更接近？',
+    opts:[{t:'我会一直追问“为什么是我、哪里出了问题”——关系的断裂像在证明“我不够好、不值得被爱”，我得弄懂才能放',v:0},{t:'我把翻篇当成自己的事——难过归难过，但“结束”只是个事实，我不靠一段关系来定义自己，该走就走',v:1},{t:'我外面看着比谁都稳，其实夜里一遍遍回放——我不愿让人看见我多在意，把不舍锁起来自己慢慢耗',v:0}] },
+  { id:'q3', text:'当你被在意的人误解时——你内心的状态更接近？',
+    opts:[{t:'我怕的是你因此看错了真正的我——伤的不是事实，是我和你的连接，所以我急着让你懂，怕你因此离远',v:0},{t:'我把事实掰正就行——说错我更正，我容不得被误读成不靠谱；但认不认可我、高不高兴，那是你的事，我不靠这个定自己',v:1},{t:'不是不想澄清，是不想显得我在乎到要解释的份上——转头自己把前因后果想通，懂没懂随你',v:0}] },
+  { id:'q4', text:'约好的、我在意的朋友（或对我重要的师长）临时放了你鸽子——你的第一反应更接近？',
+    opts:[{t:'我会往“他是不是没那么重视我”上想——被放鸽子对我不是改计划，而是一次“我重不重要”的确认',v:0},{t:'我会不爽——我的时间也是成本，放我鸽子等于没把我的优先级当回事；但不至于内耗，自己把安排接回来，该干嘛干嘛',v:1},{t:'我嘴上说“没事”，心里其实记下了——不是计较，是不想显得我多期待这次见面，那份失落我咽下去',v:0}] },
+  { id:'q5', text:'当心里有件事让你不太舒服时——你内心的状态更接近？',
+    opts:[{t:'那件事会一直挂着，因为我在反复体会它带来的感受——情绪对我需要被好好看见和消化，不是能说丢就丢',v:0},{t:'不舒服我就处理它，不打算让它占用我——我的能量花在解决上，不花在反复回味上',v:1},{t:'我外面看不出异样，其实独处时它一遍遍冒出来——我不习惯把这种不舒服摊开给人看，自己闷着想通',v:0}] },
+  { id:'q6', text:'做了一个重要的决定之后——你内心的状态更接近？',
+    opts:[{t:'我会反复想“是不是选错了、另一个会不会更好”——决定对我连着“会不会让人失望、自己后不后悔”，不只是理性取舍',v:0},{t:'我会先把利弊过一遍再拍板——但我定了就不反复拉扯，错了就扛下来改，不陷在“选错没”里跟自己较劲',v:1},{t:'我嘴上说“定了”，心里其实还在悄悄推演各种可能——不想让人看出我多犹豫，把不确定自己兜着',v:0}] },
+  { id:'q7', text:'当你在乎的人让你失望后——你消化这件事的方式更接近？',
+    opts:[{t:'我会先往“是不是我哪里没做好、才换来这对待”上想——失望背后，我最怕的是“原来我没那么被珍惜”',v:0},{t:'我据此重新评估这段关系——你让我失望，我就在心里减分、调整距离，该设的界设立起来',v:1},{t:'我不闹也不质问，甚至显得更大度——其实心里把这段关系悄悄掂量几遍，只是不肯让人看见我在意，用退半步代替说破',v:0}] },
+  { id:'q8', text:'当别人对你提出期待，且你知道拒绝会让对方失望时——你内心的第一反应更接近？',
+    opts:[{t:'我第一反应是“拒绝了他，他会不会不高兴、觉得我不好”——比起我的意愿，我更先感受到“别让人失望”的压力',v:0},{t:'我第一反应是“这合不合理、我想不想”——你的期待不是我的义务，我不想就直说，不内疚',v:1},{t:'我嘴上先应下来，是不想当场让你下不来台——心里盘算怎么既不伤你又能护住自己，周旋着把空间找回来',v:0}] },
+  { id:'q9', text:'当你对现状不太满意，但改变有风险、维持又可以再拖一阵——你内心的本能更接近？',
+    opts:[{t:'我会先赖在已知的舒服里——不是不怕变，是怕一动连这点安稳都没了，未知的代价让我不敢迈',v:0},{t:'我倾向于破局——困着本身就是成本，但我不会瞎冲，先看清风险再动，动了就不回头',v:1},{t:'我把“再看看、时机没到”挂在嘴边——其实怕动了之后局面失控、我接不住，只是更不愿承认自己在犹豫',v:0}] },
+  { id:'q10', text:'当你在两个都不错（或都不太差）的选项中做取舍时——你内心的模式更接近？',
+    opts:[{t:'我会反复权衡，因为每个选项都连着“选了之后关系/感受会怎样”——我怕选错伤到人或让自己后悔，想全想清楚再落子',v:0},{t:'我会按自己的优先级快速拍板——选了就负责到底，边走边调，不把时间耗在“万无一失”的纠结上',v:1},{t:'我表面说“都行你定”，心里早把利弊过了无数遍——真要自己拍板就再多拖一拖、多收信息，宁可显得随便也不想显得仓促',v:0}] }
+];
+
+// ===== ENGINE =====
+var state = { step:'gender', gender:'', currentQ:-1, answers:{}, shuffled:{} };
+
+function shuffleArray(a) { var b=[...a]; for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;} return b; }
+
+function startQuiz() {
+  document.getElementById('cover').style.display='none';
+  document.getElementById('quiz').style.display='block';
+  renderGender();
+  window.scrollTo(0,0);
+}
+
+function renderGender() {
+  state.step='gender';
+  var c=document.getElementById('questionContainer');
+  c.innerHTML='<div class="q-card active"><div class="q-header">&#128203; 基本信息</div><div class="q-text">你的生理性别是？</div><button class="q-option" onclick="pickGender(\'male\',this)"><span class="opt-label">A</span>男</button><button class="q-option" onclick="pickGender(\'female\',this)"><span class="opt-label">B</span>女</button></div>';
+  updateProgress(0,'第一步：基本信息');
+  document.getElementById('btnNext').disabled=true;
+}
+
+function pickGender(v,btn) {
+  state.answers['gender']=v;
+  state.gender=v;
+  document.querySelectorAll('.q-option').forEach(function(b){b.classList.remove('selected');});
+  btn.classList.add('selected');
+  document.getElementById('btnNext').disabled=false;
+  document.getElementById('btnNext').onclick=function(){startQuizCore();};
+}
+
+function startQuizCore() {
+  document.getElementById('btnNext').onclick=nextQuestion;
+  state.step='core'; state.currentQ=0;
+  showQ(0);
+  updateProgress(5,'能量探测中...');
+  document.getElementById('progressText').textContent='第 1 / 10 题';
+}
+
+function showQ(idx) {
+  var q=QUESTIONS[idx];
+  var c=document.getElementById('questionContainer');
+  // Shuffle once and reuse
+  if(!state.shuffled[q.id]) state.shuffled[q.id]=shuffleArray(q.opts);
+  var display=state.shuffled[q.id];
+  var opts=display.map(function(o,i){
+    var sel=state.answers[q.id]===o.v?'selected':'';
+    return '<button class="q-option '+sel+'" onclick="pickA(\''+q.id+'\','+o.v+',this)"><span class="opt-label">'+String.fromCharCode(65+i)+'</span>'+o.t+'</button>';
+  }).join('');
+  c.innerHTML='<div class="q-card active"><div class="q-header">&#9889; 能量探测</div><div class="q-text">'+q.text+'</div>'+opts+'</div>';
+  document.getElementById('btnNext').disabled=state.answers[q.id]===undefined;
+  c.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function pickA(qid,v,btn) {
+  state.answers[qid]=v;
+  document.querySelectorAll('.q-option').forEach(function(b){b.classList.remove('selected');});
+  btn.classList.add('selected');
+  document.getElementById('btnNext').disabled=false;
+}
+
+function nextQuestion() {
+  state.currentQ++;
+  if(state.currentQ<QUESTIONS.length){
+    showQ(state.currentQ);
+    var pct=5+((state.currentQ+1)/QUESTIONS.length)*85;
+    updateProgress(pct,'能量探测中...');
+    document.getElementById('progressText').textContent='第 '+(state.currentQ+1)+' / '+QUESTIONS.length+' 题';
+  }else{
+    showResult();
+  }
+}
+
+function updateProgress(pct,phase) {
+  document.getElementById('progressFill').style.width=Math.min(pct,100)+'%';
+  document.getElementById('progressPhase').textContent=phase||'';
+}
+
+// ===== RESULT DATA =====
+var RESULT_DATA = {};
+RESULT_DATA['yang-male']={
+  type:'男阳 · 承重者', sub:'扛起一切的人',
+  slogan:'"我扛住了全世界，却扛不住一句\'你也可以脆弱。\'"',
+  core:'守护者 · 建造者',
+  highlight:'最特殊之处：极度的自我保护机制——不是不愿意信任，是信任崩塌后的重建成本太高，索性不建了',
+  traits:[
+    '信任壁垒：信任是一面砖墙——一块砖一块砖垒起来，一件事就能崩塌，百件事才能重建',
+    '底色：用"扛"代替"说"——行动即存在，存在即责任',
+    '隐藏恐惧：无能=不被爱——所以必须永远强大、永远正确',
+    '独特认同：通过被需要来确认自我价值——"如果我不扛了，我还是谁？"'
+  ],
+  belief:{
+    root:'无能恐惧',
+    rootDesc:'"如果我没能力，就不配被爱"',
+    deepest:'最深恐惧不是"不被爱"，而是"无能=不被爱"——一旦暴露弱点，就等于失去价值与被连接的资格。',
+    trigger:'被触及时反应：向外行动——用"我必须更强、更正确"去盖过恐惧，而不是面对它。',
+    direction:'我的存在本身就有价值，不需要用"强大正确"来换。'
+  },
+  lessons:[
+    '你用"扛"代替"说"，把脆弱锁进壳里——你不是不需要被接住，是不敢让任何人看见"被接住"的自己。',
+    '你的控制（服从性测试、制定规则）底层代码是"别挑战我"；当关系威胁掌控感，你会推开甚至进入对抗，却错过真正的连接。',
+    '你把"被需要"当成唯一价值证明："如果我不扛了，我还是谁？"——于是替所有人扛，却耗尽自己。',
+    '你的"强大"常是一种自恋式防御——用夸大、装逼、需要被仰视来证明"我很行"，底层却藏着"如果我不够强，就不配被爱"的恐惧。',
+    '方向：脆弱不是崩塌，是另一种力量；你不必用"永远强大"来确认自己值得被爱。'
+  ],
+  growthDir:'阳者学柔 · 从"一个人扛"走向"敢被接住"，让刚与柔共存',
+  steps:[
+    '学习"被接住"：从最小的事练习说"我需要你"——哪怕只是让伴侣递杯水。',
+    '觉察"过度负责=控制"：放手不是失职，是信任的开始；你不必为所有人的情绪买单。',
+    '练习"臣服"：不是变弱，是把控制权交给值得信任的人——对他人的臣服是你的最高信任认证与终极勇气。',
+    '给防御留出口：在唯一信任的人面前允许自己放下防备（不是表演强大），用轻松的方式化解紧绷。',
+    '区分"扛责任"与"扛一切"：建立柔韧边界，像竹子能弯能直。'
+  ],
+  relationMode:'你习惯站在"保护者/给予者"的位置。你很难开口要，但会在关键时刻顶上。你不是不会爱，而是习惯用行动代替表达。',
+  bestMatch:{name:'女阴 · 连接者',why:'阴阳互补——她给你柔软和接纳，你给她安全感和方向'},
+  pairGuide:[
+    {target:'女阴 · 连接者',tag:'best',tagText:'最佳拍档',text:'最经典的阴阳平衡。她擅长连接和付出，你擅长担当和保护。但需警惕：她的"付出"被你当成理所当然。'},
+    {target:'女阳 · 破局者',tag:'challenge',tagText:'强强相遇',text:'两个阳性内核容易成为战友，也可能变成权力博弈。课题是：不要竞争谁更强大，学会互相钦佩。'},
+    {target:'男阴 · 深潜者',tag:'mirror',tagText:'镜像对照',text:'你们都习惯沉默，但他向内、你向外。事业上你冲锋他兜底；亲密关系中，你们需要一个人先开口。'}
+  ]
+};
+RESULT_DATA['yang-female']={
+  type:'女阳 · 破局者', sub:'打破框架的人',
+  slogan:'"不是我喜欢一个人扛——是每一次想要被接住，都扑了空。"',
+  core:'战士 · 破局者',
+  highlight:'她不是"太强势"，她只是太早学会了自己扛——女阳的坚硬不是攻击，是防御',
+  traits:[
+    '天生反叛——社会期待她柔软，但她的内核是直面和行动',
+    '底色：用"搞定事情"来证明自我价值——"我能行，我不需要任何人"',
+    '隐藏恐惧：示弱=被吞噬——"如果我示弱了，谁替我扛？谁能接住我？"',
+    '独特拉扯：在"我不需要任何人"的铠甲和"其实我也需要被接住"的渴望之间反复横跳'
+  ],
+  belief:{
+    root:'无能恐惧 + 独立自爱的本能',
+    rootDesc:'底色"我能行，我不需要任何人"，叠加"女性身份 vs 阳性本质"的内在冲突',
+    deepest:'最深恐惧：示弱=被吞噬——"如果我示弱了，谁替我扛？谁接得住我？"',
+    trigger:'被触及时反应：用"搞定事情"证明价值，把真实脆弱越锁越深。',
+    direction:'我的强不是错，柔也不是弱；刚柔并济才是完整的我。'
+  },
+  lessons:[
+    '你太早学会自己扛，坚硬是防御不是攻击；但铠甲之下是"其实我也需要被接住"的渴望，二者反复横跳。',
+    '你怕示弱=被吞噬、被当成"不够女人"，于是用"搞定事情"证明价值，却把真正的脆弱越锁越深。',
+    '与女性群体的疏离感、被误读为"太强势"——你卡在"独立"与"被接纳"的拉扯里。',
+    '你的"我不需要任何人"是一种自恋式防御——用"搞定一切、我很强"证明自己无所不能，实则是怕一旦露出脆弱，就被吞噬、被说"不够女人"。',
+    '方向：示弱不是软弱，是最高级别的向下兼容；刚柔并济才是完整。'
+  ],
+  growthDir:'阳者学柔 · 在"能扛"之外，允许自己也被接住',
+  steps:[
+    '练习"示弱=最高级别的向下兼容"：先在小事上说"我不行，你来帮我"——这需要练，不是道理懂了就成。',
+    '接纳"女性身份与阳性内核的共存"：你的强不是错，柔也不是弱。',
+    '找到理解与欣赏你的人群（尤其能接住你强度的人），平衡独立与连接。',
+    '区分"坚强"与"僵硬"：真正的力量是柔韧的，像竹子能弯能直。',
+    '把"较劲"升华为创造与突破：用建设性方式释放攻击性。'
+  ],
+  relationMode:'你需要平等、空间和被看见。你讨厌被控制，也讨厌被当成"该温柔一点"的女人。你的课题不是变得柔软，而是找到能接住你强度的人。',
+  bestMatch:{name:'男阴 · 深潜者',why:'阴阳互补——他理解你的深度，你带他走出内耗'},
+  pairGuide:[
+    {target:'男阴 · 深潜者',tag:'best',tagText:'最佳拍档',text:'你最互补的配对。你负责破局和行动，他负责深度感受和连接。他能接住你的强度，你能把他从过度思考中拉出来。'},
+    {target:'男阳 · 承重者',tag:'challenge',tagText:'强强相遇',text:'两个阳性内核容易互相欣赏，也可能暗暗较劲。相处关键是：不抢方向盘，你拼你的局，他守他的城。'},
+    {target:'女阴 · 连接者',tag:'mirror',tagText:'镜像对照',text:'她是你"不愿意成为"的自己——柔软、依赖、会撒娇。反过来，你是她羡慕的样子。你们可以互相学习，但别互相评判。'}
+  ]
+};
+RESULT_DATA['yin-female']={
+  type:'女阴 · 连接者', sub:'用心连接的人',
+  slogan:'"我给了这么多，不过是在等一句——你不用做任何事，就已经足够了。"',
+  core:'滋养者 · 连接者',
+  highlight:'最特殊之处：她的付出里藏着一句未说出口的话——"我给了你这么多，换你坚定选择我可以吗"',
+  traits:[
+    '用付出来确认关系安全——"我给了这么多，你就不会离开我了吧？"',
+    '底色：关系即存在——通过被爱来确认自我，没有连接就没有安全感',
+    '隐藏恐惧：不被爱=不存在——测试行为的背后是"怕被抛弃"的深层恐惧',
+    '独特模式：过度关注他人需求而忽视自我——"先把他照顾好，我的感受不重要"'
+  ],
+  belief:{
+    root:'不配得信念',
+    rootDesc:'"我本身不值得被爱"',
+    deepest:'最深恐惧不是孤独，而是"不被爱=不存在"；反复测试，背后是"怕被抛弃"。',
+    trigger:'被触及时反应：向内归因——"你看，我果然不配"（测试越狠，越在验证恐惧）。',
+    direction:'我本身就值得，不需要先付出来换取被爱的资格。'
+  },
+  lessons:[
+    '你的"试探/作"本质是控制——你以为是确认爱，对方感受到的是"你在测试我的底线"。这是阴阳冲突最根本的认知错位。',
+    '你容易把自己放进受害者位置，启动卡普曼戏剧三角（受害者-拯救者-加害者），把身边人卷进无限循环。',
+    '边界感弱，因为自我价值与"被需要"深度绑定："如果我说不，他可能就不再需要我了"——于是用自我牺牲换取存在感。',
+    '方向：从"不配得"走向"配得"——你不需要先付出来换被爱的资格。'
+  ],
+  growthDir:'阴者学刚 · 从"用付出去换爱"走向"我本身就值得"',
+  steps:[
+    '从"不配得"走向"配得"：你不需要先付出来换被爱的资格。',
+    '从"测试验证"走向"信任接纳"：直接表达需求（"我想要""我需要"不是羞耻），而非暗示和试探。',
+    '从"受害者心态"走向"自我负责"：放下卡普曼三角，不做自己人生的加害者。',
+    '建立边界=释放攻击性：不是刻薄，而是敢于说"我不喜欢这样"；边界不是墙，是门。',
+    '把"付出"从控制筹码转为真实滋养：允许自己也被接住、被爱。'
+  ],
+  relationMode:'你习惯用"给"来换取"留"。你渴望被需要、被珍惜，却常常因为不敢直接表达需求而委屈。你不是黏人，你只是想要确定感。',
+  bestMatch:{name:'男阳 · 承重者',why:'阴阳互补——他给你安全感，你给他被需要的感觉'},
+  pairGuide:[
+    {target:'男阳 · 承重者',tag:'best',tagText:'最佳拍档',text:'经典的阴阳平衡。你的柔软和付出正好是他的解药，他的稳重和担当正好是你的安全感。但要小心：不要把"付出"当成控制他的筹码。'},
+    {target:'男阴 · 深潜者',tag:'mirror',tagText:'镜像对照',text:'你们都敏感、都怕被抛弃，都容易想太多。你们能深度理解彼此，但也可能一起沉入情绪漩涡。课题是：谁来当那个先稳定下来的人？'},
+    {target:'女阳 · 破局者',tag:'challenge',tagText:'能量相反',text:'她是你羡慕的样子——独立、有边界、不讨好。相处时，她可能会嫌你"想太多"，你可能会觉得她"太硬"。互相欣赏，不要互相改造。'}
+  ]
+};
+RESULT_DATA['yin-male']={
+  type:'男阴 · 深潜者', sub:'潜入深处的人',
+  slogan:'"你看到的冷漠——是我用尽全力控制自己不要陷进去的样子。"',
+  core:'敏感者 · 深度连接者',
+  highlight:'他不是高冷，他体内的两股力量自己都搞不定自己——推和拉同时存在，不是故意的',
+  traits:[
+    '敏感+社会期待的双重挤压——双重枷锁，既要面对自己的敏感，又要面对"男人不该这样"',
+    '底色：过度思考代替行动——"想清楚再做"的真相往往是"怕做错、怕被评判"',
+    '隐藏恐惧：畏惧交付——"如果我把真心交出去，被伤害了怎么办？"',
+    '独特拉扯：在"渴望深度连接"和"害怕被吞噬"之间反复横跳'
+  ],
+  belief:{
+    root:'不配得信念 + 社会规训"男人要坚强"的双重枷锁',
+    rootDesc:'底色敏感内向，但社会要求向外释放——两股力量同时拉扯',
+    deepest:'最深恐惧：畏惧交付——"如果我把真心交出去，被伤害了怎么办？"',
+    trigger:'被触及时反应：用暗示、回避、消失代替直接；戴一层"阳壳"保护自己。',
+    direction:'我本身就值得，不需要证明；敏感是天线不是缺陷。'
+  },
+  lessons:[
+    '你戴一层"阳壳"：表面镇定随和，内部翻涌——不是高冷，是"用尽全力控制自己不要陷进去"。',
+    '推拉并行：一股力量推、一股力量拉，不是故意玩弄，是你体内的两股力量自己都搞不定自己。',
+    '讨好型假自体：为维持多个"人设"消耗大量能量；怕交付后被伤，于是用暗示、回避、消失代替直接。',
+    '方向：敏感不是缺陷，是超能力；有边界地信任流动，不必装阳。'
+  ],
+  growthDir:'阴者学刚 · 兼学阳的行动——温柔而坚定，既能深潜也能上岸',
+  steps:[
+    '建立自信，接纳独特性：你的敏感是优势不是弱点。',
+    '发展适度的行动力与决断力：区分"融合"与"吞噬"，先做一步，做比想重要。',
+    '学会直接表达需求与感受：从"暗示"走向"说出口"。',
+    '把敏感从"负担"重定义为"天线"：你能察觉别人察觉不到的信号，是天赋。',
+    '从阴站走向阴阳平衡：既能深潜也能上岸，温柔而坚定。'
+  ],
+  relationMode:'你渴望深度连接，却又害怕交付后被伤害。你常常"想靠近又退缩"，不是不爱，是太怕受伤。你需要一个能看穿你沉默的人。',
+  bestMatch:{name:'女阳 · 破局者',why:'阴阳互补——她带你走出去，你接住她的脆弱'},
+  pairGuide:[
+    {target:'女阳 · 破局者',tag:'best',tagText:'最佳拍档',text:'你最互补的配对。她的阳性能量带你从过度思考走向行动，你的阴性能量让她学会自然流露脆弱。她是你的铠甲，你是她的港湾。'},
+    {target:'女阴 · 连接者',tag:'mirror',tagText:'镜像对照',text:'你们都敏感、都需要安全感。你们能建立很深的情感连接，但也可能因为太像而互相内耗。课题是：谁来当那个先稳定下来的人？'},
+    {target:'男阳 · 承重者',tag:'challenge',tagText:'能量相反',text:'你们像磁铁的两极。他习惯"扛"，你习惯"想"。事业上他是前锋你是谋士；亲密关系中，他不懂你的敏感，你不懂他的沉默。'}
+  ]
+};
+
+// ===== DIMENSION SCORES (for radar) =====
+var DIMS = { rel:['q1','q2'], soc:['q3','q4'], inner:['q5','q6'], bound:['q7','q8'], decision:['q9','q10'] };
+var DIM_LABELS = { rel:'\u2764\uFE0F \u60C5\u611F\u5173\u7CFB', soc:'\uD83E\uDD1D \u793E\u4F1A\u4EBA\u9645', inner:'\uD83E\uDDE0 \u5185\u5FC3\u6D88\u5316', bound:'\uD83D\uDEE1\uFE0F \u8FB9\u754C\u535A\u5F08', decision:'\uD83E\uDDED \u51B3\u7B56\u5192\u9669' };
+
+function calcDimScores() {
+  var ds = {};
+  for (var key in DIMS) {
+    var qs = DIMS[key];
+    var y = 0, n = 0;
+    for (var i = 0; i < qs.length; i++) {
+      if (state.answers[qs[i]] !== undefined) { n++; if (state.answers[qs[i]] > 0.5) y++; }
+    }
+    ds[key] = { label: DIM_LABELS[key], score: n > 0 ? y/n : 0.5, yang: y, total: n };
+  }
+  return ds;
+}
+
+// ===== RADAR CHART SVG =====
+function renderRadar(scores) {
+  var size = 240, cx = size/2, cy = size/2, r = 90;
+  var keys = ['rel','soc','inner','bound','decision'];
+  var angleOffsets = [-90, -90+72, -90+144, -90+216, -90+288].map(function(d){return d*Math.PI/180;});
+  var isWarm = document.getElementById('result').classList.contains('warm');
+  var dataColor = isWarm ? '#c47a3a' : '#4a6a9a';
+  var fillColor = isWarm ? 'rgba(196,122,58,0.12)' : 'rgba(74,106,154,0.12)';
+  var labelColor = isWarm ? '#a08060' : '#607090';
+
+  var svg = '<svg viewBox="0 0 '+size+' '+size+'" xmlns="http://www.w3.org/2000/svg">';
+
+  // Grid
+  for (var l = 1; l <= 4; l++) {
+    var lr = (r/4)*l;
+    var pts = angleOffsets.map(function(a){
+      var x = cx + lr * Math.cos(a);
+      var y = cy + lr * Math.sin(a);
+      return x+','+y;
+    }).join(' ');
+    svg += '<polygon points="'+pts+'" fill="none" stroke="#eee" stroke-width="0.8"/>';
+  }
+
+  // Axes
+  angleOffsets.forEach(function(a){
+    svg += '<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+r*Math.cos(a))+'" y2="'+(cy+r*Math.sin(a))+'" stroke="#e4e0da" stroke-width="0.8"/>';
+  });
+
+  // Data polygon
+  var dataPts = keys.map(function(k,i){
+    var val = (scores[k]&&scores[k].score!==undefined) ? scores[k].score : 0.5;
+    var dist = r * val;
+    return {x: cx+dist*Math.cos(angleOffsets[i]), y: cy+dist*Math.sin(angleOffsets[i]), val:val};
+  });
+  var ptsStr = dataPts.map(function(p){return p.x+','+p.y;}).join(' ');
+  svg += '<polygon points="'+ptsStr+'" fill="'+fillColor+'" stroke="'+dataColor+'" stroke-width="1.5" stroke-linejoin="round"/>';
+  dataPts.forEach(function(p){
+    svg += '<circle cx="'+p.x+'" cy="'+p.y+'" r="3" fill="'+dataColor+'"/>';
+  });
+
+  // Labels
+  var labelNames = ['\u60C5\u611F\u5173\u7CFB','\u793E\u4F1A\u4EBA\u9645','\u5185\u5FC3\u6D88\u5316','\u8FB9\u754C\u535A\u5F08','\u51B3\u7B56\u5192\u9669'];
+  var labelR = r + 22;
+  angleOffsets.forEach(function(a,i){
+    var x = cx + labelR * Math.cos(a);
+    var y = cy + labelR * Math.sin(a);
+    svg += '<text x="'+x+'" y="'+y+'" text-anchor="middle" dominant-baseline="central" font-size="10" fill="'+labelColor+'" font-weight="500">'+labelNames[i]+'</text>';
+  });
+
+  // Center score
+  var totalYang = 0, totalN = 0;
+  for (var k in scores) { totalYang += scores[k].yang || 0; totalN += scores[k].total || 0; }
+  var totalScore = totalN > 0 ? Math.round(totalYang/totalN*100) : 50;
+  svg += '<text x="'+cx+'" y="'+(cy-4)+'" text-anchor="middle" font-size="22" font-weight="700" fill="'+dataColor+'">'+totalScore+'%</text>';
+  svg += '<text x="'+cx+'" y="'+(cy+14)+'" text-anchor="middle" font-size="10" fill="'+labelColor+'">\u9633\u6027\u80FD\u91CF</text>';
+
+  svg += '</svg>';
+  return svg;
+}
+
+// ===== GROWTH TOOLBOX (common) =====
+var TOOLBOX_HTML = '<div class="toolbox"><h2>成长工具箱 · 觉察 — 创伤 — 信念</h2><div class="ts">无论你是哪一种人格，通往自我和解的路都有一条共通的方法线：先看见反应，再挖到伤，最后松动信念。</div><div class="tb-sec"><h3>① 觉察 · 看见反应，而不是评判反应</h3><ul><li><b>觉察念头模式</b>：区分“事实”与“故事”。对方晚回消息是事实；“他不在乎我了”是你自己编的故事。</li><li><b>识别情绪触发点</b>：不压抑情绪，而是看见情绪背后的信息——情绪是身体在说话。</li><li><b>随时自问</b>：此刻我被触发了吗？我看见的是事实，还是我加的戏？这个反应，指向我心里哪一处旧伤？</li></ul></div><div class="tb-sec"><h3>② 创伤 · 每个强烈反应背后，都有一处没愈合的伤</h3><ul><li><b>完美镜像触发</b>：最亲近的人一句话，常常精准踩中你旧有的创伤——因为你们相遇的设计，本就是彼此照见、加速清醒。</li><li><b>震荡期</b>：自我探索初期，会经历“触发→释放情绪→回溯→挖到最源头的伤与信念→让它在被看见中松动”的循环。每次恢复的基线都比上次略高一点，是螺旋上升，不是失败。</li><li><b>核心原则</b>：“苦不能白吃”——每一次触发都是一份礼物，把礼物挖干净再走。</li></ul></div><div class="tb-sec"><h3>③ 信念 · 最底层的驱动力，是自动运行的核心程序</h3><ul><li><b>阳性核心信念</b>：“只有靠自己才靠得住”“求助没有用”“信任必须靠自己挣得”。</li><li><b>阴性核心信念</b>：“我不配得被爱”“我需要牺牲自己才值得被爱”“情绪越激烈=越爱我”。</li><li><b>松动它</b>：信念在后台自动运行，你往往察觉不到它。改变一个核心信念，就等于改变了整座上层建筑的根基。试着质疑它：这是事实，还是我被植入的故事？</li></ul><div class="formula">事实 + 故事（搅在一起） → 觉察把它们分开 → 伤被看见 → 信念松动 → 反应自然改变</div><div class="selfchk">自测：同一个触发点再来时，你的情绪波动是不是更轻了？如果是，你正在成长，不是走错了路。</div></div>';
+
+// ===== SHOW RESULT =====
+function showResult() {
+  var yang=0, yin=0, yangQs=[], yinQs=[];
+  for(var i=0;i<QUESTIONS.length;i++){
+    var v=state.answers[QUESTIONS[i].id];
+    if(v!==undefined){if(v>0.5){yang++;yangQs.push(i+1);}else{yin++;yinQs.push(i+1);}}
+  }
+  var total=yang+yin;
+  var isYang=total>0?yang/total>=0.5:true;
+  var decisive=Math.abs((total>0?yang/total:0.5)-0.5)>=0.2;
+  var key='';
+  if(isYang&&state.gender==='male') key='yang-male';
+  else if(isYang&&state.gender==='female') key='yang-female';
+  else if(!isYang&&state.gender==='female') key='yin-female';
+  else key='yin-male';
+  var data=RESULT_DATA[key];
+  var isWarm=key==='yang-male'||key==='yang-female';
+  document.getElementById('result').className='result-wrap '+(isWarm?'warm':'cool');
+  document.getElementById('resultBanner').className='r-banner '+(isWarm?'warm':'cool');
+  document.getElementById('resultType').textContent=data.type;
+  document.getElementById('resultSubtype').textContent=data.sub;
+  document.getElementById('resultSlogan').textContent=data.slogan;
+  document.getElementById('resultVerdict').innerHTML=(isYang?'\u9633\u6027\u80FD\u91CF ('+yang+'/10)':'\u9634\u6027\u80FD\u91CF ('+yin+'/10)')+' \u00B7 '+(decisive?'判定明确':'倾向清晰');
+  document.getElementById('resultVerdict').className='r-verdict '+(decisive?'high':'mid');
+
+  var pMap={};
+  pMap['yang-male']='images/male-yang.jpg?v=1';
+  pMap['yang-female']='images/female-yang.jpg?v=1';
+  pMap['yin-female']='images/female-yin.jpg?v=1';
+  pMap['yin-male']='images/male-yin.jpg?v=1';
+  var pImg=document.getElementById('resultPortrait');
+  if(pMap[key]){pImg.src=pMap[key];pImg.style.display='block';pImg.onload=function(){this.style.opacity='1';};pImg.onerror=function(){this.style.display='none';};}
+
+  // (五维能量分布雷达图已按需求移除)
+
+  // Content cards
+  var stepsHtml=data.steps.map(function(s){
+    var idx=s.indexOf('\uFF1A');
+    if(idx>0){ return '<div class="r-step"><b>'+s.substring(0,idx)+'</b>'+s.substring(idx)+'</div>'; }
+    return '<div class="r-step">'+s+'</div>';
+  }).join('');
+  var traitsHtml=data.traits.map(function(t){
+    var idx=t.indexOf('\u2014\u2014');
+    if(idx<0) idx=t.indexOf('\uFF1A');
+    if(idx>0){ return '<div class="r-trait"><b>'+t.substring(0,idx)+'</b>'+t.substring(idx)+'</div>'; }
+    return '<div class="r-trait">'+t+'</div>';
+  }).join('');
+  var pairGuideHtml=data.pairGuide.map(function(p){return '<div class="r-pair-item"><div class="r-pair-name">'+p.target+'<span class="r-pair-tag '+p.tag+'">'+p.tagText+'</span></div><div class="r-pair-text">'+p.text+'</div></div>';}).join('');
+  var beliefHtml='<div class="r-belief"><div class="b-root">核心信念 · '+data.belief.root+'</div><div class="b-row"><b>根：</b>'+data.belief.rootDesc+'</div><div class="b-row"><b>最深的恐惧：</b>'+data.belief.deepest+'</div><div class="b-row"><b>被触及时：</b>'+data.belief.trigger+'</div><div class="b-dir"><b>转化方向：</b>'+data.belief.direction+'</div></div>';
+  var lessonsHtml='<ul class="r-lesson">' + data.lessons.map(function(l){
+    var idx=l.indexOf('\u2014\u2014');
+    if(idx<0) idx=l.indexOf('\uFF1A');
+    if(idx>0){ return '<li><b>'+l.substring(0,idx)+'</b>'+l.substring(idx)+'</li>'; }
+    return '<li>'+l+'</li>';
+  }).join('') + '</ul>';
+
+  document.getElementById('resultContent').innerHTML=
+    // Verdict card (simplified - no percentage bars)
+    '<div class="r-card"><div class="r-card-title">\u2696\uFE0F \u5185\u6838\u5224\u5B9A <span class="line"></span></div>'+
+    '<div style="text-align:center;padding:4px 0 12px;font-size:24px;font-weight:700;color:'+(isWarm?'#c47a3a':'#4a6a9a')+'">'+(isYang?'\u2600\uFE0F \u9633\u6027\u80FD\u91CF':'\uD83C\uDF19 \u9634\u6027\u80FD\u91CF')+'</div>'+
+    '<div style="text-align:center;font-size:15px;font-weight:600;color:#5a5a6a;margin-bottom:10px;">'+yang+' \u7968\u9633 &middot; '+yin+' \u7968\u9634 &middot; '+(decisive?'\u5224\u5B9A\u660E\u786E':'\u503E\u5411\u6E05\u6670')+'</div>'+
+    '<div class="r-votes"><div class="r-vote-row"><span class="r-vote-tag yang">\u9633 '+yang+'\u7968</span><span class="r-vote-qs">'+(yangQs.length? 'Q'+yangQs.join(' \u3001 Q') : '\u65E0')+'</span></div><div class="r-vote-row"><span class="r-vote-tag yin">\u9634 '+yin+'\u7968</span><span class="r-vote-qs">'+(yinQs.length? 'Q'+yinQs.join(' \u3001 Q') : '\u65E0')+'</span></div></div>'+
+    '<div style="text-align:center;font-size:13px;color:#aaa;padding:10px 12px;margin-top:10px;background:'+(isWarm?'#fef9f5':'#f0f4fa')+';border-radius:8px;line-height:1.5;">\u4F60\u7684\u5185\u6838\u80FD\u91CF\u662F'+(isYang?'\u9633':'\u9634')+'——这不是说你没有'+(isYang?'\u9634':'\u9633')+'的那一面，<br>\u800C\u662F\u4F60\u9762\u5BF9\u6838\u5FC3\u51B2\u7A81\u65F6\u7684\u7B2C\u4E00\u53CD\u5E94\u662F'+(isYang?'\u76F4\u9762':'\u89C2\u5BDF')+'。</div></div>'+
+
+    '<div class="r-content">'+
+      '<div class="r-card"><div class="r-card-title">\uD83E\uDDEC \u6838\u5FC3\u4FE1\u5FF5\uFF08\u6839\uFF09 <span class="line"></span></div>'+beliefHtml+'</div>'+
+      '<div class="r-card"><div class="r-card-title">\uD83C\uDFA8 \u4EBA\u683C\u5E95\u8272 <span class="line"></span></div>'+
+      '<div class="r-desc">'+data.core+'</div>'+
+      '<div class="r-highlight">'+data.highlight+'</div>'+
+      traitsHtml+'</div>'+
+
+      '<div class="r-card"><div class="r-card-title">\uD83C\uDF31 \u8FDB\u5316\u8BFE\u9898 &rarr; \u6210\u957F\u65B9\u5411 <span class="line"></span></div>'+
+      '<div class="r-evo-box"><div class="lbl">\u25C6 \u4F60\u7684\u8BFE\u9898 The Lesson</div>'+lessonsHtml+'</div>'+
+      '<div class="r-arrow">\u2193</div>'+
+      '<div class="r-evo-box"><div class="lbl">\u2192 \u6210\u957F\u65B9\u5411</div><div class="txt" style="margin-bottom:8px">'+data.growthDir+'</div>'+stepsHtml+'</div></div>'+
+
+      '<div class="r-card"><div class="r-card-title">\uD83C\uDF0A \u5173\u7CFB\u5C42\u9762 <span class="line"></span></div>'+
+      '<div class="r-relation-box"><div class="lbl">\u5173\u7CFB\u6A21\u5F0F</div><div class="txt">'+data.relationMode+'</div></div>'+
+      '<div class="r-best-box"><div class="info"><div class="name">\uD83D\uDCAB '+data.bestMatch.name+'</div><div class="why">'+data.bestMatch.why+'</div></div></div>'+
+      '<div class="r-pair-box"><div class="plbl">\u914D\u5BF9\u6307\u5F15</div>'+pairGuideHtml+'</div></div>'+
+    '</div>'+
+    TOOLBOX_HTML;
+
+  document.getElementById('quiz').style.display='none';
+  document.getElementById('result').style.display='block';
+  window.scrollTo(0,0);
+}
+
+function restart() {
+  state={step:'gender',gender:'',currentQ:-1,answers:{},shuffled:{}};
+  document.getElementById('result').style.display='none';
+  document.getElementById('quiz').style.display='none';
+  document.getElementById('cover').style.display='flex';
+  window.scrollTo(0,0);
+}
+// Preload all character portraits as soon as page loads
+(function(){
+  var imgs=['male-yang.jpg?v=1','male-yin.jpg?v=1','female-yang.jpg?v=1','female-yin.jpg?v=1'];
+  for(var i=0;i<imgs.length;i++){var a=new Image();a.src='images/'+imgs[i];}
+})();
+</script>
+</body>
+</html>

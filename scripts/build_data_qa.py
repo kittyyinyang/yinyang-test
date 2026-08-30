@@ -148,6 +148,29 @@ def fmt_ts(at_or_ts, start_sec=None):
     return ""
 
 
+def ts_to_sec(ts):
+    """'MM:SS'（或 'MM:SS:SS'）→ 秒；无法解析返回 None。"""
+    m = re.match(r"^(\d+):(\d{2})(?::(\d{2}))?$", str(ts or "").strip())
+    if not m:
+        return None
+    return int(m.group(1)) * 60 + int(m.group(2)) + (int(m.group(3)) * 3600 if m.group(3) else 0)
+
+
+def fill_answer_links(answer):
+    """为有 ts+bv 但缺 link 的 answer 条目补 link（B站 ?t=秒 直达）；幂等，只增不改。"""
+    for a in answer or []:
+        if a.get("link"):
+            continue
+        ts, bv = a.get("ts"), a.get("bv")
+        if not ts or not bv:
+            continue
+        sec = ts_to_sec(ts)
+        if sec is None:
+            continue
+        a["link"] = "https://www.bilibili.com/video/%s?t=%d" % (bv, sec)
+    return answer
+
+
 def pick_quote(bqs):
     """最佳金句：优先长度≥14 中最短的（更接近金句质感），否则第一条。"""
     if not bqs:
@@ -184,6 +207,7 @@ def convert_card(card):
         if link and not first_link:
             first_link = link
         answer.append({"ts": ts, "videoId": vid, "bv": bv, "text": b.get("text", ""), "link": link})
+    answer = fill_answer_links(answer)
     if not video_title:
         video_title = clip_list[0].get("title", "") if clip_list else ""
     if not first_link:
@@ -256,6 +280,7 @@ def main():
         item.setdefault("forTypes", [])
         item.setdefault("compliance", "web+mini")
         item.setdefault("shareText", "")
+        item["answer"] = fill_answer_links(item.get("answer") or [])
         seen.add(qid)
         qa.append(item)
         n_src2 += 1

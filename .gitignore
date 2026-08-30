@@ -3,3 +3,6 @@ data/_tmp*
 _tmp*
 *.log
 Thumbs.db
+
+__pycache__/
+.workbuddy/

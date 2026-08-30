@@ -389,6 +389,9 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
 .site-footer::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(520px,80%);height:1px;background:linear-gradient(90deg,rgba(212,165,116,0),var(--amber) 30%,rgba(78,110,158,.6) 70%,rgba(78,110,158,0));}
 .site-footer a{color:var(--yin-deep);border-bottom:1px dashed rgba(78,110,158,.4);}
 .site-footer .src{display:block;margin-top:5px;font-size:11px;opacity:.85;letter-spacing:.06em;}
+.foot-actions{margin-top:14px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:12.5px;align-items:center;}
+.foot-actions a{color:#B5483A;border-bottom:1px solid rgba(181,72,58,.4);padding-bottom:1px;transition:all .2s;}
+.foot-actions a:hover{color:#9A382D;border-bottom-color:rgba(181,72,58,.7);}
 
 /* ── toast / 微信提示层 ── */
 .toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);background:rgba(35,34,48,.94);color:#fff;font-size:13.5px;border-radius:999px;padding:9px 24px;opacity:0;pointer-events:none;transition:all .3s;z-index:99;max-width:80vw;text-align:center;box-shadow:0 10px 30px -8px rgba(35,34,48,.5);letter-spacing:.03em;}
@@ -420,6 +423,33 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
   .page-head h2{font-size:32px;}
   .t-cover h2{font-size:30px;}
 }
+
+/* ── 问一问 · 阴阳双 Tab（极性导航） ── */
+.qa-pol-tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:14px 0 4px;}
+.qa-pol-tab{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;cursor:pointer;border:1.5px solid transparent;background:rgba(255,255,255,.78);transition:all .25s ease;position:relative;overflow:hidden;}
+.qa-pol-tab.yang{background:linear-gradient(135deg,rgba(246,195,132,.22) 0%,rgba(232,145,58,.14) 100%);border-color:rgba(232,145,58,.3);}
+.qa-pol-tab.yin{background:linear-gradient(135deg,rgba(174,194,222,.24) 0%,rgba(78,110,158,.14) 100%);border-color:rgba(78,110,158,.3);}
+.qa-pol-tab.both{background:linear-gradient(135deg,rgba(246,195,132,.16) 0%,rgba(174,194,222,.16) 50%,rgba(78,110,158,.14) 100%);border-color:rgba(35,34,48,.18);}
+.qa-pol-tab:hover{transform:translateY(-2px);box-shadow:0 8px 22px -10px rgba(35,34,48,.35);}
+.qa-pol-tab.on.yang{background:linear-gradient(135deg,#E8913A 0%,#C9742A 100%);border-color:#9A382D;color:#fff;box-shadow:0 8px 24px -8px rgba(201,116,42,.55);}
+.qa-pol-tab.on.yin{background:linear-gradient(135deg,#5F81AE 0%,#3A5480 100%);border-color:#31486C;color:#fff;box-shadow:0 8px 24px -8px rgba(58,84,128,.55);}
+.qa-pol-tab.on.both{background:linear-gradient(135deg,#5A4A6E 0%,#2E2A3F 100%);border-color:#1A1825;color:#fff;box-shadow:0 8px 24px -8px rgba(35,34,48,.6);}
+.qa-pol-mark{width:46px;height:46px;display:flex;align-items:center;justify-content:center;font-family:"Noto Serif SC","Songti SC",serif;font-weight:700;font-size:24px;border-radius:10px;flex-shrink:0;background:rgba(255,255,255,.86);color:#232230;}
+.qa-pol-tab.on .qa-pol-mark{background:rgba(255,255,255,.18);color:#fff;}
+.qa-pol-tab.yang .qa-pol-mark{color:#B5483A;}
+.qa-pol-tab.yin .qa-pol-mark{color:#3A5480;}
+.qa-pol-tab.on.yang .qa-pol-mark{color:#FFE0CC;}
+.qa-pol-tab.on.yin .qa-pol-mark{color:#D6E2F4;}
+.qa-pol-meta{flex:1;min-width:0;}
+.qa-pol-title{font-family:"Noto Serif SC","Songti SC",serif;font-weight:700;font-size:16px;line-height:1.2;color:#232230;}
+.qa-pol-tab.on .qa-pol-title{color:#fff;}
+.qa-pol-sub{font-size:11.5px;line-height:1.3;color:#6F6C7B;margin-top:4px;letter-spacing:.04em;}
+.qa-pol-tab.on .qa-pol-sub{color:rgba(255,255,255,.85);}
+.qa-pol-count{font-size:28px;font-weight:700;font-family:"Noto Serif SC","Songti SC",serif;color:#C9742A;flex-shrink:0;font-feature-settings:'tnum';}
+.qa-pol-tab.yin .qa-pol-count{color:#3A5480;}
+.qa-pol-tab.both .qa-pol-count{color:#5A4A6E;}
+.qa-pol-tab.on .qa-pol-count{color:#fff;}
+@media (max-width:720px){.qa-pol-tabs{grid-template-columns:1fr;}.qa-pol-tab{padding:12px 14px;}.qa-pol-count{font-size:22px;}}
 </style>
 </head>
 <body>
@@ -676,6 +706,32 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
       <div id="qaShareNote"></div>
       <div id="qaRecommend"></div>
       <div id="qaReadProgress"></div>
+      <div class="qa-pol-tabs" id="qaPolTabs">
+        <div class="qa-pol-tab yang" data-pol="yang" onclick="setQaPolarity('yang')">
+          <div class="qa-pol-mark">阳</div>
+          <div class="qa-pol-meta">
+            <div class="qa-pol-title">关于阳的一切</div>
+            <div class="qa-pol-sub">主动 · 给予 · 承重 · 破局</div>
+          </div>
+          <div class="qa-pol-count" id="qaPolCountYang">—</div>
+        </div>
+        <div class="qa-pol-tab yin" data-pol="yin" onclick="setQaPolarity('yin')">
+          <div class="qa-pol-mark">阴</div>
+          <div class="qa-pol-meta">
+            <div class="qa-pol-title">关于阴的一切</div>
+            <div class="qa-pol-sub">收 · 蓄 · 联结 · 沉潜</div>
+          </div>
+          <div class="qa-pol-count" id="qaPolCountYin">—</div>
+        </div>
+        <div class="qa-pol-tab both" data-pol="both" onclick="setQaPolarity('both')">
+          <div class="qa-pol-mark">合</div>
+          <div class="qa-pol-meta">
+            <div class="qa-pol-title">阴阳共通</div>
+            <div class="qa-pol-sub">关系 · 配对 · 成长 · 总论</div>
+          </div>
+          <div class="qa-pol-count" id="qaPolCountBoth">—</div>
+        </div>
+      </div>
       <div class="chip-row" id="qaGroups"></div>
       <div class="chip-row" id="qaScenes"></div>
       <div class="qa-grid" id="qaList"></div>
@@ -717,6 +773,11 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
 <footer class="site-footer">
   内容源自 B站 UP主 · <a href="https://space.bilibili.com/25583807" target="_blank" rel="noopener">都是一些小问题</a>（UID 25583807）
   <span class="src">本站为非官方知识整理 · 每条回答可溯源至原视频时间点 · 阴阳人格 v2 demo</span>
+  <div class="foot-actions">
+    <a href="feedback.html" target="_blank" rel="noopener" onclick="try{track('feedback_click',{from:'footer'});}catch(e){}">📝 帮我们改进 · 3分钟反馈</a>
+    <span class="src">·</span>
+    <a href="https://docs.qq.com/form/" target="_blank" rel="noopener" onclick="try{track('feedback_ext_click',{tool:'tengxun'});}catch(e){}">腾讯文档协同问卷</a>
+  </div>
 </footer>
 
 <nav class="tabbar" id="tabbar">
@@ -1422,6 +1483,16 @@ var QA = [];
     var ib = (b.kpId in orderIdx) ? orderIdx[b.kpId] : 500 + (b.stage||9)*10;
     return ia - ib;
   }).forEach(function(c,i){ c.seq = i+1; });
+  /* 阴阳归属：阳（y1 阳性力 + y3-b1/b2 阳型） / 阴（y2 阴性能 + y3-b3/b4 阴型） / 通用（y0/y3-通用/y4/y5/kp-） */
+  (function(){
+    function pol(c){
+      var k=(c.kpId||'');
+      if(/^y1-/.test(k) || /^y3-b[12]/.test(k)) return 'yang';
+      if(/^y2-/.test(k) || /^y3-b[34]/.test(k)) return 'yin';
+      return 'both';
+    }
+    QA.forEach(function(c){ c.polarity = pol(c); });
+  })();
 })();
 var GUIDE  = (typeof RESULT_GUIDE_MAP !== 'undefined') ? RESULT_GUIDE_MAP : {};
 var RD = {}; // 四型文案（旧站 RESULT_DATA 资产复用）
@@ -1764,11 +1835,31 @@ function renderHome(){
 function goSearch(kw){ location.hash='#search'; setTimeout(function(){ $('searchInput').value=kw; runSearch(); },80); }
 
 /* ─────────── 问一问 ─────────── */
-var qaFilter={group:'⭐ 核心知识', scene:''};
+var qaFilter={group:'⭐ 核心知识', scene:'', polarity:''}; /* polarity: 'yang' | 'yin' | 'both' | '' (全部) */
 var QA_GROUPS=['⭐ 核心知识','全部','阴阳能量','四型人格','关系与配对','成长课题'];
 var QA_SCENES=[['','全部场景'],['love','💗 情感'],['work','💼 职场'],['family','🏠 家庭']];
 function lastType(){ var h=getHistory(); return h.length?(h[0].type||''):''; }
+function _initPolFromLastType(){
+  if(qaFilter.polarity) return;
+  var t=lastType();
+  if(t==='yang-male'||t==='yang-female') qaFilter.polarity='yang';
+  else if(t==='yin-female'||t==='yin-male') qaFilter.polarity='yin';
+}
+function _qaPolCount(p){ var n=0; for(var i=0;i<QA.length;i++) if((QA[i].polarity||'both')===p) n++; return n; }
 function renderQa(){
+  _initPolFromLastType();
+  /* 极性 Tab 渲染 */
+  var pt=$('qaPolTabs');
+  if(pt){
+    var cnt={yang:_qaPolCount('yang'),yin:_qaPolCount('yin'),both:_qaPolCount('both')};
+    var ce=$('qaPolCountYang'),ci=$('qaPolCountYin'),cb=$('qaPolCountBoth');
+    if(ce) ce.textContent=cnt.yang; if(ci) ci.textContent=cnt.yin; if(cb) cb.textContent=cnt.both;
+    var tabs=pt.querySelectorAll('.qa-pol-tab');
+    for(var i=0;i<tabs.length;i++){
+      var p=tabs[i].getAttribute('data-pol');
+      tabs[i].className='qa-pol-tab '+p+(qaFilter.polarity===p?' on':'');
+    }
+  }
   var g=$('qaGroups');
   g.innerHTML=QA_GROUPS.map(function(x){ return '<span class="chip'+(qaFilter.group===x?' on':'')+'" onclick="setQaGroup(\''+x+'\')">'+x+'</span>'; }).join('');
   var sc=$('qaScenes');
@@ -1789,6 +1880,7 @@ function renderQa(){
   } else reco.innerHTML='';
   // 列表
   var list=QA.filter(function(c){
+    if(qaFilter.polarity && (c.polarity||'both')!==qaFilter.polarity) return false;
     if(qaFilter.group==='⭐ 核心知识'){ if(!c._core) return false; }
     else if(qaFilter.group!=='全部' && (c.category||'')!==qaFilter.group) return false;
     if(qaFilter.scene && (c.scene||[]).indexOf(qaFilter.scene)<0) return false;
@@ -1801,6 +1893,7 @@ function renderQa(){
 }
 function setQaGroup(x){ qaFilter.group=x; renderQa(); }
 function setQaScene(x){ qaFilter.scene=x; renderQa(); }
+function setQaPolarity(x){ qaFilter.polarity=(qaFilter.polarity===x)?'':x; renderQa(); }
 function setQaSceneGo(x){ qaFilter.scene=x; qaFilter.group='全部'; location.hash='#qa'; }
 
 /* ─────────── 搜一搜 ─────────── */

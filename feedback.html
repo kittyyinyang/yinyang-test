@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>阴阳人格 · 内测反馈 · 3分钟</title>
+<style>
+:root{--line:rgba(35,34,48,.12);--fog:#6F6C7B;--ink:#232230;--amber:#D4A574;--yang:#E8913A;--yang-deep:#B5483A;--yin:#5F81AE;--yin-deep:#3A5480;--bg:#FAF7F2;--card:#FFFFFF;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);line-height:1.6;padding:0 0 80px;}
+.head{background:linear-gradient(180deg,rgba(246,195,132,.28) 0%,rgba(174,194,222,.15) 100%);padding:32px 20px 26px;text-align:center;border-bottom:1px solid var(--line);}
+.head h1{font-family:"Noto Serif SC","Songti SC",serif;font-size:26px;margin:0 0 8px;color:var(--ink);}
+.head .sub{color:var(--fog);font-size:13px;letter-spacing:.04em;}
+.container{max-width:680px;margin:24px auto 0;padding:0 20px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin-bottom:16px;box-shadow:0 6px 18px -10px rgba(35,34,48,.12);}
+.card h2{font-family:"Noto Serif SC","Songti SC",serif;font-size:18px;margin:0 0 6px;color:var(--ink);display:flex;align-items:center;gap:10px;}
+.card h2 .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#E8913A,#C9742A);color:#fff;font-size:13px;font-weight:600;font-family:"PingFang SC",sans-serif;flex-shrink:0;}
+.card h2 .num.yin{background:linear-gradient(135deg,#5F81AE,#3A5480);}
+.card h2 .num.both{background:linear-gradient(135deg,#5A4A6E,#2E2A3F);}
+.card .q-hint{color:var(--fog);font-size:12px;margin:0 0 16px;letter-spacing:.04em;}
+.q{margin:14px 0;}
+.q label.q-title{display:block;font-size:14px;font-weight:500;margin-bottom:8px;color:var(--ink);}
+.q label.q-title .req{color:var(--yang-deep);font-size:12px;margin-left:4px;}
+.opts{display:flex;flex-wrap:wrap;gap:8px;}
+.opt{flex:0 0 auto;padding:7px 14px;border:1.5px solid var(--line);border-radius:999px;background:#fff;cursor:pointer;font-size:13px;transition:all .2s;user-select:none;}
+.opt:hover{border-color:var(--amber);}
+.opt.on{background:linear-gradient(135deg,#232230,#312F40);color:#fff;border-color:transparent;}
+.opt-row{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0;}
+.opt-row .opt-row-item{flex:1 1 100%;display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:13.5px;line-height:1.45;}
+.opt-row .opt-row-item:hover{border-color:var(--amber);background:rgba(255,242,232,.3);}
+.opt-row .opt-row-item.on{border-color:var(--yang-deep);background:rgba(246,195,132,.12);}
+.opt-row .opt-row-item input{margin-top:3px;}
+textarea,input[type=text],input[type=email]{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit;line-height:1.55;background:#fff;transition:border-color .2s;resize:vertical;}
+textarea{min-height:80px;}
+textarea:focus,input:focus{outline:none;border-color:var(--amber);}
+.submit-bar{position:sticky;bottom:0;left:0;right:0;background:rgba(250,247,242,.95);backdrop-filter:blur(10px);padding:14px 20px;border-top:1px solid var(--line);display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:10;}
+.btn{border:none;padding:11px 22px;border-radius:999px;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;font-family:inherit;}
+.btn.primary{background:linear-gradient(135deg,#B5483A,#9A382D);color:#fff;box-shadow:0 6px 18px -8px rgba(181,72,58,.5);}
+.btn.primary:hover{transform:translateY(-1px);box-shadow:0 8px 22px -8px rgba(181,72,58,.6);}
+.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line);}
+.btn.ghost:hover{border-color:var(--amber);}
+.toast{position:fixed;top:30px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 20px;border-radius:999px;font-size:13px;z-index:99;box-shadow:0 8px 24px -8px rgba(0,0,0,.5);opacity:0;transition:opacity .3s;pointer-events:none;}
+.toast.show{opacity:1;}
+.thanks{text-align:center;padding:60px 20px;}
+.thanks h2{font-family:"Noto Serif SC","Songti SC",serif;font-size:24px;color:var(--yang-deep);margin:0 0 12px;}
+.thanks p{color:var(--fog);font-size:14px;}
+.muted{color:var(--fog);font-size:12px;margin-top:6px;}
+.divider{height:1px;background:linear-gradient(90deg,rgba(212,165,116,0),var(--line) 30%,var(--line) 70%,rgba(78,110,158,0));margin:18px 0;}
+.foot-link{text-align:center;margin:20px 0 0;font-size:13px;}
+.foot-link a{color:var(--yin-deep);text-decoration:none;border-bottom:1px dashed rgba(78,110,158,.4);}
+</style>
+</head>
+<body>
+<div class="head">
+  <h1>📝 阴阳人格 · 内测反馈</h1>
+  <div class="sub">3 分钟 · 8 道题 · 你的反馈直接进入下一版迭代</div>
+</div>
+
+<div class="container" id="formArea">
+  <!-- 段 1：你是谁 -->
+  <div class="card">
+    <h2><span class="num">1</span> 你是谁</h2>
+    <p class="q-hint">先认识一下你 —— 这部分不强迫回答。</p>
+    <div class="q">
+      <label class="q-title">你的年龄段</label>
+      <div class="opts" data-name="age" data-multi="0">
+        <div class="opt" data-val="<18">18 岁以下</div>
+        <div class="opt" data-val="18-25">18–25</div>
+        <div class="opt" data-val="26-35">26–35</div>
+        <div class="opt" data-val="36-45">36–45</div>
+        <div class="opt" data-val="46+">46+</div>
+      </div>
+    </div>
+    <div class="q">
+      <label class="q-title">性别</label>
+      <div class="opts" data-name="gender" data-multi="0">
+        <div class="opt" data-val="male">男</div>
+        <div class="opt" data-val="female">女</div>
+        <div class="opt" data-val="other">其他 / 不愿透露</div>
+      </div>
+    </div>
+    <div class="q">
+      <label class="q-title">昵称 / 称呼（方便我在更新里感谢你）<span class="muted">选填</span></label>
+      <input type="text" name="nick" placeholder="例如 小阳同学" maxlength="20">
+    </div>
+  </div>
+
+  <!-- 段 2：体验反馈 -->
+  <div class="card">
+    <h2><span class="num">2</span> 体验反馈</h2>
+    <p class="q-hint">这版 v2 demo 最想听你的真实感受。</p>
+    <div class="q">
+      <label class="q-title">测完拿到结果那一刻，你的第一反应是？<span class="req">*</span></label>
+      <div class="opts" data-name="firstReaction" data-multi="0">
+        <div class="opt" data-val="shock">很准，震到了</div>
+        <div class="opt" data-val="agree">大致认同</div>
+        <div class="opt" data-val="unsure">不确定，需再看看</div>
+        <div class="opt" data-val="deny">不太准</div>
+      </div>
+    </div>
+    <div class="q">
+      <label class="q-title">整体满意度（1–10）<span class="req">*</span></label>
+      <div class="opts" data-name="score" data-multi="0">
+        <div class="opt" data-val="1">1</div><div class="opt" data-val="2">2</div><div class="opt" data-val="3">3</div>
+        <div class="opt" data-val="4">4</div><div class="opt" data-val="5">5</div><div class="opt" data-val="6">6</div>
+        <div class="opt" data-val="7">7</div><div class="opt" data-val="8">8</div><div class="opt" data-val="9">9</div>
+        <div class="opt" data-val="10">10</div>
+      </div>
+    </div>
+    <div class="q">
+      <label class="q-title">哪一块最戳中你？（多选）</label>
+      <div class="opts" data-name="bestPart" data-multi="1">
+        <div class="opt" data-val="result">四型结果解读</div>
+        <div class="opt" data-val="qa">问一问卡片</div>
+        <div class="opt" data-val="search">搜一搜 + B站跳转</div>
+        <div class="opt" data-val="share">分享图 / 配对</div>
+        <div class="opt" data-val="visual">晨昏光谱视觉</div>
+      </div>
+    </div>
+    <div class="q">
+      <label class="q-title">哪里最让你卡住 / 不舒服？<span class="muted">选填</span></label>
+      <div class="opts" data-name="pain" data-multi="1">
+        <div class="opt" data-val="quiz-long">题目太长 / 20道多</div>
+        <div class="opt" data-val="terms">术语看不懂</div>
+        <div class="opt" data-val="no-evidence">找不到B站原话佐证</div>
+        <div class="opt" data-val="share-broken">分享图/链接不好用</div>
+        <div class="opt" data-val="slow">加载慢</div>
+        <div class="opt" data-val="other">其它（下方补充）</div>
+      </div>
+    </div>
+    <div class="q">
+      <label class="q-title">一句真心话（任何想说的）<span class="muted">选填</span></label>
+      <textarea name="open" placeholder="例如：测完想转发给闺蜜看 / 测试题选项太难了 / 想看到更多哪吒的解读……" maxlength="500"></textarea>
+      <div class="muted" id="openCount">0 / 500</div>
+    </div>
+  </div>
+
+  <!-- 段 3：内测知识题（自测 4 道核心） -->
+  <div class="card">
+    <h2><span class="num yin">3</span> 内测知识题（4 选 1）</h2>
+    <p class="q-hint">这 4 道题帮你自测「阴阳人格」核心要点的清晰度 —— 也帮我们判断哪块需要补料。</p>
+
+    <div class="q">
+      <label class="q-title">Q1 · 「阳」的核心是？<span class="req">*</span></label>
+      <div class="opt-row" data-name="k1" data-multi="0">
+        <label class="opt-row-item" data-val="A"><input type="radio" name="k1r">A · 猛、刚、快</label>
+        <label class="opt-row-item" data-val="B"><input type="radio" name="k1r">B · 主动、给予、承重、破局</label>
+        <label class="opt-row-item" data-val="C"><input type="radio" name="k1r">C · 男性 = 阳</label>
+        <label class="opt-row-item" data-val="D"><input type="radio" name="k1r">D · 外向</label>
+      </div>
+    </div>
+    <div class="q">
+      <label class="q-title">Q2 · 「阴」被误解最深的一次是？<span class="req">*</span></label>
+      <div class="opt-row" data-name="k2" data-multi="0">
+        <label class="opt-row-item" data-val="A"><input type="radio" name="k2r">A · 阴 = 女性</label>
+        <label class="opt-row-item" data-val="B"><input type="radio" name="k2r">B · 阴 = 软弱 / 负能量</label>
+        <label class="opt-row-item" data-val="C"><input type="radio" name="k2r">C · 阴 = 内向</label>
+        <label class="opt-row-item" data-val="D"><input type="radio" name="k2r">D · 阴 = 不好</label>
+      </div>
+    </div>
+    <div class="q">
+      <label class="q-title">Q3 · 四型中哪一组最「反差」？<span class="req">*</span></label>
+      <div class="opt-row" data-name="k3" data-multi="0">
+        <label class="opt-row-item" data-val="A"><input type="radio" name="k3r">A · 男阳 vs 女阳</label>
+        <label class="opt-row-item" data-val="B"><input type="radio" name="k3r">B · 男阳 vs 男阴</label>
+        <label class="opt-row-item" data-val="C"><input type="radio" name="k3r">C · 女阴 vs 女阳</label>
+        <label class="opt-row-item" data-val="D"><input type="radio" name="k3r">D · 都差不多</label>
+      </div>
+    </div>
+    <div class="q">
+      <label class="q-title">Q4 · 看「哪吒」时你直觉最像哪一型？<span class="req">*</span></label>
+      <div class="opt-row" data-name="k4" data-multi="0">
+        <label class="opt-row-item" data-val="A"><input type="radio" name="k4r">A · 哪吒本人（破局）</label>
+        <label class="opt-row-item" data-val="B"><input type="radio" name="k4r">B · 敖丙（承重 + 联结）</label>
+        <label class="opt-row-item" data-val="C"><input type="radio" name="k4r">C · 太乙（柔 + 蓄）</label>
+        <label class="opt-row-item" data-val="D"><input type="radio" name="k4r">D · 申公豹（破 + 隐）</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="num both">4</span> 留个联系方式（可选）</h2>
+    <p class="q-hint">下次重大更新 / 线下沙龙 / 周边抽奖会优先通知到。</p>
+    <div class="q">
+      <label class="q-title">邮箱（不上墙、不转发）</label>
+      <input type="email" name="email" placeholder="可选 · 我会尊重你的留白">
+    </div>
+    <div class="q">
+      <label class="q-title">微信号（同上）</label>
+      <input type="text" name="wechat" placeholder="可选">
+    </div>
+  </div>
+</div>
+
+<div class="submit-bar" id="submitBar">
+  <button class="btn primary" onclick="submitForm()">📮 提交反馈</button>
+  <button class="btn ghost" onclick="copyFeedback()">📋 复制反馈到剪贴板</button>
+  <span class="muted" style="width:100%;text-align:center;">提交后会询问你「邮件发送 / 仅本地保留」</span>
+</div>
+
+<div class="thanks" id="thanksArea" style="display:none;">
+  <h2>感谢你的反馈 🙏</h2>
+  <p>每一条意见都会进入下一版迭代。<br>你想现在复制反馈到邮件发给我吗？</p>
+  <div style="margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+    <button class="btn primary" onclick="copyFeedback()">📋 复制反馈 JSON</button>
+    <a class="btn ghost" id="mailLink" href="#" onclick="mailFeedback(event)">📧 通过邮件发送</a>
+    <a class="btn ghost" href="index.html">🔙 返回首页</a>
+  </div>
+</div>
+
+<div class="foot-link">
+  <a href="https://docs.qq.com/form/" target="_blank" rel="noopener">想要更轻量？→ 腾讯文档协同问卷（你随时可改）</a>
+</div>
+
+<div class="toast" id="toast">已复制</div>
+
+<script>
+(function(){
+  /* 单/多选 chip 行为 */
+  function toggleOpt(el){
+    var box = el.parentNode;
+    var multi = box.getAttribute('data-multi')==='1';
+    if(multi){
+      el.classList.toggle('on');
+    }else{
+      var kids=box.children;
+      for(var i=0;i<kids.length;i++) kids[i].classList.remove('on');
+      el.classList.add('on');
+    }
+  }
+  /* radio row 行为（题目区） */
+  function toggleRow(label){
+    var box = label.parentNode;
+    var items = box.querySelectorAll('.opt-row-item');
+    for(var i=0;i<items.length;i++) items[i].classList.remove('on');
+    label.classList.add('on');
+    var r = label.querySelector('input[type=radio]'); if(r) r.checked = true;
+  }
+  /* 事件代理 */
+  document.addEventListener('click', function(e){
+    var t = e.target;
+    while(t && t !== document.body){
+      if(t.classList && t.classList.contains('opt')){ toggleOpt(t); return; }
+      if(t.classList && t.classList.contains('opt-row-item')){ toggleRow(t); return; }
+      t = t.parentNode;
+    }
+  });
+  /* 文本计数 */
+  var ta = document.querySelector('textarea[name=open]');
+  if(ta){
+    var ct = document.getElementById('openCount');
+    ta.addEventListener('input', function(){ ct.textContent = (ta.value||'').length + ' / 500'; });
+  }
+})();
+
+function _collect(){
+  var out = { ts: new Date().toISOString(), ua: navigator.userAgent.slice(0,120) };
+  /* opts chips */
+  var boxes = document.querySelectorAll('.opts');
+  for(var i=0;i<boxes.length;i++){
+    var b=boxes[i], name=b.getAttribute('data-name'), multi=b.getAttribute('data-multi')==='1';
+    var on=b.querySelectorAll('.opt.on');
+    var arr=[]; for(var j=0;j<on.length;j++) arr.push(on[j].getAttribute('data-val'));
+    out[name] = multi ? arr : (arr[0]||'');
+  }
+  /* radio rows (内测题) */
+  var rows = document.querySelectorAll('.opt-row');
+  for(var k=0;k<rows.length;k++){
+    var r=rows[k], name=r.getAttribute('data-name');
+    var pick=r.querySelector('.opt-row-item.on');
+    out[name] = pick ? pick.getAttribute('data-val') : '';
+  }
+  /* text/number/email */
+  var textNames = ['nick','open','email','wechat'];
+  for(var m=0;m<textNames.length;m++){
+    var el=document.querySelector('[name='+textNames[m]+']');
+    if(el) out[textNames[m]] = (el.value||'').trim();
+  }
+  return out;
+}
+function _showToast(msg){
+  var t=document.getElementById('toast'); if(!t) return;
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 1500);
+}
+function _save(obj){
+  try{ localStorage.setItem('yinyang_feedback_draft', JSON.stringify(obj)); }catch(e){}
+}
+function _buildText(obj){
+  var lines = [
+    '【阴阳人格 v2 内测反馈】',
+    '时间: '+obj.ts,
+    '年龄段: '+(obj.age||'-')+'   性别: '+(obj.gender||'-')+'   昵称: '+(obj.nick||'-'),
+    '整体满意度: '+(obj.score||'-')+' / 10',
+    '第一反应: '+(obj.firstReaction||'-'),
+    '最戳中: '+((obj.bestPart||[]).join(' / ')||'-'),
+    '卡点: '+((obj.pain||[]).join(' / ')||'-'),
+    '内测题: Q1='+(obj.k1||'-')+' Q2='+(obj.k2||'-')+' Q3='+(obj.k3||'-')+' Q4='+(obj.k4||'-'),
+    '开放: '+(obj.open||'-'),
+    '联系: 邮箱='+(obj.email||'-')+' 微信='+(obj.wechat||'-'),
+  ];
+  return lines.join('\n');
+}
+function submitForm(){
+  var obj = _collect();
+  if(!obj.score){ _showToast('请先打个分再提交 ✏️'); return; }
+  if(!obj.firstReaction){ _showToast('请选一下你的第一反应 ✏️'); return; }
+  if(!obj.k1||!obj.k2||!obj.k3||!obj.k4){ _showToast('内测 4 道题还差几道 ✏️'); return; }
+  _save(obj);
+  document.getElementById('formArea').style.display='none';
+  document.getElementById('submitBar').style.display='none';
+  document.getElementById('thanksArea').style.display='block';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function copyFeedback(){
+  var obj = _collect();
+  _save(obj);
+  var text = _buildText(obj);
+  var json = JSON.stringify(obj, null, 2);
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(json).then(function(){ _showToast('已复制 JSON 反馈 ✅'); }).catch(function(){ _fallbackCopy(text); });
+  }else{ _fallbackCopy(text); }
+}
+function _fallbackCopy(text){
+  var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta);
+  ta.select(); try{ document.execCommand('copy'); _showToast('已复制 ✅'); }catch(e){ _showToast('复制失败，请长按选中'); }
+  setTimeout(function(){ if(ta.parentNode) ta.parentNode.removeChild(ta); },200);
+}
+function mailFeedback(e){
+  if(e) e.preventDefault();
+  var obj = _collect();
+  _save(obj);
+  var body = _buildText(obj) + '\n\n--- JSON ---\n' + JSON.stringify(obj,null,2);
+  var mailto = 'mailto:hello@kittyyinyang.com?subject=' + encodeURIComponent('阴阳人格 v2 内测反馈') + '&body=' + encodeURIComponent(body);
+  window.location.href = mailto;
+}
+/* 加载草稿 */
+(function(){
+  try{
+    var draft = localStorage.getItem('yinyang_feedback_draft');
+    if(!draft) return;
+    var obj = JSON.parse(draft);
+    Object.keys(obj).forEach(function(k){
+      var el = document.querySelector('[name='+k+']');
+      if(!el) return;
+      if(el.type==='radio'){
+        var inp = document.querySelector('input[name='+k+'r][value="'+obj[k]+'"]') || document.querySelector('input[value="'+obj[k]+'"]');
+        if(inp){ var lbl = inp.closest('.opt-row-item'); if(lbl) lbl.classList.add('on'); inp.checked = true; }
+      }else if(el.tagName==='TEXTAREA' || el.type==='text' || el.type==='email'){
+        el.value = obj[k]||'';
+      }
+    });
+    var optsBox = document.querySelectorAll('.opts');
+    optsBox.forEach(function(b){
+      var name = b.getAttribute('data-name');
+      if(!name || !obj[name]) return;
+      var vals = Array.isArray(obj[name]) ? obj[name] : [obj[name]];
+      var kids = b.querySelectorAll('.opt');
+      kids.forEach(function(k){
+        if(vals.indexOf(k.getAttribute('data-val'))>=0) k.classList.add('on');
+      });
+    });
+    var ta = document.querySelector('textarea[name=open]');
+    if(ta){ var ct=document.getElementById('openCount'); if(ct) ct.textContent=(ta.value||'').length+' / 500'; }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

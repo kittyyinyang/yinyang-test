@@ -1,0 +1,5 @@
+scripts/_tmp*
+data/_tmp*
+_tmp*
+*.log
+Thumbs.db

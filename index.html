@@ -358,6 +358,24 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
 .corpus-badge{font-size:11px;color:var(--fog);background:var(--soft);border-radius:5px;padding:1px 7px;}
 .hint-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
 
+/* ── 搜一搜 · 标签脑图（晨昏光谱风） ── */
+.tag-mind{background:var(--card);border:1px solid rgba(35,34,48,.055);border-radius:var(--r);box-shadow:var(--shadow-flat);padding:18px 16px 16px;margin-top:14px;}
+.tag-mind .mm-head{font-size:15px;font-weight:700;text-align:center;letter-spacing:.12em;color:var(--ink);}
+.tag-mind .mm-sub{display:block;font-size:11px;color:var(--fog);font-weight:400;letter-spacing:.05em;margin-top:2px;}
+.tag-mind .mm-hub{width:104px;height:104px;margin:16px auto 10px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;
+  background:radial-gradient(130% 130% at 32% 24%,#C85F4C 0%,#B5483A 48%,#9A382D 100%);
+  color:#FFF6F0;box-shadow:inset 0 0 0 1px rgba(255,240,230,.35),inset 0 0 14px rgba(90,15,8,.45),0 6px 16px -6px rgba(181,72,58,.45);transform:rotate(-2deg);}
+.tag-mind .mm-hub-t{font-size:17px;font-weight:700;letter-spacing:.2em;line-height:1;}
+.tag-mind .mm-hub-sub{font-size:8.5px;letter-spacing:.28em;opacity:.85;}
+.tag-mind .mm-link{width:2px;height:14px;margin:0 auto;background:linear-gradient(180deg,var(--amber),rgba(212,165,116,0));}
+.tag-mind .mm-groups{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:4px;}
+.tag-mind .mm-group{border:1px solid var(--line);border-radius:12px;background:var(--soft);padding:10px 12px;}
+.tag-mind .mm-gname{font-size:13px;font-weight:700;margin-bottom:8px;letter-spacing:.06em;}
+.tag-mind .mm-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.tag-mind .mm-chip{font-size:12px;color:var(--ink-2);background:#fff;border:1px solid var(--line);border-radius:999px;padding:2px 11px;cursor:pointer;transition:all .18s;}
+.tag-mind .mm-chip:hover{color:var(--gc,#B5483A);border-color:var(--gc,#B5483A);background:rgba(255,255,255,.9);transform:translateY(-1px);}
+@media(max-width:560px){.tag-mind .mm-groups{grid-template-columns:1fr;}}
+
 /* ── 我的（历史：左印 + 日期竖排书脊） ── */
 .me-item{background:var(--card);border:1px solid rgba(35,34,48,.055);border-radius:var(--r);box-shadow:var(--shadow-flat),inset 0 1px 0 rgba(255,255,255,.85);padding:16px 18px;margin-bottom:12px;cursor:pointer;display:flex;align-items:center;gap:14px;flex-wrap:wrap;transition:transform .25s ease,box-shadow .25s ease;}
 .me-item:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift);}
@@ -710,6 +728,8 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
 </nav>
 
 <script src="data/data_corpus_refined.js"></script>
+<script src="data/corpus_sent_first.js"></script>
+<script src="data/tag_graph.js"></script>
 <script src="data/data_corpus.js"></script>
 <script src="data/data_pair.js"></script>
 <script src="data/data_qa.js"></script>
@@ -721,6 +741,7 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
 <script src="data/qa_clips_new.js"></script>
 <script src="data/quiz_male.js"></script>
 <script src="data/quiz_female.js"></script>
+<script src="data/qrcode_gen.js"></script>
 <script>
 /* =====================================================================
    W-F3~F7 + 结果页升级 · 功能模块（定义于主脚本之前：
@@ -1078,10 +1099,60 @@ function _latestSnapOfType(type){
   }catch(e){}
   return null;
 }
+/* ── 分享图底部行动区：左侧品牌+引导语，右侧进站 QR（裂变闭环核心）── */
+function _drawFooterQR(ctx,link,opts){
+  try{
+    var W=ctx.canvas.width, H=ctx.canvas.height;
+    /* 行动区：分隔线 → 内框底（H-34），高约 236 */
+    var sepY=H-270, actTop=sepY, actBot=H-34, actH=actBot-actTop;
+    ctx.strokeStyle='rgba(212,165,116,.35)'; ctx.lineWidth=1.6;
+    ctx.beginPath(); ctx.moveTo(150,sepY); ctx.lineTo(W-150,sepY); ctx.stroke();
+    /* 左侧文本块（行动区垂直居中） */
+    var cx1=150, tx=(150+760)/2, ty=actTop+actH/2;
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillStyle='#232230'; ctx.font=_cxFont(30,true,700);
+    ctx.fillText('阴阳人格 · 20 道人生选择题',tx,ty-26);
+    ctx.fillStyle='#6F6C7B'; ctx.font=_cxFont(24,false,500);
+    ctx.fillText('长按识别二维码 · 测出你的阴阳人格',tx,ty+26);
+    /* 右侧 QR 卡（白底 + 细框 + QR） */
+    var qs=220, qx=W-70-220, qy=actTop+(actH-qs)/2;
+    _cxRound(ctx,qx,qy,qs,qs,16);
+    ctx.fillStyle='#FFFFFF'; ctx.fill();
+    ctx.strokeStyle='rgba(35,34,48,.14)'; ctx.lineWidth=1.5; ctx.stroke();
+    var qrOk=false;
+    if(typeof QR_GEN!=='undefined' && QR_GEN.toCanvas && link){
+      var qcv=document.createElement('canvas');
+      if(QR_GEN.toCanvas(qcv,link,5)){ /* 白底内边距 12 */
+        var qw=qcv.width, qh=qcv.height, inner=qs-26;
+        if(qw>inner||qh>inner){ /* 超大降级重绘，px 取 5 的整倍数保持模块清晰 */
+          var px=Math.floor(inner/Math.max(qw,qh)*5)/5;
+          if(px>=2){ qcv=document.createElement('canvas'); if(QR_GEN.toCanvas(qcv,link,px)){ qw=qcv.width; qh=qcv.height; } }
+        }
+        var dx=qx+(qs-qw)/2, dy=qy+(qs-qh)/2;
+        ctx.drawImage(qcv,dx,dy);
+        qrOk=true;
+      }
+    }
+    if(!qrOk && link){ /* 极旧浏览器无 QR：文字版链接兜底 */
+      ctx.fillStyle='#6F6C7B'; ctx.font=_cxFont(16,false);
+      var parts=_cxWrap(ctx,link,190,3);
+      ctx.textAlign='center';
+      for(var i=0;i<parts.length;i++) ctx.fillText(parts[i],qx+qs/2,qy+qs/2-20+i*26);
+    }
+    return qrOk;
+  }catch(e){ return false; }
+}
+function _shareLink(type){
+  try{
+    var o=location.origin||'';
+    if(/^https?:/i.test(o)) return o+location.pathname+'?from=share&t='+encodeURIComponent(type);
+  }catch(e){}
+  return 'https://kittyyinyang.github.io/yinyang-test/?from=share&t='+encodeURIComponent(type);
+}
 function makeShareImage(type,opts){
   try{
     var rd=RD[type]; if(!rd) return null;
-    var W=1080,H=1440;
+    var W=1080,H=1700;
     var cv=document.createElement('canvas'); cv.width=W; cv.height=H;
     var ctx=cv.getContext('2d'); if(!ctx) return null;
     var seal=TYPE_SEAL[type]||['阳','seal-yang'];
@@ -1098,25 +1169,25 @@ function makeShareImage(type,opts){
     ctx.strokeStyle='rgba(212,165,116,.32)'; ctx.lineWidth=2;
     ctx.strokeRect(34,34,W-68,H-68);
     /* ② 简化晨昏轮（双弧双色圆 + 外环刻度） */
-    _cxWheel(ctx,W/2,240,136);
+    _cxWheel(ctx,W/2,225,118);
     /* ③ 型格印章（朱砂/黛蓝 + 反白单字） */
-    _cxSeal(ctx,W/2,480,122,SEAL_CHAR[type]||seal[0],isYang);
+    _cxSeal(ctx,W/2,465,112,SEAL_CHAR[type]||seal[0],isYang);
     /* ④ 型名 + sub（衬线大字） */
     ctx.textAlign='center'; ctx.textBaseline='alphabetic';
-    ctx.fillStyle='#232230'; ctx.font=_cxFont(58,true,700);
-    ctx.fillText(rd.type||type,W/2,668);
-    ctx.fillStyle='#6F6C7B'; ctx.font=_cxFont(27,false);
-    ctx.fillText(rd.sub||'',W/2,712);
-    var y=712;
+    ctx.fillStyle='#232230'; ctx.font=_cxFont(56,true,700);
+    ctx.fillText(rd.type||type,W/2,628);
+    ctx.fillStyle='#6F6C7B'; ctx.font=_cxFont(26,false);
+    ctx.fillText(rd.sub||'',W/2,676);
+    var y=676;
     if(opts&&opts.invite){
       ctx.fillStyle='#B5483A'; ctx.font=_cxFont(31,true,600);
-      ctx.fillText('我在等你，来看看我们合不合',W/2,y+54);
-      y+=54;
+      ctx.fillText('我在等你，来看看我们合不合',W/2,y+58);
+      y+=58;
     }
-    /* ⑤ slogan（最多三行，超出截断） */
-    var sl=_cxWrap(ctx,rd.slogan||'',840,3);
-    ctx.fillStyle='#4A4754'; ctx.font=_cxFont(34,true,500);
-    var sy=y+64;
+    /* ⑤ slogan（最多四行，超出截断） */
+    var sl=_cxWrap(ctx,rd.slogan||'',840,4);
+    ctx.fillStyle='#4A4754'; ctx.font=_cxFont(33,true,500);
+    var sy=y+86;
     for(var i=0;i<sl.length;i++) ctx.fillText(sl[i],W/2,sy+i*52);
     /* ⑥ 内核能量条（橙蓝渐变 + K%） */
     ctx.textAlign='left'; ctx.fillStyle='#6F6C7B'; ctx.font=_cxFont(24,false);
@@ -1157,28 +1228,34 @@ function makeShareImage(type,opts){
       ctx.textAlign='right'; ctx.fillStyle='#6F6C7B'; ctx.font=_cxFont(23,false);
       ctx.fillText(v==null?'—':v+'% 阳',930,yy+17);
     }
-    /* ⑧ 金句（最多两行，超出截断） */
+    /* ⑧ 金句（最多三行，超出截断） */
     var q=rd.highlight||'';
     if(q){
-      var ql=_cxWrap(ctx,q,720,2);
+      var ql=_cxWrap(ctx,q,620,3);
       ctx.fillStyle='#D4A574';
-      ctx.fillRect(150,1268,4,ql.length*46+14);
+      ctx.fillRect(150,1270,4,ql.length*46+14);
       ctx.textAlign='left';
-      ctx.font=_cxFont(42,true,700); ctx.fillStyle='rgba(181,72,58,.4)';
-      ctx.fillText('「',156,1302);
-      ctx.font=_cxFont(31,true,500); ctx.fillStyle='#4A4754';
-      for(var qi=0;qi<ql.length;qi++) ctx.fillText(ql[qi],206,1306+qi*46);
+      ctx.font=_cxFont(40,true,700); ctx.fillStyle='rgba(181,72,58,.4)';
+      ctx.fillText('「',156,1306);
+      ctx.font=_cxFont(30,true,500); ctx.fillStyle='#4A4754';
+      for(var qi=0;qi<ql.length;qi++) ctx.fillText(ql[qi],206,1310+qi*46);
     }
-    /* ⑨ 品牌行 */
-    ctx.textAlign='center'; ctx.fillStyle='#6F6C7B'; ctx.font=_cxFont(25,false,600);
-    ctx.fillText('阴阳人格 · 20 道人生选择题',W/2,1392);
+    /* ⑨ 底部行动区：品牌 + 进站 QR（裂变闭环） */
+    _drawFooterQR(ctx,_shareLink(type));
     return cv;
   }catch(e){ return null; }
+}
+function _cardLink(qaId){
+  try{
+    var o=location.origin||'';
+    if(/^https?:/i.test(o)) return o+location.pathname+'?from=share&kp='+encodeURIComponent(qaId);
+  }catch(e){}
+  return 'https://kittyyinyang.github.io/yinyang-test/?from=share&kp='+encodeURIComponent(qaId);
 }
 function makeCardImage(qa){
   try{
     if(!qa) return null;
-    var W=1080,H=1350;
+    var W=1080,H=1700;
     var cv=document.createElement('canvas'); cv.width=W; cv.height=H;
     var ctx=cv.getContext('2d'); if(!ctx) return null;
     ctx.fillStyle='#FAF7F2'; ctx.fillRect(0,0,W,H);
@@ -1201,29 +1278,31 @@ function makeCardImage(qa){
       ctx.textAlign='center'; ctx.fillStyle='#8A6A3A'; ctx.font=_cxFont(24,false,600);
       ctx.fillText(tags.join(' · '),W/2,268);
     }
-    /* 问题（衬线大字，最多三行） */
-    var ql=_cxWrap(ctx,qa.question||'',860,3);
-    ctx.fillStyle='#232230'; ctx.font=_cxFont(50,true,700);
-    var qy=372;
-    for(var i=0;i<ql.length;i++) ctx.fillText(ql[i],W/2,qy+i*70);
-    /* 简答（最多六行） */
-    var by=qy+(ql.length-1)*70+96;
-    var bl=_cxWrap(ctx,qa.answerBrief||'',790,6);
-    ctx.textAlign='left'; ctx.fillStyle='#4A4754'; ctx.font=_cxFont(29,false);
-    for(var j=0;j<bl.length;j++) ctx.fillText(bl[j],150,by+j*50);
-    /* 金句（最多三行） */
+    /* 问题（衬线大字，最多三行；left 锚定在 80~1000 区间，font 36 留足安全边） */
+    var ql=_cxWrap(ctx,qa.question||'',900,3);
+    ctx.fillStyle='#232230'; ctx.font=_cxFont(36,true,700);
+    ctx.textAlign='left';
+    var qy=362;
+    for(var i=0;i<ql.length;i++) ctx.fillText(ql[i],80,qy+i*56);
+    ctx.textAlign='center';
+    /* 简答（最多八行，自适应） */
+    var by=qy+(ql.length-1)*56+82;
+    var bl=_cxWrap(ctx,qa.answerBrief||'',790,8);
+    ctx.textAlign='left'; ctx.fillStyle='#4A4754'; ctx.font=_cxFont(28,false);
+    for(var j=0;j<bl.length;j++) ctx.fillText(bl[j],150,by+j*48);
+    /* 金句（最多三行，跟随简答、下限 960 保持节奏） */
     if(qa.quote){
-      var q2=_cxWrap(ctx,qa.quote,690,3);
-      ctx.fillStyle='#D4A574'; ctx.fillRect(150,1112,4,q2.length*48+14);
+      var gy=by+bl.length*48+62; if(gy<960) gy=960;
+      var q2=_cxWrap(ctx,qa.quote,620,3);
+      ctx.fillStyle='#D4A574'; ctx.fillRect(150,gy,4,q2.length*46+14);
       ctx.textAlign='left';
       ctx.font=_cxFont(40,true,700); ctx.fillStyle='rgba(181,72,58,.4)';
-      ctx.fillText('「',156,1146);
-      ctx.font=_cxFont(32,true,500); ctx.fillStyle='#4A4754';
-      for(var k=0;k<q2.length;k++) ctx.fillText(q2[k],206,1150+k*48);
+      ctx.fillText('「',156,gy+36);
+      ctx.font=_cxFont(30,true,500); ctx.fillStyle='#4A4754';
+      for(var k=0;k<q2.length;k++) ctx.fillText(q2[k],206,gy+40+k*46);
     }
-    /* 品牌行 */
-    ctx.textAlign='center'; ctx.fillStyle='#6F6C7B'; ctx.font=_cxFont(25,false,600);
-    ctx.fillText('阴阳人格 · 20 道人生选择题',W/2,1296);
+    /* 底部行动区：品牌 + 进站 QR */
+    _drawFooterQR(ctx,_cardLink(qa.qaId));
     return cv;
   }catch(e){ return null; }
 }
@@ -1734,15 +1813,52 @@ function scoreText(hay, words, weight){
   }
   return s;
 }
+/* 语料条目 → 首句时间索引：精确跳转（corpus_sent_first.js 轻量 7.9KB 静态加载；句子级全文 corpus_sents.js 31MB 按需注入） */
+var CORPUS_SENT_FIRST={};
+var _sentsLoaded=false,_sentsLoading=false;
+(function(){
+  try{
+    if(typeof CORPUS_SENT_FIRST_DATA!=='undefined'&&CORPUS_SENT_FIRST_DATA){
+      CORPUS_SENT_FIRST=CORPUS_SENT_FIRST_DATA;
+    }else if(typeof CORPUS_SENTS!=='undefined'&&CORPUS_SENTS&&CORPUS_SENTS.length){
+      for(var i=0;i<CORPUS_SENTS.length;i++){
+        var s=CORPUS_SENTS[i];
+        if(!s||!s.id||!(s.sec>=0)) continue;
+        if(!(s.id in CORPUS_SENT_FIRST)) CORPUS_SENT_FIRST[s.id]=s.sec;
+      }
+    }
+  }catch(e){}
+})();
+function loadCorpusSents(cb){
+  if(_sentsLoaded){ cb&&cb(); return; }
+  if(_sentsLoading){ setTimeout(function(){ loadCorpusSents(cb); },120); return; }
+  _sentsLoading=true;
+  var s=document.createElement('script');
+  s.src='data/corpus_sents.js';
+  s.onload=function(){ _sentsLoaded=true; _sentsLoading=false; try{
+      for(var i=0;i<(typeof CORPUS_SENTS!=='undefined'?CORPUS_SENTS.length:0);i++){
+        var it=CORPUS_SENTS[i];
+        if(!it||!it.id||!(it.sec>=0)) continue;
+        if(!(it.id in CORPUS_SENT_FIRST)) CORPUS_SENT_FIRST[it.id]=it.sec;
+      }
+    }catch(e){} cb&&cb(); };
+  s.onerror=function(){ _sentsLoading=false; cb&&cb(); };
+  document.head.appendChild(s);
+}
 function runSearch(){
   var q=($('searchInput').value||'').trim();
   var out=$('searchOut');
+  if(q && typeof CORPUS_SENTS==='undefined' && typeof CORPUS_SENT_FIRST_DATA!=='undefined'){
+    loadCorpusSents(function(){ try{ runSearch(); }catch(e){} });
+    return;
+  }
   if(!q){
     var tags=(typeof TAG_FREQ!=='undefined'&&TAG_FREQ)?TAG_FREQ.slice(0,12):[];
     out.innerHTML='<div class="empty-tip">输入关键词开始搜索，或试试大家都在搜：</div>'
       +'<div class="hint-chips" style="justify-content:center;padding:10px 0 20px;">'
       + tags.map(function(t){ return '<span class="chip" onclick="goSearch(\''+t[0]+'\')">'+t[0]+' <span style="color:#bbb">'+t[1]+'</span></span>'; }).join('')
-      +'</div>';
+      +'</div>'
+      +renderTagGraph();
     track('search_query',{q:'',empty:true});
     return;
   }
@@ -1770,7 +1886,11 @@ function runSearch(){
   if(corpusHits.length){
     html+=corpusHits.slice(0,30).map(function(c){
       var badge=c.advanced?'<span class="adv-badge">进阶</span>':'';
-      var go=c.bv&&c.bv!=='—'?('<a class="sc-go" href="https://www.bilibili.com/video/'+esc(c.bv)+'" target="_blank" rel="noopener">▶ B站</a>'):'';
+      var go='';
+      if(c.bv&&c.bv!=='—'){
+        var sec=CORPUS_SENT_FIRST[c.id];
+        go='<a class="sc-go" href="https://www.bilibili.com/video/'+esc(c.bv)+(sec>=0?('?t='+sec):'')+'" target="_blank" rel="noopener">▶ B站</a>';
+      }
       var topic=c.domain?esc(c.domain)+' · ':'';
       return '<div class="s-corpus">'+badge
         +'<div style="flex:1;min-width:160px;"><div class="sc-t">'+hl(c.title,q)+'</div>'
@@ -1782,6 +1902,26 @@ function runSearch(){
     html+='<div class="empty-tip" style="padding:18px;">没有命中的语料条目</div>';
   }
   out.innerHTML=html;
+}
+/* 标签脑图：中心「阴阳人格」→ 四大分支 → 语料高频标签；点标签触发 goSearch */
+function renderTagGraph(){
+  var g=(typeof TAG_GRAPH!=='undefined'&&TAG_GRAPH)?TAG_GRAPH:null;
+  if(!g||!g.groups||!g.groups.length) return '';
+  var colors=['var(--cinnabar)','var(--yang)','var(--yin)','var(--amber)'];
+  var hub='<div class="mm-hub"><span class="mm-hub-t serif">阴阳人格</span><span class="mm-hub-sub serif">Yin · Yang</span></div>';
+  var groups=g.groups.map(function(gr,i){
+    var c=colors[i%colors.length];
+    var chips=gr.children.map(function(t){
+      return '<span class="mm-chip" style="--gc:'+c+'" onclick="goSearch(\''+esc(t)+'\')">'+esc(t)+'</span>';
+    }).join('');
+    return '<div class="mm-group"><div class="mm-gname serif" style="color:'+c+'">'+esc(gr.name)+'</div><div class="mm-chips">'+chips+'</div></div>';
+  }).join('');
+  return '<div class="tag-mind">'
+    +'<div class="mm-head serif">标签脑图<span class="mm-sub">点任意标签直达搜索</span></div>'
+    +hub
+    +'<div class="mm-link"></div>'
+    +'<div class="mm-groups">'+groups+'</div>'
+    +'</div>';
 }
 
 /* ─────────── 我的 ─────────── */

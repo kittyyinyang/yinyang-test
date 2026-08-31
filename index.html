@@ -2222,7 +2222,7 @@ function showQuestion(){
     +'<div class="q-tag">'+esc(no)+' · '+esc(ch.title||'')+'</div>'
     +'<div class="q-text">'+esc(q.text)+'</div>'
     +optsHtml
-    +'<div class="q-nav"><button class="btn" id="btnNextQ" onclick="nextQuestion()" '+(T.answers[q.id]===undefined?'disabled':'')+'>下一题</button></div>'
+    +'<div class="q-nav"><button class="btn btn-ghost" onclick="prevQuestion()" '+(T.idx===0?'disabled':'')+'>上一题</button><button class="btn" id="btnNextQ" onclick="nextQuestion()" '+(T.answers[q.id]===undefined?'disabled':'')+'>下一题</button></div>'
     +'</div></div>';
 }
 function pickOpt(qid, oi, btn){
@@ -2232,6 +2232,10 @@ function pickOpt(qid, oi, btn){
   btn.classList.add('selected');
   var n=$('btnNextQ'); if(n) n.disabled=false;
   saveProgress();
+}
+function prevQuestion(){
+  if(T.idx<=0) return;
+  T.idx--; saveProgress(); showQuestion();
 }
 function nextQuestion(){
   var curCh=chapterAt(T.idx).no;

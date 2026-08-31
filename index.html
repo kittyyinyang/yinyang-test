@@ -757,6 +757,44 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 .dt-b{margin-top:3px;font-size:12.5px;color:var(--fog);line-height:1.55;}
 .dt-chips{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
 .dt-clbl{font-size:12px;color:var(--fog);margin-right:2px;}
+/* =====================================================================
+   知识卡片传播性 P0 落地（守卫式追加：只加不改）
+   分类印章 / 四型卡头 / insight 双色章 / 场景色块 / 金句大字 / 展开分类色
+   ===================================================================== */
+/* ① 分类印章 .cat-seal（核朱砂/能晨橙/型橙蓝/配黛蓝/修墨，与 cat-badge 文字并存） */
+.cat-seal{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:4px;color:#FFF6F0;font-family:var(--serif);font-size:12px;font-weight:700;transform:rotate(-2deg);box-shadow:inset 0 0 0 1px rgba(255,240,230,.3),inset 0 0 5px rgba(88,14,7,.4);margin-right:6px;}
+.cat-seal.core{background:linear-gradient(135deg,#C85F4C,#9A382D);}
+.cat-seal.energy{background:linear-gradient(135deg,#F09A42,#C9742A);}
+.cat-seal.type{background:linear-gradient(135deg,#F09A42,#5F81AE);}
+.cat-seal.pair{background:linear-gradient(135deg,#5F81AE,#3A5480);}
+.cat-seal.grow{background:linear-gradient(135deg,#312F40,#232230);}
+/* ② 四型卡头缩略图：40px 画像 + 型印 + 主题字（onerror 降级色块） */
+.qcard-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.qc-thumb{width:40px;height:40px;border-radius:10px;object-fit:cover;border:1px solid rgba(212,165,116,.5);box-shadow:0 4px 10px -4px rgba(35,34,48,.25);}
+.qc-thumb-fb{background:linear-gradient(135deg,rgba(232,145,58,.12),var(--moon));}
+.qc-theme{font-size:11px;color:var(--fog);letter-spacing:.1em;}
+/* ③ insight 数字序号 → 阴阳双色小方章（按 data-pol 染色，左侧竖线同色） */
+.insight-item .ii-n{flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:4px;font-family:var(--serif);font-size:11px;font-weight:700;color:#FFF;transform:rotate(-2deg);padding-top:0;}
+.qcard[data-pol="yang"] .ii-n{background:linear-gradient(135deg,#F09A42,#C9742A);}
+.qcard[data-pol="yin"] .ii-n{background:linear-gradient(135deg,#5F81AE,#3A5480);}
+.qcard[data-pol="both"] .ii-n{background:linear-gradient(135deg,#D4A574,#A9762F);}
+.qcard[data-pol="yang"] .insight-item{border-left-color:#C9742A;}
+.qcard[data-pol="yin"] .insight-item{border-left-color:#3A5480;}
+.qcard[data-pol="both"] .insight-item{border-left-color:#A9762F;}
+/* ④ 场景 chips → 小色块（覆盖胶囊）+ 🌙 独处专属色 */
+.scene-chip{border-radius:6px;padding:3px 8px;}
+.scene-love{color:#B05672;border-color:rgba(176,86,114,.4);background:rgba(253,238,242,.85);}
+.scene-work{color:#4E6E9E;border-color:rgba(78,110,158,.4);background:rgba(234,240,247,.9);}
+.scene-family{color:#A9762F;border-color:rgba(169,118,47,.4);background:rgba(251,241,230,.9);}
+.scene-self{color:#5A5870;border-color:rgba(90,88,112,.4);background:rgba(240,239,246,.9);}
+/* ⑤ 金句 → 居中大字金句卡（展开态，可独立截图） */
+.qcard.open .quote{text-align:center;padding:22px 20px;margin:16px 0;font-size:17px;letter-spacing:.06em;line-height:2;}
+.qcard.open .quote::before{left:50%;transform:translateX(-50%);top:-4px;font-size:40px;}
+.qcard.open .quote::after{top:14%;bottom:14%;left:0;width:3px;border-radius:2px;}
+/* ⑥ 展开上边框分类色（翻开信号） */
+.qcard[data-pol="yang"].open .qcard-body{border-top-color:rgba(232,145,58,.55);}
+.qcard[data-pol="yin"].open .qcard-body{border-top-color:rgba(78,110,158,.55);}
+.qcard[data-pol="both"].open .qcard-body{border-top-color:rgba(212,165,116,.6);}
 </style>
 
 <div class="toast" id="toast"></div>
@@ -2093,8 +2131,16 @@ function qaEvidenceHtml(c){
   return html;
 }
 function qaCardHtml(c, q){
+  /* P0 知识卡传播：分类印章 + 四型卡头缩略图（守卫式：只加不改，画像/印/主题字零素材复用） */
+  var CAT_SEAL={'核心知识':['核','core'],'阴阳能量':['能','energy'],'四型人格':['型','type'],'关系与配对':['配','pair'],'成长课题':['修','grow']};
+  var cs=CAT_SEAL[c.category]||['',''];
+  var fT=c.forTypes&&c.forTypes[0];
+  var tImg=(fT&&TYPE_IMG[fT])?TYPE_IMG[fT]:'';
+  var tChar=(fT&&SEAL_CHAR[fT])?SEAL_CHAR[fT]:'';
+  var kpM=/([a-j])$/.exec(c.kpId||'');
+  var themeChar=kpM?(DEEP_THEME[kpM[1]]||''):'';
   var scenes=(c.scene||[]).map(function(s){
-    var m={love:['💗 情感','scene-love'],work:['💼 职场','scene-work'],family:['🏠 家庭','scene-family'],school:['📚 校园','scene-work'],self:['🌙 独处','scene-work']};
+    var m={love:['💗 情感','scene-love'],work:['💼 职场','scene-work'],family:['🏠 家庭','scene-family'],school:['📚 校园','scene-work'],self:['🌙 独处','scene-self']};
     return m[s]?('<span class="scene-chip '+m[s][1]+'">'+m[s][0]+'</span>'):'';
   }).join('');
   var src=(c.videoTitle?('《'+c.videoTitle+'》'):'');
@@ -2119,12 +2165,17 @@ function qaCardHtml(c, q){
             +'<a class="ev-go" href="'+esc(e.link||('#'))+'" target="_blank" rel="noopener" title="去B站看原话" aria-label="去B站看原话" onclick="event.stopPropagation()">▶</a></div>';
         }).join('')
     : qaEvidenceHtml(c);
-  return '<div class="qcard" id="card-'+esc(c.qaId)+'" onclick="toggleQa(this)">'
-    +'<div><span class="cat-badge">'+esc(c.category||'问答')+'</span>'+coreBadge+scenes+'</div>'
+  return '<div class="qcard" id="card-'+esc(c.qaId)+'" data-pol="'+esc(c.polarity||'both')+'" onclick="toggleQa(this)">'
+    +((tImg||tChar)?('<div class="qcard-head">'
+      +(tImg?'<img class="qc-thumb" src="'+tImg+'" alt="" loading="lazy" onerror="this.classList.add(\'qc-thumb-fb\')">':'<span class="qc-thumb qc-thumb-fb"></span>')
+      +(tChar?'<span class="seal seal-sm '+TYPE_SEAL[fT][1]+'">'+tChar+'</span>':'')
+      +(themeChar?'<span class="qc-theme">'+themeChar+'</span>':'')
+      +'</div>'):'')
+    +'<div>'+(cs[0]?'<span class="cat-seal '+cs[1]+'">'+cs[0]+'</span>':'')+'<span class="cat-badge">'+esc(c.category||'问答')+'</span>'+coreBadge+scenes+'</div>'
     +'<div class="qcard-q">'+hl(c.question,q)+'</div>'
     +(c.answerBrief?('<div class="qcard-brief">'+hl(c.answerBrief,q)+'</div>'):'')
     +insightHtml
-    +'<div class="qcard-toggle">展开语料佐证 ▾</div>'
+    +'<div class="qcard-toggle">展开 · 语料佐证 / 金句 ▾</div>'
     +'<div class="qcard-body">'
       +evidenceHtml
       +(c.mirror?('<div class="mirror-block"><span class="mi-ico">🪞</span><span>'+hl(c.mirror,q)+'</span></div>'):'')

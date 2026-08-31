@@ -570,6 +570,43 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 .qa-pol-tab.both .qa-pol-count{color:#5A4A6E;}
 .qa-pol-tab.on .qa-pol-count{color:#fff;}
 @media (max-width:720px){.qa-pol-tabs{grid-template-columns:1fr;}.qa-pol-tab{padding:12px 14px;}.qa-pol-count{font-size:22px;}}
+/* =====================================================================
+   首页视觉精致化 v1 · P0 落地（守卫式追加：只加不改）
+   ===================================================================== */
+/* P0-1 移动端 hero 压缩：wheel 200px + 字阶/间距收紧 → CTA 进首屏（E4 主刀） */
+@media (max-width:720px){
+  .hero{padding:18px 20px 2px;}
+  .hero-vertical{font-size:10.5px;letter-spacing:.4em;padding:0 0 8px;}
+  .wheel{width:200px;height:200px;}
+  .wheel-wrap{margin:0 0 6px;}
+  .wheel-orbit{animation-duration:90s;}            /* 低端机省电：自转放慢 */
+  .hero-seals{margin:10px 0 12px;gap:12px;}        /* 「铃印-落款」节奏 */
+  .hero-seals .seal{width:34px;height:34px;font-size:17px;}
+  .hero h1{font-size:27px;letter-spacing:.08em;line-height:1.3;}
+  .hero-sub{font-size:13px;line-height:1.8;margin:10px 0 16px;}
+  .btn-cta{padding:12px 36px;font-size:15px;}
+  .hero-meta{font-size:11.5px;margin-top:10px;letter-spacing:.12em;}
+}
+/* P0-4 pv 菱形点随卡分色：测朱 / 问橙 / 搜蓝 / 修墨（覆盖统一 yang→amber） */
+.plate:nth-child(1) .pv:not(.hint-chips)::before{background:linear-gradient(135deg,#C85F4C,#B5483A);}
+.plate:nth-child(2) .pv:not(.hint-chips)::before{background:linear-gradient(135deg,var(--yang),var(--amber));}
+.plate:nth-child(3) .pv:not(.hint-chips)::before{background:linear-gradient(135deg,var(--moon),var(--yin));}
+.plate:nth-child(4) .pv:not(.hint-chips)::before{background:linear-gradient(135deg,#5A5866,#32303D);}
+/* =====================================================================
+   首页窗口化 v1 · P0 落地（守卫式追加：只加不改）
+   四大入口卡 → 「窗口」观感：标题栏分隔线 + 右上三色窗点 + 顶条分色完备 + 桌面 2×2 并排
+   ===================================================================== */
+/* W1 窗口标题栏：图标/标题区底部加分隔线，与内容区区分 */
+.plate-top{position:relative;padding-bottom:11px;border-bottom:1px dashed rgba(35,34,48,.1);margin-bottom:3px;}
+/* W2 右上角三色窗点（朱/橙/黛 = 品牌三色，呼应 macOS 窗点语汇） */
+.plate::after{content:'';position:absolute;top:12px;right:14px;width:7px;height:7px;border-radius:50%;background:#C85F4C;box-shadow:13px 0 0 var(--yang),26px 0 0 var(--yin);opacity:.85;}
+/* W3 修卡顶条补墨色（前 3 卡已有四色渐变顶条，第 4 卡此前回退默认橙） */
+.plate:nth-child(4)::before{background:linear-gradient(90deg,#5A5866,#32303D);}
+/* W4 桌面 ≥900px：窗口 2×2 网格并排，等高拉伸，入口按钮贴底对齐 */
+@media (min-width:900px){
+  .plate-grid{grid-template-columns:1fr 1fr;align-items:stretch;}
+  .plate{height:100%;}
+}
 </style>
 </head>
 <body>
@@ -850,10 +887,9 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
       </div>
     </div>
     <div class="container">
-      <div id="homeDaily"></div>
       <div id="homeLastResult"></div>
       <div class="brush-divider" aria-hidden="true"><svg viewBox="0 0 640 20" preserveAspectRatio="none" role="presentation"><path d="M6,13 C110,5 205,17 320,10 C435,3 530,16 634,9" fill="none" stroke="url(#wgBrush)" stroke-width="2.2" stroke-linecap="round"/></svg></div>
-      <div class="path-flow">一条自我成长的路径：<b>① 测一测</b> 看见自己 <span class="pf-arrow">→</span> <b>② 问一问</b> 理解差异 <span class="pf-arrow">→</span> <b>③ 搜一搜</b> 深挖原话 <span class="pf-arrow">→</span> <b>④ 成长课题</b> 开始修行</div>
+      <div class="path-flow">一条自我成长的路径：<b>① 测一测</b> 看见自己 <span class="pf-arrow">→</span> <b>② 问一问</b> 理解差异 <span class="pf-arrow">→</span> <b>③ 搜一搜</b> 深挖原话 <span class="pf-arrow">→</span> <b>④ 成长课题</b> 向内成长</div>
       <div class="plate-grid">
         <div class="plate">
           <div class="plate-top"><span class="plate-ico" style="color:var(--amber);border:1.5px solid rgba(212,165,116,.5);">测</span><h3 class="serif">测一测 · 看见自己</h3></div>
@@ -884,7 +920,7 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
           <a class="btn btn-sm go" href="#search">进入搜一搜</a>
         </div>
         <div class="plate">
-          <div class="plate-top"><span class="plate-ico" style="color:var(--yin);border:1.5px solid rgba(78,110,158,.4);">修</span><h3 class="serif">成长课题 · 开始修行</h3></div>
+          <div class="plate-top"><span class="plate-ico" style="color:var(--yin);border:1.5px solid rgba(78,110,158,.4);">修</span><h3 class="serif">成长课题 · 向内成长</h3></div>
           <p>知道和做到之间，隔着练习。这里把个人成长类内容单独拎出来：一条方法线（觉察→创伤→信念）、每日一练、阴/阳各自的课题，以及 100+ 个真实触发场景的拆解。</p>
           <div class="previews">
             <div class="pv hint-chips" style="background:transparent;padding:0;">
@@ -896,6 +932,7 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
           </div>
           <a class="btn btn-sm go" href="#heal">进入成长课题</a>
         </div></div>
+      <div id="homeDaily"></div>
       </div>
     </div>
   </section>
@@ -1021,6 +1058,7 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 <script src="data/qa_core7.js"></script>
 <script src="data/qa_core8.js"></script>
 <script src="data/qa_core9.js"></script>
+<script src="data/qa_core10.js"></script>
 <script src="data/qa_clips_new.js"></script>
 <script src="data/quiz_male.js"></script>
 <script src="data/quiz_female.js"></script>
@@ -1810,6 +1848,7 @@ var QA = [];
   if(typeof QA_CORE7 !== 'undefined') absorbCore(QA_CORE7);
   if(typeof QA_CORE8 !== 'undefined') absorbCore(QA_CORE8);
   if(typeof QA_CORE9 !== 'undefined') absorbCore(QA_CORE9);
+  if(typeof QA_CORE10 !== 'undefined') absorbCore(QA_CORE10);
   var DEP = (typeof DEPRECATED_QA !== 'undefined') ? DEPRECATED_QA : [];
   var depSet = {};
   DEP.forEach(function(id){ depSet[id] = 1; });

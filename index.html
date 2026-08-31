@@ -342,6 +342,15 @@ mark{background:rgba(212,165,116,.35);color:inherit;border-radius:3px;padding:0 
 .jp-emoji{font-size:18px;}
 .light-scale{display:flex;align-items:center;justify-content:center;gap:6px;margin:14px 0 0;font-size:11px;letter-spacing:.3em;color:var(--fog);}
 .ls-bar{width:96px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--yang),var(--amber),var(--yin));opacity:.6;}
+/* P2 题级切换过渡（每次 showQuestion 重渲染即触发） */
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.t-flow .q-panel,.t-flow .q-scene{animation:fadeSlideIn .3s ease;}
+/* P2 结果页旅程回放条 */
+.journey-recap{display:flex;gap:6px;margin:10px 0 2px;flex-wrap:wrap;}
+.jr-node{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-size:12px;color:var(--ink-2);cursor:pointer;transition:all .2s;}
+.jr-node:hover{border-color:var(--amber);transform:translateY(-1px);}
+.jr-node .jr-emoji{font-size:15px;}
+.jr-node .jr-pct{color:var(--fog);font-size:11px;}
 .q-panel{background:var(--card);border:1px solid rgba(35,34,48,.055);border-radius:var(--r);box-shadow:var(--shadow-flat),inset 0 1px 0 rgba(255,255,255,.85);padding:26px 22px;}
 .q-tag{font-size:11.5px;color:var(--yang-deep);letter-spacing:.16em;}
 .q-text{font-size:18px;font-weight:600;line-height:1.7;margin:10px 0 20px;letter-spacing:.01em;}
@@ -1233,7 +1242,7 @@ function _evSummary(e){
   var p=e.props||{};
   if(e.event==='test_start') return (p.gender==='female'?'女版':'男版')+(p.chan?(' · 来自:'+p.chan):'');
   if(e.event==='test_complete') return p.type||'';
-  if(e.event==='share_click') return (p.kind==='pair'?'配对分享':(p.kind==='card'?'知识卡分享':'结果分享'))+(p.mode==='image'?'(图)':''); 
+  if(e.event==='share_click') return (p.kind==='pair'?'配对分享':(p.kind==='card'?'知识卡分享':(p.kind==='chapter'?'章节封面':(p.kind==='journey'?'旅程图':'结果分享'))))+(p.mode==='image'?'(图)':''); 
   if(e.event==='qa_open') return p.qaId||'';
   if(e.event==='search_query') return (p.empty?'(空)':p.q||'').slice(0,18);
   return '';
@@ -1862,6 +1871,134 @@ function makeCardImage(qa){
   }catch(e){ return null; }
 }
 var _shareOverlay=null;
+/* ===== 测试页叙事视觉层 v1 P1：章节封面图 + 人生旅程图（canvas 1080×1350，复用 _cx* 基建，零外部资源）===== */
+var SCENE_GRAD={ family:['#FFF4E2','#F6C384'], school:['#FFFDF6','#F5ECD8'], work:['#EEF1F6','#D8E0EC'], love:['#F6C384','#4E6E9E'], self:['#232F45','#4E6E9E'] };
+var JOURNEY_TITLES=['小时候的家','校园与少年','职场里的你','亲密关系里的你','深夜独处的你'];
+var JOURNEY_SCENE_CN={family:'家庭',school:'校园',work:'职场',love:'亲密',self:'独处'};
+var JOURNEY_CN_NO=['一','二','三','四','五','六','七','八','九','十'];
+function makeChapterImage(chNo){
+  try{
+    var W=1080,H=1350;
+    var cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+    var ctx=cv.getContext('2d'); if(!ctx) return null;
+    var k=SCENE_KEYS[chNo]||'family';
+    var g=SCENE_GRAD[k]||SCENE_GRAD.family;
+    /* ① 顶部场景渐变天空（62%）→ 纸白过渡 */
+    var tg=ctx.createLinearGradient(0,0,0,H);
+    tg.addColorStop(0,g[0]); tg.addColorStop(.55,g[1]); tg.addColorStop(1,'#FAF7F2');
+    ctx.fillStyle=tg; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='rgba(212,165,116,.32)'; ctx.lineWidth=2;
+    ctx.strokeRect(34,34,W-68,H-68);
+    /* ② 中央场景符号：浅色圆底 + 大号 emoji */
+    ctx.beginPath(); ctx.arc(W/2,430,150,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,255,255,.55)'; ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.9)'; ctx.lineWidth=6; ctx.stroke();
+    ctx.font='150px "Noto Color Emoji","Segoe UI Emoji","Apple Color Emoji",serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(SCENE_EMOJI[k]||'·',W/2,446);
+    /* ③ 章号印 */
+    _cxSeal(ctx,W/2,700,128,CH_NUM[chNo]||'章',true);
+    /* ④ 章名（衬线大字）+ 场景标签 */
+    ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+    ctx.fillStyle='#8A6A3A'; ctx.font=_cxFont(26,false,600);
+    ctx.fillText(JOURNEY_SCENE_CN[k]||k,W/2,838);
+    ctx.fillStyle='#232230'; ctx.font=_cxFont(56,true,700);
+    ctx.fillText(JOURNEY_TITLES[chNo-1]||'',W/2,910);
+    /* ⑤ 主文案钩子 */
+    ctx.fillStyle='#6F6C7B'; ctx.font=_cxFont(28,false);
+    ctx.fillText('我已走到第 '+(JOURNEY_CN_NO[chNo-1]||chNo)+' 章 · 你的人生，走到哪一站了？',W/2,984);
+    /* ⑥ 底部行动区（QR → ?from=share&ch=N 直达本章） */
+    _drawFooterQR(ctx, base()+'?from=share&ch='+chNo);
+    return cv;
+  }catch(e){ return null; }
+}
+function makeJourneyImage(snap){
+  try{
+    var W=1080,H=1350;
+    var cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+    var ctx=cv.getContext('2d'); if(!ctx) return null;
+    snap=snap||{};
+    var type=snap.type||'yang-male';
+    var rd=RD[type]||{type:type};
+    var seal=TYPE_SEAL[type]||['阳','seal-yang'];
+    var isYang=seal[0]==='阳';
+    var scenes=snap.scenes||{};
+    /* ① 纸白底 + 顶部晨昏微渐变 */
+    ctx.fillStyle='#FAF7F2'; ctx.fillRect(0,0,W,H);
+    var tg=ctx.createLinearGradient(0,0,0,360);
+    tg.addColorStop(0,'rgba(246,195,132,.35)');
+    tg.addColorStop(.55,'rgba(234,240,247,.22)');
+    tg.addColorStop(1,'rgba(250,247,242,0)');
+    ctx.fillStyle=tg; ctx.fillRect(0,0,W,360);
+    ctx.strokeStyle='rgba(212,165,116,.32)'; ctx.lineWidth=2;
+    ctx.strokeRect(34,34,W-68,H-68);
+    /* ② 标题 */
+    ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+    ctx.fillStyle='#232230'; ctx.font=_cxFont(48,true,700);
+    ctx.fillText('我的五站人生旅程',W/2,118);
+    ctx.fillStyle='#6F6C7B'; ctx.font=_cxFont(24,false);
+    ctx.fillText('从家门到深夜 · 每一站的你，都不白走',W/2,168);
+    /* ③ 5 个旅程节点（emoji + 幕名 + 阳/阴占比条） */
+    var top=230, step=136;
+    for(var i=1;i<=5;i++){
+      var k=SCENE_KEYS[i];
+      var yy=top+(i-1)*step;
+      var v=scenes[k];
+      if(k==='school' && v===undefined) v=scenes.work; /* 校园题归入职场柱（computeResult 同规则） */
+      /* emoji 圆（第 5 幕深夜用夜色底） */
+      ctx.beginPath(); ctx.arc(170,yy+52,46,0,Math.PI*2);
+      ctx.fillStyle=k==='self'?'#232F45':(k==='love'?'#F6C384':'#FFFDF6');
+      ctx.fill();
+      ctx.strokeStyle='rgba(212,165,116,.5)'; ctx.lineWidth=2; ctx.stroke();
+      ctx.font='42px "Noto Color Emoji","Segoe UI Emoji","Apple Color Emoji",serif';
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(SCENE_EMOJI[k]||'',170,yy+54);
+      /* 幕名 */
+      ctx.textAlign='left'; ctx.textBaseline='alphabetic';
+      ctx.fillStyle='#232230'; ctx.font=_cxFont(30,true,600);
+      ctx.fillText(JOURNEY_TITLES[i-1],248,yy+36);
+      ctx.fillStyle='#8A6A3A'; ctx.font=_cxFont(19,false);
+      ctx.fillText('第 '+JOURNEY_CN_NO[i-1]+' 幕 · '+(k==='school'?'校园（计入职场柱）':JOURNEY_SCENE_CN[k]||k),248,yy+64);
+      /* 阳/阴占比条 */
+      _cxRound(ctx,248,yy+88,600,18,9);
+      ctx.fillStyle='#EAF0F7'; ctx.fill();
+      ctx.strokeStyle='rgba(35,34,48,.08)'; ctx.lineWidth=1; ctx.stroke();
+      if(v!=null){
+        ctx.save(); _cxRound(ctx,248,yy+88,600,18,9); ctx.clip();
+        var g1=ctx.createLinearGradient(248,0,848,0); g1.addColorStop(0,'#E8913A'); g1.addColorStop(1,'#D4A574');
+        ctx.fillStyle=g1; ctx.fillRect(248,yy+88,600*v/100,18);
+        var g2=ctx.createLinearGradient(248,0,848,0); g2.addColorStop(0,'#7C99C4'); g2.addColorStop(1,'#31486C');
+        ctx.fillStyle=g2; ctx.fillRect(248+600*v/100,yy+88,600*(100-v)/100,18);
+        ctx.restore();
+      }
+      ctx.textAlign='right'; ctx.fillStyle='#6F6C7B'; ctx.font=_cxFont(22,false);
+      ctx.fillText(v==null?'—':v+'% 阳',864,yy+102);
+    }
+    /* ④ 型格印 + 四型名 + 副标 */
+    _cxSeal(ctx,W/2,1006,92,SEAL_CHAR[type]||seal[0],isYang);
+    ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+    ctx.fillStyle='#232230'; ctx.font=_cxFont(34,true,700);
+    ctx.fillText('我是 '+rd.type,W/2,1132);
+    ctx.fillStyle='#6F6C7B'; ctx.font=_cxFont(24,false);
+    ctx.fillText('我的五站人生旅程 · 从家门到深夜，我是「'+rd.type+'」',W/2,1178);
+    /* ⑤ 底部行动区 */
+    _drawFooterQR(ctx,_shareLink(type));
+    return cv;
+  }catch(e){ return null; }
+}
+function saveChapterImage(chNo){
+  try{ track('share_click',{kind:'chapter',mode:'image',ch:chNo}); }catch(e){}
+  var cv=makeChapterImage(chNo);
+  downloadCanvasImage(cv,'阴阳人格-第'+(JOURNEY_CN_NO[chNo-1]||chNo)+'章.png','长按图片 · 保存本章封面');
+}
+function saveJourneyImage(type){
+  var snap=type?_latestSnapOfType(type):(T.snap||null);
+  if(!snap && T.quiz && T.gender){ try{ snap=computeResult(T.gender, T.quiz, T.answers); }catch(e){} }
+  if(!snap){ toast('还没有可分享的旅程结果'); return; }
+  try{ track('share_click',{kind:'journey',mode:'image',type:snap.type}); }catch(e){}
+  var cv=makeJourneyImage(snap);
+  downloadCanvasImage(cv,'阴阳人格-我的旅程图.png','长按图片 · 保存我的旅程图');
+}
 function showImageOverlay(dataUrl,tip){
   try{
     if(_shareOverlay&&_shareOverlay.parentNode) _shareOverlay.parentNode.removeChild(_shareOverlay);
@@ -2183,10 +2320,13 @@ function findQa(kpLink, kpCard){
   }
   return null;
 }
+var _qaPinReset=false; /* goQaCard 直达卡：抑制 lastType 极性默认注入，保证目标卡进列表 */
 function goQaCard(qaId){
   if(!qaId || !qaById(qaId)){ toast('这张卡还在整理中'); return; }
   try{ track('qa_open',{qaId:qaId,src:'link'}); markQaRead(qaId); }catch(e){}
   window._pendingQaCard=qaId; window._qaFromShare=false;
+  _qaPinReset=true; /* 直达卡 → 重置过滤（含 lastType 极性默认），确保目标卡渲染进列表 */
+  qaFilter.group='全部'; qaFilter.scene=''; qaFilter.polarity=''; qaFilter.typeDim='';
   if((location.hash||'').indexOf('#qa')===0){ route(); }
   else location.hash='#qa';
 }
@@ -2366,13 +2506,18 @@ function route(){
     var c=qaById(window._pendingQaCard);
     if(c){
       var el=$('card-'+c.qaId);
+      if(!el){ /* 目标卡不在当前列表（过滤/分组导致）→ 重置过滤并重渲染，确保直达展开 */
+        qaFilter.group='全部'; qaFilter.scene=''; qaFilter.polarity=''; qaFilter.typeDim='';
+        renderQa();
+        el=$('card-'+c.qaId);
+      }
       if(el){ el.classList.add('open'); setTimeout(function(){ el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
       var note=$('qaShareNote');
       if(note) note.innerHTML=window._qaFromShare
         ? '<div class="share-note">来自朋友的分享 · 测测你的能量 —— <a href="#test" style="color:var(--yang);font-weight:600;">先去测一测 →</a></div>'
         : '';
     }
-    window._pendingQaCard=null;
+    window._pendingQaCard=null; _qaPinReset=false; /* 直达卡窗口期结束，恢复 lastType 极性默认 */
   }
   window.scrollTo(0,0);
 }
@@ -2413,7 +2558,7 @@ var QA_GROUPS=['⭐ 核心知识','全部','阴阳能量','四型人格','关系
 var QA_SCENES=[['','全部场景'],['love','💗 情感'],['work','💼 职场'],['family','🏠 家庭']];
 function lastType(){ var h=getHistory(); return h.length?(h[0].type||''):''; }
 function _initPolFromLastType(){
-  if(qaFilter.polarity) return;
+  if(_qaPinReset || qaFilter.polarity) return; /* goQaCard 直达卡时跳过，避免按上次结果极性过滤掉目标卡 */
   var t=lastType();
   if(t==='yang-male'||t==='yang-female') qaFilter.polarity='yang';
   else if(t==='yin-female'||t==='yin-male') qaFilter.polarity='yin';
@@ -2538,11 +2683,9 @@ function loadCorpusSents(cb){
 function runSearch(){
   var q=($('searchInput').value||'').trim();
   var out=$('searchOut');
-  if(q && typeof CORPUS_SENTS==='undefined' && typeof CORPUS_SENT_FIRST_DATA!=='undefined'){
-    out.innerHTML='<div class="spinner-wrap"><div class="spinner"></div><div class="spinner-txt">正在翻检 500+ 卷宗，稍候…</div></div>';
-    loadCorpusSents(function(){ try{ runSearch(); }catch(e){} });
-    return;
-  }
+  /* 注：移除原 33MB corpus_sents.js 在搜索时的强制加载（搜索主流程只用 QA + CORPUS）；
+     首句时间索引已由 8KB corpus_sent_first.js 静态注入（CORPUS_SENT_FIRST_DATA），
+     首句覆盖率与全量一致；loadCorpusSents() 仍保留以备他用 */
   if(!q){
     var tags=(typeof TAG_FREQ!=='undefined'&&TAG_FREQ)?TAG_FREQ.slice(0,12):[];
     out.innerHTML='<div class="empty-tip">输入关键词开始搜索，或试试大家都在搜：</div>'
@@ -2943,6 +3086,33 @@ function journeyHtml(curNo){
   }
   return s+'</div>';
 }
+/* P2 结果页旅程回放条：5 节点（emoji+幕名+阳占比），点击回放该章 */
+function journeyRecapHtml(snap){
+  var sc=(snap&&snap.scenes)||{};
+  var s='';
+  for(var i=1;i<=5;i++){
+    var k=SCENE_KEYS[i];
+    var v=sc[k];
+    if(k==='school' && v===undefined) v=sc.work; /* 校园归入职场柱（computeResult 同规则） */
+    var cn=(i===2 && sc.school===undefined)?'校园（计入职场）':(JOURNEY_SCENE_CN[k]||k);
+    s+='<div class="jr-node" onclick="journeyRecap('+i+')" title="回放'+esc(JOURNEY_TITLES[i-1])+'">'
+      +'<span class="jr-emoji">'+(SCENE_EMOJI[k]||'')+'</span>'
+      +'<span>'+esc(JOURNEY_TITLES[i-1])+'</span>'
+      +'<span class="jr-pct">'+(v==null?'—':v+'%阳')+'</span>'
+      +'</div>';
+  }
+  return s;
+}
+function journeyRecap(chNo){
+  try{
+    var ti=0, found=false;
+    if(T.quiz && T.chapters){
+      for(var ci=0;ci<T.chapters.length;ci++){ if(T.chapters[ci].no===chNo){ ti=T.chapters[ci].start; found=true; break; } }
+      if(found){ T.view='flow'; T.idx=ti; showQuestion(); return; }
+    }
+    toast('请先进入测试后再回放章节');
+  }catch(e){ try{ toast('回放失败，请从测试页进入'); }catch(e2){} }
+}
 var CH_NUM={1:'壹',2:'贰',3:'叁',4:'肆',5:'伍',6:'陆',7:'柒',8:'捌',9:'玖',10:'拾'};
 var SEAL_CHAR={'yang-male':'承','yang-female':'破','yin-female':'连','yin-male':'潜'};
 function renderTestCover(box){
@@ -2996,6 +3166,13 @@ function startGender(gender, prog){
       T.idx=Math.min(T.idx, firstUn);
       showQuestion();
     } else {
+      /* ?ch=N 章节分享直达（P2）：按章号定位起始题，直接落地该章封面 */
+      if(window._pendingChapter){
+        var pc=window._pendingChapter; window._pendingChapter=null;
+        for(var ci=0;ci<T.chapters.length;ci++){
+          if(T.chapters[ci].no===pc){ T.idx=T.chapters[ci].start; break; }
+        }
+      }
       showChapterIntro();
     }
   });
@@ -3106,7 +3283,8 @@ function showChapterReview(chNo){
     +'<h3 class="serif">'+esc(ch.title||'')+' · 你为什么这样答</h3>'
     +'<p style="color:var(--fog);font-size:13px;margin-bottom:16px;">回看这一程——你选的每一步，背后都有一张知识卡。</p></div></div>'
     +items
-    +'<div class="q-nav">'+nextBtn+'</div>'
+    +'<div class="q-nav" style="flex-wrap:wrap;">'+nextBtn
+    +'<button class="btn btn-ghost" onclick="saveChapterImage('+chNo+')">⬇ 保存本章封面</button></div>'
     +'</div>';
 }
 function showResultFlow(){
@@ -3363,6 +3541,11 @@ function renderResultInto(box, snap, opts){
       }).join('')
     +'</div></details>'
     +'</div>';
+  /* ④.5 旅程回放条（P2：五站一键回放） */
+  html+='<div class="r-zone"><div class="r-tag">④′ 旅程回放 · RECAP</div>'
+    +'<div style="font-size:13px;color:#55524f;margin-bottom:4px;">五站走完，点一站回到那里，重走当时的你。</div>'
+    +'<div class="journey-recap">'+journeyRecapHtml(snap)+'</div>'
+    +'</div>';
   /* ⑤ 分享卡（F4 图片卡 + F5 配对邀请） */
   html+='<div class="r-zone"><div class="r-tag">⑤ 分享 · SHARE</div>'
     +'<div style="font-size:13px;color:#55524f;margin-bottom:12px;">把结果发给那个「总和你不在一个频道」的人——TA 测完就能看到你们的合盘。</div>'
@@ -3370,6 +3553,7 @@ function renderResultInto(box, snap, opts){
     +'<button class="btn" onclick="invitePair(\''+esc(snap.type)+'\')">💝 生成 TA 的专属邀请</button>'
     +'<button class="btn btn-ghost" onclick="saveShareImage(\''+esc(snap.type)+'\')">⬇ 保存分享图</button>'
     +'<button class="btn btn-ghost" onclick="saveShareImage(\''+esc(snap.type)+'\',{invite:true})">⬇ 保存邀请图</button>'
+    +'<button class="btn btn-ghost" onclick="saveJourneyImage(\''+esc(snap.type)+'\')">🛤 保存我的旅程图</button>'
     +'<button class="btn btn-ghost" onclick="copyText(base(),\'链接已复制\')">复制本页链接</button>'
     +'</div>'
     +'<div class="share-tip">微信里长按图片即可保存/转发 · 每张问答卡也有「分享这一条」，带 ?kp= 直达。</div>'
@@ -3418,15 +3602,16 @@ function renderSharedResult(type){
 
 /* ─────────── 启动 ─────────── */
 (function boot(){
-  // ?kp=qaId 直达卡展开态；?t=type 配对邀请（F5：提示条 + 测完出合盘）
+  // ?kp=qaId 直达卡展开态；?t=type 配对邀请（F5：提示条 + 测完出合盘）；?ch=N 章节封面分享直达（P2）
   var sp=new URLSearchParams(location.search);
-  var kp=sp.get('kp'), t=sp.get('t');
+  var kp=sp.get('kp'), t=sp.get('t'), ch=sp.get('ch');
   try{
     var _chan=sp.get('from'); /* W-F3：来源渠道入站落 localStorage.chan，test_start 附带 */
     if(_chan) localStorage.setItem('chan',String(_chan).slice(0,40));
   }catch(e){}
   if(kp && qaById(kp)){ window._pendingQaCard=kp; window._qaFromShare=true; location.hash='#qa'; }
   else if(t && RD[t]){ window._pairInvite=t; try{ showPairBanner(); }catch(e){} location.hash='#test'; }
+  else if(ch){ var pc=parseInt(ch,10)||0; if(pc>=1&&pc<=10){ window._pendingChapter=pc; } location.hash='#test'; }
   if(!location.hash) location.hash='#home';
   route();
   window.addEventListener('hashchange', route);

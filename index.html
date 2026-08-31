@@ -597,6 +597,24 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
 .syn-name{font-size:13px;color:var(--ink-2);font-weight:600;letter-spacing:.02em;}
 .syn-line{width:86px;height:18px;flex-shrink:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 20' preserveAspectRatio='none'%3E%3Cpath d='M2,4 C20,4 40,16 58,16' fill='none' stroke='%23D4A574' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;opacity:.8;}
 .syn-headline{font-size:16.5px;text-align:center;margin:10px 0;letter-spacing:.02em;line-height:1.7;}
+
+/* ── ①＋ 型格纵深 · DEEP TYPE ── */
+.dt-zone{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 14px;box-shadow:var(--shadow-flat);}
+.dt-title{font-size:18px;font-weight:700;color:var(--ink);margin-top:8px;letter-spacing:.02em;}
+.dt-portrait{margin-top:9px;font-size:13px;line-height:1.6;color:var(--yang-deep);background:rgba(232,145,58,.07);border:1px dashed rgba(212,165,116,.55);border-radius:11px;padding:8px 12px;cursor:pointer;}
+.dt-p-arrow{color:var(--yang);margin-right:4px;}
+.dt-meta{margin-top:8px;font-size:12px;color:var(--fog);}
+.dt-hint{font-size:12.5px;color:var(--ink-2);margin-top:4px;line-height:1.6;}
+.dt-list{margin-top:10px;display:flex;flex-direction:column;gap:8px;}
+.dt-item{border:1px solid var(--line);background:var(--soft);border-radius:12px;padding:10px 12px;cursor:pointer;transition:transform .12s ease,box-shadow .12s ease;}
+.dt-item:active{transform:scale(.985);box-shadow:var(--shadow-flat);}
+.dt-item.dt-read{opacity:.6;}
+.dt-q{font-size:14px;color:var(--ink);font-weight:600;line-height:1.55;}
+.dt-tag{display:inline-block;margin-right:6px;font-size:11px;font-weight:700;color:var(--yang-deep);background:rgba(232,145,58,.1);border-radius:5px;padding:0 5px;line-height:1.7;vertical-align:1px;}
+.dt-item.dt-read .dt-tag{color:var(--fog);background:rgba(111,108,123,.12);}
+.dt-b{margin-top:3px;font-size:12.5px;color:var(--fog);line-height:1.55;}
+.dt-chips{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
+.dt-clbl{font-size:12px;color:var(--fog);margin-right:2px;}
 </style>
 
 <div class="toast" id="toast"></div>
@@ -816,6 +834,7 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
       </div>
       <div class="chip-row" id="qaGroups"></div>
       <div class="chip-row" id="qaScenes"></div>
+      <div class="chip-row" id="qaTypeDims" style="display:none"></div>
       <div class="qa-grid" id="qaList"></div>
     </div>
   </section>
@@ -2048,7 +2067,7 @@ function renderHome(){
 function goSearch(kw){ location.hash='#search'; setTimeout(function(){ $('searchInput').value=kw; runSearch(); },80); }
 
 /* ─────────── 问一问 ─────────── */
-var qaFilter={group:'⭐ 核心知识', scene:'', polarity:''}; /* polarity: 'yang' | 'yin' | 'both' | '' (全部) */
+var qaFilter={group:'⭐ 核心知识', scene:'', polarity:'', typeDim:''}; /* polarity: 'yang' | 'yin' | 'both' | '' (全部) */
 var QA_GROUPS=['⭐ 核心知识','全部','阴阳能量','四型人格','关系与配对','成长课题'];
 var QA_SCENES=[['','全部场景'],['love','💗 情感'],['work','💼 职场'],['family','🏠 家庭']];
 function lastType(){ var h=getHistory(); return h.length?(h[0].type||''):''; }
@@ -2077,6 +2096,17 @@ function renderQa(){
   g.innerHTML=QA_GROUPS.map(function(x){ return '<span class="chip'+(qaFilter.group===x?' on':'')+'" onclick="setQaGroup(\''+x+'\')">'+x+'</span>'; }).join('');
   var sc=$('qaScenes');
   sc.innerHTML=QA_SCENES.map(function(x){ return '<span class="chip'+(qaFilter.scene===x[0]?' on':'')+'" onclick="setQaScene(\''+x[0]+'\')">'+x[1]+'</span>'; }).join('');
+  /* 四型人格分组：型格定向 chips（仅该分组显示） */
+  var td=$('qaTypeDims');
+  if(td){
+    var showDim=qaFilter.group==='四型人格';
+    td.style.display=showDim?'':'none';
+    if(showDim){
+      var dimChips='<span class="chip'+(qaFilter.typeDim===''?' on':'')+'" onclick="setQaTypeDim(\'\')">全部</span>'
+        +TYPE_DIMS.map(function(d){ return '<span class="chip'+(qaFilter.typeDim===d[0]?' on':'')+'" onclick="setQaTypeDim(\''+d[0]+'\')">'+d[1]+'</span>'; }).join('');
+      td.innerHTML=dimChips;
+    }
+  }
   try{ renderQaProgress(); }catch(e){}
   // 为你推荐：按上次结果 forTypes 过滤置顶，不足时回退到按型 deep 引导卡
   var reco=$('qaRecommend'), t=lastType();
@@ -2093,9 +2123,12 @@ function renderQa(){
   } else reco.innerHTML='';
   // 列表
   var list=QA.filter(function(c){
-    if(qaFilter.polarity && (c.polarity||'both')!==qaFilter.polarity) return false;
+    /* 四型人格+型格定向时，typeDim 已含极性语义，跳过 polarity 双重过滤 */
+    var typeScoped=(qaFilter.group==='四型人格' && qaFilter.typeDim);
+    if(!typeScoped && qaFilter.polarity && (c.polarity||'both')!==qaFilter.polarity) return false;
     if(qaFilter.group==='⭐ 核心知识'){ if(!c._core) return false; }
     else if(qaFilter.group!=='全部' && (c.category||'')!==qaFilter.group) return false;
+    if(qaFilter.group==='四型人格' && qaFilter.typeDim && (c.forTypes||[]).indexOf(qaFilter.typeDim)<0) return false;
     if(qaFilter.scene && (c.scene||[]).indexOf(qaFilter.scene)<0) return false;
     return true;
   });
@@ -2104,9 +2137,19 @@ function renderQa(){
     ? list.map(function(c){ return qaCardHtml(c,''); }).join('')
     : '<div class="empty-tip">这个分组下暂时还没有卡片 —— 问答卡持续生产中。</div>';
 }
-function setQaGroup(x){ qaFilter.group=x; renderQa(); }
+function setQaGroup(x){
+  qaFilter.group=x;
+  if(x!=='四型人格'){ qaFilter.typeDim=''; }
+  else if(!qaFilter.typeDim){
+    var t=lastType(), ok=false;
+    for(var i=0;i<TYPE_DIMS.length;i++){ if(TYPE_DIMS[i][0]===t){ ok=true; break; } }
+    if(ok) qaFilter.typeDim=t; /* 有上次测试结果 → 默认选中本型 */
+  }
+  renderQa();
+}
 function setQaScene(x){ qaFilter.scene=x; renderQa(); }
 function setQaPolarity(x){ qaFilter.polarity=(qaFilter.polarity===x)?'':x; renderQa(); }
+function setQaTypeDim(x){ qaFilter.typeDim=(qaFilter.typeDim===x)?'':x; renderQa(); }
 function setQaSceneGo(x){ qaFilter.scene=x; qaFilter.group='全部'; location.hash='#qa'; }
 
 /* ─────────── 搜一搜 ─────────── */
@@ -2719,6 +2762,55 @@ function findPair(a,b){
   if(!PAIR) return null;
   return PAIR[a+'|'+b]||PAIR[b+'|'+a]||null;
 }
+/* ─────────── ①＋ 型格纵深 · DEEP TYPE ─────────── */
+var TYPE_DIMS=[['yang-male','男阳','q-kp-b1-01'],['yang-female','女阳','q-kp-b2-01'],['yin-female','女阴','q-kp-b3-01'],['yin-male','男阴','q-kp-b4-01']];
+var DEEP_THEME={a:'形成',b:'悖论',c:'社交冲突',d:'日常机制',e:'独处社交',f:'成熟度阶梯',g:'策略',h:'柔软开关',i:'情绪模式',j:'识别信号'};
+function deepCardsOf(t){
+  try{
+    return QA.filter(function(c){
+      return c && (c.forTypes||[]).indexOf(t)>=0 && /^y3-b/.test(c.kpId||'');
+    }).sort(function(a,b){ return (a.kpId||'').localeCompare(b.kpId||''); });
+  }catch(e){ return []; }
+}
+function deepTypeHtml(snap){
+  try{
+    var t=snap&&snap.type||'', dim=null;
+    for(var i=0;i<TYPE_DIMS.length;i++){ if(TYPE_DIMS[i][0]===t){ dim=TYPE_DIMS[i]; break; } }
+    if(!dim) return '';
+    var cards=deepCardsOf(t);
+    var rs=loadJSON('readSet',[]);
+    var readN=0;
+    var items=cards.map(function(c){
+      var read=rs.indexOf(c.qaId)>=0; if(read) readN++;
+      var m=/([a-j])$/.exec(c.kpId||''); var tag=m?(DEEP_THEME[m[1]]||''):'';
+      return '<div class="dt-item'+(read?' dt-read':'')+'" onclick="goQaCard(\''+esc(c.qaId)+'\')">'
+        +'<div class="dt-q">'+(tag?('<span class="dt-tag">'+tag+'</span>'):'')+esc(c.question||'')+'</div>'
+        +(c.answerBrief?('<div class="dt-b">'+esc(c.answerBrief)+'</div>'):'')
+        +'</div>';
+    }).join('');
+    var portrait=qaById(dim[2]);
+    var chips=TYPE_DIMS.map(function(d){
+      return '<span class="chip dt-chip'+(d[0]===t?' on':'')+'" onclick="goDeepType(\''+d[0]+'\')">'+d[1]+'</span>';
+    }).join('');
+    var hint=(readN>=Math.max(1,Math.ceil(cards.length*0.6)))
+      ? '本型特征你已了解大半 —— 点下面的型格，看看其他型的活法与匹配。'
+      : '先读本型特征，确认「我符合吗」；读完后可切换其他型探索匹配。';
+    return '<div class="r-zone dt-zone"><div class="r-tag">①＋ 型格纵深 · DEEP TYPE</div>'
+      +'<div class="dt-title serif">'+esc(dim[1])+' · 纵深十问</div>'
+      +(portrait?('<div class="dt-portrait" onclick="goQaCard(\''+esc(portrait.qaId)+'\')"><span class="dt-p-arrow">▸</span> 本型画像：'+esc(portrait.question)+'</div>'):'')
+      +'<div class="dt-meta">'+readN+'/'+cards.length+' 已读 · 随自我挖掘越学越多</div>'
+      +'<div class="dt-hint">'+hint+'</div>'
+      +'<div class="dt-list">'+items+'</div>'
+      +'<div class="dt-chips"><span class="dt-clbl">探索其他型</span>'+chips+'</div>'
+      +'</div>';
+  }catch(e){ return ''; }
+}
+function goDeepType(t){
+  try{ track('type_switch',{type:t}); }catch(e){}
+  window._deepType=t;
+  var box=document.getElementById('deepTypeBox');
+  if(box) box.innerHTML=deepTypeHtml({type:t});
+}
 function renderResultInto(box, snap, opts){
   var rd=RD[snap.type]||{type:snap.type, slogan:'', traits:[]};
   var seal=TYPE_SEAL[snap.type]||['阳','seal-yang'];
@@ -2776,6 +2868,9 @@ function renderResultInto(box, snap, opts){
     bindPortrait(box);
     return;
   }
+  /* ①＋ 型格纵深 · DEEP TYPE：本型画像 + 10 张纵探卡 + 4 型切换（结果页纵向拓展，越学越多） */
+  window._deepType=snap.type;
+  try{ html+='<div id="deepTypeBox">'+deepTypeHtml(snap)+'</div>'; }catch(e){}
   /* ② 假自体科普卡（仅信号命中，无数值无档位） */
   if((snap.M||0)>=2){
     html+='<div class="r-zone mask-box"><div class="r-tag">② 内外一致性 · 假自体科普</div>'

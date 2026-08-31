@@ -383,6 +383,17 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
 .me-item .mi-type{font-weight:700;font-size:16px;letter-spacing:.06em;}
 .me-item .mi-sc{font-size:12px;color:var(--fog);}
 .me-actions{display:flex;gap:10px;margin:16px 0 34px;flex-wrap:wrap;}
+.ev-panel{background:var(--card);border:1px solid rgba(35,34,48,.055);border-radius:var(--r);box-shadow:var(--shadow-flat),inset 0 1px 0 rgba(255,255,255,.85);padding:14px 16px;margin-bottom:40px;}
+.ev-funnel{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;padding:10px 0 12px;border-bottom:1px dashed rgba(35,34,48,.09);}
+.ev-f-item{background:rgba(212,165,116,.14);border:1px solid rgba(212,165,116,.35);color:#7A4A1E;font-weight:700;padding:3px 10px;border-radius:999px;}
+.ev-f-arrow{color:var(--fog);font-size:12px;}
+.ev-f-sep{color:rgba(35,34,48,.18);margin:0 2px;}
+.ev-row{display:flex;gap:10px;align-items:baseline;font-size:12px;padding:6px 0;border-bottom:1px solid rgba(35,34,48,.05);}
+.ev-row:last-of-type{border-bottom:none;}
+.ev-ts{color:var(--fog);font-variant-numeric:tabular-nums;white-space:nowrap;}
+.ev-name{font-weight:700;color:var(--ink);min-width:92px;}
+.ev-extra{color:var(--fog);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ev-hint{font-size:11px;color:var(--fog);align-self:center;margin-left:auto;}
 
 /* ── 页脚（UP 主溯源，保持原文案） ── */
 .site-footer{text-align:center;font-size:12px;color:var(--fog);padding:28px 20px 32px;margin-top:24px;position:relative;letter-spacing:.04em;}
@@ -811,13 +822,22 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
    纪律：本块只定义不执行业务；所有函数内部守卫降级，异常不阻塞主流程。
    ===================================================================== */
 
-/* ─────────── W-F3 埋点（最简可用） ─────────── */
-var TRACK={enabled:true,endpoint:''}; /* endpoint 留空=仅写本地 evlog；填 URL 后走 sendBeacon */
+/* ─────────── W-F3 埋点（最简可用 + 数据回收） ───────────
+   endpoint 留空=仅写本地 evlog（「我的」页可导出分析）；填 URL 后额外走 sendBeacon。
+   每条事件附带 sid（访客唯一标识）与 chan（来源渠道），导出后可按用户/渠道拆漏斗。 */
+var TRACK={enabled:true,endpoint:''};
 function getChan(){ try{ return localStorage.getItem('chan')||''; }catch(e){ return ''; } }
+function getSid(){
+  try{
+    var s=localStorage.getItem('uid');
+    if(!s){ s='u'+Date.now().toString(36)+Math.random().toString(36).slice(2,8); localStorage.setItem('uid',s); }
+    return s;
+  }catch(e){ return ''; }
+}
 function track(ev,props){
   try{
     if(!TRACK||!TRACK.enabled) return;
-    var e={ts:new Date().toISOString(),event:ev,props:props||{}};
+    var e={ts:new Date().toISOString(),event:ev,sid:getSid(),props:props||{}};
     var log=loadJSON('evlog',[]);
     log.push(e);
     if(log.length>500) log=log.slice(-500);
@@ -826,6 +846,51 @@ function track(ev,props){
       try{ navigator.sendBeacon(TRACK.endpoint,JSON.stringify(e)); }catch(err){}
     }
   }catch(e){}
+}
+/* 漏斗统计：test_start → test_complete → share_click（+ 问答/搜索行为） */
+function evlogStats(){
+  try{
+    var log=loadJSON('evlog',[]);
+    var st={start:0,complete:0,share:0,qa:0,search:0,feedback:0,other:0};
+    for(var i=0;i<log.length;i++){
+      var ev=(log[i]&&log[i].event)||'';
+      if(ev==='test_start') st.start++;
+      else if(ev==='test_complete') st.complete++;
+      else if(ev==='share_click') st.share++;
+      else if(ev==='qa_open') st.qa++;
+      else if(ev==='search_query') st.search++;
+      else if(ev.indexOf('feedback')>=0) st.feedback++;
+      else st.other++;
+    }
+    return {n:log.length, st:st, recent:log.slice(-5).reverse()};
+  }catch(e){ return {n:0,st:{},recent:[]}; }
+}
+function _evSummary(e){
+  var p=e.props||{};
+  if(e.event==='test_start') return (p.gender==='female'?'女版':'男版')+(p.chan?(' · 来自:'+p.chan):'');
+  if(e.event==='test_complete') return p.type||'';
+  if(e.event==='share_click') return (p.kind==='pair'?'配对分享':(p.kind==='card'?'知识卡分享':'结果分享'))+(p.mode==='image'?'(图)':''); 
+  if(e.event==='qa_open') return p.qaId||'';
+  if(e.event==='search_query') return (p.empty?'(空)':p.q||'').slice(0,18);
+  return '';
+}
+function exportEvlog(){
+  try{
+    var log=loadJSON('evlog',[]);
+    var st=evlogStats().st;
+    var payload={exportedAt:new Date().toISOString(),note:'阴阳人格站点行为事件（sid=访客唯一标识，chan=来源渠道）',total:log.length,funnel:st,events:log};
+    var blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url; a.download='yin-yang-evlog-'+new Date().toISOString().slice(0,10)+'.json';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); },600);
+    toast('已导出 '+log.length+' 条事件');
+  }catch(e){ toast('导出失败'); }
+}
+function clearEvlog(){
+  if(!confirm('确定清空全部行为事件？此操作不可恢复。')) return;
+  saveJSON('evlog',[]); renderMe(); toast('事件已清空');
 }
 function markQaRead(qaId){
   try{
@@ -2043,6 +2108,34 @@ function renderMe(){
     }).join('');
     html+='<div class="me-actions"><button class="btn btn-ghost btn-sm" onclick="clearHistory()">清空全部记录</button></div>';
   }
+  /* W-F3 数据回收：内测期漏斗可直接在面板看，完整事件可导出 JSON */
+  try{
+    var es=evlogStats();
+    var st=es.st;
+    var funnelHtml=(st.start!==undefined)
+      ? '<div class="ev-funnel">'
+        +'<span class="ev-f-item">开始 '+st.start+'</span><span class="ev-f-arrow">→</span>'
+        +'<span class="ev-f-item">完成 '+st.complete+'</span><span class="ev-f-arrow">→</span>'
+        +'<span class="ev-f-item">分享 '+st.share+'</span>'
+        +'<span class="ev-f-sep">·</span>'
+        +'<span class="ev-f-item">读卡 '+st.qa+'</span><span class="ev-f-sep">·</span>'
+        +'<span class="ev-f-item">搜索 '+st.search+'</span>'
+      +'</div>'
+      : '';
+    var recHtml=es.recent.length
+      ? es.recent.map(function(r){
+          var t=(r.ts||'').replace('T',' ').slice(5,19);
+          return '<div class="ev-row"><span class="ev-ts">'+esc(t)+'</span><span class="ev-name">'+esc(r.event)+'</span><span class="ev-extra">'+esc(_evSummary(r))+'</span></div>';
+        }).join('')
+      : '<div class="empty-tip" style="margin:8px 0 0;">暂无行为事件 —— 测一测 / 分享 / 问一问都会记录在这里</div>';
+    html+='<div class="search-sec" style="margin-top:26px;">行为数据回收 · 已记录 '+es.n+' 条</div>'
+      +'<div class="ev-panel">'+funnelHtml+recHtml
+      +'<div class="me-actions" style="margin-top:10px;">'
+      +'<button class="btn btn-sm" onclick="exportEvlog()">导出 JSON</button>'
+      +'<button class="btn btn-ghost btn-sm" onclick="clearEvlog()">清空事件</button>'
+      +'<span class="ev-hint">endpoint 未配置时仅存本机，导出文件即可做漏斗分析</span>'
+      +'</div></div>';
+  }catch(e){}
   box.innerHTML=html;
 }
 function viewHistory(i){

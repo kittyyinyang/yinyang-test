@@ -333,6 +333,37 @@ mark{background:rgba(212,165,116,.35);color:inherit;border-radius:3px;padding:0 
 .ps-cards{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
 .ps-chip{cursor:pointer;font-size:11.5px;padding:3px 10px;border-radius:999px;background:var(--moon);color:var(--ink-2);border:1px solid rgba(35,34,48,.09);transition:transform .2s ease,box-shadow .2s ease;}
 .ps-chip:hover{transform:translateY(-1px);box-shadow:var(--shadow-lift);color:var(--ink);}
+/* 成长课题（觉察疗愈）板块 */
+.h-zone{background:var(--card);border:1px solid rgba(35,34,48,.055);border-radius:var(--r);box-shadow:var(--shadow-flat),inset 0 1px 0 rgba(255,255,255,.85);padding:18px;margin-bottom:16px;}
+.h-sub{font-size:13px;color:var(--fog);line-height:1.7;margin-bottom:12px;}
+.h-step{position:relative;padding:12px 14px;margin:8px 0;border-radius:var(--r);background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(246,243,237,.4));border:1px solid rgba(35,34,48,.06);}
+.h-step b{font-size:14.5px;letter-spacing:.04em;}
+.h-step p{font-size:13px;color:var(--ink-2);line-height:1.7;margin:6px 0 0;}
+.hs-head{display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.hs-go{font-size:12px;color:var(--yin);cursor:pointer;white-space:nowrap;font-weight:600;}
+.hs-go:hover{text-decoration:underline;}
+.hs-quote{font-size:12px;color:#8A5A1F;background:rgba(232,145,58,.1);border-left:3px solid rgba(232,145,58,.45);padding:6px 10px;margin-top:8px;border-radius:0 6px 6px 0;line-height:1.6;}
+.h-formula{font-size:12.5px;color:#31486C;background:rgba(78,110,158,.1);border:1px dashed rgba(78,110,158,.35);border-radius:8px;padding:10px 12px;margin-top:10px;text-align:center;letter-spacing:.03em;}
+.hp-card{display:flex;gap:12px;padding:14px;border-radius:var(--r);background:linear-gradient(135deg,rgba(232,145,58,.09),rgba(78,110,158,.08));border:1px solid rgba(212,165,116,.35);}
+.hp-dot{flex:none;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#E8913A,#4E6E9E);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;letter-spacing:.05em;}
+.hp-main{flex:1;}
+.hp-q{font-weight:700;font-size:15px;letter-spacing:.02em;line-height:1.6;}
+.hp-b{font-size:13px;color:var(--ink-2);margin-top:6px;line-height:1.7;}
+.hp-mirror{font-size:12.5px;color:#8A5A1F;background:rgba(232,145,58,.1);border-radius:8px;padding:8px 10px;margin-top:10px;line-height:1.6;}
+.hg{margin:12px 0;}
+.hg-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:6px;}
+.hg-head b{font-size:16px;letter-spacing:.08em;}
+.hg-sub{font-size:11.5px;color:var(--fog);}
+.hg-n{font-size:11px;color:var(--fog);margin-left:auto;}
+.h-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.h-chip{cursor:pointer;font-size:12px;padding:4px 14px;border-radius:999px;background:var(--moon);color:var(--ink-2);border:1px solid rgba(35,34,48,.1);}
+.h-chip.on{background:linear-gradient(135deg,#E8913A,#C9742A);color:#fff;border-color:transparent;font-weight:600;}
+.h-case .dq.read{color:var(--fog);}
+/* 结果页 · 成长课题联动 */
+.grow-box{background:linear-gradient(135deg,rgba(232,145,58,.09),rgba(78,110,158,.09));border:1px solid rgba(212,165,116,.4);border-radius:var(--r);padding:12px 14px;margin:10px 0 2px;}
+.grow-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+.grow-head b{font-size:15px;letter-spacing:.05em;}
+.grow-sub{font-size:11.5px;color:var(--fog);}
 .deep-item{display:flex;align-items:baseline;gap:8px;padding:9px 0;border-bottom:1px dashed rgba(233,226,214,.8);cursor:pointer;font-size:14px;}
 .deep-item:last-child{border-bottom:none;}
 .deep-item:hover .dq{color:var(--yang-deep);}
@@ -610,6 +641,7 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
       <a href="#test" data-r="test">测一测</a>
       <a href="#qa" data-r="qa">问一问</a>
       <a href="#search" data-r="search">搜一搜</a>
+      <a href="#heal" data-r="heal">成长</a>
       <a href="#me" data-r="me">我的</a>
     </nav>
   </div>
@@ -698,7 +730,7 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
       <div id="homeDaily"></div>
       <div id="homeLastResult"></div>
       <div class="brush-divider" aria-hidden="true"><svg viewBox="0 0 640 20" preserveAspectRatio="none" role="presentation"><path d="M6,13 C110,5 205,17 320,10 C435,3 530,16 634,9" fill="none" stroke="url(#wgBrush)" stroke-width="2.2" stroke-linecap="round"/></svg></div>
-      <div class="path-flow">一条自我成长的路径：<b>① 测一测</b> 看见自己 <span class="pf-arrow">→</span> <b>② 问一问</b> 理解差异 <span class="pf-arrow">→</span> <b>③ 搜一搜</b> 深挖原话</div>
+      <div class="path-flow">一条自我成长的路径：<b>① 测一测</b> 看见自己 <span class="pf-arrow">→</span> <b>② 问一问</b> 理解差异 <span class="pf-arrow">→</span> <b>③ 搜一搜</b> 深挖原话 <span class="pf-arrow">→</span> <b>④ 成长课题</b> 开始修行</div>
       <div class="plate-grid">
         <div class="plate">
           <div class="plate-top"><span class="plate-ico" style="color:var(--amber);border:1.5px solid rgba(212,165,116,.5);">测</span><h3 class="serif">测一测 · 看见自己</h3></div>
@@ -727,6 +759,19 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
             </div>
           </div>
           <a class="btn btn-sm go" href="#search">进入搜一搜</a>
+        </div>
+        <div class="plate">
+          <div class="plate-top"><span class="plate-ico" style="color:#7A9C6E;border:1.5px solid rgba(122,156,110,.45);">修</span><h3 class="serif">成长课题 · 开始修行</h3></div>
+          <p>知道和做到之间，隔着练习。这里把个人成长类内容单独拎出来：一条方法线（觉察→创伤→信念）、每日一练、阴/阳各自的课题，以及 100+ 个真实触发场景的拆解。</p>
+          <div class="previews">
+            <div class="pv hint-chips" style="background:transparent;padding:0;">
+              <span class="chip" onclick="goHealPractice()">今日练习</span>
+              <span class="chip" onclick="goQaCard('q-toolbox-01')">事实还是故事</span>
+              <span class="chip" onclick="goQaCard('q-y5-12-01')">阴的课题</span>
+              <span class="chip" onclick="goQaCard('q-y5-11-01')">阳的课题</span>
+            </div>
+          </div>
+          <a class="btn btn-sm go" href="#heal">进入成长课题</a>
         </div></div>
       </div>
     </div>
@@ -805,6 +850,16 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
     </div>
     <div class="container" id="meBox"></div>
   </section>
+
+  <!-- ═══════════ 成长课题（觉察疗愈） ═══════════ -->
+  <section class="page" id="page-heal">
+    <div class="page-head">
+      <div class="ch"> Heal · Grow </div>
+      <h2 class="serif">成长课题</h2>
+      <p class="page-sub">测一测回答「你是谁」，这里陪你「怎么修」——从觉察，到练习。</p>
+    </div>
+    <div class="container" id="healBox"></div>
+  </section>
 </main>
 
 <footer class="site-footer">
@@ -822,6 +877,7 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
   <a href="#test" data-r="test"><span class="ticon t-test serif">测</span>测一测</a>
   <a href="#qa" data-r="qa"><span class="ticon t-qa serif">问</span>问一问</a>
   <a href="#search" data-r="search"><span class="ticon t-search serif">搜</span>搜一搜</a>
+  <a href="#heal" data-r="heal"><span class="ticon t-heal serif">修</span>成长</a>
   <a href="#me" data-r="me"><span class="ticon t-me serif">我</span>我的</a>
 </nav>
 
@@ -1925,7 +1981,7 @@ function toggleQa(el){
 }
 
 /* ─────────── 路由 ─────────── */
-var ROUTES=['home','qa','test','search','me'];
+var ROUTES=['home','qa','test','search','me','heal'];
 var SCENE_NAMES={love:'情感',work:'职场',family:'家庭'};
 function route(){
   var h=(location.hash||'').replace(/^#/,'');
@@ -1944,6 +2000,7 @@ function route(){
   }
   if(h==='test') renderTest();
   if(h==='me') renderMe();
+  if(h==='heal') renderHeal();
   if(h==='home') renderHome();
   if(window._pendingQaCard && h==='qa'){
     var c=qaById(window._pendingQaCard);
@@ -2239,6 +2296,114 @@ function viewHistory(i){
 function clearHistory(){
   if(!confirm('确定清空全部测评记录？此操作不可恢复。')) return;
   saveJSON(K_HIST,[]); renderMe(); toast('已清空');
+}
+
+/* ─────────── 成长课题（觉察疗愈）───────────
+   ① 方法线（觉察→创伤→信念） ② 每日练习 ③ 课题库 ④ 实战觉察
+   数据全部复用现有 QA 池，零新增数据文件。 */
+var HEAL_METHOD=[
+  {q:'q-toolbox-01',t:'① 觉察 · 看见反应',d:'先分清「事实」和「故事」——对方晚回消息是事实，「他不在乎我了」是你编的故事。看见情绪，而不是评判情绪。'},
+  {q:'q-toolbox-02',t:'② 创伤 · 每个强烈反应背后都有一处旧伤',d:'最亲近的人一句话精准踩中旧伤，是「完美镜像触发」——触发是被照见，不是灾难。震荡是螺旋上升，不是失败。'},
+  {q:'q-toolbox-03',t:'③ 信念 · 最底层的自动程序',d:'阳信「只有靠自己」，阴信「我不配」——信念在后台自动运行，往往察觉不到。先看见它，才能松动它。'}
+];
+var HEAL_GROUPS=[
+  {key:'balance',name:'平衡总纲',sub:'往哪个方向修',kps:['y5-08','y5-02','y5-06','y5-07','y5-09','y5-10','kp-a1-balance','y1-15']},
+  {key:'yin',name:'阴的课题',sub:'立边界 · 独立人格 · 自我接纳',kps:['y5-12','y5-03','y5-04']},
+  {key:'yang',name:'阳的课题',sub:'示弱 · 表达 · 承接',kps:['y5-11']},
+  {key:'bridge',name:'进阶桥卡',sub:'情执与无我',kps:['y5-05']}
+];
+var HEAL_PRACTICE=['y5-t1','y5-t2','y5-t3','y5-t4'];
+var HEAL_SCENES=[['all','全部'],['love','情感'],['work','职场'],['family','家庭'],['none','通用']];
+var HEAL_CLIPS=null;
+function healFindCard(kp){
+  try{
+    var c=findQa(kp, (kp.indexOf('q-')===0)?kp:'');
+    return c||null;
+  }catch(e){ return null; }
+}
+function healClips(){
+  if(HEAL_CLIPS) return HEAL_CLIPS;
+  try{ HEAL_CLIPS=QA.filter(function(c){ return c.qaId&&c.qaId.indexOf('q-c-')===0; }); }
+  catch(e){ HEAL_CLIPS=[]; }
+  return HEAL_CLIPS;
+}
+function renderHeal(){
+  var box=$('healBox'); if(!box) return;
+  var h='';
+  /* ① 方法线 */
+  h+='<div class="h-zone"><div class="r-tag">① 成长方法线 · THE PATH</div>'
+    +'<p class="h-sub">无论你是哪一种人格，通往自我和解的路都有一条共通的方法线——先看见反应，再挖到伤，最后松动信念。</p>'
+    +HEAL_METHOD.map(function(m){
+      var c=healFindCard(m.q);
+      return '<div class="h-step"><div class="hs-head"><b>'+esc(m.t)+'</b><span class="hs-go" onclick="goQaCard(\''+esc(m.q)+'\')">去看卡 →</span></div>'
+        +'<p>'+esc(m.d)+'</p>'
+        +(c&&c.quote?('<div class="hs-quote">「'+esc(c.quote)+'」</div>'):'')
+        +'</div>';
+    }).join('')
+    +'<div class="h-formula">事实 + 故事（搅在一起） → 觉察分开 → 伤被看见 → 信念松动 → 反应自然改变</div>'
+    +'</div>';
+  /* ② 今日练习 */
+  var pk=HEAL_PRACTICE[dateNum()%HEAL_PRACTICE.length];
+  var pc=healFindCard(pk);
+  h+='<div class="h-zone"><div class="r-tag">② 今日练习 · DAILY PRACTICE</div>'
+    +'<div class="hp-card"><div class="hp-dot" aria-hidden="true">今</div><div class="hp-main">'
+    +'<div class="hp-q">'+esc(pc?pc.question:'今日练习')+'</div>'
+    +(pc&&pc.answerBrief?('<div class="hp-b">'+esc(pc.answerBrief)+'</div>'):'')
+    +'<div class="hp-mirror">🪞 镜子问题：今天这个触发点再来时，你看见了什么？是事实，还是你加的戏？</div>'
+    +(pc?('<button class="btn btn-ghost btn-sm" style="margin-top:10px;" onclick="goQaCard(\''+esc(pc.qaId)+'\')">看完整讲解</button>'):'')
+    +'</div></div>'
+    +'</div>';
+  /* ③ 课题库 */
+  h+='<div class="h-zone"><div class="r-tag">③ 成长课题库 · TOPICS</div>'
+    +HEAL_GROUPS.map(function(g){
+      var cards=g.kps.map(function(k){ return healFindCard(k); }).filter(Boolean);
+      if(!cards.length) return '';
+      return '<div class="hg"><div class="hg-head"><b class="serif">'+esc(g.name)+'</b><span class="hg-sub">'+esc(g.sub)+'</span><span class="hg-n">'+cards.length+' 张</span></div>'
+        +cards.map(function(c){
+          var read=loadJSON('readSet',[]).indexOf(c.qaId)>=0;
+          return '<div class="deep-item" onclick="goQaCard(\''+esc(c.qaId)+'\')"><span class="dq'+(read?' read':'')+'">'+esc(c.question)+'</span>'+(read?'<span class="db">已读</span>':'')+'</div>';
+        }).join('')
+        +'</div>';
+    }).join('')
+    +'</div>';
+  /* ④ 实战觉察 */
+  h+='<div class="h-zone"><div class="r-tag">④ 实战觉察 · REAL CASES</div>'
+    +'<p class="h-sub">真实的触发场景与拆解——先看别人怎么被触发，再认出自己的。</p>'
+    +'<div class="h-chips" id="healChips">'+HEAL_SCENES.map(function(s,i){
+      return '<button class="h-chip'+(i===0?' on':'')+'" onclick="healFilter('+i+')">'+esc(s[1])+'</button>';
+    }).join('')+'</div>'
+    +'<div id="healCases"></div>'
+    +'</div>';
+  box.innerHTML=h;
+  try{ healFilter(0); }catch(e){}
+}
+function healFilter(idx){
+  try{
+    var cfg=HEAL_SCENES[idx]||HEAL_SCENES[0];
+    var chips=document.querySelectorAll('#healChips .h-chip');
+    for(var i=0;i<chips.length;i++) chips[i].classList.toggle('on',i===idx);
+    var list=healClips().filter(function(c){
+      if(cfg[0]==='all') return true;
+      if(cfg[0]==='none') return !(c.scene&&c.scene.length);
+      return (c.scene||[]).indexOf(cfg[0])>=0;
+    });
+    var box=$('healCases'); if(!box) return;
+    box.innerHTML=list.length
+      ? list.map(function(c){
+          var sc=(c.scene||[]).map(function(s){ return SCENE_NAMES[s]||s; }).join(' · ');
+          return '<div class="deep-item h-case" onclick="goQaCard(\''+esc(c.qaId)+'\')"><span class="dq">'+esc(c.question)+'</span>'+(sc?'<span class="db">'+esc(sc)+'</span>':'')+'</div>';
+        }).join('')
+      : '<div class="empty-tip">该分类下暂无案例</div>';
+  }catch(e){}
+}
+function goHealPractice(){
+  try{
+    location.hash='#heal';
+    setTimeout(function(){
+      var el=document.querySelector('.hp-card');
+      if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+    },80);
+  }catch(e){}
 }
 
 /* ─────────── 测评引擎 ─────────── */
@@ -2633,19 +2798,27 @@ function renderResultInto(box, snap, opts){
     +profileHtml(snap)
     +'<div class="discipline">每个场景里你都有「阳」和「阴」两条线——占比不同，不是一条线上的高低。点击维度卡，看同一个场景里阳与阴为什么会这样区分。</div>'
     +'</div>';
-  /* ④ 深入学习（折叠） */
+  /* ④ 深入学习（折叠）+ 成长课题联动（按型格推荐修的方向） */
   var deep=(guide.deep||[]).map(qaById).filter(Boolean);
   var sceneCards={};
   ['work','love','family'].forEach(function(key){
     sceneCards[key]=(guide.scene&&guide.scene[key]||[]).map(qaById).filter(Boolean);
   });
+  var growTopic=isYang?{name:'阳修坤德',desc:'示弱、表达、承接——阳侧三件套',kps:['y5-11','y5-03']}:{name:'阴修乾德',desc:'立边界、释放攻击性、拿回独立人格',kps:['y5-12','y5-04']};
+  var growCards=growTopic.kps.map(function(k){ return healFindCard(k); }).filter(Boolean);
   html+='<div class="r-zone"><div class="r-tag">④ 深入学习 · DEEP DIVE</div>'
     +(rd.growthDir?('<div style="font-size:14.5px;font-weight:600;margin-bottom:6px;">'+esc(rd.growthDir)+'</div>'):'')
     +(rd.steps&&rd.steps.length?('<ul class="steps">'+rd.steps.map(function(s){ return '<li>'+esc(s)+'</li>'; }).join('')+'</ul>'):'')
+    +'<div class="grow-box"><div class="grow-head"><b class="serif">你的成长课题 · '+esc(growTopic.name)+'</b><span class="grow-sub">'+esc(growTopic.desc)+'</span></div>'
+    +(growCards.length?('<div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;">'
+      +growCards.map(function(c){ return '<span class="review-link" onclick="goQaCard(\''+esc(c.qaId)+'\')">▸ '+esc(c.question)+'</span>'; }).join('')
+      +'</div>'):'')
+    +'<div style="margin-top:10px;"><a class="btn btn-ghost btn-sm" href="#heal">去成长课题 · 完整方法线 →</a></div>'
+    +'</div>'
     +'<details class="deep-wrap" style="margin-top:10px;"><summary>按型推荐 '+deep.length+' 张问答卡（点开）</summary><div style="margin-top:8px;">'
     +deep.map(function(c){ return '<div class="deep-item" onclick="goQaCard(\''+esc(c.qaId)+'\')"><span class="dq">'+esc(c.question)+'</span><span class="db">'+esc(c.category||'')+'</span></div>'; }).join('')
     +'</div></details>'
-    +'<details class="deep-wrap" style="margin-top:10px;"><summary>分场景卡组 · 也可在雷达图点轴端进入对应探索面板</summary><div style="margin-top:8px;">'
+    +'<details class="deep-wrap" style="margin-top:10px;"><summary>分场景卡组 · 也可在剖面图点维度卡进入对应探索</summary><div style="margin-top:8px;">'
     +['work','love','family'].map(function(key){
         var cs=sceneCards[key]; if(!cs.length) return '';
         return '<div style="font-size:12.5px;color:var(--fog);margin:8px 0 2px;">'+SCENE_NAMES[key]+'</div>'

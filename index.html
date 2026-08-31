@@ -273,6 +273,10 @@ mark{background:rgba(212,165,116,.35);color:inherit;border-radius:3px;padding:0 
 .verdict-slogan::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:2px;background:linear-gradient(180deg,var(--yang),rgba(212,165,116,.1));}
 .k-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
 .k-num{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em;}
+.k-dual{display:flex;align-items:baseline;gap:8px;white-space:nowrap;}
+.kd-y{color:var(--yang);}
+.kd-n{color:var(--yin);}
+.kd-sep{color:rgba(35,34,48,.25);font-size:14px;}
 /* 内核能量条 = 晨昏渐变流动条（8s 循环） */
 .k-bar{flex:1;min-width:150px;height:12px;border-radius:6px;overflow:hidden;background:linear-gradient(90deg,var(--moon),#fff);border:1px solid rgba(35,34,48,.07);display:flex;box-shadow:inset 0 1px 3px rgba(35,34,48,.08);}
 .k-fill-yang{height:100%;background:linear-gradient(90deg,#E8913A,#F2B46B,#D4A574,#E8913A);background-size:300% 100%;animation:energyFlow 8s linear infinite;}
@@ -307,6 +311,28 @@ mark{background:rgba(212,165,116,.35);color:inherit;border-radius:3px;padding:0 
 .pillars .pillar:nth-child(2)::after{content:'💼';}
 .pillars .pillar:nth-child(3)::after{content:'💞';}
 .discipline{font-size:12.5px;color:var(--fog);margin-top:16px;text-align:center;letter-spacing:.04em;}
+/* 能量剖面 v2：各场景阴阳双进度条 */
+.prof-scene{background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(246,243,237,.35));border:1px solid rgba(35,34,48,.06);border-radius:var(--r);padding:14px 16px;margin:14px 0;}
+.prof-scene:first-child{margin-top:4px;}
+.ps-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.ps-head b{font-size:16px;letter-spacing:.12em;}
+.ps-val{font-size:13.5px;color:var(--ink-2);font-variant-numeric:tabular-nums;}
+.ps-none{font-size:12px;color:var(--fog);}
+.ps-bars{display:flex;flex-direction:column;gap:7px;}
+.ps-bar{display:flex;align-items:center;gap:8px;font-size:12px;}
+.ps-lbl{width:20px;height:20px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex:none;}
+.ps-lbl-y{background:rgba(232,145,58,.16);color:#9A5A16;border:1px solid rgba(232,145,58,.35);}
+.ps-lbl-n{background:rgba(78,110,158,.14);color:#31486C;border:1px solid rgba(78,110,158,.32);}
+.ps-track{flex:1;height:10px;border-radius:5px;overflow:hidden;background:rgba(35,34,48,.06);border:1px solid rgba(35,34,48,.06);}
+.ps-fill-y{height:100%;background:linear-gradient(90deg,#E8913A,#F2B46B);border-radius:5px;transition:width .6s ease;}
+.ps-fill-n{height:100%;background:linear-gradient(90deg,#4E6E9E,#7C99C4);border-radius:5px;transition:width .6s ease;}
+.ps-num{width:44px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink);}
+.ps-dim{display:flex;flex-direction:column;gap:4px;margin:10px 0 0;font-size:12.5px;line-height:1.6;}
+.ps-dim-y{color:#8A5A1F;}
+.ps-dim-n{color:#31486C;}
+.ps-cards{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.ps-chip{cursor:pointer;font-size:11.5px;padding:3px 10px;border-radius:999px;background:var(--moon);color:var(--ink-2);border:1px solid rgba(35,34,48,.09);transition:transform .2s ease,box-shadow .2s ease;}
+.ps-chip:hover{transform:translateY(-1px);box-shadow:var(--shadow-lift);color:var(--ink);}
 .deep-item{display:flex;align-items:baseline;gap:8px;padding:9px 0;border-bottom:1px dashed rgba(233,226,214,.8);cursor:pointer;font-size:14px;}
 .deep-item:last-child{border-bottom:none;}
 .deep-item:hover .dq{color:var(--yang-deep);}
@@ -1084,7 +1110,7 @@ function radarSvg(scenes,opts){
     }
     if(opts.center){
       s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" font-size="21" font-weight="700" fill="#232230" font-family="Noto Serif SC,Songti SC,SimSun,serif">'+opts.center+'</text>'
-        +'<text x="'+cx+'" y="'+(cy+22)+'" text-anchor="middle" font-size="9.5" fill="#6F6C7B">内核阳性度</text>';
+        +'<text x="'+cx+'" y="'+(cy+22)+'" text-anchor="middle" font-size="9.5" fill="#6F6C7B">阴阳特征占比</text>';
     }
     return s+'</svg>';
   }catch(e){ return ''; }
@@ -1125,6 +1151,70 @@ function radarPanelHtml(key){
         +'</div></details>';
     }
     return h+'</div>';
+  }catch(e){ return ''; }
+}
+
+/* ─────────── 能量剖面 v2：各场景阴阳双进度条 + 维度知识卡 ───────────
+   每个场景同时呈现阳%/阴% 两条进度条（平等双轴），下方标注该场景测到的
+   核心维度（如 战逃本能/边界感），点击维度卡直达「阳 vs 阴」区分讲解。 */
+function _sceneCards(key){
+  try{
+    var quiz=(T&&T.quiz&&T.quiz.length)?T.quiz:(window.QUIZ_NS&&QUIZ_NS.female?QUIZ_NS.female:(QUIZ_NS&&QUIZ_NS.male?QUIZ_NS.male:null));
+    var map={};
+    if(quiz&&quiz.length){
+      quiz.forEach(function(q){
+        var k=(q.scene==='school')?'work':q.scene;
+        if(k===key){
+          var c=findQa(q.kpLink, q.kpCard);
+          if(c&&c.qaId) map[c.qaId]=1;
+        }
+      });
+    }
+    return Object.keys(map).map(qaById).filter(Boolean);
+  }catch(e){ return []; }
+}
+function _dimShort(c){
+  var q=(c&&c.question)||'';
+  var i=q.indexOf('：');
+  var s=(i>0&&i<22)?q.slice(0,i):q.slice(0,14);
+  return s;
+}
+function profileHtml(snap){
+  try{
+    var sc=(snap&&snap.scenes)||{};
+    var AX=['work','love','family','self'];
+    var h='';
+    AX.forEach(function(key){
+      var v=sc[key];
+      var nm=RADAR_NAMES[key]||key;
+      var cfg=RADAR_YINYANG[key]||{yang:[],yin:[]};
+      var cards=_sceneCards(key);
+      var isNull=(v==null);
+      var yangDesc=cfg.yang&&cfg.yang[0]?cfg.yang[0]:'直接、向外';
+      var yinDesc=cfg.yin&&cfg.yin[0]?cfg.yin[0]:'含蓄、向内';
+      h+='<div class="prof-scene">'
+        +'<div class="ps-head"><b class="serif">'+nm+'</b>'
+        +(isNull
+          ? '<span class="ps-none">本题卷未覆盖此场景</span>'
+          : '<span class="ps-val">阳 <b class="num kd-y">'+v+'%</b> · 阴 <b class="num kd-n">'+(100-v)+'%</b></span>')
+        +'</div>'
+        +(isNull?'':(
+          '<div class="ps-bars">'
+          +'<div class="ps-bar"><span class="ps-lbl ps-lbl-y">阳</span><div class="ps-track"><div class="ps-fill-y" style="width:'+v+'%"></div></div><span class="ps-num num">'+v+'%</span></div>'
+          +'<div class="ps-bar"><span class="ps-lbl ps-lbl-n">阴</span><div class="ps-track"><div class="ps-fill-n" style="width:'+(100-v)+'%"></div></div><span class="ps-num num">'+(100-v)+'%</span></div>'
+          +'</div>'))
+        +'<div class="ps-dim">'
+        +'<span class="ps-dim-y">☀ '+esc(yangDesc)+'</span>'
+        +'<span class="ps-dim-n">☾ '+esc(yinDesc)+'</span>'
+        +'</div>'
+        +(cards.length
+          ? '<div class="ps-cards">'+cards.map(function(c){
+              return '<span class="ps-chip" onclick="goQaCard(\''+esc(c.qaId)+'\')">'+esc(_dimShort(c))+'</span>';
+            }).join('')+'</div>'
+          : '')
+        +'</div>';
+    });
+    return h;
   }catch(e){ return ''; }
 }
 
@@ -1315,12 +1405,13 @@ function makeShareImage(type,opts){
     ctx.fillStyle='#4A4754'; ctx.font=_cxFont(33,true,500);
     var sy=y+86;
     for(var i=0;i<sl.length;i++) ctx.fillText(sl[i],W/2,sy+i*52);
-    /* ⑥ 内核能量条（橙蓝渐变 + K%） */
-    ctx.textAlign='left'; ctx.fillStyle='#6F6C7B'; ctx.font=_cxFont(24,false);
-    ctx.fillText('内核阳性度',150,1010);
+    /* ⑥ 阴阳特征占比条（阳橙 + 阴蓝双段，左右双值平行呈现） */
+    ctx.textAlign='left';
+    ctx.fillStyle='#C9742A'; ctx.font=_cxFont(36,true,700);
+    ctx.fillText(K==null?'阳 —':'阳 '+K+'%',150,1012);
     ctx.textAlign='right';
-    ctx.fillStyle=isYang?'#C9742A':'#3A5480'; ctx.font=_cxFont(36,true,700);
-    ctx.fillText(K==null?'—':K+'%',930,1012);
+    ctx.fillStyle='#3A5480';
+    ctx.fillText(K==null?'阴 —':'阴 '+(100-K)+'%',930,1012);
     _cxRound(ctx,150,1028,780,26,13);
     ctx.fillStyle='#EAF0F7'; ctx.fill();
     ctx.strokeStyle='rgba(35,34,48,.08)'; ctx.lineWidth=1; ctx.stroke();
@@ -1879,7 +1970,7 @@ function renderHome(){
     strip.innerHTML='<div class="last-strip">'
       +'<span class="seal seal-sm '+(TYPE_SEAL[s.type]?TYPE_SEAL[s.type][1]:'seal-yang')+'">'+(TYPE_SEAL[s.type]?TYPE_SEAL[s.type][0]:'阳')+'</span>'
       +'<div style="flex:1"><div class="lbl">我的上次结果 · '+esc(s.date||'')+'</div>'
-      +'<div style="font-weight:700">'+esc(rd.type||s.type||'')+(s.K!=null?(' · 内核阳性度 <span class="num">'+s.K+'%</span>'):'')+'</div></div>'
+      +'<div style="font-weight:700">'+esc(rd.type||s.type||'')+(s.K!=null?(' · 阳 <span class="num">'+s.K+'%</span> · 阴 <span class="num">'+(100-s.K)+'%</span>'):'')+'</div></div>'
       +'<button class="btn btn-ghost btn-sm" onclick="viewHistory(0)">查看完整结果</button>'
       +'</div>';
   } else strip.innerHTML='';
@@ -2099,11 +2190,11 @@ function renderMe(){
     html+=hist.map(function(s,i){
       var rd=RD[s.type]||{};
       var sc=s.scenes||{};
-      function pct(k){ return sc[k]==null?'—':(sc[k]+'% 阳'); }
+      function dual(k){ return sc[k]==null?'—':('阳'+sc[k]+'·阴'+(100-sc[k])); }
       return '<div class="me-item" onclick="viewHistory('+i+')">'
         +'<span class="seal seal-sm '+(TYPE_SEAL[s.type]?TYPE_SEAL[s.type][1]:'seal-yang')+'">'+(TYPE_SEAL[s.type]?TYPE_SEAL[s.type][0]:'阳')+'</span>'
         +'<div style="flex:1;min-width:180px;"><div class="mi-date">'+esc(s.date||'')+'</div><div class="mi-type">'+esc(rd.type||s.type||'')+'</div></div>'
-        +'<div class="mi-sc">职场 '+pct('work')+' · 情感 '+pct('love')+' · 家庭 '+pct('family')+'</div>'
+        +'<div class="mi-sc">职场 '+dual('work')+' · 情感 '+dual('love')+' · 家庭 '+dual('family')+'</div>'
         +'</div>';
     }).join('');
     html+='<div class="me-actions"><button class="btn btn-ghost btn-sm" onclick="clearHistory()">清空全部记录</button></div>';
@@ -2485,12 +2576,12 @@ function renderResultInto(box, snap, opts){
     +(rd.slogan?('<div class="verdict-slogan">'+esc(rd.slogan)+'</div>'):'')
     +'<div class="k-row">'
     +(snap.K!=null
-      ? ('<span class="k-num num" style="color:'+(isYang?'var(--yang)':'var(--yin)')+'">'+snap.K+'%</span>'
+      ? ('<div class="k-dual"><span class="kd-y num" style="color:var(--yang)">阳 '+snap.K+'%</span><span class="kd-sep">·</span><span class="kd-n num" style="color:var(--yin)">阴 '+(100-snap.K)+'%</span></div>'
         +'<div class="k-bar"><div class="k-fill-yang" style="width:'+snap.K+'%"></div><div class="k-fill-yin"></div></div>'
-        +'<span class="conf-badge '+(snap.critical?'conf-mid':'conf-high')+'">内核阳性度 · '+(snap.critical?'倾向清晰':'判定明确')+'</span>')
+        +'<span class="conf-badge '+(snap.critical?'conf-mid':'conf-high')+'">阴阳倾向 · '+(snap.critical?'倾向清晰':'判定明确')+'</span>')
       : '<span class="conf-badge conf-high"> TA 的型格 · 你测了才知道你自己的</span>')
     +'</div>'
-    +(snap.K!=null?('<div style="font-size:12.5px;color:var(--fog);margin-top:8px;">你的内核能量是'+(isYang?'阳':'阴')+'——不是说你没有'+(isYang?'阴':'阳')+'的一面，而是你面对核心冲突时的第一反应是'+(isYang?'直面':'观察')+'。</div>'):'')
+    +(snap.K!=null?('<div style="font-size:12.5px;color:var(--fog);margin-top:8px;">你的特征占比偏'+(isYang?'阳':'阴')+'——不是说你没有'+(isYang?'阴':'阳')+'的一面，而是你面对核心冲突时的第一反应是'+(isYang?'直面':'观察')+'。阳与阴是两条平行的轴，不是一条线上的高低。</div>'):'')
     +(rd.highlight?('<div class="quote">'+esc(rd.highlight)+'</div>'):'')
     +(rd.traits&&rd.traits.length?('<div class="traits">'+rd.traits.map(function(t){
         var i=t.indexOf('：'); var head=i>0&&i<8?('<b>'+esc(t.substring(0,i+1))+'</b>'+esc(t.substring(i+1))):esc(t);
@@ -2537,11 +2628,10 @@ function renderResultInto(box, snap, opts){
       +shellCards.map(function(c){ return '<span class="review-link" onclick="goQaCard(\''+esc(c.qaId)+'\')">▸ '+esc(c.question)+'</span>'; }).join('')
       +'</div></div>';
   }
-  /* ③ 能量剖面（雷达四轴：职场/情感/家庭/独处）+ 逐层探索 */
+  /* ③ 能量剖面（各场景阴阳双进度条 + 维度知识卡） */
   html+='<div class="r-zone"><div class="r-tag">③ 能量剖面 · PROFILE</div>'
-    +'<div style="display:flex;justify-content:center;">'+radarSvg(snap.scenes,{size:320,center:(snap.K!=null?(snap.K+'%'):'')})+'</div>'
-    +'<div class="discipline">内核只有一个，呈现各有不同——点击轴端文字或顶点，逐层探索该场景。场景分是「剖面」，不是「你有几个内核」。</div>'
-    +'<div id="radarPanels">'+radarPanelHtml('work')+radarPanelHtml('love')+radarPanelHtml('family')+radarPanelHtml('self')+'</div>'
+    +profileHtml(snap)
+    +'<div class="discipline">每个场景里你都有「阳」和「阴」两条线——占比不同，不是一条线上的高低。点击维度卡，看同一个场景里阳与阴为什么会这样区分。</div>'
     +'</div>';
   /* ④ 深入学习（折叠） */
   var deep=(guide.deep||[]).map(qaById).filter(Boolean);

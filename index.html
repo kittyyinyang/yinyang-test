@@ -696,8 +696,7 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 .ev-item .ev-go{flex:none;width:30px;height:30px;display:flex;align-items:center;justify-content:center;color:#E8913A;font-size:13px;text-decoration:none;border:1.5px solid rgba(232,145,58,.55);border-radius:50%;background:rgba(232,145,58,.06);transition:all .2s}
 .ev-item .ev-go:hover{background:#E8913A;color:#fff;border-color:#E8913A}
 .ev-item .ev-go[data-on="1"]{background:#3A5480;color:#fff;border-color:#3A5480}
-.ev-item .ev-ext{flex:none;font-size:11px;color:var(--fog);text-decoration:none;border-bottom:1px dashed rgba(120,120,140,.5);line-height:1.6;margin-top:6px;transition:color .2s,border-color .2s}
-.ev-item .ev-ext:hover{color:var(--yin);border-bottom-color:var(--yin)}
+/* .ev-ext 已移除，保留空位避免误删其他规则 */
 .ev-player{flex:0 0 100%;margin:2px 0 4px}
 .evp-frame{width:100%;aspect-ratio:16/9;border-radius:10px;border:1px solid rgba(212,165,116,.35);background:#1c1c24;display:block;animation:evpIn .25s ease}
 .evp-spin{width:100%;aspect-ratio:16/9;border-radius:10px;border:1px solid rgba(212,165,116,.35);background:#1c1c24;display:flex;align-items:center;justify-content:center}
@@ -2325,6 +2324,7 @@ function goQaCard(qaId){
   if(!qaId || !qaById(qaId)){ toast('这张卡还在整理中'); return; }
   try{ track('qa_open',{qaId:qaId,src:'link'}); markQaRead(qaId); }catch(e){}
   window._pendingQaCard=qaId; window._qaFromShare=false;
+  window._qaPinId=qaId; /* 直达卡 → 渲染时把该卡置顶到列表首位，避免目标卡埋在几百张卡之后 */
   _qaPinReset=true; /* 直达卡 → 重置过滤（含 lastType 极性默认），确保目标卡渲染进列表 */
   qaFilter.group='全部'; qaFilter.scene=''; qaFilter.polarity=''; qaFilter.typeDim='';
   if((location.hash||'').indexOf('#qa')===0){ route(); }
@@ -2418,12 +2418,10 @@ function qaCardHtml(c, q){
       + '</div>';
   }
   var evidenceHtml=(c.evidence && c.evidence.length)
-    ? '<div class="ev-head">▶ 语料佐证 · 原话 '+c.evidence.length+' 条 —— 点 ▶ 站内看切片，或去 B站看原话</div>'
+    ? '<div class="ev-head">▶ 语料佐证 · 原话 '+c.evidence.length+' 条 —— 点 ▶ 看原话切片</div>'
       + c.evidence.map(function(e,i){
-          var evLink=esc(e.link||'#');
           return '<div class="ev-item"><span class="ev-quote">「'+hl(e.text||'',q)+'」</span>'
-            +'<a class="ev-go" href="javascript:void(0)" data-qa="'+esc(c.qaId)+'" data-idx="'+i+'" onclick="event.stopPropagation();toggleEvPlayer(this)" title="站内看切片" aria-label="站内看切片">▶</a>'
-            +'<a class="ev-ext" href="'+evLink+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="去B站看原话">B站 ↗</a>'
+            +'<a class="ev-go" href="javascript:void(0)" data-qa="'+esc(c.qaId)+'" data-idx="'+i+'" onclick="event.stopPropagation();toggleEvPlayer(this)" title="去 B 站看原话（桌面端站内播放，移动端外跳）" aria-label="B 站原话">▶</a>'
             +'<div class="ev-player" id="evp-'+esc(c.qaId)+'-'+i+'"></div></div>';
         }).join('')
     : qaEvidenceHtml(c);
@@ -2511,15 +2509,27 @@ function route(){
         renderQa();
         el=$('card-'+c.qaId);
       }
-      if(el){ el.classList.add('open'); setTimeout(function(){ el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
+      if(el){
+        el.classList.add('open');
+        /* 双 rAF 等 DOM 稳定后再滚动；直达卡时跳过末尾的 scrollTo(0,0)，否则会被拉回顶部 */
+        window._qaSkipTopScroll=true;
+        var _pin=el;
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            try{ _pin.scrollIntoView({behavior:'auto',block:'start'}); }
+            catch(e){ try{ _pin.scrollIntoView(); }catch(e2){} }
+          });
+        });
+      }
       var note=$('qaShareNote');
       if(note) note.innerHTML=window._qaFromShare
         ? '<div class="share-note">来自朋友的分享 · 测测你的能量 —— <a href="#test" style="color:var(--yang);font-weight:600;">先去测一测 →</a></div>'
         : '';
     }
-    window._pendingQaCard=null; _qaPinReset=false; /* 直达卡窗口期结束，恢复 lastType 极性默认 */
+    window._pendingQaCard=null; _qaPinReset=false; window._qaPinId=null; /* 直达卡窗口期结束，恢复 lastType 极性默认 */
   }
-  window.scrollTo(0,0);
+  if(window._qaSkipTopScroll){ window._qaSkipTopScroll=false; }
+  else window.scrollTo(0,0);
 }
 
 /* ─────────── 首页 ─────────── */
@@ -2618,7 +2628,12 @@ function renderQa(){
     if(qaFilter.scene && (c.scene||[]).indexOf(qaFilter.scene)<0) return false;
     return true;
   });
-  list.sort(function(a,b){ return (a.stage||9)-(b.stage||9); });
+  list.sort(function(a,b){
+    /* 直达卡窗口期：目标卡置顶，避免被埋在几百张卡之后导致「跳到问一问首页」的错觉 */
+    var pin=window._qaPinId;
+    if(pin){ if(a.qaId===pin) return -1; if(b.qaId===pin) return 1; }
+    return (a.stage||9)-(b.stage||9);
+  });
   $('qaList').innerHTML = list.length
     ? list.map(function(c){ return qaCardHtml(c,''); }).join('')
     : '<div class="empty-tip">此卷尚未抄录，笔墨仍在路上。</div>';
@@ -2724,7 +2739,7 @@ function runSearch(){
       var go='';
       if(c.bv&&c.bv!=='—'){
         var sec=CORPUS_SENT_FIRST[c.id];
-        go='<a class="sc-go" href="https://www.bilibili.com/video/'+esc(c.bv)+(sec>=0?('?t='+sec):'')+'" target="_blank" rel="noopener">▶ B站</a>';
+        go='<a class="sc-go" href="https://www.bilibili.com/video/'+esc(c.bv)+(sec>=0?('?t='+sec):'')+'" target="_blank" rel="noopener">▶</a>';
       }
       var topic=c.domain?esc(c.domain)+' · ':'';
       return '<div class="s-corpus">'+badge

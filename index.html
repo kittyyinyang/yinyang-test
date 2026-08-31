@@ -2367,7 +2367,8 @@ function toggleEvPlayer(btn){
   var c=qaById(qaId);
   if(!c || !c.evidence || !c.evidence[idx]) return;
   var e=c.evidence[idx], p=parseBili(e.link||'');
-  if(!p.bv || isMobileDevice()){ window.open(e.link||'#','_blank'); return; }
+  /* 移动端同样站内内嵌播放（不再外跳）；仅当取不到 bv 时才外跳原链接 */
+  if(!p.bv){ window.open(e.link||'#','_blank'); return; }
   /* 收起其它已打开的播放器，避免多卡并发声音 */
   var others=document.querySelectorAll('.ev-go[data-on="1"]');
   for(var i=0;i<others.length;i++){ if(others[i]!==btn) destroyEvPlayer(others[i].getAttribute('data-qa'),parseInt(others[i].getAttribute('data-idx'),10),others[i]); }
@@ -2375,7 +2376,10 @@ function toggleEvPlayer(btn){
   wrap.innerHTML='<div class="evp-spin"></div>';
   var ifr=document.createElement('iframe');
   ifr.className='evp-frame';
-  ifr.src='https://player.bilibili.com/player.html?bvid='+p.bv+'&page=1&high_quality=1&danmaku=0&autoplay=1'+(p.sec>=0?('&t='+p.sec):'');
+  /* 移动端去掉 autoplay：iOS/微信 会拦截带 autoplay 的 iframe 导致黑屏，改为手动点播放 */
+  var _m=isMobileDevice();
+  ifr.src='https://player.bilibili.com/player.html?bvid='+p.bv+'&page=1&high_quality=1&danmaku=0'
+    +(_m?'':'&autoplay=1')+(p.sec>=0?('&t='+p.sec):'');
   ifr.setAttribute('scrolling','no');
   ifr.setAttribute('frameborder','no');
   ifr.setAttribute('allowfullscreen','true');
@@ -2421,7 +2425,7 @@ function qaCardHtml(c, q){
     ? '<div class="ev-head">▶ 语料佐证 · 原话 '+c.evidence.length+' 条 —— 点 ▶ 看原话切片</div>'
       + c.evidence.map(function(e,i){
           return '<div class="ev-item"><span class="ev-quote">「'+hl(e.text||'',q)+'」</span>'
-            +'<a class="ev-go" href="javascript:void(0)" data-qa="'+esc(c.qaId)+'" data-idx="'+i+'" onclick="event.stopPropagation();toggleEvPlayer(this)" title="去 B 站看原话（桌面端站内播放，移动端外跳）" aria-label="B 站原话">▶</a>'
+            +'<a class="ev-go" href="javascript:void(0)" data-qa="'+esc(c.qaId)+'" data-idx="'+i+'" onclick="event.stopPropagation();toggleEvPlayer(this)" title="站内看原话切片" aria-label="原话切片">▶</a>'
             +'<div class="ev-player" id="evp-'+esc(c.qaId)+'-'+i+'"></div></div>';
         }).join('')
     : qaEvidenceHtml(c);

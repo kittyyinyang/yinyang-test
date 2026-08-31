@@ -297,6 +297,51 @@ mark{background:rgba(212,165,116,.35);color:inherit;border-radius:3px;padding:0 
 .ch-ticks{display:flex;gap:9px;justify-content:center;margin:0 0 30px;}
 .ch-tick{width:20px;height:3px;border-radius:2px;background:rgba(233,226,214,.95);transition:background .3s,box-shadow .3s;}
 .ch-tick.on{background:linear-gradient(90deg,var(--yang),var(--amber));box-shadow:0 0 8px rgba(232,145,58,.55);}
+/* ===== 测试页叙事视觉层 v1（P0+P1，守卫式追加，不改题卷数据）===== */
+.scene-frame{position:relative;border-radius:var(--r);overflow:hidden;margin:0 0 14px;aspect-ratio:16/9;min-height:150px;}
+.scene-frame .scene-svg{position:absolute;inset:0;width:100%;height:100%;}
+.scene-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(250,247,242,0) 52%,rgba(250,247,242,.42));}
+.scene-family{background:linear-gradient(180deg,#FFF4E2,#F6C384);}
+.scene-school{background:linear-gradient(180deg,#FFFDF6,#F5ECD8);}
+.scene-work{background:linear-gradient(180deg,#EEF1F6,#D8E0EC);}
+.scene-love{background:linear-gradient(180deg,#F6C384,#4E6E9E);}
+.scene-self{background:linear-gradient(180deg,#232F45,#4E6E9E);}
+.scene-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.14em;color:var(--fog);}
+.sb-emoji{font-size:16px;line-height:1;}
+.chapter-cover{position:relative;text-align:center;padding:0 0 30px;}
+.chapter-cover .scene-frame{margin-bottom:-44px;opacity:.94;animation:coverIn .4s ease;}
+.cover-inner{position:relative;z-index:2;padding:56px 10px 0;}
+.cover-inner .ch-seal{margin-bottom:14px;}
+@keyframes coverIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.q-scene{display:flex;align-items:center;gap:10px;border-radius:12px;padding:9px 14px;margin:0 0 12px;font-size:12px;letter-spacing:.14em;color:var(--fog);border:1px solid rgba(35,34,48,.05);}
+.qs-pos{margin-left:auto;color:var(--fog);opacity:.85;letter-spacing:.08em;}
+.journey{display:flex;gap:4px;margin-top:8px;}
+.journey-node{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9px;color:var(--fog);opacity:.5;transition:opacity .3s;}
+.jn-dot{width:100%;height:3px;border-radius:2px;background:var(--line);transition:all .3s;}
+.journey-node.on{opacity:1;color:var(--yang-deep);}
+.journey-node.on .jn-dot{background:linear-gradient(90deg,var(--yang),var(--amber));box-shadow:0 0 8px rgba(232,145,58,.5);}
+.journey-node.done{opacity:.8;color:var(--ink-2);}
+.journey-node.done .jn-dot{background:var(--amber);}
+@media (max-width:640px){ .journey-node .jn-emoji{font-size:10px;} }
+.q-opt{position:relative;}
+.q-opt::after{content:'✓';position:absolute;right:14px;top:50%;transform:translateY(-50%) scale(0);width:22px;height:22px;border-radius:50%;color:#fff;font-size:13px;font-weight:700;background:linear-gradient(135deg,var(--yang),var(--yang-deep));display:flex;align-items:center;justify-content:center;transition:transform .25s cubic-bezier(.34,1.56,.64,1);}
+.q-opt.selected::after{transform:translateY(-50%) scale(1);}
+.q-opt.selected{animation:optPop .28s cubic-bezier(.34,1.56,.64,1);}
+.q-opt.selected .opt-label{transform:scale(1.06);}
+@keyframes optPop{0%{transform:scale(1)}55%{transform:scale(1.015)}100%{transform:scale(1)}}
+.review-hero{position:relative;}
+.review-hero .scene-frame{margin-bottom:-34px;opacity:.92;}
+.rh-inner{position:relative;z-index:2;padding:40px 4px 8px;}
+.rh-no{font-size:12px;letter-spacing:.4em;color:var(--amber);margin-bottom:6px;}
+.pol{display:inline-flex;width:18px;height:18px;border-radius:4px;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-right:8px;vertical-align:1px;}
+.pol-yang{background:rgba(232,145,58,.16);color:#9A5A16;border:1px solid rgba(232,145,58,.35);}
+.pol-yin{background:rgba(78,110,158,.14);color:#31486C;border:1px solid rgba(78,110,158,.32);}
+.pol-neu{background:var(--soft);color:var(--fog);border:1px solid var(--line);}
+.journey-preview{display:flex;justify-content:center;gap:8px;margin:18px 0 4px;flex-wrap:wrap;}
+.jp-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:var(--fog);padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.6);border:1px solid rgba(233,226,214,.9);}
+.jp-emoji{font-size:18px;}
+.light-scale{display:flex;align-items:center;justify-content:center;gap:6px;margin:14px 0 0;font-size:11px;letter-spacing:.3em;color:var(--fog);}
+.ls-bar{width:96px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--yang),var(--amber),var(--yin));opacity:.6;}
 .q-panel{background:var(--card);border:1px solid rgba(35,34,48,.055);border-radius:var(--r);box-shadow:var(--shadow-flat),inset 0 1px 0 rgba(255,255,255,.85);padding:26px 22px;}
 .q-tag{font-size:11.5px;color:var(--yang-deep);letter-spacing:.16em;}
 .q-text{font-size:18px;font-weight:600;line-height:1.7;margin:10px 0 20px;letter-spacing:.01em;}
@@ -485,6 +530,26 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 .tag-mind .mm-chip:hover{color:var(--gc,#B5483A);border-color:var(--gc,#B5483A);background:rgba(255,255,255,.9);transform:translateY(-1px);}
 @media(max-width:560px){.tag-mind .mm-groups{grid-template-columns:1fr;}}
 
+/* ── 搜一搜 · 知识切片体系化图谱（三级：中心→分类→系列→卡片） ── */
+.kp-mind .kp-branches{display:flex;flex-direction:column;gap:12px;margin-top:4px;}
+.kp-mind .kp-branch{border:1px solid var(--line);border-radius:12px;background:var(--soft);padding:12px 12px 10px;}
+.kp-mind .kp-bname{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;letter-spacing:.06em;margin-bottom:8px;}
+.kp-mind .kp-bname .kp-bdot{width:10px;height:10px;border-radius:3px;background:var(--bc,#B5483A);transform:rotate(45deg);flex:none;}
+.kp-mind .kp-bcount{font-size:10.5px;font-weight:600;color:var(--fog);background:#fff;border:1px solid var(--line);border-radius:999px;padding:1px 8px;margin-left:2px;}
+.kp-mind .kp-series{border-top:1px dashed var(--line);padding:7px 2px 2px;}
+.kp-mind .kp-shead{display:flex;align-items:center;gap:8px;cursor:pointer;padding:3px 4px;border-radius:8px;user-select:none;transition:background .18s;}
+.kp-mind .kp-shead:hover{background:rgba(255,255,255,.75);}
+.kp-mind .kp-sarr{width:16px;height:16px;flex:none;color:var(--fog);font-size:10px;display:flex;align-items:center;justify-content:center;transition:transform .22s;border:1px solid var(--line);border-radius:50%;background:#fff;}
+.kp-mind .kp-series.open .kp-sarr{transform:rotate(90deg);color:var(--ink);}
+.kp-mind .kp-sname{font-size:13px;font-weight:600;color:var(--ink);}
+.kp-mind .kp-scnt{font-size:10.5px;color:var(--fog);background:#fff;border:1px solid var(--line);border-radius:999px;padding:1px 7px;}
+.kp-mind .kp-cards{display:none;flex-wrap:wrap;gap:6px;padding:8px 2px 4px;}
+.kp-mind .kp-series.open .kp-cards{display:flex;}
+.kp-mind .kp-card{font-size:12px;color:var(--ink-2);background:#fff;border:1px solid var(--line);border-radius:999px;padding:2px 11px;cursor:pointer;transition:all .18s;max-width:100%;}
+.kp-mind .kp-card:hover{color:var(--gc,#B5483A);border-color:var(--gc,#B5483A);background:rgba(255,255,255,.9);transform:translateY(-1px);}
+.kp-mind .kp-toggle{display:block;margin:2px auto 0;border:1px solid var(--line);background:#fff;color:var(--ink-2);font-size:11px;border-radius:999px;padding:3px 14px;cursor:pointer;transition:all .18s;}
+.kp-mind .kp-toggle:hover{color:var(--gc,#B5483A);border-color:var(--gc,#B5483A);}
+
 /* ── 我的（历史：左印 + 日期竖排书脊） ── */
 .me-item{background:var(--card);border:1px solid rgba(35,34,48,.055);border-radius:var(--r);box-shadow:var(--shadow-flat),inset 0 1px 0 rgba(255,255,255,.85);padding:16px 18px;margin-bottom:12px;cursor:pointer;display:flex;align-items:center;gap:14px;flex-wrap:wrap;transition:transform .25s ease,box-shadow .25s ease;}
 .me-item:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift);}
@@ -621,6 +686,15 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 .ev-item .ev-quote{color:#5a5866;flex:1;min-width:0;}
 .ev-item .ev-go{flex:none;width:30px;height:30px;display:flex;align-items:center;justify-content:center;color:#E8913A;font-size:13px;text-decoration:none;border:1.5px solid rgba(232,145,58,.55);border-radius:50%;background:rgba(232,145,58,.06);transition:all .2s}
 .ev-item .ev-go:hover{background:#E8913A;color:#fff;border-color:#E8913A}
+.ev-item .ev-go[data-on="1"]{background:#3A5480;color:#fff;border-color:#3A5480}
+.ev-item .ev-ext{flex:none;font-size:11px;color:var(--fog);text-decoration:none;border-bottom:1px dashed rgba(120,120,140,.5);line-height:1.6;margin-top:6px;transition:color .2s,border-color .2s}
+.ev-item .ev-ext:hover{color:var(--yin);border-bottom-color:var(--yin)}
+.ev-player{flex:0 0 100%;margin:2px 0 4px}
+.evp-frame{width:100%;aspect-ratio:16/9;border-radius:10px;border:1px solid rgba(212,165,116,.35);background:#1c1c24;display:block;animation:evpIn .25s ease}
+.evp-spin{width:100%;aspect-ratio:16/9;border-radius:10px;border:1px solid rgba(212,165,116,.35);background:#1c1c24;display:flex;align-items:center;justify-content:center}
+.evp-spin::after{content:"";width:26px;height:26px;border:3px solid rgba(232,145,58,.25);border-top-color:#E8913A;border-radius:50%;animation:evpSpin .8s linear infinite}
+@keyframes evpIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes evpSpin{to{transform:rotate(360deg)}}
 .path-flow{max-width:1080px;margin:0 auto 16px;padding:12px 18px;background:linear-gradient(90deg,rgba(232,145,58,.07),rgba(78,110,158,.07));border:1px solid rgba(35,34,48,.08);border-radius:14px;font-size:13px;color:#4a4956;text-align:center}
 .path-flow b{color:#232230}
 .path-flow .pf-arrow{color:#B5483A;font-weight:700;margin:0 6px}
@@ -959,7 +1033,7 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
         </div>
         <div class="plate">
           <div class="plate-top"><span class="plate-ico" style="color:var(--yin);border:1.5px solid rgba(78,110,158,.4);">修</span><h3 class="serif">成长课题 · 向内成长</h3></div>
-          <p>知道和做到之间，隔着练习。这里把个人成长类内容单独拎出来：一条方法线（觉察→创伤→信念）、每日一练、阴/阳各自的课题，以及 100+ 个真实触发场景的拆解。</p>
+          <p>知道和做到之间，隔着练习。这里把个人成长类内容单独拎出来：一条方法线（觉察→创伤→信念）、每日一练、阴/阳各自的课题，以及 50+ 个真实触发场景的拆解。</p>
           <div class="previews">
             <div class="pv hint-chips" style="background:transparent;padding:0;">
               <span class="chip" onclick="goHealPractice()">今日练习</span>
@@ -1083,6 +1157,7 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 <script src="data/data_corpus_refined.js"></script>
 <script src="data/corpus_sent_first.js"></script>
 <script src="data/tag_graph.js"></script>
+<script src="data/kp_graph.js"></script>
 <script src="data/data_corpus.js"></script>
 <script src="data/data_pair.js"></script>
 <script src="data/data_qa.js"></script>
@@ -1097,6 +1172,8 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 <script src="data/qa_core8.js"></script>
 <script src="data/qa_core9.js"></script>
 <script src="data/qa_core10.js"></script>
+<script src="data/qa_core11.js"></script>
+<script src="data/qa_core12.js"></script>
 <script src="data/qa_clips_new.js"></script>
 <script src="data/quiz_male.js"></script>
 <script src="data/quiz_female.js"></script>
@@ -1887,6 +1964,8 @@ var QA = [];
   if(typeof QA_CORE8 !== 'undefined') absorbCore(QA_CORE8);
   if(typeof QA_CORE9 !== 'undefined') absorbCore(QA_CORE9);
   if(typeof QA_CORE10 !== 'undefined') absorbCore(QA_CORE10);
+  if(typeof QA_CORE11 !== 'undefined') absorbCore(QA_CORE11);
+  if(typeof QA_CORE12 !== 'undefined') absorbCore(QA_CORE12);
   var DEP = (typeof DEPRECATED_QA !== 'undefined') ? DEPRECATED_QA : [];
   var depSet = {};
   DEP.forEach(function(id){ depSet[id] = 1; });
@@ -2130,6 +2209,46 @@ function qaEvidenceHtml(c){
   if(!ans.length) html='<div class="ev-item">（本条为编辑整理，未附原文切片）</div>';
   return html;
 }
+/* ─────────── B站切片站内播放 ─────────── */
+/* 桌面端 ▶ → 懒创建 iframe 定位秒位站内播；移动端 → 直接跳 B站；收起/切卡即销毁防并发声音 */
+function parseBili(link){
+  var m=/video\/(BV[\w]+)/.exec(link||''), t=/[?&]t=(\d+)/.exec(link||'');
+  return { bv:(m?m[1]:''), sec:(t?parseInt(t[1],10):-1) };
+}
+function isMobileDevice(){
+  try{ return window.matchMedia && window.matchMedia('(max-width:768px)').matches; }catch(e){ return false; }
+}
+function toggleEvPlayer(btn){
+  if(!btn) return;
+  var qaId=btn.getAttribute('data-qa'), idx=parseInt(btn.getAttribute('data-idx'),10);
+  var wrap=document.getElementById('evp-'+qaId+'-'+idx);
+  if(!wrap) return;
+  if(btn.getAttribute('data-on')==='1'){ destroyEvPlayer(qaId,idx,btn); return; }
+  var c=qaById(qaId);
+  if(!c || !c.evidence || !c.evidence[idx]) return;
+  var e=c.evidence[idx], p=parseBili(e.link||'');
+  if(!p.bv || isMobileDevice()){ window.open(e.link||'#','_blank'); return; }
+  /* 收起其它已打开的播放器，避免多卡并发声音 */
+  var others=document.querySelectorAll('.ev-go[data-on="1"]');
+  for(var i=0;i<others.length;i++){ if(others[i]!==btn) destroyEvPlayer(others[i].getAttribute('data-qa'),parseInt(others[i].getAttribute('data-idx'),10),others[i]); }
+  btn.setAttribute('data-on','1'); btn.innerHTML='▣';
+  wrap.innerHTML='<div class="evp-spin"></div>';
+  var ifr=document.createElement('iframe');
+  ifr.className='evp-frame';
+  ifr.src='https://player.bilibili.com/player.html?bvid='+p.bv+'&page=1&high_quality=1&danmaku=0&autoplay=1'+(p.sec>=0?('&t='+p.sec):'');
+  ifr.setAttribute('scrolling','no');
+  ifr.setAttribute('frameborder','no');
+  ifr.setAttribute('allowfullscreen','true');
+  ifr.setAttribute('loading','lazy');
+  ifr.setAttribute('allow','autoplay; fullscreen');
+  ifr.onload=function(){ var sp=wrap.querySelector('.evp-spin'); if(sp) sp.style.display='none'; };
+  wrap.appendChild(ifr);
+}
+function destroyEvPlayer(qaId,idx,btn){
+  var wrap=document.getElementById('evp-'+qaId+'-'+idx);
+  if(wrap) wrap.innerHTML='';
+  if(btn){ btn.removeAttribute('data-on'); btn.innerHTML='▶'; }
+}
 function qaCardHtml(c, q){
   /* P0 知识卡传播：分类印章 + 四型卡头缩略图（守卫式：只加不改，画像/印/主题字零素材复用） */
   var CAT_SEAL={'核心知识':['核','core'],'阴阳能量':['能','energy'],'四型人格':['型','type'],'关系与配对':['配','pair'],'成长课题':['修','grow']};
@@ -2159,10 +2278,13 @@ function qaCardHtml(c, q){
       + '</div>';
   }
   var evidenceHtml=(c.evidence && c.evidence.length)
-    ? '<div class="ev-head">▶ 语料佐证 · 原话 '+c.evidence.length+' 条 —— 点右侧播放按钮，跳到B站视频对应位置</div>'
-      + c.evidence.map(function(e){
+    ? '<div class="ev-head">▶ 语料佐证 · 原话 '+c.evidence.length+' 条 —— 点 ▶ 站内看切片，或去 B站看原话</div>'
+      + c.evidence.map(function(e,i){
+          var evLink=esc(e.link||'#');
           return '<div class="ev-item"><span class="ev-quote">「'+hl(e.text||'',q)+'」</span>'
-            +'<a class="ev-go" href="'+esc(e.link||('#'))+'" target="_blank" rel="noopener" title="去B站看原话" aria-label="去B站看原话" onclick="event.stopPropagation()">▶</a></div>';
+            +'<a class="ev-go" href="javascript:void(0)" data-qa="'+esc(c.qaId)+'" data-idx="'+i+'" onclick="event.stopPropagation();toggleEvPlayer(this)" title="站内看切片" aria-label="站内看切片">▶</a>'
+            +'<a class="ev-ext" href="'+evLink+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="去B站看原话">B站 ↗</a>'
+            +'<div class="ev-player" id="evp-'+esc(c.qaId)+'-'+i+'"></div></div>';
         }).join('')
     : qaEvidenceHtml(c);
   return '<div class="qcard" id="card-'+esc(c.qaId)+'" data-pol="'+esc(c.polarity||'both')+'" onclick="toggleQa(this)">'
@@ -2203,7 +2325,12 @@ function toggleQa(el){
   if(!el) return;
   var wasOpen=el.classList.contains('open');
   var cards=document.querySelectorAll('.qcard.open');
-  for(var i=0;i<cards.length;i++) cards[i].classList.remove('open');
+  for(var i=0;i<cards.length;i++){
+    /* 收起卡：销毁卡内所有 B站切片播放器，防止多卡并发声音 */
+    var evs=cards[i].querySelectorAll('.ev-go[data-on="1"]');
+    for(var j=0;j<evs.length;j++) destroyEvPlayer(evs[j].getAttribute('data-qa'),parseInt(evs[j].getAttribute('data-idx'),10),evs[j]);
+    cards[i].classList.remove('open');
+  }
   if(!wasOpen){
     el.classList.add('open');
     try{
@@ -2422,6 +2549,7 @@ function runSearch(){
       +'<div class="hint-chips" style="justify-content:center;padding:10px 0 20px;">'
       + tags.map(function(t){ return '<span class="chip" onclick="goSearch(\''+t[0]+'\')">'+t[0]+' <span style="color:#bbb">'+t[1]+'</span></span>'; }).join('')
       +'</div>'
+      +renderKpGraph()
       +renderTagGraph();
     track('search_query',{q:'',empty:true});
     return;
@@ -2467,6 +2595,48 @@ function runSearch(){
   }
   out.innerHTML=html;
 }
+/* 知识切片体系化图谱：中心「阴阳人格」→ 分类分支 → kpId 系列 → 问答卡；点卡 goQaCard 直达 */
+function renderKpGraph(){
+  var g=(typeof KP_GRAPH!=='undefined'&&KP_GRAPH)?KP_GRAPH:null;
+  if(!g||!g.branches||!g.branches.length) return '';
+  var hub='<div class="mm-hub"><span class="mm-hub-t serif">阴阳人格</span><span class="mm-hub-sub serif">知识图谱</span></div>';
+  var branches=g.branches.map(function(b){
+    var cnt=0;
+    var series=b.series.map(function(s){
+      cnt+=s.cards.length;
+      var cards=s.cards.map(function(c){
+        return '<span class="kp-card" title="'+esc(c.q)+'" onclick="goQaCard(\''+esc(c.qaId)+'\')">'+esc(c.q)+'</span>';
+      }).join('');
+      return '<div class="kp-series">'
+        +'<div class="kp-shead" onclick="this.parentNode.classList.toggle(\'open\')">'
+        +'<span class="kp-sarr">▶</span><span class="kp-sname serif">'+esc(s.name)+'</span><span class="kp-scnt">'+s.cards.length+' 卡</span>'
+        +'</div>'
+        +'<div class="kp-cards">'+cards+'</div>'
+        +'</div>';
+    }).join('');
+    return '<div class="kp-branch" style="--bc:'+b.color+'">'
+      +'<div class="kp-bname"><span class="kp-bdot"></span>'+esc(b.name)+'<span class="kp-bcount">'+cnt+' 卡</span></div>'
+      +series
+      +'</div>';
+  }).join('');
+  return '<div class="tag-mind kp-mind">'
+    +'<div class="mm-head serif">知识切片图谱<span class="mm-sub">分类 → 系列 → 卡片 · 点卡直达问答</span></div>'
+    +hub
+    +'<div class="mm-link"></div>'
+    +'<div class="kp-branches">'+branches+'</div>'
+    +'<button class="kp-toggle" onclick="toggleKpAll(this)">展开全部系列</button>'
+    +'</div>';
+}
+function toggleKpAll(btn){
+  var root=btn.closest?btn.closest('.kp-mind'):null;
+  if(!root) return;
+  var all=root.querySelectorAll('.kp-series');
+  var opened=root.querySelectorAll('.kp-series.open').length;
+  var openAll=(opened<all.length);
+  for(var i=0;i<all.length;i++){ all[i].classList.toggle('open',openAll); }
+  btn.textContent=openAll?'收起全部系列':'展开全部系列';
+}
+
 /* 标签脑图：中心「阴阳人格」→ 四大分支 → 语料高频标签；点标签触发 goSearch */
 function renderTagGraph(){
   var g=(typeof TAG_GRAPH!=='undefined'&&TAG_GRAPH)?TAG_GRAPH:null;
@@ -2560,9 +2730,9 @@ function clearHistory(){
    ① 方法线（觉察→创伤→信念） ② 每日练习 ③ 课题库 ④ 实战觉察
    数据全部复用现有 QA 池，零新增数据文件。 */
 var HEAL_METHOD=[
-  {q:'q-toolbox-01',t:'① 觉察 · 看见反应',d:'先分清「事实」和「故事」——对方晚回消息是事实，「他不在乎我了」是你编的故事。看见情绪，而不是评判情绪。'},
-  {q:'q-toolbox-02',t:'② 创伤 · 每个强烈反应背后都有一处旧伤',d:'最亲近的人一句话精准踩中旧伤，是「完美镜像触发」——触发是被照见，不是灾难。震荡是螺旋上升，不是失败。'},
-  {q:'q-toolbox-03',t:'③ 信念 · 最底层的自动程序',d:'阳信「只有靠自己」，阴信「我不配」——信念在后台自动运行，往往察觉不到。先看见它，才能松动它。'}
+  {q:'q-kp-c3-01',t:'① 觉察 · 看见反应',d:'先分清「事实」和「故事」——对方晚回消息是事实，「他不在乎我了」是你编的故事。觉察=从剧情主角退成观察者，它一定不带评判。'},
+  {q:'q-kp-c11-01',t:'② 创伤 · 每个强烈反应背后都有一处旧伤',d:'最亲近的人一句话精准踩中旧伤，是「完美镜像触发」——触发是被照见，不是灾难。旧伤多在原生家庭，看见了才能重养内在小孩。'},
+  {q:'q-y1-06-01',t:'③ 信念 · 最底层的自动程序',d:'阳信「无能=不被爱」，阴信「我不配得」——信念在后台自动运行，往往察觉不到。先看见它，才能松动它。'}
 ];
 var HEAL_GROUPS=[
   {key:'balance',name:'平衡总纲',sub:'往哪个方向修',kps:['y5-08','y5-02','y5-06','y5-07','y5-09','y5-10','kp-a1-balance','y1-15']},
@@ -2738,16 +2908,60 @@ function renderTest(){
 }
 /* [visual] 纯展示资源（不参与任何逻辑）：封面晨昏轮 / 章号印字 / 四型印字 */
 var WHEEL_SVG='<div class="wheel-wrap wheel-in-cover" aria-hidden="true"><svg class="wheel" viewBox="0 0 420 420" aria-hidden="true"><g filter="url(#wgInk)" opacity=".1"><circle cx="210" cy="210" r="150" fill="#8A8794"/><circle cx="330" cy="112" r="26" fill="#E8913A"/><circle cx="92" cy="304" r="30" fill="#4E6E9E"/></g><circle cx="210" cy="210" r="146" fill="none" stroke="#D4A574" stroke-opacity=".22" stroke-width="10" filter="url(#wgHalo)"/><g class="wheel-orbit"><circle cx="210" cy="210" r="186" fill="none" stroke="#232230" stroke-opacity=".12" stroke-width="1"/><circle cx="210" cy="210" r="166" fill="none" stroke="#232230" stroke-opacity=".35" stroke-width="7" stroke-dasharray="1.6 41.86" transform="rotate(-90 210 210)"/><g stroke="#232230" stroke-opacity=".3" stroke-width="1.5" stroke-linecap="round"><line x1="210" y1="32" x2="210" y2="40"/><line x1="210" y1="388" x2="210" y2="380"/><line x1="32" y1="210" x2="40" y2="210"/><line x1="388" y1="210" x2="380" y2="210"/></g><g fill="#4E6E9E"><circle cx="349" cy="88" r="2" opacity=".55"/><circle cx="63" cy="136" r="1.6" opacity=".4"/><circle cx="86" cy="326" r="1.4" opacity=".45"/><circle cx="344" cy="336" r="2.1" opacity=".5"/></g><path d="M56,82 q14,-10 28,0 q12,8 24,2" fill="none" stroke="#8A8794" stroke-opacity=".55" stroke-width="1.4" stroke-linecap="round"/><path d="M330,360 q16,-10 30,0 q10,7 22,1" fill="none" stroke="#8A8794" stroke-opacity=".5" stroke-width="1.4" stroke-linecap="round"/></g><g class="wheel-core"><path d="M210,70 A140,140 0 0 1 210,350 C270,317 270,243 210,210 C150,177 150,103 210,70 Z" fill="url(#wgDayG)"/><path d="M210,70 A140,140 0 0 0 210,350 C270,317 270,243 210,210 C150,177 150,103 210,70 Z" fill="url(#wgNightG)"/><circle cx="262" cy="146" r="19" fill="#FFEFD6" opacity=".95"/><g stroke="#FFF3DE" stroke-opacity=".7" stroke-width="1.6" stroke-linecap="round"><line x1="262" y1="116" x2="262" y2="122"/><line x1="262" y1="170" x2="262" y2="176"/><line x1="232" y1="146" x2="238" y2="146"/><line x1="286" y1="146" x2="292" y2="146"/><line x1="241" y1="125" x2="245" y2="129"/><line x1="279" y1="163" x2="283" y2="167"/><line x1="283" y1="125" x2="279" y2="129"/><line x1="245" y1="163" x2="241" y2="167"/></g><path d="M226,196 q16,-7 32,-1" fill="none" stroke="#FFF7E8" stroke-opacity=".55" stroke-width="1.4" stroke-linecap="round"/><path d="M238,214 q13,-6 26,-1" fill="none" stroke="#FFF7E8" stroke-opacity=".4" stroke-width="1.3" stroke-linecap="round"/><path d="M154,260 A17,17 0 1,0 154,294 A21,21 0 0,1 154,260 Z" fill="#F2F6FC" opacity=".96"/><g fill="#EAF0F7"><circle cx="185" cy="242" r="1.6" opacity=".9"/><circle cx="205" cy="262" r="1.2" opacity=".75"/><circle cx="172" cy="308" r="1.4" opacity=".8"/><circle cx="132" cy="286" r="1.1" opacity=".6"/></g><g stroke="#EAF0F7" stroke-opacity=".8" stroke-width="1.1" stroke-linecap="round" fill="none"><path d="M196,296 v6 M193,299 h6"/><path d="M148,318 v5 M145.5,320.5 h5"/></g><path d="M120,180 q14,-9 28,-1" fill="none" stroke="#CBD8EA" stroke-opacity=".5" stroke-width="1.3" stroke-linecap="round"/><path d="M210,70 C150,103 150,177 210,210 C270,243 270,317 210,350" fill="none" stroke="#FDF6EA" stroke-opacity=".28" stroke-width="6" stroke-linecap="round"/><path d="M210,70 C150,103 150,177 210,210 C270,243 270,317 210,350" fill="none" stroke="url(#wgSG)" stroke-width="2.2" stroke-linecap="round"/><circle cx="210" cy="210" r="140" fill="none" stroke="#232230" stroke-opacity=".16" stroke-width="1"/><circle cx="210" cy="210" r="3" fill="#FDF6EA" opacity=".9"/></g></svg></div>';
+/* ===== 测试页叙事视觉层 v1（P0+P1，守卫式追加：场景插画/氛围带/旅程小地图）===== */
+var SCENE_KEYS={1:'family',2:'school',3:'work',4:'love',5:'self'};
+var SCENE_EMOJI={family:'🏡',school:'⛹️',work:'💼',love:'💞',self:'🌙'};
+var CHAPTER_ART={
+1:'<svg class="scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="c1sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6E8"/><stop offset=".55" stop-color="#F6C384"/><stop offset="1" stop-color="#E8913A"/></linearGradient><linearGradient id="c1door" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9742A"/><stop offset="1" stop-color="#9A382D"/></linearGradient></defs><rect width="600" height="400" fill="url(#c1sky)"/><circle cx="478" cy="92" r="36" fill="#FFF8EA" opacity=".95"/><g stroke="#FFF8EA" stroke-opacity=".8" stroke-width="3" stroke-linecap="round"><line x1="478" y1="40" x2="478" y2="50"/><line x1="478" y1="134" x2="478" y2="144"/><line x1="426" y1="92" x2="436" y2="92"/><line x1="520" y1="92" x2="530" y2="92"/></g><ellipse cx="300" cy="398" rx="340" ry="30" fill="#E3B77E" opacity=".5"/><rect x="410" y="150" width="150" height="230" rx="6" fill="#B5483A" opacity=".5"/><rect x="420" y="158" width="62" height="214" rx="3" fill="url(#c1door)"/><rect x="482" y="158" width="22" height="214" fill="#FFF4E2"/><rect x="504" y="158" width="56" height="214" rx="3" fill="#C9742A"/><rect x="400" y="142" width="170" height="12" rx="3" fill="#8A5A2A"/><circle cx="466" cy="262" r="4" fill="#FFF4E2"/><circle cx="232" cy="240" r="22" fill="#232230"/><path d="M206 372 q0-78 26-78 q26 0 26 78 z" fill="#232230"/><path d="M208 372 q-14-10 4-18 l12-7" stroke="#232230" stroke-width="9" stroke-linecap="round"/><rect x="252" y="338" width="34" height="28" rx="7" fill="#C9742A"/><rect x="196" y="360" width="26" height="17" rx="2" fill="#FCFAF6" transform="rotate(-8 209 368)"/><path d="M208 366 l6 4 l8-9" stroke="#B5483A" stroke-width="2" fill="none" opacity=".7"/><ellipse cx="232" cy="384" rx="46" ry="9" fill="#232230" opacity=".12"/></svg>',
+2:'<svg class="scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="c2sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFDF6"/><stop offset=".6" stop-color="#F5ECD8"/><stop offset="1" stop-color="#EFE3C6"/></linearGradient></defs><rect width="600" height="400" fill="url(#c2sky)"/><circle cx="300" cy="70" r="30" fill="#F6C384" opacity=".9"/><path d="M-20 320 q320-90 640-30" fill="none" stroke="#D4A574" stroke-width="16" stroke-linecap="round" opacity=".6"/><path d="M-20 344 q320-90 640-30" fill="none" stroke="#E8913A" stroke-width="4" stroke-dasharray="14 10" opacity=".7"/><circle cx="120" cy="252" r="26" fill="#E8913A" opacity=".85"/><path d="M100 238 a26 26 0 0 0 12 40 M132 226 a26 26 0 0 1 8 44" fill="none" stroke="#FFF6E8" stroke-width="2.5"/><circle cx="470" cy="288" r="26" fill="none" stroke="#31486C" stroke-width="5"/><circle cx="548" cy="280" r="24" fill="none" stroke="#31486C" stroke-width="5"/><path d="M470 288 L500 240 L540 276 M500 240 L512 268" fill="none" stroke="#31486C" stroke-width="4" stroke-linecap="round"/><circle cx="280" cy="216" r="20" fill="#4A4754"/><path d="M256 340 q0-74 24-74 q24 0 24 74 z" fill="#4A4754"/><path d="M282 250 l40-18" stroke="#4A4754" stroke-width="6" stroke-linecap="round"/><circle cx="352" cy="228" r="18" fill="#6F6C7B" opacity=".8"/><path d="M332 344 q0-66 20-66 q20 0 20 66 z" fill="#6F6C7B" opacity=".8"/></svg>',
+3:'<svg class="scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="c3sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEF1F6"/><stop offset="1" stop-color="#D8E0EC"/></linearGradient><linearGradient id="c3scr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C384"/><stop offset="1" stop-color="#4E6E9E"/></linearGradient></defs><rect width="600" height="400" fill="url(#c3sky)"/><rect x="40" y="56" width="250" height="200" rx="4" fill="#FFFFFF" opacity=".85" stroke="#C9D3E2" stroke-width="3"/><g fill="#A9B8CE"><rect x="70" y="180" width="42" height="76"/><rect x="128" y="150" width="30" height="106"/><rect x="180" y="196" width="38" height="60"/><rect x="234" y="166" width="24" height="90"/></g><rect x="48" y="120" width="236" height="3" opacity=".4" fill="#FFFFFF"/><rect x="48" y="172" width="236" height="3" opacity=".4" fill="#FFFFFF"/><line x1="300" y1="0" x2="300" y2="70" stroke="#8A8794" stroke-width="3"/><circle cx="300" cy="80" r="12" fill="#F6C384"/><line x1="430" y1="0" x2="430" y2="70" stroke="#8A8794" stroke-width="3"/><circle cx="430" cy="80" r="12" fill="#F6C384"/><polygon points="120,280 480,280 560,360 40,360" fill="#FFFFFF" stroke="#C9D3E2" stroke-width="3"/><rect x="248" y="250" width="94" height="24" rx="4" fill="#4A4754"/><rect x="254" y="260" width="82" height="52" rx="3" fill="url(#c3scr)"/><rect x="292" y="312" width="10" height="46" fill="#4A4754"/><path d="M470 360 l0-56 M470 304 l26-16 M470 340 l24-14 M470 360 l-28 0" stroke="#6F6C7B" stroke-width="6" stroke-linecap="round" fill="none"/><rect x="442" y="356" width="58" height="10" rx="3" fill="#6F6C7B"/><circle cx="150" cy="172" r="15" fill="#4A4754" opacity=".85"/><path d="M134 252 q0-50 16-50 q16 0 16 50 q8 6 12 14 l-56 0 q4-8 12-14 z" fill="#4A4754" opacity=".85"/></svg>',
+4:'<svg class="scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="c4sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C384"/><stop offset=".45" stop-color="#E8913A"/><stop offset="1" stop-color="#4E6E9E"/></linearGradient><radialGradient id="c4mir" cx="50%" cy="38%" r="70%"><stop offset="0" stop-color="#FFF6E8" stop-opacity=".95"/><stop offset="1" stop-color="#E8913A" stop-opacity=".55"/></radialGradient></defs><rect width="600" height="400" fill="url(#c4sky)"/><circle cx="300" cy="120" r="62" fill="url(#c4mir)" stroke="#D4A574" stroke-width="6"/><circle cx="278" cy="98" r="14" fill="#FFFDF8" opacity=".6"/><path d="M170 340 l0-52 M170 288 l-22-14 M170 320 l-20-12 M170 340 l-30 0" stroke="#31486C" stroke-width="7" stroke-linecap="round" fill="none"/><rect x="140" y="334" width="62" height="12" rx="4" fill="#31486C"/><path d="M430 340 l0-52 M430 288 l22-14 M430 320 l20-12 M430 340 l30 0" stroke="#B5483A" stroke-width="7" stroke-linecap="round" fill="none"/><rect x="398" y="334" width="62" height="12" rx="4" fill="#B5483A"/><rect x="212" y="300" width="34" height="26" rx="6" fill="#FFFFFF" opacity=".7" stroke="#C9D3E2" stroke-width="2"/><rect x="354" y="300" width="34" height="26" rx="6" fill="#FFFFFF" opacity=".7" stroke="#C9D3E2" stroke-width="2"/><rect x="436" y="252" width="26" height="44" rx="4" fill="#232230"/><rect x="439" y="256" width="20" height="36" rx="2" fill="#F6C384"/><circle cx="240" cy="240" r="18" fill="#232230" opacity=".9"/><path d="M218 340 q0-64 22-64 q22 0 22 64 z" fill="#232230" opacity=".9"/><circle cx="362" cy="240" r="18" fill="#4A4754" opacity=".9"/><path d="M340 340 q0-64 22-64 q22 0 22 64 z" fill="#4A4754" opacity=".9"/></svg>',
+5:'<svg class="scene-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="c5sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232F45"/><stop offset=".6" stop-color="#31486C"/><stop offset="1" stop-color="#4E6E9E"/></linearGradient></defs><rect width="600" height="400" fill="url(#c5sky)"/><g fill="#EAF0F7"><circle cx="90" cy="60" r="2"/><circle cx="180" cy="90" r="1.6" opacity=".7"/><circle cx="300" cy="40" r="2.2"/><circle cx="520" cy="66" r="1.8" opacity=".8"/><circle cx="420" cy="34" r="1.4" opacity=".6"/><circle cx="240" cy="120" r="1.4" opacity=".5"/></g><circle cx="470" cy="84" r="30" fill="#F2EFE9"/><circle cx="480" cy="74" r="6" fill="#232F45" opacity=".35"/><circle cx="458" cy="94" r="4" fill="#232F45" opacity=".25"/><rect x="360" y="60" width="180" height="170" rx="4" fill="#232F45" stroke="#4E6E9E" stroke-width="5"/><rect x="368" y="68" width="164" height="154" rx="2" fill="#3A5480" opacity=".55"/><rect x="368" y="140" width="164" height="3" fill="#4E6E9E"/><rect x="450" y="68" width="3" height="154" fill="#4E6E9E"/><path d="M320 60 q-30 120 10 170 l-40 0 q-30-70 0-170 z" fill="#232F45"/><rect x="40" y="300" width="340" height="30" rx="8" fill="#4E6E9E"/><rect x="56" y="236" width="150" height="66" rx="10" fill="#5F81AE"/><path d="M120 236 q0-40 34-40 q34 0 34 40" fill="#232230"/><circle cx="184" cy="224" r="16" fill="#232230"/><rect x="400" y="330" width="44" height="34" rx="4" fill="#4E6E9E"/><rect x="408" y="306" width="28" height="26" rx="3" fill="#232230"/><rect x="410" y="308" width="24" height="22" rx="2" fill="#F6C384" opacity=".95"/><circle cx="422" cy="340" r="10" fill="#F6C384" opacity=".25"/></svg>'
+};
+function sceneArt(chNo){
+  var k=SCENE_KEYS[chNo]||'family';
+  return '<div class="scene-frame scene-'+k+'">'
+    + (CHAPTER_ART[chNo]||'')
+    + '<div class="scene-shade"></div>'
+    + '</div>';
+}
+function sceneBadge(sceneKey){
+  var names={family:'家',school:'校园',work:'职场',love:'亲密',self:'独处'};
+  return '<span class="scene-badge scene-'+esc(sceneKey)+'">'
+    + '<span class="sb-emoji">'+(SCENE_EMOJI[sceneKey]||'·')+'</span>'
+    + '<span class="sb-name">'+esc(names[sceneKey]||sceneKey)+'</span>'
+    + '</span>';
+}
+function journeyHtml(curNo){
+  var n=Math.min(5, T.chapters&&T.chapters.length||5);
+  var s='<div class="journey" aria-hidden="true">';
+  for(var i=1;i<=n;i++){
+    s+='<div class="journey-node'+(i<curNo?' done':(i===curNo?' on':''))+'">'
+      +'<span class="jn-dot"></span>'
+      +'<span class="jn-emoji">'+(SCENE_EMOJI[SCENE_KEYS[i]]||'')+'</span>'
+      +'</div>';
+  }
+  return s+'</div>';
+}
 var CH_NUM={1:'壹',2:'贰',3:'叁',4:'肆',5:'伍',6:'陆',7:'柒',8:'捌',9:'玖',10:'拾'};
 var SEAL_CHAR={'yang-male':'承','yang-female':'破','yin-female':'连','yin-male':'潜'};
 function renderTestCover(box){
   var prog=loadJSON(K_PROG,null);
   var canResume=prog && prog.gender && prog.answers && Object.keys(prog.answers).length>0;
+  var jp='<div class="journey-preview" aria-hidden="true">';
+  var jpTitles=['小时候的家','校园与少年','职场里的你','亲密关系里的你','深夜独处的你'];
+  for(var ji=0;ji<jpTitles.length;ji++){
+    var jk=SCENE_KEYS[ji+1];
+    jp+='<div class="jp-item"><span class="jp-emoji">'+(SCENE_EMOJI[jk]||'')+'</span><span>'+esc(jpTitles[ji])+'</span></div>';
+  }
+  jp+='</div>';
   box.innerHTML='<div class="t-cover">'
     +WHEEL_SVG
     +'<div class="hero-seals"><span class="seal seal-yang">阳</span><span class="hero-dash"></span><span class="seal seal-yin">阴</span></div>'
-    +'<h2 class="serif">20 道人生选择题<br>看穿你面对世界的第一反应</h2>'
-    +'<p class="sub">从「小时候的家」走到「深夜独处的你」——每题 2 个选项，选你的本能，不选「更好的那个」。</p>'
+    +'<h2 class="serif">你的人生，二十个选择<br>看穿你面对世界的第一反应</h2>'
+    +'<p class="sub">从白天的家门，走到深夜的房间——五幕走完，看见你面对世界的第一反应。每题 2 个选项，选你的本能，不选「更好的那个」。</p>'
+    +'<div class="light-scale" aria-hidden="true"><span>☀ 晨</span><div class="ls-bar"></div><span>夜 ☾</span></div>'
+    +jp
     +(canResume
       ? '<div class="last-strip" style="text-align:left;"><div style="flex:1"><div class="lbl">上次答到一半（'+esc(prog.savedAt||'')+'）</div><div style="font-weight:700">'+esc(prog.gender==='male'?'男版':'女版')+' · 已答 '+Object.keys(prog.answers).length+' 题</div></div><button class="btn btn-sm" onclick="resumeQuiz()">续答</button></div>'
       : '')
@@ -2793,18 +3007,18 @@ function showChapterIntro(){
   var total=T.quiz.length;
   var answered=Object.keys(T.answers).length;
   saveProgress();
-  var tickTotal=T.chapters.length||1, ticksHtml='';
-  for(var ti=1;ti<=tickTotal;ti++){ ticksHtml+='<span class="ch-tick'+(ti===ch.no?' on':'')+'"></span>'; }
   $('testBox').innerHTML='<div class="ch-head"><div class="progress-bar"><div class="progress-fill" style="width:'+(answered*100/total)+'%"></div></div>'
     +'<div class="progress-meta"><span>第 '+Math.min(answered+1,total)+' / '+total+' 题</span><span>'+esc(no)+' · '+esc(ch.title||'')+'</span></div></div>'
-    +'<div class="t-flow"><div class="ch-intro">'
+    +'<div class="t-flow"><div class="chapter-cover">'
+    +sceneArt(ch.no)
+    +'<div class="cover-inner">'
     +'<div class="ch-seal" aria-hidden="true">'+(CH_NUM[ch.no]||'章')+'</div>'
     +'<div class="ch-no">'+esc(no)+'</div>'
     +'<h3 class="serif">'+esc(ch.title||'')+'</h3>'
     +(ch.intro?('<p>'+esc(ch.intro)+'</p>'):'')
-    +'<div class="ch-ticks" aria-hidden="true">'+ticksHtml+'</div>'
+    +journeyHtml(ch.no)
     +'<button class="btn" onclick="showQuestion()">开始作答</button>'
-    +'</div></div>';
+    +'</div></div></div>';
 }
 function goNextChapter(nextIdx){
   T.idx=nextIdx; saveProgress(); showChapterIntro();
@@ -2823,9 +3037,16 @@ function showQuestion(){
     optsHtml+='<button class="q-opt'+sel+'" onclick="pickOpt(\''+q.id+'\','+oi+',this)"><span class="opt-label">'+String.fromCharCode(65+i)+'</span>'+esc(o.t)+'</button>';
   }
   var total=T.quiz.length;
+  var jny=(T.chapters&&T.chapters.length===5)?journeyHtml(ch.no):'';
   $('testBox').innerHTML='<div class="ch-head"><div class="progress-bar"><div class="progress-fill" style="width:'+((T.idx)*100/total)+'%"></div></div>'
-    +'<div class="progress-meta"><span>第 '+(T.idx+1)+' / '+total+' 题</span><span>'+esc(no)+' · '+esc(ch.title||'')+'</span></div></div>'
-    +'<div class="t-flow"><div class="q-panel">'
+    +'<div class="progress-meta"><span>第 '+(T.idx+1)+' / '+total+' 题</span><span>'+esc(no)+' · '+esc(ch.title||'')+'</span></div>'
+    +jny+'</div>'
+    +'<div class="t-flow">'
+    +'<div class="q-scene scene-'+esc(q.scene||SCENE_KEYS[ch.no]||'family')+'">'
+    +   sceneBadge(q.scene||SCENE_KEYS[ch.no]||'family')
+    +   '<span class="qs-pos">'+esc(no)+' · 第 '+(T.idx+1)+' 题</span>'
+    +'</div>'
+    +'<div class="q-panel">'
     +'<div class="q-tag">'+esc(no)+' · '+esc(ch.title||'')+'</div>'
     +'<div class="q-text">'+esc(q.text)+'</div>'
     +optsHtml
@@ -2855,6 +3076,7 @@ function nextQuestion(){
 }
 function showChapterReview(chNo){
   var ch=null, lastIdx=-1;
+  var no='第'+['一','二','三','四','五','六','七','八','九','十'][chNo-1]+'章';
   for(var i=0;i<T.chapters.length;i++){ if(T.chapters[i].no===chNo){ ch=T.chapters[i]; break; } }
   if(!ch){ T.idx++; showQuestion(); return; }
   for(var j=0;j<T.quiz.length;j++){ if(T.quiz[j].chapter===chNo) lastIdx=j; }
@@ -2863,11 +3085,15 @@ function showChapterReview(chNo){
     var q=T.quiz[k];
     if(q.chapter!==chNo) continue;
     var a=T.answers[q.id];
-    var optTxt=(a!==undefined && q.opts[a])?q.opts[a].t:'';
+    var o=(a!==undefined && q.opts[a])?q.opts[a]:null;
+    var optTxt=o?o.t:'';
+    var pol=o&&o.k===1 ? '<span class="pol pol-yang">阳</span>'
+          : o&&o.k===-1 ? '<span class="pol pol-yin">阴</span>'
+          : '<span class="pol pol-neu">中</span>';
     var qa=findQa(q.kpLink, q.kpCard);
-    var link=qa?('<span class="review-link" onclick="goQaCard(\''+esc(qa.qaId)+'\')">为什么这样答 →「'+esc(qa.question)+'」</span>'):'';
+    var link=qa?('<span class="review-link" onclick="goQaCard(\''+esc(qa.qaId)+'\')">「为什么这样答」→ 知识卡：'+esc(qa.question)+'</span>'):'';
     items+='<div class="review-item"><div class="review-q">'+esc(q.text)+'</div>'
-      +'<div class="review-a">你选了：'+esc(optTxt)+'</div>'
+      +'<div class="review-a">'+pol+'你选了：'+esc(optTxt)+'</div>'
       +link+'</div>';
   }
   var isLast=chNo===T.chapters[T.chapters.length-1].no;
@@ -2875,9 +3101,10 @@ function showChapterReview(chNo){
     ? '<button class="btn" onclick="showResultFlow()">看我的结果</button>'
     : '<button class="btn" onclick="goNextChapter('+(lastIdx+1)+')">下一章 →</button>';
   $('testBox').innerHTML='<div class="t-flow" style="max-width:640px;">'
-    +'<div class="ch" style="margin:16px 0 4px;">CHAPTER REVIEW</div>'
-    +'<h3 class="serif" style="font-size:22px;letter-spacing:2px;margin-bottom:6px;">'+esc(ch.title||'')+' · 为什么这样答</h3>'
-    +'<p style="color:var(--fog);font-size:13px;margin-bottom:16px;">每道题背后是一张知识卡——同一情境下，阴与阳为什么会有这个区分。</p>'
+    +'<div class="review-hero">'+sceneArt(chNo)
+    +'<div class="rh-inner"><div class="rh-no">'+esc(no)+' · 回顾</div>'
+    +'<h3 class="serif">'+esc(ch.title||'')+' · 你为什么这样答</h3>'
+    +'<p style="color:var(--fog);font-size:13px;margin-bottom:16px;">回看这一程——你选的每一步，背后都有一张知识卡。</p></div></div>'
     +items
     +'<div class="q-nav">'+nextBtn+'</div>'
     +'</div>';

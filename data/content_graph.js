@@ -11,10 +11,10 @@ var CONTENT_GRAPH = {
     {
       id: 'P1', name: '四型人设卡', role: '身份认同传播', mainPlatform: '小红书', subPlatform: ['抖音','视频号'], share: 25, funnel: '获客',
       topics: [
-        { id: 'p1x01', title: '男阳·承重者人设', sourceQa: 'slogan:yang-male', hook: '扛住了全世界，却扛不住一句「你也可以脆弱」', formats: ['图文卡'], cta: { type: 'test', from: 'p1x01' }, compliance: '✅' },
-        { id: 'p1x02', title: '女阳·破局者人设', sourceQa: 'slogan:yang-female', hook: '不是我喜欢一个人扛——是每次想被接住，都扑了空', formats: ['图文卡'], cta: { type: 'test', from: 'p1x02' }, compliance: '✅' },
-        { id: 'p1x03', title: '女阴·连接者人设', sourceQa: 'slogan:yin-female', hook: '我给了这么多，不过是在等一句：你已经足够了', formats: ['图文卡'], cta: { type: 'test', from: 'p1x03' }, compliance: '✅' },
-        { id: 'p1x04', title: '男阴·深潜者人设', sourceQa: 'slogan:yin-male', hook: '你看到的冷漠，是我用尽全力不陷进去的样子', formats: ['图文卡'], cta: { type: 'test', from: 'p1x04' }, compliance: '✅' },
+        { id: 'p1x01', title: '男阳人设', sourceQa: 'slogan:yang-male', hook: '扛住了全世界，却扛不住一句「你也可以脆弱」', formats: ['图文卡'], cta: { type: 'test', from: 'p1x01' }, compliance: '✅' },
+        { id: 'p1x02', title: '女阳人设', sourceQa: 'slogan:yang-female', hook: '不是我喜欢一个人扛——是每次想被接住，都扑了空', formats: ['图文卡'], cta: { type: 'test', from: 'p1x02' }, compliance: '✅' },
+        { id: 'p1x03', title: '女阴人设', sourceQa: 'slogan:yin-female', hook: '我给了这么多，不过是在等一句：你已经足够了', formats: ['图文卡'], cta: { type: 'test', from: 'p1x03' }, compliance: '✅' },
+        { id: 'p1x04', title: '男阴人设', sourceQa: 'slogan:yin-male', hook: '你看到的冷漠，是我用尽全力不陷进去的样子', formats: ['图文卡'], cta: { type: 'test', from: 'p1x04' }, compliance: '✅' },
         { id: 'p1x05', title: '四个字看穿一个人', sourceQa: 'types:seals', hook: '四个字看穿你对象：承、破、连、潜——对号入座', formats: ['短视频口播','图文'], cta: { type: 'test', from: 'p1x05' }, compliance: '✅' },
         { id: 'p1x06', title: '四型速查图', sourceQa: 'q-y0-02-01', hook: '一张图分清四种人：一致型两种、错位型两种', formats: ['长图'], cta: { type: 'test', from: 'p1x06' }, compliance: '✅' },
         { id: 'p1x07', title: '你的人格几岁了', sourceQa: 'q-y3-age-01', hook: '成年人的三种心智：幼、少、老——你的内核今年几岁？', formats: ['互动问答'], cta: { type: 'card', kp: 'q-y3-age-01' }, compliance: '✅' },
@@ -55,7 +55,7 @@ var CONTENT_GRAPH = {
         { id: 'p4x01', title: '测完晒图挑战', sourceQa: 'share:image', hook: '测出来是「承」，谁懂啊 #阴阳人格', formats: ['UGC挑战标签'], cta: { type: 'test', from: 'p4x01' }, compliance: '✅' },
         { id: 'p4x02', title: '情侣合盘挑战', sourceQa: 'pair:report', hook: '和对象互测，看双印合不合——评论区晒组合', formats: ['挑战'], cta: { type: 'pair' }, compliance: '✅' },
         { id: 'p4x03', title: '猜他是什么型', sourceQa: 'types:quickref', hook: '猜猜你老板/你爸/你前任是哪种——评论区对答案', formats: ['互动帖'], cta: { type: 'test', from: 'p4x03' }, compliance: '✅' },
-        { id: 'p4x04', title: '四型吵架现场', sourceQa: 'q-kp-a2-01', hook: '同一件事四种反应：承重者沉默、破局者开怼、连接者哭、深潜者消失——你是哪种', formats: ['情景短视频'], cta: { type: 'test', from: 'p4x04' }, compliance: '✅' }
+        { id: 'p4x04', title: '四型吵架现场', sourceQa: 'q-kp-a2-01', hook: '同一件事四种反应：男阳沉默、女阳开怼、女阴哭、男阴消失——你是哪种', formats: ['情景短视频'], cta: { type: 'test', from: 'p4x04' }, compliance: '✅' }
       ]
     },
     {
@@ -64,7 +64,7 @@ var CONTENT_GRAPH = {
         { id: 'p5x01', title: '哪吒×敖丙', sourceQa: 'cast:nezha', hook: '哪吒为什么是男阳，敖丙为什么是男阴——一阳一阴才成CP', formats: ['混剪+解说'], cta: { type: 'test', from: 'p5x01' }, compliance: '⚠️文字解说+自绘角色卡，不用剧集截图' },
         { id: 'p5x02', title: '甄嬛传四型', sourceQa: 'cast:zhenhuan', hook: '甄嬛传里的阴阳四型：谁扛、谁破、谁连、谁潜', formats: ['图文','解说'], cta: { type: 'test', from: 'p5x02' }, compliance: '⚠️同上' },
         { id: 'p5x03', title: '知否四型', sourceQa: 'cast:zhiming', hook: '明兰的「扮猪吃老虎」，是女阳的藏锋策略', formats: ['图文'], cta: { type: 'test', from: 'p5x03' }, compliance: '⚠️同上' },
-        { id: 'p5x04', title: '繁花四型', sourceQa: 'cast:fanhua', hook: '繁花里的两种女能量：连接者与破局者', formats: ['图文'], cta: { type: 'test', from: 'p5x04' }, compliance: '⚠️同上' }
+        { id: 'p5x04', title: '繁花四型', sourceQa: 'cast:fanhua', hook: '繁花里的两种女能量：女阴与女阳', formats: ['图文'], cta: { type: 'test', from: 'p5x04' }, compliance: '⚠️同上' }
       ]
     },
     {

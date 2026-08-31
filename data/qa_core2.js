@@ -16,7 +16,6 @@
 var QA_CORE2 = [
 
   // ==================== 阶1 补全 ====================
-
   {
     qaId:'q-y1-01-01', kpId:'y1-01', stage:1, category:'阴阳能量', scene:['self','work'], forTypes:[],
     question:'能量方向：阳向外辐射，阴向内深潜——总纲的第一推论',
@@ -39,7 +38,6 @@ var QA_CORE2 = [
     shareText:'阳向外辐射，阴向内深潜——被否定时一个顶回去、一个照单全收，方向就是内核的第一指纹。',
     editorNotes:'总纲 y1-01 能量方向（阶1，✅P1）；源 §2.5.2/680；V3.3 §1.3 能量流动方向：向外辐射 vs 向内深潜、§2.5 自爱/爱他本能；证据 B39（旧卡验证切片复用）。'
   },
-
   {
     qaId:'q-y1-03-01', kpId:'y1-03', stage:1, category:'阴阳能量', scene:['self','work'], forTypes:[],
     question:'自我强弱：阳撑得满，阴收得柔——弱不等于没有',
@@ -50,17 +48,16 @@ var QA_CORE2 = [
       '判读提醒：把「自我弱」听成「没自我」，会误判阴的独立诉求；把「自我强」读成「内心强大」，会漏看阳的自恋卡点。'
     ],
     evidence:[
-      {ts:'00:23', videoId:'B680', bv:'BV1KXby62Ems', text:'阳的呈现上，首先第一个是他的自我非常强。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=23'},
-      {ts:'00:27', videoId:'B680', bv:'BV1KXby62Ems', text:'而阴的内核的话，他自我是比较弱的——但不代表说阴没有自我，他的这个自我会比较弱。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=27'}
+      {ts:'00:23', videoId:'B680', bv:'BV195g56xEG4', text:'阳的呈现上，首先第一个是他的自我非常强。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=23'},
+      {ts:'00:27', videoId:'B680', bv:'BV195g56xEG4', text:'而阴的内核的话，他自我是比较弱的——但不代表说阴没有自我，他的这个自我会比较弱。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=27'}
     ],
     quote:'阳的自我非常强；阴的自我比较弱——但不代表阴没有自我。',
-    videoTitle:'阴性爱上一个不爱自己的人怎么办【新增·v4-628】',
-    jumpUrl:'https://www.bilibili.com/video/BV1KXby62Ems?t=23',
+    videoTitle:'如何判断阴阳能量内核属性',
+    jumpUrl:'https://www.bilibili.com/video/BV195g56xEG4?t=23',
     compliance:'web+mini',
     shareText:'阳自我撑得满，阴自我收得柔——弱不等于没有，强弱之别是后续一切差异的第一环。',
     editorNotes:'总纲 y1-03 自我强弱（阶1，✅P1）；680 内核论链条第一环；V3.3 §3.2 画像（自我强弱）；证据 B680（旧卡验证切片复用）。'
   },
-
   {
     qaId:'q-y1-04-01', kpId:'y1-04', stage:1, category:'阴阳能量', scene:['work','love'], forTypes:[],
     question:'价值权重：阳重事业，阴重感情——权重不同，不是有无',
@@ -72,17 +69,16 @@ var QA_CORE2 = [
       '关系含义：权重互补是吸引的来源，也是摩擦的来源——阳给的是支持，阴要的是陪伴。'
     ],
     evidence:[
-      {ts:'01:02', videoId:'B680', bv:'BV1KXby62Ems', text:'女阴的内在世界，这个感情是最重要的，然后她们的事业就弱很多。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=62'},
-      {ts:'01:11', videoId:'B680', bv:'BV1KXby62Ems', text:'男阳的体现，就是他的事业心会非常强，然后他的自我也会非常强。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=71'}
+      {ts:'01:02', videoId:'B680', bv:'BV195g56xEG4', text:'女阴的内在世界，这个感情是最重要的，然后她们的事业就弱很多。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=62'},
+      {ts:'01:11', videoId:'B680', bv:'BV195g56xEG4', text:'男阳的体现，就是他的事业心会非常强，然后他的自我也会非常强。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=71'}
     ],
     quote:'女阴感情第一、事业弱很多；男阳事业心非常强、自我也非常强。',
-    videoTitle:'阴性爱上一个不爱自己的人怎么办【新增·v4-628】',
-    jumpUrl:'https://www.bilibili.com/video/BV1KXby62Ems?t=62',
+    videoTitle:'如何判断阴阳能量内核属性',
+    jumpUrl:'https://www.bilibili.com/video/BV195g56xEG4?t=62',
     compliance:'web+mini',
     shareText:'阳重事业、阴重感情——不是有无之别，是权重排序不同：两套价值系统互相看不懂。',
     editorNotes:'总纲 y1-04 价值权重（阶1，✅P1）；680 链条第二环；V3.3 §2.3.2、§3.2 画像；证据 B680（旧卡验证切片复用）。'
   },
-
   {
     qaId:'q-y1-09-01', kpId:'y1-09', stage:1, category:'阴阳能量', scene:['work','love'], forTypes:[],
     question:'决策模式：阳定方向，阴抠细节',
@@ -104,7 +100,6 @@ var QA_CORE2 = [
     shareText:'阳定方向、阴抠细节：决策快慢与依据都相反——最佳配合是阳说「往东走」，阴把每一步填满。',
     editorNotes:'总纲 y1-09 决策模式（阶1，✅P1）；源 §2.8.3/117；V3.3 §2.4.4 决策模式的阴阳差异；证据 B117（旧卡验证切片复用）。'
   },
-
   {
     qaId:'q-y1-10-01', kpId:'y1-10', stage:1, category:'阴阳能量', scene:['work','love'], forTypes:[],
     question:'沟通风格：阳直接解题，阴迂回连接',
@@ -126,7 +121,6 @@ var QA_CORE2 = [
     shareText:'阳沟通为解题，阴沟通为连接——阴的「反话」别按字面执行，阳的直接别按攻击解读。',
     editorNotes:'总纲 y1-10 沟通风格（阶1，✅P1）；源 §2.8.4；V3.3 §2.4.5 沟通风格的阴阳差异（B606 羞耻感扭曲正源、B42 当面锣正源）；证据 B606/B42（B42 新窗口，与 y1-13 错开）。'
   },
-
   {
     qaId:'q-y1-14-01', kpId:'y1-14', stage:1, category:'阴阳能量', scene:['love'], forTypes:[],
     question:'关系引力：阳交强不慕，阴慕强依赖',
@@ -139,17 +133,16 @@ var QA_CORE2 = [
       '成长变量：独立人格一出来，慕强依赖会松动——开始欣赏强者，而不再攀附强者。'
     ],
     evidence:[
-      {ts:'01:35', videoId:'B680', bv:'BV1KXby62Ems', text:'阴性能量通常都慕强——他们找伴侣，一定会找比自己强的。但阳性能量就不是这样，阳不会慕强；他会和强者交朋友，但是他不会像阴那样，一定要找一个比自己强很多的。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=95'},
-      {ts:'02:00', videoId:'B680', bv:'BV1KXby62Ems', text:'还有就是阴性能量比较依赖人，因为他自我弱嘛。而阳是不会去依赖别人的。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=120'}
+      {ts:'01:35', videoId:'B680', bv:'BV195g56xEG4', text:'阴性能量通常都慕强——他们找伴侣，一定会找比自己强的。但阳性能量就不是这样，阳不会慕强；他会和强者交朋友，但是他不会像阴那样，一定要找一个比自己强很多的。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=95'},
+      {ts:'02:00', videoId:'B680', bv:'BV195g56xEG4', text:'还有就是阴性能量比较依赖人，因为他自我弱嘛。而阳是不会去依赖别人的。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=120'}
     ],
     quote:'阴慕强、依赖人；阳不慕强，只和强者交朋友。',
-    videoTitle:'阴性爱上一个不爱自己的人怎么办【新增·v4-628】',
-    jumpUrl:'https://www.bilibili.com/video/BV1KXby62Ems?t=95',
+    videoTitle:'如何判断阴阳能量内核属性',
+    jumpUrl:'https://www.bilibili.com/video/BV195g56xEG4?t=95',
     compliance:'web+mini',
     shareText:'阴慕强、依赖人；阳不慕强、只和强者交朋友——关系引力的方向，从内核就相反。',
     editorNotes:'总纲 y1-14 关系引力（阶1，✅P1）；源 680/678；融合动力归 y7-13；V3.3 §2.3.2、§4.6；证据 B680（旧卡验证切片复用）。'
   },
-
   {
     qaId:'q-y1-19-01', kpId:'y1-19', stage:1, category:'阴阳能量', scene:['love'], forTypes:[],
     question:'作的方式：女阴求确认，男阴布心机',
@@ -171,7 +164,6 @@ var QA_CORE2 = [
     shareText:'同是「作」：女阴演给你看（求哄），男阴藏起来让你猜（求追）——一个耗你耐心，一个耗整个关系。',
     editorNotes:'总纲 y1-19 作的方式（阶1，待产 K1，型内对比变体）；场景细节归 y3-b3c/b4c；V3.3 §3.7.5 男阴的作 vs 女阴的作、§2.3.6；证据 B186（新提取核验）/B605（切片复用）。'
   },
-
   {
     qaId:'q-y1-20-01', kpId:'y1-20', stage:1, category:'阴阳能量', scene:['love'], forTypes:[],
     question:'仇恨路径：阳生戾气，阴积怨气——仇恨走两条路',
@@ -194,7 +186,6 @@ var QA_CORE2 = [
     shareText:'阳被背叛起仇念生戾气（报仇），阴被抛弃生恨意积怨气（怨恨）——仇恨的两条路，化解方式也相反。',
     editorNotes:'总纲 y1-20 仇恨路径（阶1，✅K1 试点）；报仇周期归 y7-08；V3.3 §2.6.5 戾气 vs 怨气（B273 正源）；证据 B273/B101（新提取逐句核验原文）。'
   },
-
   {
     qaId:'q-y1-21-01', kpId:'y1-21', stage:1, category:'阴阳能量', scene:['love'], forTypes:[],
     question:'性与爱的耦合：阳分得开，阴分不开',
@@ -216,7 +207,6 @@ var QA_CORE2 = [
     shareText:'阳性性与爱分得开（双窗结构），阴性身心一体分不开——两套架构互看，一个像渣、一个像黏。',
     editorNotes:'总纲 y1-21 性与爱的耦合（阶1，✅K1 试点）；亲密体验归 y2-12；V3.3 §2.1.2（性与爱分离）、§2.3.2；证据 B31 双窗（旧卡验证切片复用）。⚠️ 小程序阶段需复核（涉性表述措辞），网页先行。'
   },
-
   {
     qaId:'q-y1-23-01', kpId:'y1-23', stage:1, category:'阴阳能量', scene:['self'], forTypes:[],
     question:'属性浓度：可偏阳可偏阴——连续谱，不是非此即彼',
@@ -238,7 +228,6 @@ var QA_CORE2 = [
     shareText:'人人有阴有阳，只是比例不同——判型找的是主导极，不是非黑即白的标签。',
     editorNotes:'总纲 y1-23 属性浓度（阶1，待产 K1，连续谱标题）；与 y0-03 判断没有标准衔接；V3.3 §1.5 连续谱：不是二元，是比例（B100 正源）；证据 B100（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y1-24-01', kpId:'y1-24', stage:1, category:'阴阳能量', scene:['self'], forTypes:[],
     question:'转化规律：阳极生阴，阴极生阳——物极必反',
@@ -260,7 +249,6 @@ var QA_CORE2 = [
     shareText:'阳极生阴、阴极生阳——物极必反是宇宙铁律：极化不是终点，是转折的信号。',
     editorNotes:'总纲 y1-24 转化规律（阶1，待产 K1）；人格层转化归 y5-06；V3.3 §1.6 宇宙平衡律（物极必反铁律）；证据 B100/B477（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y1-25-01', kpId:'y1-25', stage:1, category:'阴阳能量', scene:['self','love'], forTypes:[],
     question:'身体感受：阳坚固如墙，阴虚空无城',
@@ -281,7 +269,6 @@ var QA_CORE2 = [
     shareText:'身体比头脑先知道：阳的胸膛像铜墙铁壁，阴的腹区像没有城墙的空场——感受一下就知道自己偏哪边。',
     editorNotes:'总纲 y1-25 身体感受（阶1，待产 K1）；与 y1-11/y1-08 编者注互指；V3.3 §2.4.2 身体感受与能量感知（B63 正源）；证据 B63（新提取逐句核验，ASR 层场→场域、层墙→城墙）。'
   },
-
   {
     qaId:'q-y1-22-01', kpId:'y1-22', stage:1, category:'阴阳能量', scene:['work','love'], forTypes:[],
     question:'路径气质：阳金刚道，阴菩萨道——两种修行路径',
@@ -306,7 +293,6 @@ var QA_CORE2 = [
   },
 
   // ==================== 阶2 精选（命题式改写场景卡） ====================
-
   {
     qaId:'q-y2-03-01', kpId:'y2-03', stage:2, category:'阴阳能量', scene:['love','family'], forTypes:[],
     question:'被触发时：阳先忍后炸，阴即时爆发',
@@ -328,7 +314,6 @@ var QA_CORE2 = [
     shareText:'被触发时：阳先忍后炸（水坝式），阴即时爆发（海啸式）——节奏错配是冲突升级的暗门。',
     editorNotes:'总纲 y2-03 被触发时（阶2，✅P1）；喉轮封印机制归 y1-07；V3.3 §2.4.3（被触发时）；证据 B59（新提取逐句核验原文，替换旧卡转述句）/B3（切片复用）。'
   },
-
   {
     qaId:'q-y2-05-01', kpId:'y2-05', stage:2, category:'四型人格', scene:['love'], forTypes:[],
     question:'嘴硬与说没事：女阳的真没事，阴的求关注',
@@ -340,17 +325,16 @@ var QA_CORE2 = [
       '误读代价：把女阳的没事当口是心非去「关爱轰炸」，她觉得被小看；把阴的没事当真没事，她委屈到内耗。'
     ],
     evidence:[
-      {ts:'00:19', videoId:'B685', bv:'BV1ZouA6wEKp', text:'女阳的这种没事啊，她不是心里面想着要你去关心她——不是倒挂了，她是真的自己坚强，觉得没事。', link:'https://www.bilibili.com/video/BV1ZouA6wEKp?t=19'},
-      {ts:'00:32', videoId:'B685', bv:'BV1ZouA6wEKp', text:'不一样。嘴上说没事，但是他心里可有事了。阳这方面是什么就是什么——如果女阳说没事，那是因为她觉得我能搞定。', link:'https://www.bilibili.com/video/BV1ZouA6wEKp?t=32'}
+      {ts:'00:19', videoId:'B685', bv:'BV1ghuZ66Ens', text:'女阳的这种没事啊，她不是心里面想着要你去关心她——不是倒挂了，她是真的自己坚强，觉得没事。', link:'https://www.bilibili.com/video/BV1ghuZ66Ens?t=19'},
+      {ts:'00:32', videoId:'B685', bv:'BV1ghuZ66Ens', text:'不一样。嘴上说没事，但是他心里可有事了。阳这方面是什么就是什么——如果女阳说没事，那是因为她觉得我能搞定。', link:'https://www.bilibili.com/video/BV1ghuZ66Ens?t=32'}
     ],
     quote:'女阳说没事是真没事——她不是想要你去关心她，她是真的自己坚强。',
-    videoTitle:'为什么男阴的话不可信【新增·v4-646】',
-    jumpUrl:'https://www.bilibili.com/video/BV1ZouA6wEKp?t=19',
+    videoTitle:'女阳说没事是真没事吗？',
+    jumpUrl:'https://www.bilibili.com/video/BV1ghuZ66Ens?t=19',
     compliance:'web+mini',
     shareText:'同一句「没事」：女阳是真没事（能搞定），阴是求关注（快来问）——先看底色，再决定接不接。',
     editorNotes:'总纲 y2-05 嘴硬与说没事（阶2，✅P1）；女阳场景层归 y3-b2d；源 685内容；证据 B685（旧卡验证切片复用）。'
   },
-
   {
     qaId:'q-y2-10-01', kpId:'y2-10', stage:2, category:'阴阳能量', scene:['love'], forTypes:[],
     question:'建立信任时：阳先观察再给，阴先投入再验证',
@@ -375,7 +359,6 @@ var QA_CORE2 = [
   },
 
   // ==================== 阶3 对照 ====================
-
   {
     qaId:'q-y3-08-01', kpId:'y3-08', stage:3, category:'四型人格', scene:['work','love','family'], forTypes:[],
     question:'同一情境，四种反应——四型对照总纲',
@@ -387,17 +370,16 @@ var QA_CORE2 = [
       '用法：情境是照妖镜——把四种反应放在一起看，阴阳差异一目了然；四型内部还有幼/少/老的心智年龄差，同型不同龄反应也不同。'
     ],
     evidence:[
-      {ts:'00:00', videoId:'B666', bv:'BV1A7gK6HEmc', text:'战逃反应你知道吧，就是fight or flight。阴性能量它的第一本能启动的反应就是flight，逃；阳性能量第一本能启动的就是fight，战斗。', link:'https://www.bilibili.com/video/BV1A7gK6HEmc?t=0'},
-      {ts:'00:00', videoId:'B671', bv:'BV1mcuz67Eha', text:'阳是一旦认定方向了以后就一往直前，阴是很容易反复，男阴女阴都是这样。阳不容易反复，直接就一往直前往前冲——他门槛高，但是他速度快。', link:'https://www.bilibili.com/video/BV1mcuz67Eha?t=0'}
+      {ts:'00:00', videoId:'B666', bv:'BV1Fz8i67EgE', text:'战逃反应你知道吧，就是fight or flight。阴性能量它的第一本能启动的反应就是flight，逃；阳性能量第一本能启动的就是fight，战斗。', link:'https://www.bilibili.com/video/BV1Fz8i67EgE?t=0'},
+      {ts:'00:00', videoId:'B671', bv:'BV11W836nEup', text:'阳是一旦认定方向了以后就一往直前，阴是很容易反复，男阴女阴都是这样。阳不容易反复，直接就一往直前往前冲——他门槛高，但是他速度快。', link:'https://www.bilibili.com/video/BV11W836nEup?t=0'}
     ],
     quote:'冲突见战逃，选择见反复，冷落见依赖——同一情境，四种反应。',
-    videoTitle:'两个阳会在一起吗？两个阴在一起会怎么样？【新增·v4-630】',
-    jumpUrl:'https://www.bilibili.com/video/BV1A7gK6HEmc?t=0',
+    videoTitle:'阴阳能量的本能第一反应',
+    jumpUrl:'https://www.bilibili.com/video/BV1Fz8i67EgE?t=0',
     compliance:'web+mini',
     shareText:'情境是照妖镜：冲突见战逃、选择见反复、冷落见依赖——反应路径，就是型的指纹。',
     editorNotes:'总纲 y3-08 同一情境，四种反应（阶3，✅P2）；源 §3.11；体验层归阶2 场景卡；V3.3 §3.10.1 四型同一情境本质反应对照表；证据 B666/B671（切片复用+新提取核验，替换旧卡转述句）。'
   },
-
   {
     qaId:'q-y3-10-01', kpId:'y3-10', stage:3, category:'四型人格', scene:['work','love'], forTypes:[],
     question:'四型金钱观：大方证明实力 vs 安全感储蓄',
@@ -419,7 +401,6 @@ var QA_CORE2 = [
     shareText:'看钱比看话准：阳花钱买「我强」与轻松，阴花钱买「你不会走」——同张账单，两种账本。',
     editorNotes:'总纲 y3-10 四型金钱观（阶3，✅P2）；源 §3.14；体验层归 y2-09；V3.3 §3.16 金钱观与物质态度；证据 B255（旧卡验证切片复用）。'
   },
-
   {
     qaId:'q-y3-11-01', kpId:'y3-11', stage:3, category:'四型人格', scene:['love'], forTypes:[],
     question:'嫉妒与分手：四型的不同剧本',
@@ -443,7 +424,6 @@ var QA_CORE2 = [
   },
 
   // ==================== 阶4 机制 ====================
-
   {
     qaId:'q-y4-01-01', kpId:'y4-01', stage:4, category:'关系与配对', scene:['work'], forTypes:[],
     question:'阴阳分工：阳定方向，阴做执行',
@@ -456,7 +436,7 @@ var QA_CORE2 = [
     ],
     evidence:[
       {ts:'00:00', videoId:'B117', bv:'BV1NH7WzMED6', text:'阳适合把握大方向、做选择、做决策、做决定，但是他的执行力仅限于核心重要事项，在繁杂的事物当中阳是不擅长的。阴适合做落地执行——最好的配合就是阳负责做选择、把握大方向、做决定、做决策，阴来做具体的落地执行。', link:'https://www.bilibili.com/video/BV1NH7WzMED6?t=0'},
-      {ts:'02:03', videoId:'B673', bv:'BV1HHup6fEZ9', text:'阴阳搭配能产生奇效哦……一个是顶尖的男阳，一个是顶尖的女阴，他们两个的搭配就很厉害了——双剑合璧。', link:'https://www.bilibili.com/video/BV1HHup6fEZ9?t=123'}
+      {ts:'02:03', videoId:'B673', bv:'BV1rybe6GELJ', text:'阴阳搭配能产生奇效哦……一个是顶尖的男阳，一个是顶尖的女阴，他们两个的搭配就很厉害了——双剑合璧。', link:'https://www.bilibili.com/video/BV1rybe6GELJ?t=123'}
     ],
     quote:'最好的配合是阳负责做选择、把握大方向，阴来做具体的落地执行。',
     videoTitle:'阴阳的不同分工',
@@ -465,7 +445,6 @@ var QA_CORE2 = [
     shareText:'阴阳分工：阳定方向、阴做执行——双剑合璧的效率，远高于两个同极互相较劲。',
     editorNotes:'总纲 y4-01 阴阳分工（阶4，✅P3）；源 117/673；V3.3 §2.4.4（B117 全文正源）、§4.2；证据 B117@00:00/B673@02:03（新提取逐句核验原文，替换旧卡转述句）。'
   },
-
   {
     qaId:'q-y4-02-01', kpId:'y4-02', stage:4, category:'关系与配对', scene:['love','work'], forTypes:[],
     question:'权力争夺：阴怕失控，阳要掌控',
@@ -478,17 +457,16 @@ var QA_CORE2 = [
       '出口：安全感补上，阴会松手；习性被看见，阳才肯让渡——解药在各自的源头里。'
     ],
     evidence:[
-      {ts:'00:10', videoId:'B670', bv:'BV1W7gK6HEpJ', text:'我发现我在和男性进入亲密关系之后，我就会类似于和他形成竞争关系。这个是你在情感关系当中的权力争夺。', link:'https://www.bilibili.com/video/BV1W7gK6HEpJ?t=10'},
-      {ts:'00:29', videoId:'B670', bv:'BV1W7gK6HEpJ', text:'阴的话是来自于那一份不安全感；对于阳来讲，它更多的不是出于安全感，而是因为它的习性就是要掌控全局。无外乎就是在争夺谁在主导。', link:'https://www.bilibili.com/video/BV1W7gK6HEpJ?t=29'}
+      {ts:'00:10', videoId:'B670', bv:'BV1Dt8J6SEAS', text:'我发现我在和男性进入亲密关系之后，我就会类似于和他形成竞争关系。这个是你在情感关系当中的权力争夺。', link:'https://www.bilibili.com/video/BV1Dt8J6SEAS?t=10'},
+      {ts:'00:00', videoId:'B670', bv:'BV1Dt8J6SEAS', text:'阴的话是来自于那一份不安全感；对于阳来讲，它更多的不是出于安全感，而是因为它的习性就是要掌控全局。无外乎就是在争夺谁在主导。', link:'https://www.bilibili.com/video/BV1Dt8J6SEAS?t=0'}
     ],
     quote:'阴的掌控来自不安全感；阳的掌控是习性——争夺的都是在关系里谁说了算。',
-    videoTitle:'为什么阳性不会被情感诈骗【新增·v4-629】',
-    jumpUrl:'https://www.bilibili.com/video/BV1W7gK6HEpJ?t=10',
+    videoTitle:'亲密关系当中的权利争夺',
+    jumpUrl:'https://www.bilibili.com/video/BV1Dt8J6SEAS?t=10',
     compliance:'web+mini',
     shareText:'权力争夺：阴怕失控所以抓（治「怕」），阳要掌控是习性（治「权」）——一套话术治不了两种病。',
     editorNotes:'总纲 y4-02 权力争夺（阶4，✅P3）；源 670内容；V3.3 §4.2 关系互动行为库、§2.7.2；证据 B670@00:10/00:29（切片复用原文）。'
   },
-
   {
     qaId:'q-y4-04-01', kpId:'y4-04', stage:4, category:'关系与配对', scene:['love'], forTypes:[],
     question:'亲密关系是检验场：卸妆比喻',
@@ -501,12 +479,12 @@ var QA_CORE2 = [
       '正解：不是修好才配进关系，而是在关系里练「带着真实被看见」——检验场的意义是暴露，不是淘汰。'
     ],
     evidence:[
-      {ts:'00:00', videoId:'B672', bv:'BV1ghuZ66Ens', text:'真正的亲密关系，一定是两个真实的自我建立起来的真实连接。靠人设、靠面具吸引来的人，面具一旦维持不住了，关系就要进入到结束的节奏。', link:'https://www.bilibili.com/video/BV1ghuZ66Ens?t=0'},
-      {ts:'00:54', videoId:'B672', bv:'BV1ghuZ66Ens', text:'你认不认以前你打扮得多漂亮，你和亲密伴侣在一起的时候，你总得卸妆吧，你总不可能每天都带妆睡吧。', link:'https://www.bilibili.com/video/BV1ghuZ66Ens?t=54'}
+      {ts:'00:00', videoId:'B672', bv:'BV1ys836SE3j', text:'真正的亲密关系，一定是两个真实的自我建立起来的真实连接。靠人设、靠面具吸引来的人，面具一旦维持不住了，关系就要进入到结束的节奏。', link:'https://www.bilibili.com/video/BV1ys836SE3j?t=0'},
+      {ts:'00:54', videoId:'B672', bv:'BV1ys836SE3j', text:'你认不认以前你打扮得多漂亮，你和亲密伴侣在一起的时候，你总得卸妆吧，你总不可能每天都带妆睡吧。', link:'https://www.bilibili.com/video/BV1ys836SE3j?t=54'}
     ],
     quote:'你总得卸妆吧，你总不可能每天都带妆睡吧——亲密关系里，面具一定会拆下来。',
-    videoTitle:'女阳说没事是真没事吗？【新增·v4-637】',
-    jumpUrl:'https://www.bilibili.com/video/BV1ghuZ66Ens?t=0',
+    videoTitle:'亲密关系照见真实的自己',
+    jumpUrl:'https://www.bilibili.com/video/BV1ys836SE3j?t=0',
     compliance:'web+mini',
     shareText:'亲密关系是检验场：总得卸妆、没法带妆入睡——面具一拆，靠人设吸引来的关系就见底。',
     editorNotes:'总纲 y4-04 亲密关系是检验场（阶4，✅P3）；源 672内容；假自体理论归 y8-01；V3.3 §4.2、§5.2；证据 B672@00:00/00:54（切片复用原文）。'

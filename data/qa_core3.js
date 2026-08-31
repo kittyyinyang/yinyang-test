@@ -19,7 +19,6 @@
 var QA_CORE3 = [
 
   // ==================== 阶2 场景（净新增） ====================
-
   {
     qaId:'q-y2-06-01', kpId:'y2-06', stage:2, category:'四型人格', scene:['family','work'], forTypes:[],
     question:'被批评时：阳当场炸毛或事后清算，阴向内归因「是不是我不够好」',
@@ -42,7 +41,6 @@ var QA_CORE3 = [
     mirror:'被批评时你的第一反应是「炸毛/事后清算」，还是「是不是我不够好」？',
     editorNotes:'总纲 y2-06 场景·被批评时（阶2，K2）；对照层归 y3-08；v3 讲解错配（误挂被冷落段）已弃用，机制重构自 V3.3 §3.10.1 情境一（AI 整理表）；证据 B302@01:39/B39@03:53（逐句核验，B39 与 y1-01 复用同段）。'
   },
-
   {
     qaId:'q-y2-07-01', kpId:'y2-07', stage:2, category:'四型人格', scene:['love'], forTypes:[],
     question:'被冷落时：阳抽离装作不需要，阴加戏、脑内小剧场',
@@ -65,7 +63,6 @@ var QA_CORE3 = [
     mirror:'被冷落时你是抽离装不需要，还是脑内小剧场加戏？',
     editorNotes:'总纲 y2-07 场景·被冷落时（阶2，K2）；机制归 y1-07/y1-12；v3 讲解错配（误挂同一被冷落段且缺阳组对照原文）部分甄取；V3.3 §3.10.1 情境二（AI 整理表）；证据 B21@00:10/00:46（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y2-08-01', kpId:'y2-08', stage:2, category:'四型人格', scene:['work'], forTypes:[],
     question:'面对权威与规则：阳不服管想掀桌，阴顺从里的委屈与抱怨',
@@ -88,7 +85,6 @@ var QA_CORE3 = [
     mirror:'面对权威和规则，你想掀桌，还是顺从里憋着委屈？',
     editorNotes:'总纲 y2-08 场景·面对权威与规则（阶2，K2）；四型对照归 y3-08；v3 讲解错配（误挂被冷落段）已弃用；V3.3 §3.10.5、§3.15（男阳嫉妒权威，B247 正源）；证据 B247@00:18/00:32（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y2-09-01', kpId:'y2-09', stage:2, category:'四型人格', scene:['work','love'], forTypes:[],
     question:'面对金钱：阳大方消费证明实力，阴谨慎权衡、安全感储蓄',
@@ -111,7 +107,6 @@ var QA_CORE3 = [
     mirror:'你花钱的风格是在证明什么，还是在防什么？',
     editorNotes:'总纲 y2-09 场景·面对金钱（阶2，K2）；四型对照归 y3-10；v3 讲解 §3.16 部分相关、已甄取；V3.3 §3.16 金钱观（体验层）；证据 B255（旧卡验证切片复用）。'
   },
-
   {
     qaId:'q-y2-11-01', kpId:'y2-11', stage:2, category:'四型人格', scene:['love'], forTypes:[],
     question:'吃醋时：阳直球宣示领地，阴曲折试探旁敲侧击',
@@ -134,7 +129,6 @@ var QA_CORE3 = [
     mirror:'你吃醋是直球宣示，还是旁敲侧击？',
     editorNotes:'总纲 y2-11 场景·吃醋时（阶2，K2）；四型对照归 y3-11；v3 讲解 §3.15 部分相关、已甄取；V3.3 §3.15 嫉妒机制差异；证据 B190/B33（切片复用+旧卡验证）。'
   },
-
   {
     qaId:'q-y2-12-01', kpId:'y2-12', stage:2, category:'阴阳能量', scene:['love'], forTypes:[],
     question:'面对亲密：阳靠近后想后撤透气，阴靠近后想更近',
@@ -157,7 +151,6 @@ var QA_CORE3 = [
     mirror:'靠近之后你想后撤透气，还是想更近？',
     editorNotes:'总纲 y2-12 场景·面对亲密（阶2，K2）；性爱分离机制归 y1-21；v3 讲解错配（误挂 §9.3）已弃用；V3.3 §2.1.2（回避深连接）、§2.3.4（B271 抓取反效果正源）；证据 B3@01:48/B271@00:57（逐句核验）。'
   },
-
   {
     qaId:'q-y2-13-01', kpId:'y2-13', stage:2, category:'四型人格', scene:['love','family'], forTypes:[],
     question:'被需要时：阳扛起就上（价值感来源），阴想扛又怕扛不住',
@@ -180,7 +173,6 @@ var QA_CORE3 = [
     mirror:'被需要时你扛起就上，还是想扛又怕扛不住？',
     editorNotes:'总纲 y2-13 场景·被需要时（阶2，K2）；价值感外包归 y5-12；v3 讲解错配（误挂幼少老）已弃用；V3.3 §7.1.1（B713 正源）、§3.9.1；证据 B713@00:39/01:22（切片复用+新提取核验）。'
   },
-
   {
     qaId:'q-y2-14-01', kpId:'y2-14', stage:2, category:'四型人格', scene:['work','family'], forTypes:[],
     question:'犯错之后：阳自证「我没有错」，阴认错与道歉里的求安抚',
@@ -203,7 +195,6 @@ var QA_CORE3 = [
     mirror:'犯错之后你是急着自证，还是认错+反复道歉求安抚？',
     editorNotes:'总纲 y2-14 场景·犯错之后（阶2，K2）；自证机制归 y3-b4b、源 185 异窗口；v3 讲解错配（误挂被冷落段）已弃用；V3.3 §3.10.1、§2.1.4（无能恐惧→不认错）；证据 B68@02:54/B418@00:18（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y2-15-01', kpId:'y2-15', stage:2, category:'四型人格', scene:['work','family'], forTypes:[],
     question:'需要帮助时：阳硬扛不开口，阴不敢自己定、想要人给方向',
@@ -215,12 +206,12 @@ var QA_CORE3 = [
       '成长方向：阳练「求助 = 调度资源，不是认输」；阴练「先自己给一个草案，再听建议」——把方向盘一点点拿回来。'
     ],
     evidence:[
-      {ts:'00:36', videoId:'B671', bv:'BV1mcuz67Eha', text:'对于阳来讲，寻求帮助这件事情本身会伤害到他的自恋。', link:'https://www.bilibili.com/video/BV1mcuz67Eha?t=36'},
-      {ts:'00:59', videoId:'B671', bv:'BV1mcuz67Eha', text:'男阳要让他去寻求帮助，这种对他来讲太困难了。他那个自强的心里，核心的信念就是靠自己嘛，而且自己一定要比别人强才行。', link:'https://www.bilibili.com/video/BV1mcuz67Eha?t=59'}
+      {ts:'00:36', videoId:'B671', bv:'BV11W836nEup', text:'对于阳来讲，寻求帮助这件事情本身会伤害到他的自恋。', link:'https://www.bilibili.com/video/BV11W836nEup?t=36'},
+      {ts:'00:59', videoId:'B671', bv:'BV11W836nEup', text:'男阳要让他去寻求帮助，这种对他来讲太困难了。他那个自强的心里，核心的信念就是靠自己嘛，而且自己一定要比别人强才行。', link:'https://www.bilibili.com/video/BV11W836nEup?t=59'}
     ],
     quote:'对阳来讲，寻求帮助这件事本身会伤害他的自恋——核心信念就是靠自己。',
-    videoTitle:'女阳会主动捞男阴吗？【新增·v4-635】',
-    jumpUrl:'https://www.bilibili.com/video/BV1mcuz67Eha?t=36',
+    videoTitle:'阳性的成长特点',
+    jumpUrl:'https://www.bilibili.com/video/BV11W836nEup?t=36',
     compliance:'web+mini',
     shareText:'需要帮助时：阳硬扛（求助伤自恋），阴要人给方向（怕担责）——一个怕露短，一个怕选错。',
     mirror:'需要帮助时你硬扛不开口，还是不敢自己定、想有人给方向？',
@@ -228,7 +219,6 @@ var QA_CORE3 = [
   },
 
   // ==================== 阶3 骨架与横向（净新增） ====================
-
   {
     qaId:'q-y3-01-01', kpId:'y3-01', stage:3, category:'四型人格', scene:['self','love'], forTypes:[],
     question:'为什么有四型：内核 × 性别——两个二元变量，四种组合',
@@ -240,18 +230,17 @@ var QA_CORE3 = [
       '为什么重要：判型必须两个变量一起看——只看能量会把女阳误判成男阳、把男阴误判成女阴；只看性别会完全判错。'
     ],
     evidence:[
-      {ts:'01:12', videoId:'B680', bv:'BV1KXby62Ems', text:'男阳的体现，就是他的事业心会非常强，然后他的自我也会非常强。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=72'},
+      {ts:'01:12', videoId:'B680', bv:'BV195g56xEG4', text:'男阳的体现，就是他的事业心会非常强，然后他的自我也会非常强。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=72'},
       {ts:'01:30', videoId:'B122', bv:'BV1As7WzKEqp', text:'男阴这样感觉是阴性内核，和集体潜意识里对男性的阳刚规训，产生了极大的冲突。', link:'https://www.bilibili.com/video/BV1As7WzKEqp?t=90'}
     ],
     quote:'男阴的阴性内核，和集体潜意识里「男人要阳刚」的规训，产生极大冲突。',
     videoTitle:'男阴是最压抑的群体',
-    jumpUrl:'https://www.bilibili.com/video/BV1KXby62Ems?t=72',
+    jumpUrl:'https://www.bilibili.com/video/BV195g56xEG4?t=72',
     compliance:'web+mini',
     shareText:'阴阳内核 × 生理性别 = 四型：两种一致型顺流，两种错位型逆行——判型必须两个变量一起看。',
     mirror:'你身边同性别的人，内核差异为什么那么大？用「内核×性别」解释得通吗？',
     editorNotes:'总纲 y3-01 为什么有四型（阶3 公共骨架，✅P2）；源 680/122；与 y0-02 同知识点（阶0 为测评衔接层、本卡为地图入口层）；V3.3 §3.1 人格判定公式；证据 B680@01:12/B122@01:30（逐句核验）。'
   },
-
   {
     qaId:'q-y3-02-01', kpId:'y3-02', stage:3, category:'四型人格', scene:['work','self'], forTypes:[],
     question:'阳组对照：男阳孤狼→头狼，女阳战士→灯塔',
@@ -263,18 +252,17 @@ var QA_CORE3 = [
       '识别要点：男阳的强是「压场」——在场子就安静；女阳的强是「冲劲」——她一上桌子就开始推进事情。'
     ],
     evidence:[
-      {ts:'00:59', videoId:'B671', bv:'BV1mcuz67Eha', text:'男阳要让他去寻求帮助，这种对他来讲太困难了。他那个自强的心里，核心的信念就是靠自己嘛，而且自己一定要比别人强才行。', link:'https://www.bilibili.com/video/BV1mcuz67Eha?t=59'},
-      {ts:'04:31', videoId:'B247', bv:'BV1G384zREyi', text:'女阳是嫉妒别人能力比她强。你如果工作当中遇到有一个人实力还很强，和你不相上下，这个时候你的战斗欲就出来了——不是他死就是我活。', link:'https://www.bilibili.com/video/BV1G384zREyi?t=271'}
+      {ts:'00:59', videoId:'B671', bv:'BV11W836nEup', text:'男阳要让他去寻求帮助，这种对他来讲太困难了。他那个自强的心里，核心的信念就是靠自己嘛，而且自己一定要比别人强才行。', link:'https://www.bilibili.com/video/BV11W836nEup?t=59'},
+      {ts:'04:45', videoId:'B247', bv:'BV1G384zREyi', text:'女阳是嫉妒别人能力比她强。你如果工作当中遇到有一个人实力还很强，和你不相上下，这个时候你的战斗欲就出来了——不是他死就是我活。', link:'https://www.bilibili.com/video/BV1G384zREyi?t=285'}
     ],
     quote:'男阳要靠自己、比别人强（孤狼成头狼）；女阳战斗欲一出，不是他死就是我活（战士成灯塔）。',
     videoTitle:'阴阳能量嫉妒的表现',
-    jumpUrl:'https://www.bilibili.com/video/BV1G384zREyi?t=271',
+    jumpUrl:'https://www.bilibili.com/video/BV1G384zREyi?t=285',
     compliance:'web+mini',
     shareText:'同是阳：男阳孤狼成头狼（靠实力压场），女阳战士成灯塔（靠冲劲发光）——一个向位，一个向能。',
     mirror:'同样是阳：男阳的孤狼和女阳的灯塔，你对上号了吗？',
     editorNotes:'总纲 y3-02 阳组对照（阶3 公共骨架，✅P2）；源 §2.7.1；v3 无锚点（形态B）已补证据；V3.3 §3.2.1/3.2.3 画像、§3.11 V2.5 画像刻画；证据 B671@00:59/B247@04:31（逐句核验）。'
   },
-
   {
     qaId:'q-y3-03-01', kpId:'y3-03', stage:3, category:'四型人格', scene:['love','self'], forTypes:[],
     question:'阴组对照：女阴小剧场，男阴大叙事',
@@ -297,7 +285,6 @@ var QA_CORE3 = [
     mirror:'同样是阴：女阴的小剧场和男阴的大叙事，你对上号了吗？',
     editorNotes:'总纲 y3-03 阴组对照（阶3 公共骨架，✅P2）；源 §2.7.2；脑内连续剧归 y3-b3c、拉扯归 y3-b4c；v3 无锚点（形态B）已补证据；V3.3 §3.2.2/3.2.4 画像、§3.10.2；证据 B21@00:46/B150@00:08（逐句核验）。'
   },
-
   {
     qaId:'q-y3-12-01', kpId:'y3-12', stage:3, category:'四型人格', scene:['self','love'], forTypes:[],
     question:'性别一致性红利与双重张力：男阳顺期待而行，女阳男阴逆风而战',
@@ -320,7 +307,6 @@ var QA_CORE3 = [
     mirror:'顺性别有红利也有内压，逆性别有双重张力——你或你在乎的人站哪边？',
     editorNotes:'总纲 y3-12 性别一致性红利与双重张力（阶3 横向，待产 K3）；v3 讲解错配（误挂 §1.4 解耦内容）已弃用，仅取总纲论点；V3.3 §3.2.1–3.2.4 张力、§3.11（男阴最压抑 B122 正源）；证据 B122@01:30/B605@01:26（逐句核验）。'
   },
-
   {
     qaId:'q-y3-13-01', kpId:'y3-13', stage:3, category:'四型人格', scene:['love'], forTypes:[],
     question:'信任与报仇的四型差异：门槛排序与报仇方式排序',
@@ -343,7 +329,6 @@ var QA_CORE3 = [
     mirror:'四型的信任门槛和报仇方式怎么排？你排出来的顺序和实际一致吗？',
     editorNotes:'总纲 y3-13 四型在信任与报仇上的差异（阶3 横向，待产 K3）；戾气怨气归 y1-20、砖墙归 y1-12；V3.3 §3.12 四型信任报仇差异表；证据 B56@02:51/B101@00:31（逐句核验，均与其他卡窗口错开）。'
   },
-
   {
     qaId:'q-y3-14-01', kpId:'y3-14', stage:3, category:'四型人格', scene:['love','work'], forTypes:[],
     question:'控制与攻击的四型差异：谁玩定义权，谁玩消耗战',
@@ -368,7 +353,6 @@ var QA_CORE3 = [
   },
 
   // ==================== 阶4 机制（净新增） ====================
-
   {
     qaId:'q-y4-03-01', kpId:'y4-03', stage:4, category:'关系与配对', scene:['love'], forTypes:[],
     question:'注意力分配与依附警戒线：阳留余力给阴，阴必须留一半给自己',
@@ -380,12 +364,12 @@ var QA_CORE3 = [
       '真投入还是逃避：阴把注意力放工作要分辨——真投入是成长；「不能闲、一闲注意力就全在阳身上」是用工作逃避——警戒线没动，只是换了个藏身处。'
     ],
     evidence:[
-      {ts:'01:55', videoId:'B691', bv:'BV1xX8t6iEMZ', text:'阳如果把过多的注意力放在阴身上……阳只要把这个注意力都放在做好自己，同时有一部分余力也给他就够了。', link:'https://www.bilibili.com/video/BV1xX8t6iEMZ?t=115'},
-      {ts:'02:45', videoId:'B691', bv:'BV1xX8t6iEMZ', text:'可以把多一部分的这个注意力给阳，但是还是要留相当的一部分的注意力给自己……只要把所有的注意力都投注，这个形成的一定是依附。', link:'https://www.bilibili.com/video/BV1xX8t6iEMZ?t=165'}
+      {ts:'01:55', videoId:'B691', bv:'BV1HWup6tEpB', text:'阳如果把过多的注意力放在阴身上……阳只要把这个注意力都放在做好自己，同时有一部分余力也给他就够了。', link:'https://www.bilibili.com/video/BV1HWup6tEpB?t=115'},
+      {ts:'02:45', videoId:'B691', bv:'BV1HWup6tEpB', text:'可以把多一部分的这个注意力给阳，但是还是要留相当的一部分的注意力给自己……只要把所有的注意力都投注，这个形成的一定是依附。', link:'https://www.bilibili.com/video/BV1HWup6tEpB?t=165'}
     ],
     quote:'阳做好自己发光、留余力给阴；阴的注意力全部投给阳，形成的一定是依附。',
-    videoTitle:'楼层介绍【新增·v4-616】',
-    jumpUrl:'https://www.bilibili.com/video/BV1xX8t6iEMZ?t=115',
+    videoTitle:'女阳如何辅助男阴建立自信',
+    jumpUrl:'https://www.bilibili.com/video/BV1HWup6tEpB?t=115',
     compliance:'web+mini',
     shareText:'注意力法则：阳发光+留余力，阴可以多给但必须留一半给自己——全部投注的那条线，叫依附。',
     mirror:'一天里你的注意力给了谁？那条「依附警戒线」你踩过吗？',

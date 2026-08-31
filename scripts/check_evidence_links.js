@@ -3,8 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 const DATA = path.join(__dirname, '..', 'data');
-const FILES = ['qa_core.js','qa_core2.js','qa_core3.js','qa_core4.js','qa_clips_new.js','data_qa.js'];
-const VARS = ['QA_CORE','QA_CORE2','QA_CORE3','QA_CORE4','QA_CLIPS_NEW','QA_DATA'];
+const FILES = ['qa_core.js','qa_core2.js','qa_core3.js','qa_core4.js','qa_core5.js','qa_core6.js','qa_core7.js','qa_core8.js','qa_core9.js','qa_core10.js','qa_core11.js','qa_core12.js','qa_clips_new.js','data_qa.js'];
+const VARS = ['QA_CORE','QA_CORE2','QA_CORE3','QA_CORE4','QA_CORE5','QA_CORE6','QA_CORE7','QA_CORE8','QA_CORE9','QA_CORE10','QA_CORE11','QA_CORE12','QA_CLIPS_NEW','QA_DATA'];
 
 // 从每个文件中提取数组变量（用 vm 执行）
 const vm = require('vm');

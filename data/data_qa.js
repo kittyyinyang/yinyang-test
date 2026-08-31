@@ -887,11 +887,11 @@ var QA_DATA =
     "ts": "01:11",
     "videoId": "B680",
     "bv": "BV1KXby62Ems",
-    "text": "于是阳性能量发育出一个比较刚硬的独立自我，沉淀出「只有靠自己才能靠得住」的信念；落到男阳身上，就是自我非常强、事业心非常强——这是「承重者」被炼出来的底层路径。",
+    "text": "于是阳性能量发育出一个比较刚硬的独立自我，沉淀出「只有靠自己才能靠得住」的信念；落到男阳身上，就是自我非常强、事业心非常强——这是男阳「硬扛」被炼出来的底层路径。",
     "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=71"
    }
   ],
-  "quote": "于是阳性能量发育出一个比较刚硬的独立自我，沉淀出「只有靠自己才能靠得住」的信念；落到男阳身上，就是自我非常强、事业心非常强——这是「承重者」被炼出来的底层路径。",
+  "quote": "于是阳性能量发育出一个比较刚硬的独立自我，沉淀出「只有靠自己才能靠得住」的信念；落到男阳身上，就是自我非常强、事业心非常强——这是男阳「硬扛」被炼出来的底层路径。",
   "videoTitle": "双生通关秘籍（三）——阴阳能量的人格特质",
   "jumpUrl": "https://www.bilibili.com/video/BV15MVWzGEnh?t=69",
   "compliance": "web+mini",
@@ -955,7 +955,7 @@ var QA_DATA =
     "ts": "02:00",
     "videoId": "B680",
     "bv": "BV1KXby62Ems",
-    "text": "而阴性能量比较依赖人，因为自我弱；依赖是连接者人格的能量来源，也是它的软肋。",
+    "text": "而阴性能量比较依赖人，因为自我弱；依赖是女阴人格的能量来源，也是它的软肋。",
     "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=120"
    },
    {
@@ -966,7 +966,7 @@ var QA_DATA =
     "link": "https://www.bilibili.com/video/BV11nj7zSE51?t=47"
    }
   ],
-  "quote": "而阴性能量比较依赖人，因为自我弱；依赖是连接者人格的能量来源，也是它的软肋。",
+  "quote": "而阴性能量比较依赖人，因为自我弱；依赖是女阴人格的能量来源，也是它的软肋。",
   "videoTitle": "阴性爱上一个不爱自己的人怎么办",
   "jumpUrl": "https://www.bilibili.com/video/BV1KXby62Ems?t=51",
   "compliance": "web+mini",
@@ -1154,7 +1154,7 @@ var QA_DATA =
    "yang-male"
   ],
   "question": "职场冲突里，你的第一本能是战还是退？",
-  "answerBrief": "男阳在职场是开创者与承重者，冲突第一本能是迎上去战。",
+  "answerBrief": "男阳在职场是开创者与扛大梁的，冲突第一本能是迎上去战。",
   "answer": [
    {
     "ts": "00:00",

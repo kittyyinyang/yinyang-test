@@ -17,7 +17,6 @@
 var QA_CORE4 = [
 
   // ==================== 男阳（11） ====================
-
   {
     qaId:'q-kp-b1-01', kpId:'kp-b1-nanyang', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-male'],
     question:'男阳画像：自我强到膨胀成自恋——太阳型人格长什么样',
@@ -29,41 +28,39 @@ var QA_CORE4 = [
       '成长课题：削膨胀——把自我修到能容下人；健康则强、膨胀则盲。'
     ],
     evidence:[
-      {ts:'01:12', videoId:'B680', bv:'BV1KXby62Ems', text:'男阳的体现，就是他的事业心会非常强，然后他的自我也会非常强。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=72'},
-      {ts:'00:36', videoId:'B671', bv:'BV1mcuz67Eha', text:'对于阳来讲，寻求帮助这件事情本身会伤害到他的自恋。', link:'https://www.bilibili.com/video/BV1mcuz67Eha?t=36'}
+      {ts:'01:12', videoId:'B680', bv:'BV195g56xEG4', text:'男阳的体现，就是他的事业心会非常强，然后他的自我也会非常强。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=72'},
+      {ts:'00:36', videoId:'B671', bv:'BV11W836nEup', text:'对于阳来讲，寻求帮助这件事情本身会伤害到他的自恋。', link:'https://www.bilibili.com/video/BV11W836nEup?t=36'}
     ],
     quote:'男阳事业心非常强、自我也非常强——强到膨胀，就目中无人。',
-    videoTitle:'阴性爱上一个不爱自己的人怎么办【新增·v4-628】',
-    jumpUrl:'https://www.bilibili.com/video/BV1KXby62Ems?t=72',
+    videoTitle:'如何判断阴阳能量内核属性',
+    jumpUrl:'https://www.bilibili.com/video/BV195g56xEG4?t=72',
     compliance:'web+mini',
     shareText:'男阳 = 太阳：向外扛、靠实力说话——自我是引擎，膨胀是盲区。',
     mirror:'（男阳/身边男阳）自我强到什么时候会变成「容不下人」？',
     editorNotes:'总纲 kp-b1 男阳画像（阶3，✅KS0）；源 680/669；V3.3 §3.2.1、§3.11（V2.5 画像刻画）；证据 B680@01:12/B671@00:36（切片复用）。'
   },
-
   {
     qaId:'q-y3-b1a-01', kpId:'y3-b1a', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-male'],
-    question:'承重者是怎么炼成的：求助无效 → 反向补偿 → 「只能靠自己」',
+    question:'男阳是怎么炼成的：求助无效 → 反向补偿 → 「只能靠自己」',
     answerBrief:'需求反复求助无果的童年，炼出男阳「只能靠自己」的承重信念。',
     insight:[
       '养育底片：强势的母亲 + 儿时需求被反复忽略——「我表达了需要，但得不到回应」，于是学会不表达。',
       '反向补偿：不是不需要，是「说了也没用」——对无力感的反向补偿，长成焦虑回避型依恋与刚硬的独立自我。',
-      '信念定格：靠自己才能靠得住；求助 = 无效 = 危险——承重者的肩膀，是被失望压出来的。',
+      '信念定格：靠自己才能靠得住；求助 = 无效 = 危险——男阳的肩膀，是被失望压出来的。',
       '代价与馈赠：代价是不会示弱、苦自己咽；馈赠是极强的问题解决能力——他扛过的东西，多数人扛不动。'
     ],
     evidence:[
       {ts:'01:09', videoId:'B3', bv:'BV15MVWzGEnh', text:'阳性能量在婴儿时期的原生家庭成长环境，通常有一个强势的母亲，且在婴儿时期遭遇过自己的需求时而被响应、时而被冷漠对待的母婴养育体验……因为强力抵御父母反复入侵独立自我边界，就发育出来一个比较刚硬的独立自我。', link:'https://www.bilibili.com/video/BV15MVWzGEnh?t=69'},
       {ts:'01:32', videoId:'B3', bv:'BV15MVWzGEnh', text:'所以阳性能量通常有深刻的靠自己——只有靠自己才能靠得住的信念。', link:'https://www.bilibili.com/video/BV15MVWzGEnh?t=92'}
     ],
-    quote:'强势的母亲、被忽略的需求——炼出「只有靠自己才能靠得住」的承重者。',
+    quote:'强势的母亲、被忽略的需求——炼出「只有靠自己才能靠得住」的男阳。',
     videoTitle:'双生通关秘籍（三）——阴阳能量的人格特质（重复）',
     jumpUrl:'https://www.bilibili.com/video/BV15MVWzGEnh?t=69',
     compliance:'web+mini',
-    shareText:'承重者不是天生能扛——是求助无果的童年教会他：只能靠自己。',
+    shareText:'男阳不是天生能扛——是求助无果的童年教会他：只能靠自己。',
     mirror:'男阳的「只能靠自己」是哪一年学会的？代价是什么？',
     editorNotes:'总纲 y3-b1a 承重者是怎么炼成的（阶3，✅P2）；源 §3.7.1；V3.3 §2.1.1（形成原因，B3@01:09 正源）、§3.3 起源故事；证据 B3@01:09/01:32（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y3-b1b-01', kpId:'y3-b1b', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-male'],
     question:'孤狼悖论：越要强 vs 不会求——求助为什么伤男阳的自恋',
@@ -75,41 +72,39 @@ var QA_CORE4 = [
       '破局点：把「求助」重新定义为调度资源——会借力的人才是真强者。'
     ],
     evidence:[
-      {ts:'00:36', videoId:'B671', bv:'BV1mcuz67Eha', text:'对于阳来讲，寻求帮助这件事情本身会伤害到他的自恋。', link:'https://www.bilibili.com/video/BV1mcuz67Eha?t=36'},
-      {ts:'00:44', videoId:'B671', bv:'BV1mcuz67Eha', text:'女阳会比较容易啊，男阳是最困难的。', link:'https://www.bilibili.com/video/BV1mcuz67Eha?t=44'}
+      {ts:'00:36', videoId:'B671', bv:'BV11W836nEup', text:'对于阳来讲，寻求帮助这件事情本身会伤害到他的自恋。', link:'https://www.bilibili.com/video/BV11W836nEup?t=36'},
+      {ts:'00:44', videoId:'B671', bv:'BV11W836nEup', text:'女阳会比较容易啊，男阳是最困难的。', link:'https://www.bilibili.com/video/BV11W836nEup?t=44'}
     ],
     quote:'对阳来讲，寻求帮助这件事本身会伤害他的自恋——男阳是最困难的。',
-    videoTitle:'女阳会主动捞男阴吗？【新增·v4-635】',
-    jumpUrl:'https://www.bilibili.com/video/BV1mcuz67Eha?t=36',
+    videoTitle:'阳性的成长特点',
+    jumpUrl:'https://www.bilibili.com/video/BV11W836nEup?t=36',
     compliance:'web+mini',
     shareText:'孤狼悖论：要强与不会求是同一个根——男阳的求助电话，往往是最后的求助电话。',
     mirror:'越要强越开不了口求助——你卡在哪一件具体的事上？',
     editorNotes:'总纲 y3-b1b 孤狼悖论（阶3，✅P2）；源 §3.8.1；V3.3 §3.5 内在张力、§3.11（求助伤自恋）；证据 B671@00:36/00:44（切片复用）。'
   },
-
   {
     qaId:'q-y3-b1c-01', kpId:'y3-b1c', stage:3, category:'四型人格', scene:['work'], forTypes:['yang-male'],
-    question:'职场与冲突中的男阳：开创者、承重者与「大小王」秩序',
-    answerBrief:'男阳职场是开创者与承重者；需要大小王秩序，冲突第一本能是战。',
+    question:'职场与冲突中的男阳：开创者与「大小王」秩序',
+    answerBrief:'男阳职场是开创者与扛大梁的；需要大小王秩序，冲突第一本能是战。',
     insight:[
-      '职场角色：开创者（从零破局）与承重者（扛最难的活）——男阳的价值感来自「这事非我不可」的核心位置。',
+      '职场角色：开创者（从零破局）与扛大梁的（扛最难的活）——男阳的价值感来自「这事非我不可」的核心位置。',
       '大小王秩序：男阳扎堆必须分出大小王——家族合影里两个 C 位都要争；秩序未定，内耗不止。',
       '冲突本能：第一反应是战——直面硬刚、就事论事；赢了做事，输了记仇。',
       '协作提示：给男阳明确的目标与授权（而不是过程管控），他会把「为什么服你」变成效率。'
     ],
     evidence:[
-      {ts:'00:26', videoId:'B217', bv:'BV1EfMcz3E9F', text:'男阳会把他的方案分享给你——他在做这个方案的时候，情绪体验就是：哇靠，我这方案做得太牛逼了。他一定得分享给其他人。', link:'https://www.bilibili.com/video/BV1EfMcz3E9F?t=26'},
-      {ts:'00:00', videoId:'B666', bv:'BV1A7gK6HEmc', text:'战逃反应你知道吧，就是fight or flight。阴性能量它的第一本能启动的反应就是flight，逃；阳性能量第一本能启动的就是fight，战斗。', link:'https://www.bilibili.com/video/BV1A7gK6HEmc?t=0'}
+      {ts:'00:00', videoId:'B217', bv:'BV1EfMcz3E9F', text:'男阳会把他的方案分享给你——他在做这个方案的时候，情绪体验就是：哇靠，我这方案做得太牛逼了。他一定得分享给其他人。', link:'https://www.bilibili.com/video/BV1EfMcz3E9F?t=0'},
+      {ts:'00:00', videoId:'B666', bv:'BV1Fz8i67EgE', text:'战逃反应你知道吧，就是fight or flight。阴性能量它的第一本能启动的反应就是flight，逃；阳性能量第一本能启动的就是fight，战斗。', link:'https://www.bilibili.com/video/BV1Fz8i67EgE?t=0'}
     ],
     quote:'男阳做出好方案必须分享——「我这方案做得太牛逼了」；冲突第一本能是战。',
     videoTitle:'【男阳的凡尔赛时刻】',
-    jumpUrl:'https://www.bilibili.com/video/BV1EfMcz3E9F?t=26',
+    jumpUrl:'https://www.bilibili.com/video/BV1EfMcz3E9F?t=0',
     compliance:'web+mini',
-    shareText:'职场男阳：开创者+承重者，要「大小王」秩序；冲突第一本能是战——给目标别给管控。',
-    mirror:'男阳在职场是开创者还是承重者？他需要身边有「大小王」吗？',
+    shareText:'职场男阳：开创者+扛大梁，要「大小王」秩序；冲突第一本能是战——给目标别给管控。',
+    mirror:'男阳在职场是开创者还是扛大梁的？他需要身边有「大小王」吗？',
     editorNotes:'总纲 y3-b1c 职场与冲突中的男阳（阶3，✅P2）；源 §3.10.5/新语料；V3.3 §3.10.1、§2.10.2（战逃）；证据 B217@00:26/B666@00:00（切片复用）。'
   },
-
   {
     qaId:'q-y3-b1d-01', kpId:'y3-b1d', stage:3, category:'四型人格', scene:['work','self'], forTypes:['yang-male'],
     question:'狂妄与目中无人：男阳的自恋膨胀机制',
@@ -121,18 +116,17 @@ var QA_CORE4 = [
       '修正路径：削膨胀（精神层面砍掉「我必须最大」）——削完之后，阴的柔软才长得进来。'
     ],
     evidence:[
-      {ts:'04:48', videoId:'B680', bv:'BV1KXby62Ems', text:'目中无人的这种就是男阳哦……但是已经膨胀到了没有其他人了啊。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=288'},
+      {ts:'04:48', videoId:'B680', bv:'BV195g56xEG4', text:'目中无人的这种就是男阳哦……但是已经膨胀到了没有其他人了啊。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=288'},
       {ts:'00:32', videoId:'B669', bv:'BV1gj8w6NEHY', text:'自宫实际上是精神层面——精神层面把自己的自恋和自大膨胀的（削掉）。', link:'https://www.bilibili.com/video/BV1gj8w6NEHY?t=32'}
     ],
     quote:'目中无人就是男阳——膨胀到了没有其他人了；修法是把自恋削掉。',
     videoTitle:'男阳的终极课题【新增·v4-621】',
-    jumpUrl:'https://www.bilibili.com/video/BV1KXby62Ems?t=288',
+    jumpUrl:'https://www.bilibili.com/video/BV195g56xEG4?t=288',
     compliance:'web+mini',
     shareText:'自恋健康则强、膨胀则盲——男阳的目中无人，是自我溢出了边界。',
     mirror:'自恋健康时是强，膨胀时是盲——你上一次「看不见人」是什么时候？',
     editorNotes:'总纲 y3-b1d 狂妄与目中无人（阶3，✅P2）；源 §3.8/669；V3.3 §3.11（男阳 狂妄自大、削膨胀）、§2.1.7 装逼段位；证据 B680@04:48/B669@00:32（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y3-b1e-01', kpId:'y3-b1e', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-male'],
     question:'男阳的独处与社交：领地与应酬',
@@ -155,7 +149,6 @@ var QA_CORE4 = [
     mirror:'男阳独处时在干嘛？他的社交能量收支是赚是亏？',
     editorNotes:'总纲 y3-b1e 男阳的独处与社交（阶3，K4）；充电维度归 y1-11、本卡落到男阳场景；V3.3 §2.1.2/2.1.3（B3 正源）；证据 B3@02:37/01:37（v3 金句佐证+逐句核验）。'
   },
-
   {
     qaId:'q-y3-b1f-01', kpId:'y3-b1f', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-male'],
     question:'男阳成熟度阶梯：从青铜装逼到沉稳承重',
@@ -178,7 +171,6 @@ var QA_CORE4 = [
     mirror:'男阳从青铜装逼到沉稳承重，你现在在哪一阶？转折点是什么？',
     editorNotes:'总纲 y3-b1f 男阳成熟度阶梯（阶3，K4）；终点画像归 y5-09；V3.3 §3.6.0（幼少老标尺）、§3.9.1、§2.1.7（装逼段位 B87 正源）；证据 B712@00:00/B87@02:22（切片复用）。'
   },
-
   {
     qaId:'q-y3-b1g-01', kpId:'y3-b1g', stage:3, category:'四型人格', scene:['work','self'], forTypes:['yang-male'],
     question:'装逼的段位体系：10 分说成 50 分',
@@ -201,7 +193,6 @@ var QA_CORE4 = [
     mirror:'把 10 分说成 50 分的那一刻，你在怕什么？',
     editorNotes:'总纲 y3-b1g 装逼的段位体系（阶3，K4）；狂妄机制归 y3-b1d；V3.3 §2.1.7 阳性装逼的等级体系（B87 正源）；证据 B87@01:15/02:22（切片复用）。'
   },
-
   {
     qaId:'q-y3-b1h-01', kpId:'y3-b1h', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-male'],
     question:'撒娇 = 终极信任：男阳的柔软开关',
@@ -224,7 +215,6 @@ var QA_CORE4 = [
     mirror:'男阳对谁才会撒娇？你见过那个瞬间吗？你被托付过吗？',
     editorNotes:'总纲 y3-b1h 撒娇=终极信任（阶3，K4）；信任路径归 y1-12；V3.3 §2.1.8 阳性撒娇=终极信任（B38 正源）；证据 B38@00:04/00:33（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y3-b1i-01', kpId:'y3-b1i', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-male'],
     question:'男阳的情绪模式：堵不住的火与说不出的苦',
@@ -247,7 +237,6 @@ var QA_CORE4 = [
     mirror:'男阳的火堵在哪里、苦咽在哪里？他允许谁看见？',
     editorNotes:'总纲 y3-b1i 男阳的情绪模式（阶3，K4）；喉轮封印机制归 y1-07；V3.3 §3.6.1 卡点段、§2.4.3；证据 B23@16:59/B59@01:00（复用已验证窗口）。'
   },
-
   {
     qaId:'q-y3-b1j-01', kpId:'y3-b1j', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-male'],
     question:'识别信号：怎么认出男阳',
@@ -259,7 +248,7 @@ var QA_CORE4 = [
       '与阳壳女阴区分：看内核不看外壳——压力下的第一本能（战逃）比平时的表现诚实。'
     ],
     evidence:[
-      {ts:'01:12', videoId:'B680', bv:'BV1KXby62Ems', text:'男阳的体现，就是他的事业心会非常强，然后他的自我也会非常强。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=72'},
+      {ts:'01:12', videoId:'B680', bv:'BV195g56xEG4', text:'男阳的体现，就是他的事业心会非常强，然后他的自我也会非常强。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=72'},
       {ts:'02:15', videoId:'B217', bv:'BV1EfMcz3E9F', text:'确实男阳很爱低姿态（分享），但夸了他牛逼以后也没有觉得他很得意——就凡尔赛嘛，用低调的方式去高调的炫耀，就男阳干的事情。', link:'https://www.bilibili.com/video/BV1EfMcz3E9F?t=135'}
     ],
     quote:'男阳爱低姿态分享、夸了也不见得意——凡尔赛，用低调的方式高调炫耀。',
@@ -272,7 +261,6 @@ var QA_CORE4 = [
   },
 
   // ==================== 女阳（11） ====================
-
   {
     qaId:'q-kp-b2-01', kpId:'kp-b2-nvyang', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-female'],
     question:'女阳画像：一往直前，但自我容易过大——战士型人格长什么样',
@@ -284,18 +272,17 @@ var QA_CORE4 = [
       '成长课题：沉下来承载——从「证明我能」到「承载他人」，战士终成灯塔。'
     ],
     evidence:[
-      {ts:'04:31', videoId:'B247', bv:'BV1G384zREyi', text:'女阳是嫉妒别人能力比她强。你如果工作当中遇到有一个人实力还很强，和你不相上下，这个时候你的战斗欲就出来了——不是他死就是我活。', link:'https://www.bilibili.com/video/BV1G384zREyi?t=271'},
-      {ts:'00:44', videoId:'B671', bv:'BV1mcuz67Eha', text:'女阳会比较容易啊，男阳是最困难的——女阳她如果说遇到障碍了以后，她会比男阳更快速地去寻求帮助。', link:'https://www.bilibili.com/video/BV1mcuz67Eha?t=44'}
+      {ts:'04:45', videoId:'B247', bv:'BV1G384zREyi', text:'女阳是嫉妒别人能力比她强。你如果工作当中遇到有一个人实力还很强，和你不相上下，这个时候你的战斗欲就出来了——不是他死就是我活。', link:'https://www.bilibili.com/video/BV1G384zREyi?t=285'},
+      {ts:'00:44', videoId:'B671', bv:'BV11W836nEup', text:'女阳会比较容易啊，男阳是最困难的——女阳她如果说遇到障碍了以后，她会比男阳更快速地去寻求帮助。', link:'https://www.bilibili.com/video/BV11W836nEup?t=44'}
     ],
     quote:'女阳战斗欲一出，不是他死就是我活——但她遇障碍比男阳更快转弯求助。',
     videoTitle:'阴阳能量嫉妒的表现',
-    jumpUrl:'https://www.bilibili.com/video/BV1G384zREyi?t=271',
+    jumpUrl:'https://www.bilibili.com/video/BV1G384zREyi?t=285',
     compliance:'web+mini',
     shareText:'女阳 = 战士：一往直前、破局最强——课题不是独立，是把自我过大修成承载。',
     mirror:'（女阳/身边女阳）一往直前的背后，自我是不是也容易过大？',
     editorNotes:'总纲 kp-b2 女阳画像（阶3，✅KS0）；源 680/671；V3.3 §3.2.3、§3.11（女阳通病：捞人自恋驱动）；证据 B247@04:31/B671@00:44（切片复用）。'
   },
-
   {
     qaId:'q-y3-b2a-01', kpId:'y3-b2a', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-female'],
     question:'战士的来历：阳性内核 × 女性身体 × 社会期待的三重碰撞',
@@ -318,7 +305,6 @@ var QA_CORE4 = [
     mirror:'女阳的「活出自己」是从哪一次反弹开始的？',
     editorNotes:'总纲 y3-b2a 战士的来历（阶3，✅P2）；源 §3.7.2；阳壳误判归 y0-04/y3-b3d；V3.3 §3.2.3、§3.3 起源故事；证据 B605@00:46/01:26（切片复用，兼作真女阳 vs 阳壳辨析）。'
   },
-
   {
     qaId:'q-y3-b2b-01', kpId:'y3-b2b', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-female'],
     question:'灯塔悖论：破局动能最强的人，为什么停不下来',
@@ -330,17 +316,16 @@ var QA_CORE4 = [
       '修法方向：不是关掉引擎，是加装刹车——允许自己「不动」，把价值感从战果挪回存在本身。'
     ],
     evidence:[
-      {ts:'00:00', videoId:'B671', bv:'BV1mcuz67Eha', text:'阳是一旦认定方向了以后就一往直前，阴是很容易反复，男阴女阴都是这样。阳不容易反复，直接就一往直前往前冲——他门槛高，但是他速度快。', link:'https://www.bilibili.com/video/BV1mcuz67Eha?t=0'}
+      {ts:'00:00', videoId:'B671', bv:'BV11W836nEup', text:'阳是一旦认定方向了以后就一往直前，阴是很容易反复，男阴女阴都是这样。阳不容易反复，直接就一往直前往前冲——他门槛高，但是他速度快。', link:'https://www.bilibili.com/video/BV11W836nEup?t=0'}
     ],
     quote:'阳认定方向就一往直前、门槛高速度快——灯塔悖论是引擎太强、刹车缺席。',
-    videoTitle:'女阳会主动捞男阴吗？【新增·v4-635】',
-    jumpUrl:'https://www.bilibili.com/video/BV1mcuz67Eha?t=0',
+    videoTitle:'阳性的成长特点',
+    jumpUrl:'https://www.bilibili.com/video/BV11W836nEup?t=0',
     compliance:'web+mini',
     shareText:'灯塔悖论：破局最强的引擎 + 缺失的刹车——女阳要学的不是停，是允许自己「不动」。',
     mirror:'破局动能最强的人为什么停不下来？刹车在哪？',
     editorNotes:'总纲 y3-b2b 灯塔悖论（阶3，✅P2）；源 §3.8.2；V3.3 §3.5 内在张力；证据 B671@00:00（逐句核验，单证卡）。'
   },
-
   {
     qaId:'q-y3-b2c-01', kpId:'y3-b2c', stage:3, category:'四型人格', scene:['love','work'], forTypes:['yang-female'],
     question:'社交与冲突中的女阳：做局赋能与「捞男阴」情结',
@@ -362,7 +347,6 @@ var QA_CORE4 = [
     mirror:'女阳捞男阴：捞得动吗？捞不动之后的嫌弃是什么？',
     editorNotes:'总纲 y3-b2c 社交与冲突中的女阳（阶3，✅P2）；源 §3.10/新语料；做局机制归 y7-10；V3.3 §3.11（女阳捞人通病）；证据 B151@00:35（切片复用，单证卡）。'
   },
-
   {
     qaId:'q-y3-b2d-01', kpId:'y3-b2d', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-female'],
     question:'说没事是真没事：女阳的坚强不是倒挂的试探',
@@ -374,18 +358,17 @@ var QA_CORE4 = [
       '易混辨析：同样说「没事」，先分辨底色——阳壳女阴（假性大女主）说没事时，才是话里有话。'
     ],
     evidence:[
-      {ts:'00:19', videoId:'B685', bv:'BV1ZouA6wEKp', text:'女阳的这种没事啊，她不是心里面想着要你去关心她——不是倒挂了，她是真的自己坚强，觉得没事。', link:'https://www.bilibili.com/video/BV1ZouA6wEKp?t=19'},
-      {ts:'00:32', videoId:'B685', bv:'BV1ZouA6wEKp', text:'不一样。嘴上说没事，但是他心里可有事了。阳这方面是什么就是什么——如果女阳说没事，那是因为她觉得我能搞定。', link:'https://www.bilibili.com/video/BV1ZouA6wEKp?t=32'}
+      {ts:'00:19', videoId:'B685', bv:'BV1ghuZ66Ens', text:'女阳的这种没事啊，她不是心里面想着要你去关心她——不是倒挂了，她是真的自己坚强，觉得没事。', link:'https://www.bilibili.com/video/BV1ghuZ66Ens?t=19'},
+      {ts:'00:32', videoId:'B685', bv:'BV1ghuZ66Ens', text:'不一样。嘴上说没事，但是他心里可有事了。阳这方面是什么就是什么——如果女阳说没事，那是因为她觉得我能搞定。', link:'https://www.bilibili.com/video/BV1ghuZ66Ens?t=32'}
     ],
     quote:'女阳说没事是真没事——她不是想要你去关心她，她是真的自己坚强。',
-    videoTitle:'为什么男阴的话不可信【新增·v4-646】',
-    jumpUrl:'https://www.bilibili.com/video/BV1ZouA6wEKp?t=19',
+    videoTitle:'女阳说没事是真没事吗？',
+    jumpUrl:'https://www.bilibili.com/video/BV1ghuZ66Ens?t=19',
     compliance:'web+mini',
     shareText:'女阳的「没事」= 能搞定——不是倒挂的试探；关爱轰炸反而让她觉得被小看。',
     mirror:'女阳说「没事」的时候，你信吗？你自己是真没事吗？',
     editorNotes:'总纲 y3-b2d 说没事是真没事（阶3，✅P2）；源 685内容；阴阳对照机制归 y2-05；V3.3 §3.11（女阳 说没事是真没事）；证据 B685@00:19/00:32（切片复用，与 y2-05 同段、视角不同）。'
   },
-
   {
     qaId:'q-y3-b2e-01', kpId:'y3-b2e', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-female'],
     question:'女阳的独处与社交：战场与灯塔',
@@ -408,7 +391,6 @@ var QA_CORE4 = [
     mirror:'女阳独处在复盘什么战局？社交里她要的是发光还是掌控？',
     editorNotes:'总纲 y3-b2e 女阳的独处与社交（阶3，K4）；捞人细节归 y3-b2c；V3.3 §3.9.1（独处四象）；证据 B497@03:25/01:10（切片复用）。'
   },
-
   {
     qaId:'q-y3-b2f-01', kpId:'y3-b2f', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-female'],
     question:'女阳成熟度阶梯：从对抗式独立到榜样式发光',
@@ -421,7 +403,7 @@ var QA_CORE4 = [
     ],
     evidence:[
       {ts:'00:00', videoId:'B712', bv:'BV1Jo8d6qEwQ', text:'我分的是这样，把心智的成熟度分为幼阴、少阴和老阴，幼阳、少阳、老阳。幼态的这个就是心智非常的小，如果说我用心理学的话就是巨婴，他的心智还停留在婴儿时期。', link:'https://www.bilibili.com/video/BV1Jo8d6qEwQ?t=0'},
-      {ts:'00:50', videoId:'B671', bv:'BV1mcuz67Eha', text:'她会比男阳更快速地去寻求帮助……因为他的自恋没有那么大嘛。', link:'https://www.bilibili.com/video/BV1mcuz67Eha?t=50'}
+      {ts:'00:50', videoId:'B671', bv:'BV11W836nEup', text:'她会比男阳更快速地去寻求帮助……因为他的自恋没有那么大嘛。', link:'https://www.bilibili.com/video/BV11W836nEup?t=50'}
     ],
     quote:'女阳自恋没那么大，遇障碍比男阳更快转弯——弹性出现，就是半觉醒的标志。',
     videoTitle:'阴阳能量的三个阶段',
@@ -431,7 +413,6 @@ var QA_CORE4 = [
     mirror:'从对抗式独立到榜样式发光——你在哪一段？',
     editorNotes:'总纲 y3-b2f 女阳成熟度阶梯（阶3，K4）；终点画像归 y5-09；V3.3 §3.6.0、§3.9.2、§3.11；证据 B712@00:00/B671@00:50（切片复用+新提取核验）。'
   },
-
   {
     qaId:'q-y3-b2g-01', kpId:'y3-b2g', stage:3, category:'四型人格', scene:['work','self'], forTypes:['yang-female'],
     question:'扮猪吃老虎：女阳的藏锋策略',
@@ -454,7 +435,6 @@ var QA_CORE4 = [
     mirror:'你藏锋是为了什么？亮锋的时机你把握过吗？',
     editorNotes:'总纲 y3-b2g 扮猪吃老虎（阶3，K4）；捞人机制归 y3-b2c；V3.3 §3.13（女阳 扮猪吃老虎式布局）；证据 B151@03:21/00:16（切片复用）。'
   },
-
   {
     qaId:'q-y3-b2h-01', kpId:'y3-b2h', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-female'],
     question:'更快求助的柔软开关：女阳比男阳先转弯',
@@ -466,18 +446,17 @@ var QA_CORE4 = [
       '成长意义：更快转弯 = 更快迭代——这是女阳常能后来居上的隐藏原因。'
     ],
     evidence:[
-      {ts:'00:50', videoId:'B671', bv:'BV1mcuz67Eha', text:'她会比男阳更快速地去寻求帮助……因为他的自恋没有那么大嘛。', link:'https://www.bilibili.com/video/BV1mcuz67Eha?t=50'},
-      {ts:'00:44', videoId:'B671', bv:'BV1mcuz67Eha', text:'女阳会比较容易啊，男阳是最困难的——女阳她如果说遇到障碍了以后，她会比男阳更快速地去寻求帮助。', link:'https://www.bilibili.com/video/BV1mcuz67Eha?t=44'}
+      {ts:'00:50', videoId:'B671', bv:'BV11W836nEup', text:'她会比男阳更快速地去寻求帮助……因为他的自恋没有那么大嘛。', link:'https://www.bilibili.com/video/BV11W836nEup?t=50'},
+      {ts:'00:44', videoId:'B671', bv:'BV11W836nEup', text:'女阳会比较容易啊，男阳是最困难的——女阳她如果说遇到障碍了以后，她会比男阳更快速地去寻求帮助。', link:'https://www.bilibili.com/video/BV11W836nEup?t=44'}
     ],
     quote:'女阳遇障碍比男阳更快转弯求助——因为她的自恋没有那么大。',
-    videoTitle:'女阳会主动捞男阴吗？【新增·v4-635】',
-    jumpUrl:'https://www.bilibili.com/video/BV1mcuz67Eha?t=50',
+    videoTitle:'阳性的成长特点',
+    jumpUrl:'https://www.bilibili.com/video/BV11W836nEup?t=50',
     compliance:'web+mini',
     shareText:'同是阳，女阳更快转弯求助——自恋更小，弹性更大，迭代更快。',
     mirror:'遇到障碍你比男阳更快转弯求助吗？那次转弯发生了什么？',
     editorNotes:'总纲 y3-b2h 更快求助的柔软开关（阶3，K4）；孤狼悖论对照归 y3-b1b；V3.3 §3.11、§2.7.1；证据 B671@00:50/00:44（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y3-b2i-01', kpId:'y3-b2i', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-female'],
     question:'女阳的情绪模式：破局冲动与不会停',
@@ -490,7 +469,7 @@ var QA_CORE4 = [
     ],
     evidence:[
       {ts:'07:45', videoId:'B60', bv:'BV1pdhwzrErv', text:'阳性能量和阳性能量，他那个天赋点了技能，点的那个技能不一样。阳性能量把技能点都点到反击上面去了——所以就是你搞我，我就搞你。', link:'https://www.bilibili.com/video/BV1pdhwzrErv?t=465'},
-      {ts:'04:31', videoId:'B247', bv:'BV1G384zREyi', text:'你如果工作当中遇到有一个人实力还很强，和你不相上下，这个时候你的战斗欲就出来了——不是他死就是我活。', link:'https://www.bilibili.com/video/BV1G384zREyi?t=271'}
+      {ts:'04:45', videoId:'B247', bv:'BV1G384zREyi', text:'你如果工作当中遇到有一个人实力还很强，和你不相上下，这个时候你的战斗欲就出来了——不是他死就是我活。', link:'https://www.bilibili.com/video/BV1G384zREyi?t=285'}
     ],
     quote:'阳把技能点都点到反击上——你搞我，我就搞你；女阳的怼极猛。',
     videoTitle:'了解阴性能量2',
@@ -500,7 +479,6 @@ var QA_CORE4 = [
     mirror:'女阳的怼有多猛、停不下来的时候是什么样？',
     editorNotes:'总纲 y3-b2i 女阳的情绪模式（阶3，K4）；沉下来承载归 y5-t2；V3.3 §3.6.3 卡点段；证据 B60@07:45/B247@04:31（切片复用）。'
   },
-
   {
     qaId:'q-y3-b2j-01', kpId:'y3-b2j', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yang-female'],
     question:'识别信号：怎么认出女阳',
@@ -512,12 +490,12 @@ var QA_CORE4 = [
       '与阳壳女阴区分：假性大女主平时像女阳，压力下的第一本能（逃/向内归因）会暴露内核——看第一反应，不看平时人设。'
     ],
     evidence:[
-      {ts:'00:19', videoId:'B685', bv:'BV1ZouA6wEKp', text:'女阳的这种没事啊，她不是心里面想着要你去关心她——不是倒挂了，她是真的自己坚强，觉得没事。', link:'https://www.bilibili.com/video/BV1ZouA6wEKp?t=19'},
+      {ts:'00:19', videoId:'B685', bv:'BV1ghuZ66Ens', text:'女阳的这种没事啊，她不是心里面想着要你去关心她——不是倒挂了，她是真的自己坚强，觉得没事。', link:'https://www.bilibili.com/video/BV1ghuZ66Ens?t=19'},
       {ts:'00:46', videoId:'B605', bv:'BV1mNJ8zFEMv', text:'有很多这样的女阳是什么？假性大女主，就是装坚强硬撑的。内核是阴，有一个阳性能量的假面具，专业术语叫假自体。', link:'https://www.bilibili.com/video/BV1mNJ8zFEMv?t=46'}
     ],
     quote:'女阳的没事是真的（能搞定）；假性大女主的没事是装的（假自体）——看第一反应分辨。',
-    videoTitle:'为什么男阴的话不可信【新增·v4-646】',
-    jumpUrl:'https://www.bilibili.com/video/BV1ZouA6wEKp?t=19',
+    videoTitle:'女阳说没事是真没事吗？',
+    jumpUrl:'https://www.bilibili.com/video/BV1ghuZ66Ens?t=19',
     compliance:'web+mini',
     shareText:'认女阳四条：果断、直、扛事、说没事是真没事——当心假性大女主（阳壳女阴）混进来。',
     mirror:'认女阳：果断/直/扛事/说没事——命中几条？和男阳怎么区分？',
@@ -525,7 +503,6 @@ var QA_CORE4 = [
   },
 
   // ==================== 女阴（11，b3d 已在 core） ====================
-
   {
     qaId:'q-kp-b3-01', kpId:'kp-b3-nvyin', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yin-female'],
     question:'女阴画像：把感情放第一位，最大课题是独立',
@@ -537,22 +514,21 @@ var QA_CORE4 = [
       '成长课题：独立人格——难度与男阳削自恋对等；修好后「以柔克刚」极强，是非常优秀的群体。'
     ],
     evidence:[
-      {ts:'01:02', videoId:'B680', bv:'BV1KXby62Ems', text:'女阴的内在世界，这个感情是最重要的，然后她们的事业就弱很多。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=62'},
-      {ts:'00:04', videoId:'B679', bv:'BV1g58w6iEiv', text:'修炼独立人格的话有什么好的方法吗？首先就是立边界啊——阴的独立人格之所以人格不够独立，是因为他的人格的边界是千疮百孔的。', link:'https://www.bilibili.com/video/BV1g58w6iEiv?t=4'}
+      {ts:'01:02', videoId:'B680', bv:'BV195g56xEG4', text:'女阴的内在世界，这个感情是最重要的，然后她们的事业就弱很多。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=62'},
+      {ts:'00:04', videoId:'B679', bv:'BV1pdgs6MEad', text:'修炼独立人格的话有什么好的方法吗？首先就是立边界啊——阴的独立人格之所以人格不够独立，是因为他的人格的边界是千疮百孔的。', link:'https://www.bilibili.com/video/BV1pdgs6MEad?t=4'}
     ],
     quote:'女阴感情第一、事业弱很多——独立人格的修法，从立边界开始。',
-    videoTitle:'阴性爱上一个不爱自己的人怎么办【新增·v4-628】',
-    jumpUrl:'https://www.bilibili.com/video/BV1KXby62Ems?t=62',
+    videoTitle:'如何判断阴阳能量内核属性',
+    jumpUrl:'https://www.bilibili.com/video/BV195g56xEG4?t=62',
     compliance:'web+mini',
     shareText:'女阴 = 月亮：感情第一、共情力强——最大课题是独立人格，修法从立边界开始。',
     mirror:'（女阴/身边女阴）把感情放第一位之后，独立成了最大的课题？',
     editorNotes:'总纲 kp-b3 女阴画像（阶3，✅KS0）；源 680/21；V3.3 §3.2.2、§3.11（女阴 最大最难课题=独立人格）；证据 B680@01:02/B679@00:04（切片复用+新提取核验）。'
   },
-
   {
     qaId:'q-y3-b3a-01', kpId:'y3-b3a', stage:3, category:'四型人格', scene:['love','self'], forTypes:['yin-female'],
-    question:'连接者的形成：「爱 = 自我牺牲」的程序是谁装的',
-    answerBrief:'自我弱 + 重感情 + 「爱=牺牲」程序 → 讨好与反复验证的连接者模式。',
+    question:'女阴的形成：「爱 = 自我牺牲」的程序是谁装的',
+    answerBrief:'自我弱 + 重感情 + 「爱=牺牲」程序 → 讨好与反复验证的女阴模式。',
     insight:[
       '程序植入：早年被灌输「爱 = 自我牺牲」——付出才配被爱；这个程序不删，付出就永远带着交换的尾巴。',
       '结构成因：自我弱（不配得）+ 重感情（连接是氧气）——两点一连，就走向讨好与反复验证。',
@@ -567,11 +543,10 @@ var QA_CORE4 = [
     videoTitle:'阴性缺乏边界感（重复）',
     jumpUrl:'https://www.bilibili.com/video/BV1EzKHzZENB?t=66',
     compliance:'web+mini',
-    shareText:'连接者的原厂程序：爱 = 自我牺牲——删掉等式，付出才不再带交换的尾巴。',
+    shareText:'女阴的原厂程序：爱 = 自我牺牲——删掉等式，付出才不再带交换的尾巴。',
     mirror:'「爱=自我牺牲」这个程序是谁给你装的？',
     editorNotes:'总纲 y3-b3a 连接者的形成（阶3，✅P2）；源 §3.7.3；V3.3 §3.7.3、§2.2.1（B3@03:54 正源）；证据 B3@03:54/B189@01:06（B3 新提取核验，B189 切片复用）。'
   },
-
   {
     qaId:'q-y3-b3b-01', kpId:'y3-b3b', stage:3, category:'四型人格', scene:['love','self'], forTypes:['yin-female'],
     question:'深情悖论：越爱越抓——付出记账与「休想跑」',
@@ -594,7 +569,6 @@ var QA_CORE4 = [
     mirror:'从怕失去到付出记账到「休想跑」——你走到过第几步？',
     editorNotes:'总纲 y3-b3b 深情悖论（阶3，✅P2）；源 269；V3.3 §3.6.2、§2.3.4（B271 抓取反效果）；证据 B269@00:19/00:44（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y3-b3c-01', kpId:'y3-b3c', stage:3, category:'四型人格', scene:['love'], forTypes:['yin-female'],
     question:'脑内连续剧与依恋模式：女阴的戏演到第几季',
@@ -617,7 +591,6 @@ var QA_CORE4 = [
     mirror:'你脑内那部连续剧演到第几季了？男女主是谁？',
     editorNotes:'总纲 y3-b3c 脑内连续剧与依恋模式（阶3，✅P2）；源 §3.10.2/21；与 y2-07 同段异窗；V3.3 §3.10.2；证据 B21@00:10/00:23（切片复用+逐句核验）。'
   },
-
   {
     qaId:'q-y3-b3e-01', kpId:'y3-b3e', stage:3, category:'四型人格', scene:['love','self'], forTypes:['yin-female'],
     question:'女阴的独处与社交：连接是氧气',
@@ -640,7 +613,6 @@ var QA_CORE4 = [
     mirror:'独处时你空落吗？你的关系网在替你挡什么？',
     editorNotes:'总纲 y3-b3e 女阴的独处与社交（阶3，K5）；依恋模式归 y3-b3c；V3.3 §3.10.3/3.10.4；证据 B416@00:58/02:53（切片复用）。'
   },
-
   {
     qaId:'q-y3-b3f-01', kpId:'y3-b3f', stage:3, category:'四型人格', scene:['love','self'], forTypes:['yin-female'],
     question:'女阴成熟度阶梯：从「在关系里找妈」到独立后反而会连接',
@@ -653,7 +625,7 @@ var QA_CORE4 = [
     ],
     evidence:[
       {ts:'00:00', videoId:'B712', bv:'BV1Jo8d6qEwQ', text:'我分的是这样，把心智的成熟度分为幼阴、少阴和老阴，幼阳、少阳、老阳。幼态的这个就是心智非常的小，如果说我用心理学的话就是巨婴，他的心智还停留在婴儿时期。', link:'https://www.bilibili.com/video/BV1Jo8d6qEwQ?t=0'},
-      {ts:'00:00', videoId:'B668', bv:'BV14wuz6mEUg', text:'对于阴来讲，只要把自我接纳这一关过了就会很快了。对于阴来讲，比较难的就是自我接纳。', link:'https://www.bilibili.com/video/BV14wuz6mEUg?t=0'}
+      {ts:'00:00', videoId:'B668', bv:'BV1g58w6iEiv', text:'对于阴来讲，只要把自我接纳这一关过了就会很快了。对于阴来讲，比较难的就是自我接纳。', link:'https://www.bilibili.com/video/BV1g58w6iEiv?t=0'}
     ],
     quote:'对阴来讲，把自我接纳这一关过了，后面就快了——最难的是自我接纳。',
     videoTitle:'阴阳能量的三个阶段',
@@ -663,7 +635,6 @@ var QA_CORE4 = [
     mirror:'从在关系里找妈到独立后反而会连接——你在哪一阶？',
     editorNotes:'总纲 y3-b3f 女阴成熟度阶梯（阶3，K5）；独立课题归 y5-t3；V3.3 §3.6.0、§3.9.3；证据 B712@00:00/B668@00:00（切片复用）。'
   },
-
   {
     qaId:'q-y3-b3g-01', kpId:'y3-b3g', stage:3, category:'四型人格', scene:['love'], forTypes:['yin-female'],
     question:'以付出换爱的日常：牺牲式付出画像',
@@ -686,7 +657,6 @@ var QA_CORE4 = [
     mirror:'你牺牲式付出的一天长什么样？背后那笔交换账你算过吗？',
     editorNotes:'总纲 y3-b3g 以付出换爱的日常（阶3，K5）；付出记账主证归 y3-b3b（本卡不引记账论点）；V3.3 §3.6.2、§3.16；证据 B255@01:21/B189@00:43（切片复用）。'
   },
-
   {
     qaId:'q-y3-b3h-01', kpId:'y3-b3h', stage:3, category:'四型人格', scene:['love'], forTypes:['yin-female'],
     question:'吃醋的秒杀式表达：曲折与爆发的混合形态',
@@ -709,7 +679,6 @@ var QA_CORE4 = [
     mirror:'女阴吃醋的曲折-爆发混合形态，你见过吗？',
     editorNotes:'总纲 y3-b3h 吃醋的秒杀式表达（阶3，K5）；四型对照归 y3-11、体验层归 y2-11；V3.3 §3.15；证据 B190@00:32/01:53（切片复用）。'
   },
-
   {
     qaId:'q-y3-b3i-01', kpId:'y3-b3i', stage:3, category:'四型人格', scene:['love','self'], forTypes:['yin-female'],
     question:'女阴的情绪模式：卷入剧情与抽不出来',
@@ -721,18 +690,17 @@ var QA_CORE4 = [
       '练习入口：给情绪命名（「我现在在不配得发作」）——命名即拉开半步距离，半步就够转身。'
     ],
     evidence:[
-      {ts:'00:15', videoId:'B663', bv:'BV195g56xEG4', text:'如果说情绪过于激烈的时候，这个时候你要优先去处理情绪——不是说你情绪已经崩得不行了，然后你还要去干活，这个时候就反了。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=15'},
-      {ts:'04:41', videoId:'B663', bv:'BV195g56xEG4', text:'抽离并不是风暴消失了，是那个风暴影响不了你了，是它卷不动你了。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=281'}
+      {ts:'00:15', videoId:'B663', bv:'BV1M4hG6wEfy', text:'如果说情绪过于激烈的时候，这个时候你要优先去处理情绪——不是说你情绪已经崩得不行了，然后你还要去干活，这个时候就反了。', link:'https://www.bilibili.com/video/BV1M4hG6wEfy?t=15'},
+      {ts:'04:41', videoId:'B663', bv:'BV1M4hG6wEfy', text:'抽离并不是风暴消失了，是那个风暴影响不了你了，是它卷不动你了。', link:'https://www.bilibili.com/video/BV1M4hG6wEfy?t=281'}
     ],
     quote:'情绪崩了还去干活就反了；抽离不是风暴消失——是风暴卷不动你了。',
-    videoTitle:'如何判断阴阳能量内核属性【新增·v4-632】',
-    jumpUrl:'https://www.bilibili.com/video/BV195g56xEG4?t=15',
+    videoTitle:'从情绪到信念',
+    jumpUrl:'https://www.bilibili.com/video/BV1M4hG6wEfy?t=15',
     compliance:'web+mini',
     shareText:'女阴的情绪卷入：先消炎再手术——抽离不是没风暴，是风暴卷不动你了。',
     mirror:'你卷入剧情时谁拉过你？抽出来那一次靠什么？',
     editorNotes:'总纲 y3-b3i 女阴的情绪模式（阶3，K5）；观察者方法归 y6-05、先情绪后信念归 y6-01；V3.3 §3.6.2、§14.6；证据 B663@00:15/04:41（切片复用）。'
   },
-
   {
     qaId:'q-y3-b3j-01', kpId:'y3-b3j', stage:3, category:'四型人格', scene:['love','self'], forTypes:['yin-female'],
     question:'识别信号：怎么认出女阴',
@@ -744,7 +712,7 @@ var QA_CORE4 = [
       '口令提醒：判断看内核（不配得 + 连接渴求）不看外壳——社会化面具男女都有。'
     ],
     evidence:[
-      {ts:'00:54', videoId:'B680', bv:'BV1KXby62Ems', text:'女阴，就是女性的阴性能量——她们的内在世界感情最重要、事业弱很多。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=54'},
+      {ts:'00:54', videoId:'B680', bv:'BV195g56xEG4', text:'女阴，就是女性的阴性能量——她们的内在世界感情最重要、事业弱很多。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=54'},
       {ts:'06:22', videoId:'B22', bv:'BV17kVdzuEtE', text:'阴性能量如果说他明明想要秒回，这个时候内心戏就来了：哎呀我这样秒回会不会显得我太热情了？不行，我不能显得这么主动……', link:'https://www.bilibili.com/video/BV17kVdzuEtE?t=382'}
     ],
     quote:'明明想秒回，内心戏却是「秒回会不会显得我太热情」——女阴的反复确认写在每条消息里。',
@@ -757,7 +725,6 @@ var QA_CORE4 = [
   },
 
   // ==================== 男阴（11） ====================
-
   {
     qaId:'q-kp-b4-01', kpId:'kp-b4-nanyin', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yin-male'],
     question:'男阴画像：阴性内核长在男人身上，最压抑的群体',
@@ -780,10 +747,9 @@ var QA_CORE4 = [
     mirror:'（男阴/身边男阴）阴性内核长在男人身上，他压住了什么？',
     editorNotes:'总纲 kp-b4 男阴画像（阶3，✅KS0）；源 122/146/132；V3.3 §3.2.4、§3.11（男阴段落）；证据 B122@00:10/00:20（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y3-b4a-01', kpId:'y3-b4a', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yin-male'],
-    question:'深潜者的形成：强势母亲加阴性内核的双重塑造',
+    question:'男阴的形成：强势母亲加阴性内核的双重塑造',
     answerBrief:'强势母亲 + 阴性内核双重塑造——内缩依赖，学来的却是「爱 = 控制」。',
     insight:[
       '双重塑造：强势母亲（控制式关爱）× 阴性内核（天然向内）——他从被控制里学会爱，也学会控制。',
@@ -792,18 +758,18 @@ var QA_CORE4 = [
       '解法方向：把「被懂」的期待换成「自懂」——先自己看见自己，深潜才会变成深度而不是深渊。'
     ],
     evidence:[
-      {ts:'00:00', videoId:'B122', bv:'BV1As7WzKEqp', text:'男阴的话，他回头想要把女阳给扯下来啊——所以你不能那么高，你必须低下来和我平起平坐，他会这样。', link:'https://www.bilibili.com/video/BV1As7WzKEqp?t=0'},
-      {ts:'00:10', videoId:'B122', bv:'BV1As7WzKEqp', text:'所有的人群啊——女阴、女阳、男阴、男阳，其实活得最压抑的群体就是男阴。', link:'https://www.bilibili.com/video/BV1As7WzKEqp?t=10'}
+      {ts:'00:00', videoId:'B105', bv:'BV1r1jqzNEKP', text:'男阴的原生家庭是怎样的？实际上就是男阴的家里面肯定有一个极强控制欲的妈，这个妈把男阴的这个自我搓得千疮百孔，然后情感绑架、道德勒索。', link:'https://www.bilibili.com/video/BV1r1jqzNEKP?t=0'},
+      {ts:'00:16', videoId:'B105', bv:'BV1r1jqzNEKP', text:'男阴的那些套路，什么情感道德绑架、情感勒索，全是跟他妈学的。', link:'https://www.bilibili.com/video/BV1r1jqzNEKP?t=16'},
+      {ts:'00:00', videoId:'B122', bv:'BV1As7WzKEqp', text:'男阴的话，他回头想要把女阳给扯下来啊——所以你不能那么高，你必须低下来和我平起平坐，他会这样。', link:'https://www.bilibili.com/video/BV1As7WzKEqp?t=0'}
     ],
     quote:'男阴会把高能量的女阳扯下来——「你必须低下来，和我平起平坐」。',
-    videoTitle:'男阴是最压抑的群体',
-    jumpUrl:'https://www.bilibili.com/video/BV1As7WzKEqp?t=0',
+    videoTitle:'原生家庭对男阴的影响',
+    jumpUrl:'https://www.bilibili.com/video/BV1r1jqzNEKP?t=0',
     compliance:'web+mini',
-    shareText:'深潜者的形成：强势母亲 × 阴性内核——被控制里学会爱，也学会控制。',
+    shareText:'男阴的形成：强势母亲 × 阴性内核——被控制里学会爱，也学会控制。',
     mirror:'强势母亲加阴性内核，他学来的「爱=控制」用在谁身上了？',
-    editorNotes:'总纲 y3-b4a 深潜者的形成（阶3，✅P2）；源 §3.7.4（形成机制为知识库整理，原文佐证为压抑群体段）；V3.3 §3.7.4、§3.11；证据 B122@00:00/00:10（新提取逐句核验）。'
+    editorNotes:'总纲 y3-b4a 男阴的形成（阶3，✅P2）；源 §3.7.4；V3.3 §3.7.4、§3.11；证据 B105@00:00/00:16（原生家庭对男阴的影响，新核验）+ B122@00:00（反弹形态佐证）。'
   },
-
   {
     qaId:'q-y3-b4b-01', kpId:'y3-b4b', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yin-male'],
     question:'尊严悖论：既权衡又心机——被揭穿时的自证',
@@ -826,7 +792,6 @@ var QA_CORE4 = [
     mirror:'表面占道德高地、内里一直算计——被揭穿时他怎么自证？',
     editorNotes:'总纲 y3-b4b 尊严悖论（阶3，✅P2）；源 185；V3.3 §3.6.4、§2.3.2（自证）；证据 B185@00:37/00:50（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y3-b4c-01', kpId:'y3-b4c', stage:3, category:'四型人格', scene:['work','love'], forTypes:['yin-male'],
     question:'拉扯模式与职场炫技：抓住又推开，靠细节证明「我也不差」',
@@ -839,7 +804,7 @@ var QA_CORE4 = [
     ],
     evidence:[
       {ts:'00:10', videoId:'B186', bv:'BV1jMTXzVETW', text:'这就是拉扯，无意识的拉扯撕裂——就是一股是推、推拉的一股力量，又在扯你，又在把你推开，这种力量叫摇晃，抓住你猛烈摇晃，无意识层面的。', link:'https://www.bilibili.com/video/BV1jMTXzVETW?t=10'},
-      {ts:'00:27', videoId:'B692', bv:'BV1xXby62Eqn', text:'他会炫技，他会在你面前炫技——炫技和开屏是不一样的哦。', link:'https://www.bilibili.com/video/BV1xXby62Eqn?t=27'}
+      {ts:'00:27', videoId:'B692', bv:'BV1HoMy6HE5x', text:'他会炫技，他会在你面前炫技——炫技和开屏是不一样的哦。', link:'https://www.bilibili.com/video/BV1HoMy6HE5x?t=27'}
     ],
     quote:'一股推一股拉、抓住你摇晃（拉扯）；在你面前炫技——炫技和开屏不一样。',
     videoTitle:'【男阴的拉扯摇晃】',
@@ -849,7 +814,6 @@ var QA_CORE4 = [
     mirror:'抓住又推开、靠抠细节炫技——你身边有这个模式吗？',
     editorNotes:'总纲 y3-b4c 拉扯模式与职场炫技（阶3，✅P2）；源 692内容/683；拉扯机制归 y1-19；V3.3 §3.11（男阴 炫技段）；证据 B186@00:10/B692@00:27（切片复用+逐句核验）。'
   },
-
   {
     qaId:'q-y3-b4d-01', kpId:'y3-b4d', stage:3, category:'四型人格', scene:['love','work'], forTypes:['yin-male'],
     question:'高我说话不算话（花大饼机制）：情绪上头的承诺兑现不了',
@@ -861,18 +825,17 @@ var QA_CORE4 = [
       '识别与应对：听其言更要观其行——只认落地的 10%，不认嘴上的 100%；对花大饼者，把承诺写进日历而不是心里。'
     ],
     evidence:[
-      {ts:'00:11', videoId:'B694', bv:'BV1WJgb6EEF1', text:'高我说话还真不算话……她情绪到那个位置的时候，她什么话都说出来——就是人家在那一刻是发自内心的，人家就是在那一秒钟说的就是真话。', link:'https://www.bilibili.com/video/BV1WJgb6EEF1?t=11'},
-      {ts:'00:35', videoId:'B694', bv:'BV1WJgb6EEF1', text:'其实这个就是跟她这个情绪起伏太大有关系——她每个阶段说的话。', link:'https://www.bilibili.com/video/BV1WJgb6EEF1?t=35'}
+      {ts:'00:11', videoId:'B694', bv:'BV1ZouA6wEKp', text:'高我说话还真不算话……她情绪到那个位置的时候，她什么话都说出来——就是人家在那一刻是发自内心的，人家就是在那一秒钟说的就是真话。', link:'https://www.bilibili.com/video/BV1ZouA6wEKp?t=11'},
+      {ts:'00:35', videoId:'B694', bv:'BV1ZouA6wEKp', text:'其实这个就是跟她这个情绪起伏太大有关系——她每个阶段说的话。', link:'https://www.bilibili.com/video/BV1ZouA6wEKp?t=35'}
     ],
     quote:'情绪到那个位置，什么话都说得出来——那一刻是真话，但那是情绪的真话。',
-    videoTitle:'高我和小我【新增·v4-657】',
-    jumpUrl:'https://www.bilibili.com/video/BV1WJgb6EEF1?t=11',
+    videoTitle:'为什么男阴的话不可信',
+    jumpUrl:'https://www.bilibili.com/video/BV1ZouA6wEKp?t=11',
     compliance:'web+mini',
     shareText:'花大饼机制：情绪上头的承诺是真话——是情绪的真话，不是能力的边界；只认落地的 10%。',
     mirror:'情绪上头时的大承诺，后来兑现了几个？',
     editorNotes:'总纲 y3-b4d 高我说话不算话（阶3，✅P2）；源 694；V3.3 §3.11（男阴 花大饼）、§6.x（高我辨别）；证据 B694@00:11/00:35（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y3-b4e-01', kpId:'y3-b4e', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yin-male'],
     question:'男阴的独处与社交：深潜与观察——为什么不轻易进场',
@@ -895,7 +858,6 @@ var QA_CORE4 = [
     mirror:'男阴独处在深潜什么？社交里他为什么不轻易进场？',
     editorNotes:'总纲 y3-b4e 男阴的独处与社交（阶3，K5）；拉扯模式归 y3-b4c；V3.3 §3.10.3/3.10.4、§3.11（男阴靠观察判断）；证据 B188@02:57/03:33（切片复用）。'
   },
-
   {
     qaId:'q-y3-b4f-01', kpId:'y3-b4f', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yin-male'],
     question:'男阴成熟度阶梯：从算计卖惨到深潜成器',
@@ -918,7 +880,6 @@ var QA_CORE4 = [
     mirror:'从算计卖惨到深潜成器——他在哪一阶？',
     editorNotes:'总纲 y3-b4f 男阴成熟度阶梯（阶3，K5）；全力以赴归 y5-t4；V3.3 §3.6.0、§3.9.4；证据 B150@00:08/B712@00:00（切片复用）。'
   },
-
   {
     qaId:'q-y3-b4g-01', kpId:'y3-b4g', stage:3, category:'四型人格', scene:['love','work'], forTypes:['yin-male'],
     question:'画圈战术：让你自己耗死——男阴的精准消耗',
@@ -941,7 +902,6 @@ var QA_CORE4 = [
     mirror:'画圈的手法（拖/绕/耗）你见过或用过吗？为什么阳吃这一套？',
     editorNotes:'总纲 y3-b4g 画圈战术（阶3，K4/K5）；金刚道菩萨道归 y1-22；V3.3 §2.7.6（B42 正源，主语 ASR 疑误已按上下文校正）；证据 B42@01:38/01:50（与 qa_core y1-13 同源异窗）。'
   },
-
   {
     qaId:'q-y3-b4h-01', kpId:'y3-b4h', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yin-male'],
     question:'卑微与高姿态切换：他在保卫什么',
@@ -963,7 +923,6 @@ var QA_CORE4 = [
     mirror:'卑微和高姿态的切换发生在什么时刻？他在保卫什么？',
     editorNotes:'总纲 y3-b4h 卑微与高姿态切换（阶3，K5）；源 146/185 异窗口（146 未取到贴题原文，单证卡+知识库整理）；尊严悖论归 y3-b4b；V3.3 §3.6.4；证据 B185@00:26（新提取核验）。'
   },
-
   {
     qaId:'q-y3-b4i-01', kpId:'y3-b4i', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yin-male'],
     question:'男阴的情绪模式：压进去的与咽下去的——最后从哪儿漏出来',
@@ -976,7 +935,7 @@ var QA_CORE4 = [
     ],
     evidence:[
       {ts:'16:49', videoId:'B23', bv:'BV1qkVdzuEJa', text:'男阴他们是回避型，他就是自己情绪自己消化，就内攻击。', link:'https://www.bilibili.com/video/BV1qkVdzuEJa?t=1009'},
-      {ts:'01:09', videoId:'B44', bv:'BV1cSJAzLEKb', text:'阴性能量本身不是没有能量，而是它把自己的能量都用来自己和自己左右手互搏了——他拿自己 50% 的能量和自己另外 50% 的能量对抗冲突、耗损，能量当然就没有了。', link:'https://www.bilibili.com/video/BV1cSJAzLEKb?t=69'}
+      {ts:'00:58', videoId:'B44', bv:'BV1cSJAzLEKb', text:'阴性能量本身不是没有能量，而是它把自己的能量都用来自己和自己左右手互搏了——他拿自己 50% 的能量和自己另外 50% 的能量对抗冲突、耗损，能量当然就没有了。', link:'https://www.bilibili.com/video/BV1cSJAzLEKb?t=58'}
     ],
     quote:'男阴是回避型——自己情绪自己消化，直接内攻击；左右手互搏，能量自耗。',
     videoTitle:'双生重要经验包，双生阴阳能量之间的交换（重复）',
@@ -986,7 +945,6 @@ var QA_CORE4 = [
     mirror:'男阴压进去的情绪最后从哪儿漏出来？',
     editorNotes:'总纲 y3-b4i 男阴的情绪模式（阶3，K5）；最压抑群体归 kp-b4；V3.3 §3.6.4 卡点段、§2.3.3（2）；证据 B23@16:49/B44@01:09（切片复用）。'
   },
-
   {
     qaId:'q-y3-b4j-01', kpId:'y3-b4j', stage:3, category:'四型人格', scene:['self','love'], forTypes:['yin-male'],
     question:'识别信号：怎么认出男阴',
@@ -998,12 +956,12 @@ var QA_CORE4 = [
       '与男阳区分：男阳靠实力共鸣（服强），男阴靠独立观察（会一会你，考察完才认）。'
     ],
     evidence:[
-      {ts:'00:27', videoId:'B692', bv:'BV1xXby62Eqn', text:'他会炫技，他会在你面前炫技——炫技和开屏是不一样的哦。', link:'https://www.bilibili.com/video/BV1xXby62Eqn?t=27'},
+      {ts:'00:27', videoId:'B692', bv:'BV1HoMy6HE5x', text:'他会炫技，他会在你面前炫技——炫技和开屏是不一样的哦。', link:'https://www.bilibili.com/video/BV1HoMy6HE5x?t=27'},
       {ts:'00:00', videoId:'B255', bv:'BV1aTM3zdEix', text:'男阴会有一种营造，他会营造出一种氛围：他给你花这个钱有多么的不容易、多么的艰难，他才这么窘迫穷困潦倒的情况下，还愿意掏空。', link:'https://www.bilibili.com/video/BV1aTM3zdEix?t=0'}
     ],
     quote:'男阴会在你面前炫技（炫技和开屏不一样）；营造「多不容易还为你花钱」的氛围。',
-    videoTitle:'九楼还有情执课题吗？【新增·v4-627】',
-    jumpUrl:'https://www.bilibili.com/video/BV1xXby62Eqn?t=27',
+    videoTitle:'男阴在女阳面前证明自己的方式',
+    jumpUrl:'https://www.bilibili.com/video/BV1HoMy6HE5x?t=27',
     compliance:'web+mini',
     shareText:'认男阴四条：细节控、权衡、先观察、心机——和女阴的区分在戏演明处还是暗处。',
     mirror:'认男阴：细节控/权衡/先观察/心机——命中几条？和女阴怎么分？',
@@ -1011,7 +969,6 @@ var QA_CORE4 = [
   },
 
   // ==================== 阶5 平衡与修行（10） ====================
-
   {
     qaId:'q-kp-a1-balance-01', kpId:'kp-a1-balance', stage:5, category:'阴阳能量', scene:['self','love','work'], forTypes:[],
     question:'阴阳平衡：偏废则两害——光自强自我毁灭，光厚德困在原地',
@@ -1024,7 +981,7 @@ var QA_CORE4 = [
     ],
     evidence:[
       {ts:'01:02', videoId:'B160', bv:'BV1hzNEzTEra', text:'他最后要走到哪呢？他还得发展出来一些阴的东西来平衡这个阳——最终他走向这个平衡，比如说像那个火车终点站都是叫阴阳平衡站。', link:'https://www.bilibili.com/video/BV1hzNEzTEra?t=62'},
-      {ts:'05:04', videoId:'B680', bv:'BV1KXby62Ems', text:'他修厚德载物，他修德啊，修坤德；而阴性能量的话，他就要去修这个自强啊，修这个乾德。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=304'}
+      {ts:'05:04', videoId:'B680', bv:'BV195g56xEG4', text:'他修厚德载物，他修德啊，修坤德；而阴性能量的话，他就要去修这个自强啊，修这个乾德。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=304'}
     ],
     quote:'阳修坤德、阴修乾德——光自强会毁灭，光厚德会困在原地。',
     videoTitle:'双火阴阳平衡的终点站',
@@ -1034,7 +991,6 @@ var QA_CORE4 = [
     mirror:'光自强会自我毁灭、光厚德会困在原地——你现在偏向哪边的坑？',
     editorNotes:'总纲 kp-a1-balance 阴阳平衡：偏废则两害（阶5，✅KS0；总纲源 346/329 与「偏废」主题贴题不足，改用已核验的 B160/B680 平衡正源）；V3.3 §1.6 宇宙平衡律、§2.3.4；证据 B160@01:02/B680@05:04（逐句核验）。'
   },
-
   {
     qaId:'q-y5-06-01', kpId:'y5-06', stage:5, category:'阴阳能量', scene:['self'], forTypes:[],
     question:'阴极生阳，阳极生阴：人格层面的转化与触发条件',
@@ -1047,7 +1003,7 @@ var QA_CORE4 = [
     ],
     evidence:[
       {ts:'01:33', videoId:'B59', bv:'BV1mNJ8zFEN3', text:'男阳变阴也会偷偷哭吗？会啊，它叫生发阴性能量。', link:'https://www.bilibili.com/video/BV1mNJ8zFEN3?t=93'},
-      {ts:'00:56', videoId:'B667', bv:'BV11W836nEup', text:'当一个阴开始不再自我逃避、不再自我欺骗的时候，他就进入到快速成长通道了——因为你开始生发阳性能量了。不逃、直面，这是阳性能量。', link:'https://www.bilibili.com/video/BV11W836nEup?t=56'}
+      {ts:'00:56', videoId:'B667', bv:'BV1d28i6rEVF', text:'当一个阴开始不再自我逃避、不再自我欺骗的时候，他就进入到快速成长通道了——因为你开始生发阳性能量了。不逃、直面，这是阳性能量。', link:'https://www.bilibili.com/video/BV1d28i6rEVF?t=56'}
     ],
     quote:'男阳偷偷哭是生发阴；阴不再逃、直面课题是生阳——极点是转化的门。',
     videoTitle:'如何收割男阳自恋',
@@ -1057,7 +1013,6 @@ var QA_CORE4 = [
     mirror:'你见过「阳极生阴」的真实例子吗（硬汉偷偷哭那种）？触发条件是什么？',
     editorNotes:'总纲 y5-06 阴极生阳，阳极生阴（阶5，K8）；转化律归 y1-24（本卡讲人格层转化）；V3.3 §1.7.1（生发路径）、§2.3.3；证据 B59@01:33/B667@00:56（切片复用）。'
   },
-
   {
     qaId:'q-y5-07-01', kpId:'y5-07', stage:5, category:'阴阳能量', scene:['self','love'], forTypes:[],
     question:'动态平衡：不是静态 50/50——失衡到再平衡的周期',
@@ -1069,18 +1024,17 @@ var QA_CORE4 = [
       '修行的真相：不是永远不再失衡，而是失衡幅度越来越小、回归速度越来越快。'
     ],
     evidence:[
-      {ts:'02:27', videoId:'B663', bv:'BV195g56xEG4', text:'阴要走向阴阳平衡，最好的最快速的方式是生发自己内在的阳性能量，去和自己的阴性能量平衡。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=147'},
+      {ts:'02:27', videoId:'B663', bv:'BV1M4hG6wEfy', text:'阴要走向阴阳平衡，最好的最快速的方式是生发自己内在的阳性能量，去和自己的阴性能量平衡。', link:'https://www.bilibili.com/video/BV1M4hG6wEfy?t=147'},
       {ts:'00:37', videoId:'B100', bv:'BV1UWjdzwEUJ', text:'双方不同的比例，最终都是要达到一个无极的平衡。', link:'https://www.bilibili.com/video/BV1UWjdzwEUJ?t=37'}
     ],
     quote:'生发内在的对侧能量去平衡——不同比例，最终都要走向无极的平衡。',
-    videoTitle:'如何判断阴阳能量内核属性【新增·v4-632】',
-    jumpUrl:'https://www.bilibili.com/video/BV195g56xEG4?t=147',
+    videoTitle:'从情绪到信念',
+    jumpUrl:'https://www.bilibili.com/video/BV1M4hG6wEfy?t=147',
     compliance:'web+mini',
     shareText:'动态平衡不是 50/50：失衡→识别→接纳→清理→再平衡——每走一轮，失衡更浅、回归更快。',
     mirror:'你的平衡是静态配比还是动态过程？你现在处于失衡还是再平衡？',
     editorNotes:'总纲 y5-07 动态平衡（阶5，K8）；偏废机制归 kp-a1-balance；V3.3 §1.7.2 动态平衡（1.7.5 失衡→再平衡周期）；证据 B663@02:27/B100@00:37（逐句核验）。'
   },
-
   {
     qaId:'q-y5-02-01', kpId:'y5-02', stage:5, category:'阴阳能量', scene:['self','love'], forTypes:[],
     question:'阳修坤德，阴修乾德——互补修行的总纲',
@@ -1092,18 +1046,17 @@ var QA_CORE4 = [
       '验收标准：阳修好了是「强而不压」，阴修好了是「柔而不塌」——两句话，各自的终点画像。'
     ],
     evidence:[
-      {ts:'04:57', videoId:'B680', bv:'BV1KXby62Ems', text:'已经膨胀到了没有其他人了啊——所以这种阳性能量他要修行的课题是什么？他修厚德载物，他修德啊，修坤德；而阴性能量的话，他就要去修这个自强啊，修这个乾德。', link:'https://www.bilibili.com/video/BV1KXby62Ems?t=297'},
+      {ts:'04:57', videoId:'B680', bv:'BV195g56xEG4', text:'已经膨胀到了没有其他人了啊——所以这种阳性能量他要修行的课题是什么？他修厚德载物，他修德啊，修坤德；而阴性能量的话，他就要去修这个自强啊，修这个乾德。', link:'https://www.bilibili.com/video/BV195g56xEG4?t=297'},
       {ts:'00:10', videoId:'B669', bv:'BV1gj8w6NEHY', text:'你把自己从阳修到阴的话，你觉得最难的地方是在哪？精神层面上阉割掉自己的男性身份——这是最难的哦。', link:'https://www.bilibili.com/video/BV1gj8w6NEHY?t=10'}
     ],
     quote:'阳修坤德（厚德载物），阴修乾德（自强不息）——各修对侧，同赴平衡。',
     videoTitle:'男阳的终极课题【新增·v4-621】',
-    jumpUrl:'https://www.bilibili.com/video/BV1KXby62Ems?t=297',
+    jumpUrl:'https://www.bilibili.com/video/BV195g56xEG4?t=297',
     compliance:'web+mini',
     shareText:'互补修行总纲：阳修坤德、阴修乾德——阳修好了强而不压，阴修好了柔而不塌。',
     mirror:'你在修对侧能量吗？修的是坤德还是乾德？',
     editorNotes:'总纲 y5-02 阳修坤德，阴修乾德（阶5，✅P3）；源 680@05:04；细目归 y5-11/y5-12；V3.3 §2.3.4 阴阳平衡·整合的动力学；证据 B680@04:57/B669@00:10（逐句核验）。'
   },
-
   {
     qaId:'q-y5-11-01', kpId:'y5-11', stage:5, category:'成长课题', scene:['love','self'], forTypes:[],
     question:'阳修坤德细目：示弱、表达、承接——阳侧三件套',
@@ -1126,7 +1079,6 @@ var QA_CORE4 = [
     mirror:'示弱/表达/承接——阳侧三件套，你最缺哪件？',
     editorNotes:'总纲 y5-11 阳修坤德细目（阶5，K8）；引 y5-02 不重述定义；V3.3 §1.7.1（阳生阴路径）、§2.1.8（撒娇）；证据 B79@00:00/B38@00:37（切片复用+逐句核验）。'
   },
-
   {
     qaId:'q-y5-03-01', kpId:'y5-03', stage:5, category:'成长课题', scene:['self','love'], forTypes:[],
     question:'自我接纳：阴的第一关——这关过了，后面就快了',
@@ -1138,18 +1090,17 @@ var QA_CORE4 = [
       '练习入口：从「承认」开始——「我现在就是不配得发作了」；承认即接纳的第一步，反驳自己只会更深。'
     ],
     evidence:[
-      {ts:'00:00', videoId:'B668', bv:'BV14wuz6mEUg', text:'对于阴来讲，只要把自我接纳这一关过了就会很快了。对于阴来讲，比较难的就是自我接纳。', link:'https://www.bilibili.com/video/BV14wuz6mEUg?t=0'},
-      {ts:'00:58', videoId:'B668', bv:'BV14wuz6mEUg', text:'只要是能力就是可以习得的，就可以练习的——对于阴来讲只要把自我接纳这一关过了，就会很快了。', link:'https://www.bilibili.com/video/BV14wuz6mEUg?t=58'}
+      {ts:'00:00', videoId:'B668', bv:'BV1g58w6iEiv', text:'对于阴来讲，只要把自我接纳这一关过了就会很快了。对于阴来讲，比较难的就是自我接纳。', link:'https://www.bilibili.com/video/BV1g58w6iEiv?t=0'},
+      {ts:'00:58', videoId:'B668', bv:'BV1g58w6iEiv', text:'只要是能力就是可以习得的，就可以练习的——对于阴来讲只要把自我接纳这一关过了，就会很快了。', link:'https://www.bilibili.com/video/BV1g58w6iEiv?t=58'}
     ],
     quote:'对阴来讲，自我接纳这一关过了就会很快——接纳是能力，能力就可以练习。',
-    videoTitle:'为什么阳性比阴性体力好',
-    jumpUrl:'https://www.bilibili.com/video/BV14wuz6mEUg?t=0',
+    videoTitle:'女阴的课题难点',
+    jumpUrl:'https://www.bilibili.com/video/BV1g58w6iEiv?t=0',
     compliance:'web+mini',
     shareText:'自我接纳是阴的第一关：过了就全顺——它不是天赋，是可以练习的能力。',
     mirror:'自我接纳为什么是阴的第一关？你过关了吗？',
     editorNotes:'总纲 y5-03 自我接纳：阴的第一关（阶5，✅P3）；源 668；V3.3 §9.1 爱自己、§3.6.2；证据 B668@00:00/00:58（切片复用）。'
   },
-
   {
     qaId:'q-y5-04-01', kpId:'y5-04', stage:5, category:'成长课题', scene:['self','work'], forTypes:[],
     question:'卸面具，不是内化面具——买车还要养车的能量账',
@@ -1162,17 +1113,16 @@ var QA_CORE4 = [
     ],
     evidence:[
       {ts:'01:26', videoId:'B605', bv:'BV1mNJ8zFEMv', text:'他那个壳是怎么产生的？他就是他不接纳自己的性别，要么就是他不接纳自己的脆弱，他就诞生出了一个假阳的壳。', link:'https://www.bilibili.com/video/BV1mNJ8zFEMv?t=86'},
-      {ts:'00:43', videoId:'B679', bv:'BV1g58w6iEiv', text:'有的时候以为自己在外壳上已经很阳了，但实际上里面还有一些隐藏的不独立的地方——这就是要修内在。', link:'https://www.bilibili.com/video/BV1g58w6iEiv?t=43'}
+      {ts:'00:43', videoId:'B679', bv:'BV1pdgs6MEad', text:'有的时候以为自己在外壳上已经很阳了，但实际上里面还有一些隐藏的不独立的地方——这就是要修内在。', link:'https://www.bilibili.com/video/BV1pdgs6MEad?t=43'}
     ],
     quote:'以为外壳已经很阳了，里面还藏着不独立的部分——面具卸到内层时，最像「已经好了」。',
-    videoTitle:'女阴的课题难点【新增·v4-620】',
-    jumpUrl:'https://www.bilibili.com/video/BV1g58w6iEiv?t=43',
+    videoTitle:'了解阴性能量',
+    jumpUrl:'https://www.bilibili.com/video/BV1pdgs6MEad?t=43',
     compliance:'web+mini',
     shareText:'面具买车+养车都在耗能——要卸不要内化；卸到内层时最像好了，那正是最后一层。',
     mirror:'你的面具「买车+养车」每月烧多少能量？卸下来一天试试会怎样？',
     editorNotes:'总纲 y5-04 卸面具，不是内化面具（阶5，✅P3）；源 679；假自体理论归 y8-01；V3.3 §5.2（假自体）、§3.11（女阴 面具能量学）；证据 B605@01:26/B679@00:43（切片复用+新提取核验）。'
   },
-
   {
     qaId:'q-y5-09-01', kpId:'y5-09', stage:5, category:'成长课题', scene:['self','work','love'], forTypes:[],
     question:'平衡态画像：修好了是什么样——四型的终点像',
@@ -1195,7 +1145,6 @@ var QA_CORE4 = [
     mirror:'给四型各画一张「修好了」的终点像——你现在离哪张最近？',
     editorNotes:'总纲 y5-09 平衡态画像（阶5，K8）；阶梯全程归各型 f 槽位卡；V3.3 §3.9（成熟态）、§3.11；证据 B669@00:00/B87@01:44（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y5-10-01', kpId:'y5-10', stage:5, category:'成长课题', scene:['self','love'], forTypes:[],
     question:'生发对侧能量：双向修行菜单——今天先练哪一项',
@@ -1207,18 +1156,17 @@ var QA_CORE4 = [
       '启动建议：今天挑一项练 10 分钟——对侧能量是肌肉，不是觉悟；一次一项，比立志全改有效一百倍。'
     ],
     evidence:[
-      {ts:'01:21', videoId:'B667', bv:'BV11W836nEup', text:'阴阳平衡最好的、最快速的方式是生发自己内在的阳性能量，去和自己的阴性能量平衡。', link:'https://www.bilibili.com/video/BV11W836nEup?t=81'},
+      {ts:'01:21', videoId:'B667', bv:'BV1d28i6rEVF', text:'阴阳平衡最好的、最快速的方式是生发自己内在的阳性能量，去和自己的阴性能量平衡。', link:'https://www.bilibili.com/video/BV1d28i6rEVF?t=81'},
       {ts:'00:34', videoId:'B271', bv:'BV1AAf6YgEP1', text:'拒绝——其实恰恰是建立在充分尊重自己的基础之上的。拒绝恰恰是充分的尊重自己。', link:'https://www.bilibili.com/video/BV1AAf6YgEP1?t=34'}
     ],
     quote:'生发内在的对侧能量，是最快的平衡方式；拒绝恰恰是充分的尊重自己。',
-    videoTitle:'阳性的成长特点【新增·v4-623】',
-    jumpUrl:'https://www.bilibili.com/video/BV11W836nEup?t=81',
+    videoTitle:'阴性能量的三个阶段',
+    jumpUrl:'https://www.bilibili.com/video/BV1d28i6rEVF?t=81',
     compliance:'web+mini',
     shareText:'双向修行菜单：阴练边界/反击/直面，阳练柔软/表达/承接——一次一项，各练 10 分钟。',
     mirror:'对侧能量菜单上，哪一项你今天就能练 10 分钟？',
     editorNotes:'总纲 y5-10 生发对侧能量：双向修行菜单（阶5，K8）；源 667@01:21/§2.6.x；V3.3 §1.7.1（阴生阳/阳生阴路径表）；证据 B667@01:21/B271@00:34（新提取逐句核验）。'
   },
-
   {
     qaId:'q-y5-05-01', kpId:'y5-05', stage:5, category:'成长课题', scene:['self'], forTypes:[],
     question:'情执与无我：「有我」才有情执——通向高阶的桥卡',
@@ -1230,12 +1178,12 @@ var QA_CORE4 = [
       '桥卡定位：阴阳尽头是平衡，平衡尽头指向无我——这张卡是通向高阶分册（九楼）的桥。'
     ],
     evidence:[
-      {ts:'00:00', videoId:'B681', bv:'BV1pdgs6MEad', text:'那真情真爱跟无条件的爱之间的差别，是不是差着一个情执——一个有我，一个没有我。', link:'https://www.bilibili.com/video/BV1pdgs6MEad?t=0'},
-      {ts:'00:45', videoId:'B681', bv:'BV1pdgs6MEad', text:'为什么会有情执？因为只要我们有缺失就会有情执……你修的越来越完整的时候，你缺失没有了的话，那你自然就没有这个执了。', link:'https://www.bilibili.com/video/BV1pdgs6MEad?t=45'}
+      {ts:'00:00', videoId:'B681', bv:'BV1V5g56xEgr', text:'那真情真爱跟无条件的爱之间的差别，是不是差着一个情执——一个有我，一个没有我。', link:'https://www.bilibili.com/video/BV1V5g56xEgr?t=0'},
+      {ts:'00:45', videoId:'B681', bv:'BV1V5g56xEgr', text:'为什么会有情执？因为只要我们有缺失就会有情执……你修的越来越完整的时候，你缺失没有了的话，那你自然就没有这个执了。', link:'https://www.bilibili.com/video/BV1V5g56xEgr?t=45'}
     ],
     quote:'只要我们有缺失就会有情执；修到完整，缺失没有了，执自然就没了。',
-    videoTitle:'女阴阳壳怎么修出独立自我，为什么要卸掉面具【新增·v4-631】',
-    jumpUrl:'https://www.bilibili.com/video/BV1pdgs6MEad?t=0',
+    videoTitle:'真情真爱与无条件的爱，八楼与九楼',
+    jumpUrl:'https://www.bilibili.com/video/BV1V5g56xEgr?t=0',
     compliance:'web',
     shareText:'「有我」才有情执——修到完整，缺失消失，执自然松开（本卡为高阶桥卡，仅网页）。',
     mirror:'「有我」才有情执——你愿意往「无我」那边挪一步试试吗？',

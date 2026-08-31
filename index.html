@@ -33,6 +33,37 @@
   --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px;
   --fs-11:11px; --fs-12:12px; --fs-13:13px; --fs-15:15px; --fs-17:17px;
   --fs-18:18px; --fs-20:20px; --fs-24:24px; --fs-28:28px; --fs-32:32px;
+  /* —— 趣味交互 v1 新增：动效令牌（只加不改） —— */
+  --dur-ms:120ms;                 /* 按压/涟漪：短促 */
+  --dur-q:180ms;                  /* 选项/卡片切换：轻快 */
+  --dur-m:280ms;                  /* 展开/翻篇：中等 */
+  --dur-seal:420ms;               /* 落印/盖章：仪式 */
+  --ease-seal:cubic-bezier(.34,1.56,.64,1);   /* 落印回弹：先压后弹 */
+  --ease-gentle:cubic-bezier(.25,.8,.35,1);   /* 普通动效 */
+  --stamp-x:-2deg;                /* 印章落印的惯常倾角（沿用 ±2° 规范） */
+}
+/* 落印统一动效原语（趣味交互 v1：一次定义，处处引用） */
+@keyframes sealStamp{             /* 从悬空到盖定：放大→回落→微倾定格 */
+  0%{ transform:scale(1.45) rotate(0deg); opacity:0; }
+  55%{ transform:scale(.94) rotate(var(--stamp-x)); opacity:1; }
+  75%{ transform:scale(1.05) rotate(var(--stamp-x)); }
+  100%{ transform:scale(1) rotate(var(--stamp-x)); }
+}
+@keyframes inkBloom{              /* 印泥洇开：墨迹扩散渐隐 */
+  0%{ opacity:.5; transform:scale(.4); }
+  100%{ opacity:0; transform:scale(1.6); }
+}
+@keyframes brushGlide{            /* 进度条墨迹光点前扫 */
+  from{ transform:translateX(0);}
+  to{ transform:translateX(120vw);}
+}
+@keyframes pageTurn{              /* 页面切换翻篇淡入 */
+  from{ opacity:0; transform:translateY(10px);}
+  to{ opacity:1; transform:none;}
+}
+@keyframes cardSettle{            /* 卡片落定（结果页判定卡/今日一问） */
+  from{ opacity:0; transform:translateY(14px);}
+  to{ opacity:1; transform:none;}
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html{scroll-behavior:smooth;}
@@ -630,6 +661,57 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 /* P0-9 按压反馈：chips/卡片统一轻按缩放（移动端点击有手感，不覆盖 open 态） */
 .chip:active,.plate:active,.pair-card:active,.gcard:active,.reco-item:active,.deep-item:active,.ps-chip:active,.dt-portrait:active,.h-chip:active{transform:scale(.985);box-shadow:var(--shadow-flat);}
 .qcard:not(.open):active{transform:scale(.985);box-shadow:var(--shadow-flat);}
+/* =====================================================================
+   趣味交互 v1 · P0 落地（守卫式追加：只加不改）
+   ===================================================================== */
+/* P0-1 选项盖章：选中 = 落一枚小方章 + 印泥洇开一圈 */
+.q-opt{ position:relative; }
+.q-opt.selected::after{
+  content:'已';position:absolute;right:14px;top:50%;margin-top:-13px;
+  width:26px;height:26px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:12px;color:#FFF6F0;border-radius:3px;
+  background:radial-gradient(130% 130% at 30% 22%,#C85F4C,#B5483A 48%,#9A382D);
+  transform:rotate(-2deg);animation:sealStamp var(--dur-seal) var(--ease-seal) both;
+}
+.q-opt.selected::before{
+  content:'';position:absolute;right:22px;top:50%;width:30px;height:30px;
+  margin:-15px 0 0;border-radius:50%;
+  background:radial-gradient(rgba(181,72,58,.35),transparent 65%);
+  animation:inkBloom .5s ease-out both;
+}
+/* 连点重选时重放落印（JS 守卫式加 .stamp，见 boot 后 IIFE） */
+.q-opt.stamp::after{ animation:sealStamp var(--dur-seal) var(--ease-seal) both; }
+.q-opt.stamp::before{ animation:inkBloom .5s ease-out both; }
+/* P0-2 按压梯度三档（覆盖全局统一 :active，只动 transform） */
+.btn-cta:active,.btn:active{ transform:scale(.96); }                          /* 主操作：略沉 */
+.q-opt:active,.gcard:active{ transform:scale(.985) translateY(1px); }         /* 选择项：下压入纸 */
+.plate:active,.s-corpus:active,.pair-card:active{ transform:scale(.99); }     /* 卡片：轻点 */
+.qcard:not(.open):active{ transform:scale(.99);box-shadow:var(--shadow-flat); }
+/* P0-3 进度条墨迹光点前扫（保留宽度过渡，伪元素只动 transform） */
+.progress-fill{ position:relative;overflow:hidden; }
+.progress-fill::after{
+  content:'';position:absolute;top:0;bottom:0;left:-20px;width:18px;
+  background:linear-gradient(90deg,transparent,rgba(255,246,240,.75),transparent);
+  animation:brushGlide 2.2s var(--ease-gentle) infinite;
+}
+/* P0-4 知识卡展开钤「已览」章（右上角，与左缘 cat-badge 同排不遮挡） */
+.qcard.open::after{
+  content:'已览';position:absolute;right:12px;top:12px;
+  font-family:var(--serif);font-size:10px;color:#8A5A1F;letter-spacing:.1em;
+  border:1px solid rgba(212,165,116,.55);border-radius:3px;padding:1px 6px;
+  background:rgba(212,165,116,.08);animation:sealStamp var(--dur-seal) var(--ease-seal) both;
+}
+/* P0-7 完成测评：判定卡落定 + 判定卡印章盖定（含历史回看，DOM 重插即重放） */
+.result-wrap .r-zone:first-child{ animation:cardSettle var(--dur-m) var(--ease-gentle) both; }
+.result-wrap .r-zone:first-child .seal{ animation:sealStamp var(--dur-seal) var(--ease-seal) .12s both; }
+/* P0-8 今日一问：入场轻动 + 标签印章点题 */
+.daily-card{ animation:cardSettle var(--dur-m) var(--ease-gentle) both; }
+.dc-tag{ position:relative;padding-left:16px; }
+.dc-tag::before{
+  content:'';position:absolute;left:0;top:50%;width:8px;height:8px;
+  margin-top:-4px;border-radius:2px;transform:rotate(45deg);
+  background:linear-gradient(135deg,var(--yang),var(--amber));
+}
 .chip:active{color:var(--ink);border-color:var(--amber);}
 .dt-item.dt-read{opacity:.6;}
 .dt-q{font-size:14px;color:var(--ink);font-weight:600;line-height:1.55;}
@@ -936,6 +1018,9 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 <script src="data/qa_core4.js"></script>
 <script src="data/qa_core5.js"></script>
 <script src="data/qa_core6.js"></script>
+<script src="data/qa_core7.js"></script>
+<script src="data/qa_core8.js"></script>
+<script src="data/qa_core9.js"></script>
 <script src="data/qa_clips_new.js"></script>
 <script src="data/quiz_male.js"></script>
 <script src="data/quiz_female.js"></script>
@@ -1722,6 +1807,9 @@ var QA = [];
   if(typeof QA_CORE4 !== 'undefined') absorbCore(QA_CORE4);
   if(typeof QA_CORE5 !== 'undefined') absorbCore(QA_CORE5);
   if(typeof QA_CORE6 !== 'undefined') absorbCore(QA_CORE6);
+  if(typeof QA_CORE7 !== 'undefined') absorbCore(QA_CORE7);
+  if(typeof QA_CORE8 !== 'undefined') absorbCore(QA_CORE8);
+  if(typeof QA_CORE9 !== 'undefined') absorbCore(QA_CORE9);
   var DEP = (typeof DEPRECATED_QA !== 'undefined') ? DEPRECATED_QA : [];
   var depSet = {};
   DEP.forEach(function(id){ depSet[id] = 1; });
@@ -1867,8 +1955,17 @@ function $(id){ return document.getElementById(id); }
 function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function pad2(n){ return (n<10?'0':'')+n; }
 function fmtDate(d){ return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate())+' '+pad2(d.getHours())+':'+pad2(d.getMinutes()); }
+/* P0-6 趣味文案：toast 已知消息 → 国风点题映射（精确匹配，防误伤；未收录的原样显示） */
+var TOAST_LANG={
+  '已复制':'已誊入剪贴板',
+  '导出失败':'笔走偏锋，导出未成——再试一次',
+  '卡片不存在':'这张卡尚未裱好，稍后再来',
+  '分享图已生成':'印已成章，长按可存',
+  '没有可续答的进度':'书案空空，尚未落墨——开一局新卷吧',
+  '链接已复制':'本页链接已誊入剪贴板'
+};
 function toast(msg){
-  var t=$('toast'); t.textContent=msg; t.classList.add('show');
+  var t=$('toast'); t.textContent=TOAST_LANG[msg]||msg; t.classList.add('show');
   clearTimeout(t._tm); t._tm=setTimeout(function(){ t.classList.remove('show'); },2200);
 }
 function loadJSON(key,def){ try{ var v=localStorage.getItem(key); return v?JSON.parse(v):def; }catch(e){ return def; } }
@@ -2162,7 +2259,7 @@ function renderQa(){
   list.sort(function(a,b){ return (a.stage||9)-(b.stage||9); });
   $('qaList').innerHTML = list.length
     ? list.map(function(c){ return qaCardHtml(c,''); }).join('')
-    : '<div class="empty-tip">这个分组下暂时还没有卡片 —— 问答卡持续生产中。</div>';
+    : '<div class="empty-tip">此卷尚未抄录，笔墨仍在路上。</div>';
 }
 function setQaGroup(x){
   qaFilter.group=x;
@@ -2225,7 +2322,7 @@ function runSearch(){
   var q=($('searchInput').value||'').trim();
   var out=$('searchOut');
   if(q && typeof CORPUS_SENTS==='undefined' && typeof CORPUS_SENT_FIRST_DATA!=='undefined'){
-    out.innerHTML='<div class="spinner-wrap"><div class="spinner"></div><div class="spinner-txt">正在加载语料库…</div></div>';
+    out.innerHTML='<div class="spinner-wrap"><div class="spinner"></div><div class="spinner-txt">正在翻检 500+ 卷宗，稍候…</div></div>';
     loadCorpusSents(function(){ try{ runSearch(); }catch(e){} });
     return;
   }
@@ -2258,7 +2355,7 @@ function runSearch(){
   html+='<div class="search-sec">问答卡 · 命中 '+qaHits.length+' 条（按相关度）</div>';
   html+=qaHits.length
     ? qaHits.map(function(c){ return qaCardHtml(c,q); }).join('')
-    : '<div class="empty-tip" style="padding:18px;">没有命中的问答卡</div>';
+    : '<div class="empty-tip" style="padding:18px;">案头翻遍，暂无此问——换个说法试试？</div>';
   html+='<div class="search-sec">语料条目 · 命中 '+corpusHits.length+' 条（按相关度，显示前 30）</div>';
   if(corpusHits.length){
     html+=corpusHits.slice(0,30).map(function(c){
@@ -2276,7 +2373,7 @@ function runSearch(){
     }).join('');
     if(corpusHits.length>30) html+='<div class="empty-tip" style="padding:8px;">其余 '+(corpusHits.length-30)+' 条已省略，试试更精确的关键词</div>';
   } else {
-    html+='<div class="empty-tip" style="padding:18px;">没有命中的语料条目</div>';
+    html+='<div class="empty-tip" style="padding:18px;">卷宗里暂未寻得，试一个更短的关键词？</div>';
   }
   out.innerHTML=html;
 }
@@ -2313,7 +2410,7 @@ function renderMe(){
   }
   html+='<div class="search-sec">历史结果 · '+hist.length+'/10 次</div>';
   if(!hist.length){
-    html+='<div class="empty-tip">还没有测评记录 —— <a href="#test" style="color:var(--yang);font-weight:600;">去测一测 →</a></div>';
+    html+='<div class="empty-tip">第一枚印章，等你落笔 —— <a href="#test" style="color:var(--yang);font-weight:600;">去测一测 →</a></div>';
   } else {
     html+=hist.map(function(s,i){
       var rd=RD[s.type]||{};
@@ -2576,7 +2673,7 @@ function startGender(gender, prog){
   try{ if(!prog) track('test_start',{gender:gender,chan:getChan()}); }catch(e){}
   T.view='loading'; T.gender=gender; T.answers={}; T.shuffled={}; T.idx=0; T.snap=null;
   window._historyView=null;
-  $('testBox').innerHTML='<div class="spinner-wrap"><div class="spinner"></div><div class="spinner-txt">题卷加载中…</div></div>';
+  $('testBox').innerHTML='<div class="spinner-wrap"><div class="spinner"></div><div class="spinner-txt">笔墨备好，正在铺纸…</div></div>';
   loadQuiz(gender, function(quiz, meta){
     if(!quiz){ T.view='cover';
       $('testBox').innerHTML='<div class="t-cover"><h2 class="serif">题卷生产中</h2><p class="sub">这一版题卷还在打磨，请稍后再来。数据文件缺失时站点其余板块不受影响。</p><a class="btn btn-ghost" href="#home">回首页</a></div>';
@@ -3016,6 +3113,13 @@ function renderSharedResult(type){
   if(!location.hash) location.hash='#home';
   route();
   window.addEventListener('hashchange', route);
+})();
+/* 趣味交互 v1 · P0-1 选项盖章重放（守卫式：事件委托，不改 pickOpt；连点重选也重放落印） */
+(function(){
+  document.addEventListener('click', function(e){
+    var o=e.target.closest('.q-opt');
+    if(o){ o.classList.remove('stamp'); void o.offsetWidth; o.classList.add('stamp'); }
+  });
 })();
 </script>
 </body>

@@ -718,7 +718,8 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 .qa-series-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
 .qs-card{padding:14px;background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-sm);cursor:pointer;transition:border-color .2s,transform .15s}
 .qs-card:hover{border-color:var(--yin);transform:translateY(-2px)}
-.qsc-name{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.qsc-name{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:3px;line-height:1.4}
+.qsc-sub{font-size:11.5px;color:var(--fog);margin-bottom:5px;line-height:1.45}
 .qsc-num{font-size:12px;color:var(--fog)}
 .qa-titles{display:flex;flex-direction:column;gap:6px}
 .qtitle-item{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-sm);cursor:pointer}
@@ -1114,7 +1115,8 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
       <div id="qaShareNote"></div>
       <div id="qaRecommend"></div>
       <div id="qaReadProgress"></div>
-      <div class="qa-pol-tabs" id="qaPolTabs">
+      <!-- 极性 Tab 停用（阳/阴/共通三个入口已融合进知识脉络 V3.3 三阶段 + 章体系）
+      <div class="qa-pol-tabs" id="qaPolTabs" style="display:none">
         <div class="qa-pol-tab yang" data-pol="yang" onclick="setQaPolarity('yang')">
           <div class="qa-pol-mark">阳</div>
           <div class="qa-pol-meta">
@@ -1140,6 +1142,7 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
           <div class="qa-pol-count" id="qaPolCountBoth">—</div>
         </div>
       </div>
+      -->
       <!-- 知识树导引：搜索 + 分叉图 → 板块目录 → 卡片清单 → 单卡浏览 -->
       <div id="qaNav"></div>
       <div id="qaFilterBar">
@@ -2719,9 +2722,82 @@ var SERIES_CN={
   'kp-c':'认知切片','kp-d':'成长切片','kp-e':'情感切片','kp-f':'实修切片','kp-g':'其他切片',
   'other':'其他'
 };
-var QA_TREE_GROUPS=['阴阳能量','四型人格','关系与配对','成长课题','灵性成长'];
-var QA_TREE_COLOR=['#E8913A','#4E6E9E','#B5483A','#1D9E75','#7F77DD'];
-var QA_NAV={level:'tree', group:'', series:'', idx:0, cards:[]};
+/* ── V3.3 三阶段 + 章体系（知识脉络主轴，取代原 category 分叉）── */
+var V33_STAGES=[
+  {id:'s1',name:'认识你自己',sub:'阴阳人格',color:'#E8913A',chs:[
+    {id:'ch1',name:'第一章 · 阴阳的二元区分',sub:'为何有二元'},
+    {id:'ch2',name:'第二章 · 阴阳能量的区别',sub:'只讲能量，不加入性别变量'},
+    {id:'ch3',name:'第三章 · 四型人格',sub:'内核 × 性别'},
+    {id:'ch4',name:'第四章 · 关系中的阴阳',sub:'配对与动力'}
+  ]},
+  {id:'s2',name:'自我成长',sub:'觉察 · 生发 · 疗愈',color:'#4E6E9E',chs:[
+    {id:'ch5',name:'第五章 · 觉察与防御',sub:''},
+    {id:'ch6',name:'第六章 · 情绪与信念的处理',sub:''},
+    {id:'ch7',name:'第七章 · 边界与攻击性',sub:''},
+    {id:'ch8',name:'第八章 · 生发对侧能量',sub:'走向平衡'},
+    {id:'ch9',name:'第九章 · 疗愈',sub:'爱自己与原生家庭'},
+    {id:'ch10',name:'第十章 · 关系中的修行',sub:''},
+    {id:'ch11',name:'第十一章 · 成长的规律与考验',sub:''}
+  ]},
+  {id:'s3',name:'灵性成长',sub:'高阶内容',color:'#7F77DD',chs:[
+    {id:'ch12',name:'第十二章 · 意识九层次',sub:'认知的维度地图'},
+    {id:'ch15',name:'第十五章 · 见道与二元的超越',sub:''},
+    {id:'ch16',name:'第十六章 · 神性与魔性的整合',sub:''},
+    {id:'ch17',name:'第十七章 · 灵魂议题',sub:'大愿与意义'}
+  ]}
+];
+/* series → 章（第一阶段按编号精确映射；二/三阶段走关键词） */
+var SERIES_CH={
+  'y0':'ch1','kp-a':'ch1','kp-a1':'ch1','kp-a2':'ch1','kp-a4':'ch1',
+  'y1':'ch2','y2':'ch2','kp-e':'ch2',
+  'y3':'ch3','y3-b1':'ch3','y3-b2':'ch3','y3-b3':'ch3','y3-b4':'ch3',
+  'kp-b':'ch3','kp-b1':'ch3','kp-b2':'ch3','kp-b3':'ch3','kp-b4':'ch3',
+  'y4':'ch4','y4-p':'ch4','kp-f':'ch4'
+};
+var CH_KEYWORDS=[
+  ['ch5',/觉察|看见|观察者|剧情|防御|第一反应|反应模式/],
+  ['ch6',/情绪|信念|恐惧|焦虑|内耗|自卑|不配得|无能/],
+  ['ch7',/边界|攻击|发火|冲突|拒绝|讨好|攻击性|生气/],
+  ['ch8',/平衡|生发|修炼|对侧|走向|互补/],
+  ['ch9',/疗愈|原生家庭|内在小孩|爱自己|创伤|重养|父母/],
+  ['ch10',/亲密|伴侣|相处|依恋|关系修行/],
+  ['ch11',/成长|规律|反复|螺旋|节奏|成熟|考验/],
+  ['ch12',/意识|层次|维度地图|认知/],
+  ['ch15',/见道|超越|二元|空性|无我/],
+  ['ch16',/神性|魔性|整合|阴影|阴暗面/],
+  ['ch17',/灵魂|大愿|意义|使命|双生/]
+];
+function qaChapterOf(c){
+  var g=c.category||'其他', sk=qaSeriesKey(c.kpId);
+  var blob=((c.question||'')+' '+(c.answerBrief||'')+' '+(c.quote||'')+' '+(c.insight||[]).join(' '));
+  function hit(ids){ for(var i=0;i<ids.length;i++){ for(var j=0;j<CH_KEYWORDS.length;j++){ if(CH_KEYWORDS[j][0]===ids[i] && CH_KEYWORDS[j][1].test(blob)) return ids[i]; } } return ''; }
+  /* 1) 灵性成长：锁定第三阶段四章，避免被成长/情绪类关键词吸走 */
+  if(g==='灵性成长') return hit(['ch12','ch15','ch16','ch17'])||'ch12';
+  /* 2) 成长课题：锁定第二阶段七章 */
+  if(g==='成长课题') return hit(['ch5','ch6','ch7','ch8','ch9','ch10','ch11'])||'ch11';
+  /* 3) 其余（阴阳能量/四型人格/关系与配对）：先按 kpId 系列精确映射 */
+  if(SERIES_CH[sk]) return SERIES_CH[sk];
+  /* 4) 兜底：全表关键词 → 再按 category */
+  var h=hit(['ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8','ch9','ch10','ch11','ch12','ch15','ch16','ch17']);
+  if(h) return h;
+  if(g==='关系与配对') return 'ch4';
+  if(g==='四型人格') return 'ch3';
+  return 'ch2';
+}
+function qaStageOfCh(chId){
+  for(var i=0;i<V33_STAGES.length;i++){
+    for(var j=0;j<V33_STAGES[i].chs.length;j++){ if(V33_STAGES[i].chs[j].id===chId) return V33_STAGES[i]; }
+  }
+  return V33_STAGES[0];
+}
+function qaChName(chId){
+  for(var i=0;i<V33_STAGES.length;i++){
+    for(var j=0;j<V33_STAGES[i].chs.length;j++){ if(V33_STAGES[i].chs[j].id===chId) return V33_STAGES[i].chs[j].name; }
+  }
+  return chId;
+}
+function qaChCards(chId){ return QA.filter(function(c){ return qaChapterOf(c)===chId; }); }
+var QA_NAV={level:'tree', stage:'', ch:'', idx:0, cards:[]};
 
 function qaSeriesKey(kp){
   if(!kp) return 'other';
@@ -2740,22 +2816,24 @@ function renderQaNav(){
   var fb=$('qaFilterBar'), lst=$('qaList');
   if(fb) fb.style.display=drilling?'none':'';
   if(lst) lst.style.display=drilling?'none':'';
-  if(QA_NAV.level==='series') return renderQaSeriesView(box);
+  if(QA_NAV.level==='stage') return renderQaStageView(box);
   if(QA_NAV.level==='list') return renderQaTitlesView(box);
   if(QA_NAV.level==='card') return renderQaSingleView(box);
   return renderQaTree(box);
 }
-function qaNavOpen(g){ QA_NAV.level='series'; QA_NAV.group=g; QA_NAV.series=''; QA_NAV.idx=0; renderQaNav(); try{ window.scrollTo(0,0); }catch(e){} }
+function qaNavStage(sid){ QA_NAV.level='stage'; QA_NAV.stage=sid; QA_NAV.ch=''; QA_NAV.idx=0; renderQaNav(); try{ window.scrollTo(0,0); }catch(e){} }
+function qaNavCh(chId){ QA_NAV.level='list'; QA_NAV.ch=chId; QA_NAV.cards=qaChCards(chId); QA_NAV.idx=0; renderQaNav(); try{ window.scrollTo(0,0); }catch(e){} }
 function qaNavGo(level){
-  if(level==='tree'){ QA_NAV.level='tree'; QA_NAV.group=''; QA_NAV.series=''; }
-  else if(level==='series'){ QA_NAV.level='series'; QA_NAV.series=''; }
+  if(level==='tree'){ QA_NAV.level='tree'; QA_NAV.stage=''; QA_NAV.ch=''; }
+  else if(level==='stage'){ QA_NAV.level='stage'; QA_NAV.ch=''; }
   else if(level==='list'){ QA_NAV.level='list'; }
   renderQaNav(); try{ window.scrollTo(0,0); }catch(e){}
 }
 function qaNavCrumbs(){
+  var st=qaStageOfCh(QA_NAV.ch);
   var p=[{t:'问一问',l:'tree'}];
-  if(QA_NAV.level!=='tree') p.push({t:QA_NAV.group,l:'series'});
-  if(QA_NAV.level==='list'||QA_NAV.level==='card') p.push({t:qaSeriesName(QA_NAV.series),l:'list'});
+  if(QA_NAV.level!=='tree') p.push({t:st.name,l:'stage'});
+  if(QA_NAV.level==='list'||QA_NAV.level==='card') p.push({t:qaChName(QA_NAV.ch),l:'list'});
   if(QA_NAV.level==='card') p.push({t:'第 '+(QA_NAV.idx+1)+' 张',l:'card'});
   return '<div class="qa-crumbs">'+p.map(function(x,i){
     return (i?'<span class="qc-sep">›</span>':'')+'<span class="qc-item" onclick="qaNavGo(\''+x.l+'\')">'+esc(x.t)+'</span>';
@@ -2764,15 +2842,16 @@ function qaNavCrumbs(){
 
 function renderQaTree(box){
   var h='<div class="qa-tree-wrap">'
-    +'<div class="qa-search-row"><input id="qaTreeSearch" class="qa-search-input" type="search" placeholder="搜标题 / 结论 / 金句，或直接选下面的分支" oninput="qaTreeSearch(this.value)"></div>'
+    +'<div class="qa-search-row"><input id="qaTreeSearch" class="qa-search-input" type="search" placeholder="搜标题 / 结论 / 金句，或直接选下面的阶段" oninput="qaTreeSearch(this.value)"></div>'
     +'<div id="qaTreeResult"></div>'
-    +'<div class="qa-tree-title">知识脉络 · 选一个分支进入</div>'
+    +'<div class="qa-tree-title">知识脉络 · 三阶段体系（V3.3）</div>'
     +'<div class="qa-tree">'
-    +QA_TREE_GROUPS.map(function(g,i){
-      var n=qaGroupCards(g).length; if(!n) return '';
-      return '<div class="qt-branch" onclick="qaNavOpen(\''+esc(g)+'\')">'
-        +'<span class="qt-dot" style="background:'+QA_TREE_COLOR[i]+'"></span>'
-        +'<span class="qt-body"><span class="qt-name">'+esc(g)+'</span><span class="qt-num">'+n+' 张卡片</span></span>'
+    +V33_STAGES.map(function(s){
+      var n=0; s.chs.forEach(function(ch){ n+=qaChCards(ch.id).length; });
+      return '<div class="qt-branch" onclick="qaNavStage(\''+s.id+'\')">'
+        +'<span class="qt-dot" style="background:'+s.color+'"></span>'
+        +'<span class="qt-body"><span class="qt-name">'+esc(s.name)+'</span>'
+        +'<span class="qt-num">'+s.chs.length+' 章 · '+n+' 张卡片</span></span>'
         +'<span class="qt-go">›</span></div>';
     }).join('')
     +'</div>'
@@ -2797,32 +2876,31 @@ function qaTreeSearch(q){
 }
 function qaNavCardDirect(qaId){
   var c=qaById(qaId); if(!c) return;
-  QA_NAV.level='card'; QA_NAV.group=c.category||'其他'; QA_NAV.series=qaSeriesKey(c.kpId);
-  QA_NAV.cards=qaSeriesCards(QA_NAV.group,QA_NAV.series);
+  QA_NAV.level='card'; QA_NAV.ch=qaChapterOf(c); QA_NAV.stage=qaStageOfCh(QA_NAV.ch).id;
+  QA_NAV.cards=qaChCards(QA_NAV.ch);
   QA_NAV.idx=Math.max(0,QA_NAV.cards.findIndex(function(x){ return x.qaId===qaId; }));
   renderQaNav(); try{ window.scrollTo(0,0); }catch(e){}
 }
 
-function renderQaSeriesView(box){
-  var g=QA_NAV.group, cards=qaGroupCards(g), m=new Map();
-  cards.forEach(function(c){ var k=qaSeriesKey(c.kpId); if(!m.has(k)) m.set(k,[]); m.get(k).push(c); });
-  var keys=[...m.keys()].sort(function(a,b){ return m.get(b).length-m.get(a).length; });
+function renderQaStageView(box){
+  var st=null;
+  for(var i=0;i<V33_STAGES.length;i++){ if(V33_STAGES[i].id===QA_NAV.stage) st=V33_STAGES[i]; }
+  if(!st){ QA_NAV.level='tree'; return renderQaNav(); }
+  var total=0; st.chs.forEach(function(ch){ total+=qaChCards(ch.id).length; });
   box.innerHTML='<div class="qa-tree-wrap">'+qaNavCrumbs()
-    +'<div class="qa-sec-title">'+esc(g)+' · 选一个主题（'+cards.length+' 张）</div>'
-    +'<div class="qa-series-grid">'+keys.map(function(k){
-        return '<div class="qs-card" onclick="qaNavSeries(\''+esc(k)+'\')">'
-          +'<div class="qsc-name">'+esc(qaSeriesName(k))+'</div>'
-          +'<div class="qsc-num">'+m.get(k).length+' 张</div></div>';
+    +'<div class="qa-sec-title">'+esc(st.name)+' · 选一章（'+total+' 张）</div>'
+    +'<div class="qa-series-grid">'+st.chs.map(function(ch){
+        var n=qaChCards(ch.id).length;
+        return '<div class="qs-card" onclick="qaNavCh(\''+ch.id+'\')">'
+          +'<div class="qsc-name">'+esc(ch.name)+'</div>'
+          +(ch.sub?'<div class="qsc-sub">'+esc(ch.sub)+'</div>':'')
+          +'<div class="qsc-num">'+n+' 张</div></div>';
       }).join('')+'</div></div>';
-}
-function qaNavSeries(k){
-  QA_NAV.level='list'; QA_NAV.series=k; QA_NAV.cards=qaSeriesCards(QA_NAV.group,k); QA_NAV.idx=0;
-  renderQaNav(); try{ window.scrollTo(0,0); }catch(e){}
 }
 function renderQaTitlesView(box){
   var cards=QA_NAV.cards;
   box.innerHTML='<div class="qa-tree-wrap">'+qaNavCrumbs()
-    +'<div class="qa-sec-title">'+esc(qaSeriesName(QA_NAV.series))+' · '+cards.length+' 张</div>'
+    +'<div class="qa-sec-title">'+esc(qaChName(QA_NAV.ch))+' · '+cards.length+' 张</div>'
     +'<div class="qa-titles">'+cards.map(function(c,i){
         return '<div class="qtitle-item" onclick="qaNavCard('+i+')">'
           +'<span class="qti-no">'+String(i+1).padStart(2,'0')+'</span>'

@@ -2363,6 +2363,14 @@ function parseBili(link){
 function isMobileDevice(){
   try{ return window.matchMedia && window.matchMedia('(max-width:768px)').matches; }catch(e){ return false; }
 }
+/* B站跳转链接规范化：必须是 /video/<BV>/?t=秒（BV 号后带斜杠），
+   否则 B站解析不到 t 参数，会从视频开头播放。 */
+function biliJumpUrl(link){
+  var bv=(/video\/(BV[\w]+)/.exec(link||'')||[])[1];
+  var t=(/[?&]t=(\d+)/.exec(link||'')||[])[1];
+  if(!bv) return link||'#';
+  return 'https://www.bilibili.com/video/'+bv+'/'+(t?('?t='+t):'');
+}
 function toggleEvPlayer(btn, forceMode){
   if(!btn) return;
   var qaId=btn.getAttribute('data-qa'), idx=parseInt(btn.getAttribute('data-idx'),10);
@@ -2432,7 +2440,7 @@ function qaCardHtml(c, q){
           /* 定稿：文字在左占满宽度，两个入口在右侧纵向排（▶ 图标 / B站 ↗ 标识） */
           var _btns='<div class="ev-acts">'
             + '<a class="ev-go ev-go-video" href="javascript:void(0)" data-qa="'+esc(c.qaId)+'" data-idx="'+i+'" data-txt="▶" onclick="event.stopPropagation();toggleEvPlayer(this,\'video\')" title="网页内嵌播放 B站视频" aria-label="网页内嵌播放">▶</a>'
-            + '<a class="ev-ext" href="'+esc(e.link||'#')+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="跳转到 B 站看（带时间点）" aria-label="跳转 B 站">B站 ↗</a>'
+            + '<a class="ev-ext" href="'+esc(biliJumpUrl(e.link))+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="跳转到 B 站看（带时间点）" aria-label="跳转 B 站">B站 ↗</a>'
             + '</div>';
           return '<div class="ev-item"><span class="ev-quote">「'+hl(e.text||'',q)+'」</span>'
             +_btns
@@ -2528,12 +2536,13 @@ function route(){
         /* 双 rAF 等 DOM 稳定后再滚动；直达卡时跳过末尾的 scrollTo(0,0)，否则会被拉回顶部 */
         window._qaSkipTopScroll=true;
         var _pin=el;
-        requestAnimationFrame(function(){
-          requestAnimationFrame(function(){
-            try{ _pin.scrollIntoView({behavior:'auto',block:'start'}); }
-            catch(e){ try{ _pin.scrollIntoView(); }catch(e2){} }
-          });
-        });
+        function _pinScroll(){
+          try{ _pin.scrollIntoView({behavior:'auto',block:'start'}); }
+          catch(e){ try{ _pin.scrollIntoView(); }catch(e2){} }
+        }
+        requestAnimationFrame(function(){ requestAnimationFrame(_pinScroll); });
+        /* 兜底：真机上列表渲染/图片加载会改变高度，延时再滚一次确保目标卡在视口内 */
+        setTimeout(_pinScroll, 260);
       }
       var note=$('qaShareNote');
       if(note) note.innerHTML=window._qaFromShare
@@ -3052,7 +3061,14 @@ function clearProgress(){ try{ localStorage.removeItem(K_PROG); }catch(e){} }
 function resumeQuiz(){
   var p=loadJSON(K_PROG,null);
   if(!p){ toast('没有可续答的进度'); return; }
-  startGender(p.gender, p);
+  /* 在「我的」页点续答时，startGender 只改 testBox（不在当前视图）→ 页面看起来毫无反应。
+     先切到测试页并等 route 渲染完封面，再开始续答。 */
+  if((location.hash||'').indexOf('#test')!==0){
+    location.hash='#test';
+    setTimeout(function(){ startGender(p.gender, p); }, 80);
+  } else {
+    startGender(p.gender, p);
+  }
 }
 function chaptersOf(quiz, meta){
   var chs=[], seen={};

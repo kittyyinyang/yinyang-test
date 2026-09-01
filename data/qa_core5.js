@@ -139,7 +139,7 @@ var QA_CORE5 =
       },
       {
         "ts": "0:52",
-        "videoId": "B666",
+        "videoId": "B667",
         "bv": "BV1d28i6rEVF",
         "text": "阴性能量它的第一本能启动的反应就是 flight；阳性能量第一本能启动的就是 fight，战斗。",
         "link": "https://www.bilibili.com/video/BV1d28i6rEVF?t=52"
@@ -696,7 +696,7 @@ var QA_CORE5 =
       },
       {
         "ts": "00:07",
-        "videoId": "BV1mNJ8zFEMv",
+        "videoId": "B605",
         "bv": "",
         "text": "男阴就是巨耐惨，比女阴还要耐惨。",
         "link": "https://www.bilibili.com/video/BV1mNJ8zFEMv?t=7"
@@ -959,7 +959,7 @@ var QA_CORE5 =
       },
       {
         "ts": "0:52",
-        "videoId": "B666",
+        "videoId": "B667",
         "bv": "BV1d28i6rEVF",
         "text": "战逃反应你知道吧，就是 fight or flight。阳性能量第一本能启动的就是 fight，战斗。",
         "link": "https://www.bilibili.com/video/BV1d28i6rEVF?t=52"

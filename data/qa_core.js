@@ -27,7 +27,7 @@ var QA_CORE =
     "evidence": [
       {
         "ts": "00:54",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "女阴，就是女性的阴性能量——她们的内在世界感情最重要、事业弱很多；男阳的话，事业心会非常强，自我也会非常强。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=54"

@@ -38,14 +38,14 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:54",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "女阴，就是女性的阴性能量。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=54"
       },
       {
         "ts": "01:11",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "男阳的体现，是事业心会非常强，自我也会非常强。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=71"
@@ -75,7 +75,7 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:05",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "有人问「这个如何判断」，UP 主的回答很直接：我现在是没有标准的。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=5"
@@ -175,7 +175,7 @@ var QA_DATA =
       },
       {
         "ts": "00:27",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "而阴的内核的话，他自我是比较弱的——但不代表说阴没有自我，他的这个自我会比较弱。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=27"
@@ -201,7 +201,7 @@ var QA_DATA =
     "answer": [
       {
         "ts": "01:02",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "女阴的内在世界，这个感情是最重要的，然后她们的事业就弱很多。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=62"
@@ -255,7 +255,7 @@ var QA_DATA =
       },
       {
         "ts": "01:25",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "呈现出来：阳性能量主要是自恋和自卑，阴性能量呈现出来的更多是那种自卑。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=85"
@@ -306,21 +306,21 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:14",
-        "videoId": "B684",
+        "videoId": "B693",
         "bv": "BV1zouA6PEFN",
         "text": "阳的体力精力普遍比较旺盛——他不内耗。",
         "link": "https://www.bilibili.com/video/BV1zouA6PEFN?t=14"
       },
       {
         "ts": "00:17",
-        "videoId": "B684",
+        "videoId": "B693",
         "bv": "BV1zouA6PEFN",
         "text": "阴不是没有能量，是能量都拿来内耗，自己耗完了。",
         "link": "https://www.bilibili.com/video/BV1zouA6PEFN?t=17"
       },
       {
         "ts": "00:22",
-        "videoId": "B684",
+        "videoId": "B693",
         "bv": "BV1zouA6PEFN",
         "text": "所以阴普遍易疲劳，阳有那种小太阳的、绽放的感觉——阳不消耗自己。",
         "link": "https://www.bilibili.com/video/BV1zouA6PEFN?t=22"
@@ -522,7 +522,7 @@ var QA_DATA =
       },
       {
         "ts": "02:00",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "还有就是阴性能量比较依赖人，因为他自我弱嘛。而阳是不会去依赖别人的。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=120"
@@ -552,7 +552,7 @@ var QA_DATA =
       },
       {
         "ts": "01:58",
-        "videoId": "B671",
+        "videoId": "B683",
         "bv": "BV1mcuz67Eha",
         "text": "阴的反复是一个螺旋的过程——螺旋上升，不是原地打转。",
         "link": "https://www.bilibili.com/video/BV1mcuz67Eha?t=118"
@@ -618,7 +618,7 @@ var QA_DATA =
       },
       {
         "ts": "00:32",
-        "videoId": "B685",
+        "videoId": "B694",
         "bv": "BV1ZouA6wEKp",
         "text": "不一样。嘴上说没事，但是他心里可有事了。阳这方面是什么就是什么——如果女阳说没事，那是因为她觉得我能搞定。",
         "link": "https://www.bilibili.com/video/BV1ZouA6wEKp?t=32"
@@ -641,7 +641,7 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:10",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "阳的内核像《易经》讲的「天行健，自强不息」，阴的内核是「厚德载物」——本质上只有这两种能量属性，不是四种。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=10"
@@ -655,7 +655,7 @@ var QA_DATA =
       },
       {
         "ts": "02:11",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "阳一般比较清楚自己就是阳；反过来，判断不清自己阴阳的人，大概率偏阴——这是两性在自我认知一致性上的差异。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=131"
@@ -678,14 +678,14 @@ var QA_DATA =
     "answer": [
       {
         "ts": "04:41",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "典型的男阳，自我大到狂妄自大、目中无人，已经膨胀到没有别人了——他的修行功课是修「厚德载物」、修坤德。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=281"
       },
       {
         "ts": "04:11",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "女阳天生就是一身傲骨，独立对她根本不是课题——她的功课不是没有自我，而是自我太大，要学会沉得下来、承载。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=251"
@@ -708,7 +708,7 @@ var QA_DATA =
     "answer": [
       {
         "ts": "03:56",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "阴的能量自我比较弱，女阴最难修的就是独立人格——因为自我本弱，要把这个自我重新修出来。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=236"
@@ -742,7 +742,7 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:34",
-        "videoId": "B671",
+        "videoId": "B683",
         "bv": "BV1mcuz67Eha",
         "text": "对于阳来讲，寻求帮助这件事本身就会伤害到他的自恋；男阳尤其困难，要让他主动去寻求帮助「太困难了」。",
         "link": "https://www.bilibili.com/video/BV1mcuz67Eha?t=34"
@@ -783,7 +783,7 @@ var QA_DATA =
       },
       {
         "ts": "04:31",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "所以女阳的功课是要「沉得下来、放得下来」，往能承载的方向走——破局力天生强，却也最难主动停下。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=271"
@@ -912,7 +912,7 @@ var QA_DATA =
     "answer": [
       {
         "ts": "04:17",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "女阳天生就是一身傲骨，她独立得很——她的课题不是没有自我，而是自我太大了。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=257"
@@ -946,14 +946,14 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:51",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "女阴的内在世界里，感情是最重要的，事业则弱很多——阴性能量天然重感情、轻事业。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=51"
       },
       {
         "ts": "02:00",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "而阴性能量比较依赖人，因为自我弱；依赖是女阴人格的能量来源，也是它的软肋。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=120"
@@ -987,7 +987,7 @@ var QA_DATA =
     "answer": [
       {
         "ts": "02:22",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "男阴在工作上偏阳、在感情上却仍有依赖——他的内核是阴，外面包着一层社会规训戴上的面具。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=142"
@@ -1021,7 +1021,7 @@ var QA_DATA =
     "answer": [
       {
         "ts": "04:41",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "你见到那种狂妄自大、目中无人的，往往就是男阳——因为他的自我太大了，已经膨胀到了没有其他人。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=281"
@@ -1055,7 +1055,7 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:19",
-        "videoId": "B685",
+        "videoId": "B694",
         "bv": "BV1ZouA6wEKp",
         "text": "女阳的这种「没事」啊，她不是心里想着要你去关心她，她是真的自己坚强，觉得没事。",
         "link": "https://www.bilibili.com/video/BV1ZouA6wEKp?t=19"
@@ -1089,7 +1089,7 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:08",
-        "videoId": "B677",
+        "videoId": "B687",
         "bv": "BV1gbu26GEm4",
         "text": "很多事业做得好的女性容易被做局骗到，本质是她们以为自己是阳，实际是阴——做事上可以，情感上对关注与爱仍有极强渴求。",
         "link": "https://www.bilibili.com/video/BV1gbu26GEm4?t=8"
@@ -1158,21 +1158,21 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:00",
-        "videoId": "B673",
+        "videoId": "B690",
         "bv": "BV1HHup6fEZ9",
         "text": "阳主开创、阴主辅助是底层分工——凡是要「打下来」的局面，开路的那个一定是阳，落到男阳身上就是扛旗与承重。",
         "link": "https://www.bilibili.com/video/BV1HHup6fEZ9?t=0"
       },
       {
         "ts": "00:46",
-        "videoId": "B673",
+        "videoId": "B690",
         "bv": "BV1HHup6fEZ9",
         "text": "但两个阳一旦平级合作就容易博弈：阳和阳之间必须提前分清楚「大小王」，否则一山不容二虎，会爆发出很激烈的冲突。",
         "link": "https://www.bilibili.com/video/BV1HHup6fEZ9?t=46"
       },
       {
         "ts": "00:05",
-        "videoId": "B666",
+        "videoId": "B678",
         "bv": "BV1A7gK6HEmc",
         "text": "而在冲突的第一反应上，阳性能量启动的是 fight（战斗），阴性能量启动的是 fly（回避）——这是男阳面对攻击、批评时「顶上去」而非「缩回来」的生理级底色。",
         "link": "https://www.bilibili.com/video/BV1A7gK6HEmc?t=5"
@@ -1199,21 +1199,21 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:01",
-        "videoId": "B683",
+        "videoId": "B692",
         "bv": "BV1HoMy6HE5x",
         "text": "女阳有个通病：隔三差五就想去捞一下男阴，觉得对面很可怜；真捞了半天捞不动，转头又骂男阴——骨子里是「我比他行」的自恋在驱动。",
         "link": "https://www.bilibili.com/video/BV1HoMy6HE5x?t=1"
       },
       {
         "ts": "00:00",
-        "videoId": "B671",
+        "videoId": "B683",
         "bv": "BV1mcuz67Eha",
         "text": "但相比男阳，女阳的自恋没那么重：一旦遇到障碍，她比男阳更快速地去找人帮忙，认准方向也能一往直前、不太反复。",
         "link": "https://www.bilibili.com/video/BV1mcuz67Eha?t=0"
       },
       {
         "ts": "00:00",
-        "videoId": "B670",
+        "videoId": "B677",
         "bv": "BV1W7gK6HEpJ",
         "text": "在关系里，阳（含女阳）天然就想掌控主导权，容易和对方进入「权力争夺」——不是出于不安全感，而是习性使然。",
         "link": "https://www.bilibili.com/video/BV1W7gK6HEpJ?t=0"
@@ -1254,7 +1254,7 @@ var QA_DATA =
       },
       {
         "ts": "00:00",
-        "videoId": "B679",
+        "videoId": "B668",
         "bv": "BV1g58w6iEiv",
         "text": "底层原因是人格边界千疮百孔：女阴的独立人格不够独立，需要先学会拒绝、释放攻击性，而不是向外求认可。",
         "link": "https://www.bilibili.com/video/BV1g58w6iEiv?t=0"
@@ -1289,7 +1289,7 @@ var QA_DATA =
       },
       {
         "ts": "00:27",
-        "videoId": "B692",
+        "videoId": "B675",
         "bv": "BV1xXby62Eqn",
         "text": "炫技则是另一种证明：男阴会在你面前抠细节、指出想法，让你感到「他也很厉害」——这不是开屏，而是投注大量注意力来体现价值，求你别小瞧他。",
         "link": "https://www.bilibili.com/video/BV1xXby62Eqn?t=27"
@@ -1322,21 +1322,21 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:05",
-        "videoId": "B666",
+        "videoId": "B678",
         "bv": "BV1A7gK6HEmc",
         "text": "被批评或被攻击时，阳性能量启动的是 fight（迎战），阴性能量启动的是 fly（回避）——这是四型在冲突起点上的根本分水岭。",
         "link": "https://www.bilibili.com/video/BV1A7gK6HEmc?t=5"
       },
       {
         "ts": "00:00",
-        "videoId": "B671",
+        "videoId": "B683",
         "bv": "BV1mcuz67Eha",
         "text": "面临重大选择，阳一旦认准方向就一往直前、不容易反复；阴容易反复、像螺旋一样绕回原点——这是决定权上的「阳果断、阴犹豫」。",
         "link": "https://www.bilibili.com/video/BV1mcuz67Eha?t=0"
       },
       {
         "ts": "01:28",
-        "videoId": "B678",
+        "videoId": "B697",
         "bv": "BV1UjMX6DE33",
         "text": "落到「被冷落」：阴会把关系当成弥补童年安全感缺失的容器，陷入「他到底爱不爱我」的脑内戏与共生依赖；阳则更独立、继续向前，不靠关系续命。",
         "link": "https://www.bilibili.com/video/BV1UjMX6DE33?t=88"
@@ -1368,7 +1368,7 @@ var QA_DATA =
       },
       {
         "ts": "00:27",
-        "videoId": "B678",
+        "videoId": "B697",
         "bv": "BV1UjMX6DE33",
         "text": "两个阴可以，但组合起来的亲密关系是「共生」——阴和阴在一起，底层是共生共生。",
         "link": "https://www.bilibili.com/video/BV1UjMX6DE33?t=27"
@@ -1494,7 +1494,7 @@ var QA_DATA =
       },
       {
         "ts": "01:55",
-        "videoId": "B673",
+        "videoId": "B690",
         "bv": "BV1HHup6fEZ9",
         "text": "到了关系协作里，阴阳搭配会产生奇效——顶尖的阳与顶尖的阴互补，就是「双剑合璧」，协作效率远高于同性的两两博弈。",
         "link": "https://www.bilibili.com/video/BV1HHup6fEZ9?t=115"
@@ -1520,21 +1520,21 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:00",
-        "videoId": "B670",
+        "videoId": "B677",
         "bv": "BV1W7gK6HEpJ",
         "text": "阴在关系里想掌控，源头是那一份不安全感：越怕失控，越要去抓关系的主导权。",
         "link": "https://www.bilibili.com/video/BV1W7gK6HEpJ?t=0"
       },
       {
         "ts": "00:29",
-        "videoId": "B670",
+        "videoId": "B677",
         "bv": "BV1W7gK6HEpJ",
         "text": "阳在关系里想掌控，则不是出于不安全感，而是习性使然——阳天然就要掌控，这是能量底色，与怕不怕无关。",
         "link": "https://www.bilibili.com/video/BV1W7gK6HEpJ?t=29"
       },
       {
         "ts": "00:41",
-        "videoId": "B670",
+        "videoId": "B677",
         "bv": "BV1W7gK6HEpJ",
         "text": "所谓权力争夺，无外乎是争夺「谁主导这段关系」，而它最后仍落回内在安全感的匮乏；两种根源不同，对话策略就不能用同一套。",
         "link": "https://www.bilibili.com/video/BV1W7gK6HEpJ?t=41"
@@ -1559,21 +1559,21 @@ var QA_DATA =
     "answer": [
       {
         "ts": "01:55",
-        "videoId": "B691",
+        "videoId": "B664",
         "bv": "BV1xX8t6iEMZ",
         "text": "阳若把过多注意力放在阴身上，反而说明阳「弱了」——阳只需把注意力放在做好自己，同时留一份余力给阴就够。",
         "link": "https://www.bilibili.com/video/BV1xX8t6iEMZ?t=115"
       },
       {
         "ts": "02:14",
-        "videoId": "B691",
+        "videoId": "B664",
         "bv": "BV1xX8t6iEMZ",
         "text": "阴可以把大部分注意力给阳，但必须留一部分在自己身上；一旦把所有注意力都压在阳身上，形成的就一定是依附。",
         "link": "https://www.bilibili.com/video/BV1xX8t6iEMZ?t=134"
       },
       {
         "ts": "02:51",
-        "videoId": "B691",
+        "videoId": "B664",
         "bv": "BV1xX8t6iEMZ",
         "text": "配比上，阳在「做自己」（事业、工作）上的注意力应略多于阴；阴把多出的部分给阳可以，却始终要保留相当一块给自己，才能不失衡。",
         "link": "https://www.bilibili.com/video/BV1xX8t6iEMZ?t=171"
@@ -1598,21 +1598,21 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:00",
-        "videoId": "B672",
+        "videoId": "B685",
         "bv": "BV1ghuZ66Ens",
         "text": "真正的亲密关系，只能由两个真实的自我建立真实连接；靠人设、靠面具吸引来的人，面具一旦维持不住，关系就走到尽头。",
         "link": "https://www.bilibili.com/video/BV1ghuZ66Ens?t=0"
       },
       {
         "ts": "00:58",
-        "videoId": "B672",
+        "videoId": "B685",
         "bv": "BV1ghuZ66Ens",
         "text": "亲密关系里面具一定会拆下来——就像和伴侣同眠总得卸妆，你真实的状态和真实的问题，在这里最容易彰显、藏不住。",
         "link": "https://www.bilibili.com/video/BV1ghuZ66Ens?t=58"
       },
       {
         "ts": "02:05",
-        "videoId": "B672",
+        "videoId": "B685",
         "bv": "BV1ghuZ66Ens",
         "text": "若因为自己「没修好」而不愿进入关系，这个行为仍是被恐惧驱动的：怕自己不完美，怕不完美的部分对方不接纳。",
         "link": "https://www.bilibili.com/video/BV1ghuZ66Ens?t=125"
@@ -1635,21 +1635,21 @@ var QA_DATA =
     "answer": [
       {
         "ts": "04:20",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "阳的卡点在「自我太大」：当自我膨胀到容不下别人，修行方向就是沉下来、能承载。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=260"
       },
       {
         "ts": "04:53",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "落到修行总纲，阳要修的是厚德载物——修德、修坤德，把撑得太满的自我收回去。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=293"
       },
       {
         "ts": "05:09",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "阴的卡点恰相反，是「自我太弱」：修行方向是长出自强自立，修自强不息、修乾德，把依赖与弱势认同逐步修掉。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=309"
@@ -1672,7 +1672,7 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:00",
-        "videoId": "B668",
+        "videoId": "B684",
         "bv": "BV14wuz6mEUg",
         "text": "阴最难的就是自我接纳：只要这一关过了，后面的成长就会很快。",
         "link": "https://www.bilibili.com/video/BV14wuz6mEUg?t=0"
@@ -1712,21 +1712,21 @@ var QA_DATA =
     "answer": [
       {
         "ts": "02:54",
-        "videoId": "B679",
+        "videoId": "B668",
         "bv": "BV1g58w6iEiv",
         "text": "面具从能量层面看是笔账：你创造一个面具本身要消耗能量，维持这个面具也要消耗能量，如同买车付钱、养车还要付钱。",
         "link": "https://www.bilibili.com/video/BV1g58w6iEiv?t=174"
       },
       {
         "ts": "03:43",
-        "videoId": "B679",
+        "videoId": "B668",
         "bv": "BV1g58w6iEiv",
         "text": "卸面具不是内化面具——内化是面具和肉长在一起，那时再剥离更痛苦；正确的做法是先把面具卸掉，再把它的能量回收到自己内在。",
         "link": "https://www.bilibili.com/video/BV1g58w6iEiv?t=223"
       },
       {
         "ts": "04:18",
-        "videoId": "B679",
+        "videoId": "B668",
         "bv": "BV1g58w6iEiv",
         "text": "实操上别一下子全扒：先准备好，再一点一点卸，把原本拿去生成面具的阳性能量，回收到成长自身。",
         "link": "https://www.bilibili.com/video/BV1g58w6iEiv?t=258"
@@ -1816,14 +1816,14 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:13",
-        "videoId": "B679",
+        "videoId": "B668",
         "bv": "BV1g58w6iEiv",
         "text": "阴的独立人格之所以不够独立，是人格边界千疮百孔；修独立人格的第一步就是立边界，最基础的是学会拒绝，甚至释放自己的攻击性——而修出独立人格的难度，和男阳把自恋修掉的难度是对等的。",
         "link": "https://www.bilibili.com/video/BV1g58w6iEiv?t=13"
       },
       {
         "ts": "03:37",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "女阴最难跨越的课题就是独立，但她一旦拥有独立人格，绝对不会差到哪里去；过程是把依赖与依靠慢慢放下，追求极致的独立、自主与真正的自由，方向始终没变。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=217"
@@ -1851,14 +1851,14 @@ var QA_DATA =
     "answer": [
       {
         "ts": "02:23",
-        "videoId": "B694",
+        "videoId": "B705",
         "bv": "BV1WJgb6EEF1",
         "text": "男阴的问题往往不是能力，而是「根本不愿意全力以赴地去做」——比起最后成不成，真正的卡点在于还没开始，就给自己找了一万个理由劝退自己。",
         "link": "https://www.bilibili.com/video/BV1WJgb6EEF1?t=143"
       },
       {
         "ts": "03:59",
-        "videoId": "B694",
+        "videoId": "B705",
         "bv": "BV1WJgb6EEF1",
         "text": "哪怕生发了阳性能量、有一鼓作气的劲，后面也容易后继无力；可只要没真的全力以赴试过就先下定论，等于提前把自己困在原地。",
         "link": "https://www.bilibili.com/video/BV1WJgb6EEF1?t=239"
@@ -1883,21 +1883,21 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:23",
-        "videoId": "B675",
+        "videoId": "B665",
         "bv": "BV1M68264EB4",
         "text": "情执与「我」绑在一起：只要还没修到彻彻底底的无我，就还会残留情执；没有「我」，这些执念就失去了附着的根。",
         "link": "https://www.bilibili.com/video/BV1M68264EB4?t=23"
       },
       {
         "ts": "00:00",
-        "videoId": "B681",
+        "videoId": "B679",
         "bv": "BV1pdgs6MEad",
         "text": "真情真爱和无条件的爱之间，差的恰是一个「情执」——一个「有我」、一个「没有我」；你都无我了，哪里还有「我的情执」。",
         "link": "https://www.bilibili.com/video/BV1pdgs6MEad?t=0"
       },
       {
         "ts": "02:27",
-        "videoId": "B663",
+        "videoId": "B680",
         "bv": "BV195g56xEG4",
         "text": "阴阳人格修行的落点，是回到阴阳平衡：阴要走向平衡，最快速的方式是生发内在的阳性能量，去和自己的阴性能量平衡。",
         "link": "https://www.bilibili.com/video/BV195g56xEG4?t=147"
@@ -2017,14 +2017,14 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:10",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "阳的内核取法「天行健，自强不息」；阴的内核取法「地势坤，厚德载物」。落到人身上，阳的自我非常强，阴的自我相对弱。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=10"
       },
       {
         "ts": "00:38",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "阳不是不讲感情，而是把事业放在前面；阴把感情放在前面，事业放在后面。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=38"
@@ -2160,7 +2160,7 @@ var QA_DATA =
     "answer": [
       {
         "ts": "04:41",
-        "videoId": "B680",
+        "videoId": "B676",
         "bv": "BV1KXby62Ems",
         "text": "你见那种狂妄自大、目中无人的男性，就是典型的男阳——因为他的自我太大了，已经膨胀到没有其他人了。",
         "link": "https://www.bilibili.com/video/BV1KXby62Ems?t=281"
@@ -2194,7 +2194,7 @@ var QA_DATA =
     "answer": [
       {
         "ts": "00:00",
-        "videoId": "B671",
+        "videoId": "B683",
         "bv": "BV1mcuz67Eha",
         "text": "阳一旦认定了方向，就一往直前往前冲；门槛高，但速度快。阴容易反复，阳不容易反复。",
         "link": "https://www.bilibili.com/video/BV1mcuz67Eha?t=0"

@@ -692,6 +692,47 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 .insight-item{display:flex;gap:9px;padding:8px 12px;border-left:2.5px solid #D4A574;background:linear-gradient(90deg,rgba(212,165,116,.09),rgba(212,165,116,.02));border-radius:0 10px 10px 0;font-size:14px;line-height:1.75;font-weight:400;color:#4a4956}
 .insight-item b{font-weight:700;color:#232230}
 .insight-item .ii-n{flex:none;color:#B5483A;font-weight:800;font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;font-size:13px;padding-top:1px}
+/* ── 知识树导引（问一问入口）：分叉图 / 目录 / 清单 / 单卡 ── */
+.qa-tree-wrap{padding:2px 0 6px}
+.qa-search-row{margin:0 0 10px}
+.qa-search-input{width:100%;box-sizing:border-box;padding:10px 14px;font-size:14px;font-family:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:999px;outline:none;transition:border-color .2s}
+.qa-search-input:focus{border-color:var(--yang)}
+.qa-tree-title{margin:14px 0 10px;font-size:13px;color:var(--fog);letter-spacing:.04em}
+.qa-tree{display:flex;flex-direction:column;gap:8px}
+.qt-branch{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-sm);cursor:pointer;transition:transform .15s,border-color .2s}
+.qt-branch:hover{border-color:var(--amber);transform:translateX(3px)}
+.qt-dot{width:10px;height:10px;border-radius:50%;flex:none}
+.qt-body{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.qt-name{font-size:15px;font-weight:600;color:var(--ink)}
+.qt-num{font-size:12px;color:var(--fog)}
+.qt-go{flex:none;font-size:18px;color:var(--fog)}
+.qa-tree-foot{margin-top:12px;font-size:12px;color:var(--fog);text-align:center}
+.qts-head{margin:12px 0 6px;font-size:12px;color:var(--fog)}
+.qts-item{padding:10px 12px;background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-sm);margin-bottom:6px;font-size:13.5px;cursor:pointer;line-height:1.5}
+.qts-item:hover{border-color:var(--yang)}
+.qts-more,.qts-empty{padding:8px;font-size:12px;color:var(--fog);text-align:center}
+.qa-crumbs{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:12px;font-size:12.5px}
+.qc-item{color:var(--yin);cursor:pointer;border-bottom:1px dashed rgba(78,110,158,.4)}
+.qc-sep{color:var(--fog);margin:0 2px}
+.qa-sec-title{margin:4px 0 12px;font-size:14px;font-weight:600;color:var(--ink)}
+.qa-series-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.qs-card{padding:14px;background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-sm);cursor:pointer;transition:border-color .2s,transform .15s}
+.qs-card:hover{border-color:var(--yin);transform:translateY(-2px)}
+.qsc-name{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.qsc-num{font-size:12px;color:var(--fog)}
+.qa-titles{display:flex;flex-direction:column;gap:6px}
+.qtitle-item{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-sm);cursor:pointer}
+.qtitle-item:hover{border-color:var(--yang)}
+.qti-no{flex:none;font-size:11px;color:var(--fog);font-variant-numeric:tabular-nums}
+.qti-t{flex:1;min-width:0;font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.qti-go{flex:none;color:var(--fog)}
+.qa-single{margin-bottom:14px}
+.qa-single-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:4px 0 10px}
+.qsn-btn{flex:0 0 auto;padding:9px 16px;font-size:13px;font-family:inherit;color:var(--ink-2);background:var(--card);border:1.5px solid var(--line);border-radius:999px;cursor:pointer}
+.qsn-btn:disabled{opacity:.4;cursor:default}
+.qsn-btn:not(:disabled):hover{border-color:var(--yin);color:var(--yin)}
+.qsn-pos{flex:1;text-align:center;font-size:12.5px;color:var(--fog);font-variant-numeric:tabular-nums}
+.qa-single-foot{text-align:center;font-size:12.5px;color:var(--yin);cursor:pointer;padding:6px}
 .ev-item .ev-quote{color:#5a5866;flex:1;min-width:0;}
 /* 操作区在右侧纵向排布：文字在左占满剩余宽度，按钮不侵占文字空间 */
 .ev-item .ev-acts{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:2px}
@@ -1099,9 +1140,13 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
           <div class="qa-pol-count" id="qaPolCountBoth">—</div>
         </div>
       </div>
-      <div class="chip-row" id="qaGroups"></div>
-      <div class="chip-row" id="qaScenes"></div>
-      <div class="chip-row" id="qaTypeDims" style="display:none"></div>
+      <!-- 知识树导引：搜索 + 分叉图 → 板块目录 → 卡片清单 → 单卡浏览 -->
+      <div id="qaNav"></div>
+      <div id="qaFilterBar">
+        <div class="chip-row" id="qaGroups"></div>
+        <div class="chip-row" id="qaScenes"></div>
+        <div class="chip-row" id="qaTypeDims" style="display:none"></div>
+      </div>
       <div class="qa-grid" id="qaList"></div>
     </div>
   </section>
@@ -2660,6 +2705,151 @@ function renderQa(){
   $('qaList').innerHTML = list.length
     ? list.map(function(c){ return qaCardHtml(c,''); }).join('')
     : '<div class="empty-tip">此卷尚未抄录，笔墨仍在路上。</div>';
+  try{ renderQaNav(); }catch(e){}
+}
+/* ══════ 知识树导引（问一问入口）══════
+   四层下钻：分叉图(tree) → 板块目录(series) → 卡片清单(list) → 单卡浏览(card)
+   守卫式：不改动原有 chips 筛选与列表逻辑，下钻时临时隐藏原区，返回即恢复。 */
+var SERIES_CN={
+  'y0':'总纲 · 基础认知','y1':'阴阳能量内核','y2':'互动与反应模式',
+  'y3':'四型总纲','y3-b1':'男阳','y3-b2':'女阳','y3-b3':'女阴','y3-b4':'男阴',
+  'y4':'关系与配对','y4-p':'关系场景','y5':'成长课题','y5-t':'成长练习',
+  'kp-a':'总纲切片','kp-a1':'乾德坤德','kp-a2':'战逃本能','kp-a4':'情绪主题',
+  'kp-b':'四型切片','kp-b1':'男阳','kp-b2':'女阳','kp-b3':'女阴','kp-b4':'男阴',
+  'kp-c':'认知切片','kp-d':'成长切片','kp-e':'情感切片','kp-f':'实修切片','kp-g':'其他切片',
+  'other':'其他'
+};
+var QA_TREE_GROUPS=['阴阳能量','四型人格','关系与配对','成长课题','灵性成长'];
+var QA_TREE_COLOR=['#E8913A','#4E6E9E','#B5483A','#1D9E75','#7F77DD'];
+var QA_NAV={level:'tree', group:'', series:'', idx:0, cards:[]};
+
+function qaSeriesKey(kp){
+  if(!kp) return 'other';
+  if(/^kp-[a-z]+\d+-/.test(kp)) return kp.split('-').slice(0,2).join('-');
+  if(/^y\d+-[a-z]+\d*/.test(kp)) return kp.split('-').slice(0,2).join('-');
+  var m=/^(y\d+|kp-[a-z]+)/.exec(kp);
+  return m?m[1]:'other';
+}
+function qaSeriesName(k){ return SERIES_CN[k]||k; }
+function qaGroupCards(g){ return QA.filter(function(c){ return (c.category||'其他')===g; }); }
+function qaSeriesCards(g,s){ return qaGroupCards(g).filter(function(c){ return qaSeriesKey(c.kpId)===s; }); }
+
+function renderQaNav(){
+  var box=$('qaNav'); if(!box) return;
+  var drilling=(QA_NAV.level!=='tree');
+  var fb=$('qaFilterBar'), lst=$('qaList');
+  if(fb) fb.style.display=drilling?'none':'';
+  if(lst) lst.style.display=drilling?'none':'';
+  if(QA_NAV.level==='series') return renderQaSeriesView(box);
+  if(QA_NAV.level==='list') return renderQaTitlesView(box);
+  if(QA_NAV.level==='card') return renderQaSingleView(box);
+  return renderQaTree(box);
+}
+function qaNavOpen(g){ QA_NAV.level='series'; QA_NAV.group=g; QA_NAV.series=''; QA_NAV.idx=0; renderQaNav(); try{ window.scrollTo(0,0); }catch(e){} }
+function qaNavGo(level){
+  if(level==='tree'){ QA_NAV.level='tree'; QA_NAV.group=''; QA_NAV.series=''; }
+  else if(level==='series'){ QA_NAV.level='series'; QA_NAV.series=''; }
+  else if(level==='list'){ QA_NAV.level='list'; }
+  renderQaNav(); try{ window.scrollTo(0,0); }catch(e){}
+}
+function qaNavCrumbs(){
+  var p=[{t:'问一问',l:'tree'}];
+  if(QA_NAV.level!=='tree') p.push({t:QA_NAV.group,l:'series'});
+  if(QA_NAV.level==='list'||QA_NAV.level==='card') p.push({t:qaSeriesName(QA_NAV.series),l:'list'});
+  if(QA_NAV.level==='card') p.push({t:'第 '+(QA_NAV.idx+1)+' 张',l:'card'});
+  return '<div class="qa-crumbs">'+p.map(function(x,i){
+    return (i?'<span class="qc-sep">›</span>':'')+'<span class="qc-item" onclick="qaNavGo(\''+x.l+'\')">'+esc(x.t)+'</span>';
+  }).join('')+'</div>';
+}
+
+function renderQaTree(box){
+  var h='<div class="qa-tree-wrap">'
+    +'<div class="qa-search-row"><input id="qaTreeSearch" class="qa-search-input" type="search" placeholder="搜标题 / 结论 / 金句，或直接选下面的分支" oninput="qaTreeSearch(this.value)"></div>'
+    +'<div id="qaTreeResult"></div>'
+    +'<div class="qa-tree-title">知识脉络 · 选一个分支进入</div>'
+    +'<div class="qa-tree">'
+    +QA_TREE_GROUPS.map(function(g,i){
+      var n=qaGroupCards(g).length; if(!n) return '';
+      return '<div class="qt-branch" onclick="qaNavOpen(\''+esc(g)+'\')">'
+        +'<span class="qt-dot" style="background:'+QA_TREE_COLOR[i]+'"></span>'
+        +'<span class="qt-body"><span class="qt-name">'+esc(g)+'</span><span class="qt-num">'+n+' 张卡片</span></span>'
+        +'<span class="qt-go">›</span></div>';
+    }).join('')
+    +'</div>'
+    +'<div class="qa-tree-foot">共 '+QA.length+' 张 · 也可以直接用上面的搜索</div>'
+    +'</div>';
+  box.innerHTML=h;
+}
+function qaTreeSearch(q){
+  var box=$('qaTreeResult'); if(!box) return;
+  q=(q||'').trim();
+  if(!q){ box.innerHTML=''; return; }
+  var ql=q.toLowerCase(), hit=[];
+  QA.forEach(function(c){
+    var blob=((c.question||'')+' '+(c.answerBrief||'')+' '+(c.quote||'')+' '+(c.insight||[]).join(' ')).toLowerCase();
+    if(blob.indexOf(ql)>=0) hit.push(c);
+  });
+  box.innerHTML=hit.length
+    ? '<div class="qts-head">命中 '+hit.length+' 张</div>'+hit.slice(0,20).map(function(c){
+        return '<div class="qts-item" onclick="qaNavCardDirect(\''+esc(c.qaId)+'\')">'+hl(c.question||'',q)+'</div>';
+      }).join('')+(hit.length>20?'<div class="qts-more">仅显示前 20 条，输入更精确的关键词</div>':'')
+    : '<div class="qts-empty">没找到，换个词试试</div>';
+}
+function qaNavCardDirect(qaId){
+  var c=qaById(qaId); if(!c) return;
+  QA_NAV.level='card'; QA_NAV.group=c.category||'其他'; QA_NAV.series=qaSeriesKey(c.kpId);
+  QA_NAV.cards=qaSeriesCards(QA_NAV.group,QA_NAV.series);
+  QA_NAV.idx=Math.max(0,QA_NAV.cards.findIndex(function(x){ return x.qaId===qaId; }));
+  renderQaNav(); try{ window.scrollTo(0,0); }catch(e){}
+}
+
+function renderQaSeriesView(box){
+  var g=QA_NAV.group, cards=qaGroupCards(g), m=new Map();
+  cards.forEach(function(c){ var k=qaSeriesKey(c.kpId); if(!m.has(k)) m.set(k,[]); m.get(k).push(c); });
+  var keys=[...m.keys()].sort(function(a,b){ return m.get(b).length-m.get(a).length; });
+  box.innerHTML='<div class="qa-tree-wrap">'+qaNavCrumbs()
+    +'<div class="qa-sec-title">'+esc(g)+' · 选一个主题（'+cards.length+' 张）</div>'
+    +'<div class="qa-series-grid">'+keys.map(function(k){
+        return '<div class="qs-card" onclick="qaNavSeries(\''+esc(k)+'\')">'
+          +'<div class="qsc-name">'+esc(qaSeriesName(k))+'</div>'
+          +'<div class="qsc-num">'+m.get(k).length+' 张</div></div>';
+      }).join('')+'</div></div>';
+}
+function qaNavSeries(k){
+  QA_NAV.level='list'; QA_NAV.series=k; QA_NAV.cards=qaSeriesCards(QA_NAV.group,k); QA_NAV.idx=0;
+  renderQaNav(); try{ window.scrollTo(0,0); }catch(e){}
+}
+function renderQaTitlesView(box){
+  var cards=QA_NAV.cards;
+  box.innerHTML='<div class="qa-tree-wrap">'+qaNavCrumbs()
+    +'<div class="qa-sec-title">'+esc(qaSeriesName(QA_NAV.series))+' · '+cards.length+' 张</div>'
+    +'<div class="qa-titles">'+cards.map(function(c,i){
+        return '<div class="qtitle-item" onclick="qaNavCard('+i+')">'
+          +'<span class="qti-no">'+String(i+1).padStart(2,'0')+'</span>'
+          +'<span class="qti-t">'+esc(c.question||'')+'</span>'
+          +'<span class="qti-go">›</span></div>';
+      }).join('')+'</div></div>';
+}
+function qaNavCard(i){ QA_NAV.level='card'; QA_NAV.idx=i; renderQaNav(); try{ window.scrollTo(0,0); }catch(e){} }
+function renderQaSingleView(box){
+  var cards=QA_NAV.cards, i=QA_NAV.idx, c=cards[i]; if(!c){ QA_NAV.level='list'; return renderQaNav(); }
+  var n=cards.length;
+  var h='<div class="qa-tree-wrap">'+qaNavCrumbs()
+    +'<div class="qa-single">'+qaCardHtml(c,'')+'</div>'
+    +'<div class="qa-single-nav">'
+      +'<button class="qsn-btn" onclick="qaNavStep(-1)" '+(i<=0?'disabled':'')+'>‹ 上一张</button>'
+      +'<span class="qsn-pos">'+(i+1)+' / '+n+'</span>'
+      +'<button class="qsn-btn" onclick="qaNavStep(1)" '+(i>=n-1?'disabled':'')+'>下一张 ›</button>'
+    +'</div>'
+    +'<div class="qa-single-foot"><span onclick="qaNavGo(\'list\')">返回目录</span></div>'
+    +'</div>';
+  box.innerHTML=h;
+  var el=document.getElementById('card-'+c.qaId); if(el) el.classList.add('open');
+}
+function qaNavStep(d){
+  var n=QA_NAV.cards.length, i=QA_NAV.idx+d;
+  if(i<0||i>=n) return;
+  QA_NAV.idx=i; renderQaNav(); try{ window.scrollTo(0,0); }catch(e){}
 }
 function setQaGroup(x){
   qaFilter.group=x;

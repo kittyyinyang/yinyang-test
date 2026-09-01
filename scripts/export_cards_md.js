@@ -146,7 +146,7 @@ for (const g of orderedGroups) {
       cIdx++;
       const n = kpCount.get(c.kpId || '(无)') || 1;
       const mark = (n > 1 && c.kpId) ? ' ⚠' : '';
-      L.push(`- ${cIdx}. ${esc(c.question || '(无标题)')}　<sub>\`${c.qaId}\`${mark}</sub>`);
+      L.push('- ' + cIdx + '. [' + esc(c.question || '(无标题)') + '](#card-' + cIdx + ')　<sub>`' + (c.qaId || '') + '`' + mark + '</sub>');
     }
     L.push('');
   }
@@ -169,7 +169,7 @@ for (const g of orderedGroups) {
       const evs = c.evidence || c.answer || [];
       const n = kpCount.get(c.kpId || '(无)') || 1;
       const mark = (n > 1 && c.kpId) ? '　⚠️ **同 kpId 有 ' + n + ' 张卡，请核对是否重复**' : '';
-      L.push(`### ${cIdx}. ${c.question || '(无标题)'}`);
+      L.push(`### ${cIdx}. ${c.question || '(无标题)'} <a id="card-${cIdx}"></a>`);
       L.push('');
       const meta = [`\`${c.qaId}\``];
       if (c.kpId) meta.push(`kpId \`${c.kpId}\``);

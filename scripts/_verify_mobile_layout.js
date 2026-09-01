@@ -7,9 +7,10 @@ const EDGE = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
 const OUT = path.resolve(__dirname, '_tmp_m3');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 if (!fs.existsSync(OUT)) fs.mkdirSync(OUT, { recursive: true });
-try { fs.rmSync(OUT + '/_ed', { recursive: true, force: true }); } catch (e) { }
+/* 每次用全新 profile（时间戳），避免磁盘缓存导致测到旧页面 */
+const PROFILE = OUT + '/_ed_' + Date.now();
 
-const edge = spawn(EDGE, ['--headless=new', '--disable-gpu', '--hide-scrollbars', `--remote-debugging-port=${PORT}`, `--user-data-dir=${OUT}/_ed`, 'about:blank'], { stdio: 'ignore' });
+const edge = spawn(EDGE, ['--headless=new', '--disable-gpu', '--hide-scrollbars', `--remote-debugging-port=${PORT}`, `--user-data-dir=${PROFILE}`, 'about:blank'], { stdio: 'ignore' });
 const cleanup = () => { try { process.kill(-edge.pid); } catch (e) { } };
 process.on('exit', cleanup);
 
@@ -25,6 +26,8 @@ async function main() {
   const shot = async n => { const r = await send('Page.captureScreenshot', { format: 'png' }); fs.writeFileSync(path.join(OUT, n + '.png'), Buffer.from(r.data, 'base64')); return n; };
 
   await send('Page.enable'); await send('Runtime.enable');
+  await send('Network.enable');
+  await send('Network.setCacheDisabled', { cacheDisabled: true });
   await send('Emulation.setDeviceMetricsOverride', { width: 375, height: 1200, deviceScaleFactor: 2, mobile: true, screenWidth: 375, screenHeight: 1200, positionX: 0, positionY: 0, screenOrientation: { type: 'portraitPrimary', angle: 0 } });
   await send('Page.navigate', { url: URL + '#qa' });
   await sleep(3500);

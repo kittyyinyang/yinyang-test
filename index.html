@@ -692,16 +692,14 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 .insight-item{display:flex;gap:9px;padding:8px 12px;border-left:2.5px solid #D4A574;background:linear-gradient(90deg,rgba(212,165,116,.09),rgba(212,165,116,.02));border-radius:0 10px 10px 0;font-size:14px;line-height:1.75;font-weight:400;color:#4a4956}
 .insight-item b{font-weight:700;color:#232230}
 .insight-item .ii-n{flex:none;color:#B5483A;font-weight:800;font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;font-size:13px;padding-top:1px}
-.ev-item .ev-quote{color:#5a5866;flex:0 0 100%;min-width:0;}
-/* 操作区独占一行、纵向排布，保证原文文字占满整行不被按钮挤压 */
-.ev-item .ev-acts{flex:0 0 100%;display:flex;flex-direction:column;align-items:flex-start;gap:5px;margin-top:2px}
-/* 三种播放入口并排：音频 / 网页内嵌视频 / 跳转 B站（本地对比用，定稿后精简） */
-.ev-item .ev-go{flex:none;height:28px;display:flex;align-items:center;justify-content:center;gap:3px;color:#E8913A;font-size:11px;font-weight:600;text-decoration:none;border:1.5px solid rgba(232,145,58,.55);border-radius:999px;padding:0 10px;background:rgba(232,145,58,.06);transition:all .2s;white-space:nowrap}
-.ev-item .ev-go:hover{background:#E8913A;color:#fff;border-color:#E8913A}
-.ev-item .ev-go.ev-go-video{color:#4E6E9E;border-color:rgba(78,110,158,.5);background:rgba(78,110,158,.06)}
-.ev-item .ev-go.ev-go-video:hover{background:#4E6E9E;color:#fff;border-color:#4E6E9E}
+.ev-item .ev-quote{color:#5a5866;flex:1;min-width:0;}
+/* 操作区在右侧纵向排布：文字在左占满剩余宽度，按钮不侵占文字空间 */
+.ev-item .ev-acts{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:2px}
+/* 定稿：▶ 圆形图标按钮（网页内嵌播放）+ B站↗ 文字标识，纵向排在文字右侧 */
+.ev-item .ev-go{flex:none;width:30px;height:30px;display:flex;align-items:center;justify-content:center;color:#4E6E9E;font-size:13px;text-decoration:none;border:1.5px solid rgba(78,110,158,.5);border-radius:50%;background:rgba(78,110,158,.06);transition:all .2s}
+.ev-item .ev-go:hover{background:#4E6E9E;color:#fff;border-color:#4E6E9E}
 .ev-item .ev-go[data-on="1"]{background:#3A5480;color:#fff;border-color:#3A5480}
-.ev-item .ev-ext{flex:none;font-size:11px;color:var(--fog);text-decoration:none;border-bottom:1px dashed rgba(120,120,140,.5);line-height:1.6;margin-top:6px;transition:color .2s,border-color .2s}
+.ev-item .ev-ext{flex:none;font-size:11px;color:var(--fog);text-decoration:none;border-bottom:1px dashed rgba(120,120,140,.5);line-height:1.6;transition:color .2s,border-color .2s}
 .ev-item .ev-ext:hover{color:var(--yin);border-bottom-color:var(--yin)}
 .ev-player{flex:0 0 100%;margin:2px 0 4px}
 .evp-frame{width:100%;aspect-ratio:16/9;border-radius:10px;border:1px solid rgba(212,165,116,.35);background:#1c1c24;display:block;animation:evpIn .25s ease}
@@ -2431,10 +2429,10 @@ function qaCardHtml(c, q){
   var evidenceHtml=(c.evidence && c.evidence.length)
     ? '<div class="ev-head">▶ 语料佐证 · 原话 '+c.evidence.length+' 条 —— 点 ▶ 看原话切片</div>'
       + c.evidence.map(function(e,i){
-          /* 定稿：两个入口纵向排布在下方，不侵占原文横向空间 */
+          /* 定稿：文字在左占满宽度，两个入口在右侧纵向排（▶ 图标 / B站 ↗ 标识） */
           var _btns='<div class="ev-acts">'
-            + '<a class="ev-go ev-go-video" href="javascript:void(0)" data-qa="'+esc(c.qaId)+'" data-idx="'+i+'" data-txt="▶ 网页内嵌播放" onclick="event.stopPropagation();toggleEvPlayer(this,\'video\')" title="网页内嵌播放 B站视频">▶ 网页内嵌播放</a>'
-            + '<a class="ev-ext" href="'+esc(e.link||'#')+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="跳转到 B 站看（带时间点）">B站 ↗ 跳转观看</a>'
+            + '<a class="ev-go ev-go-video" href="javascript:void(0)" data-qa="'+esc(c.qaId)+'" data-idx="'+i+'" data-txt="▶" onclick="event.stopPropagation();toggleEvPlayer(this,\'video\')" title="网页内嵌播放 B站视频" aria-label="网页内嵌播放">▶</a>'
+            + '<a class="ev-ext" href="'+esc(e.link||'#')+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="跳转到 B 站看（带时间点）" aria-label="跳转 B 站">B站 ↗</a>'
             + '</div>';
           return '<div class="ev-item"><span class="ev-quote">「'+hl(e.text||'',q)+'」</span>'
             +_btns

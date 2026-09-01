@@ -30,9 +30,13 @@ async function main() {
   await sleep(3500);
 
   const qa = await ev(`(()=>{
-    var k=Object.keys(AUDIO_MANIFEST||{});
-    for(var i=0;i<k.length;i++){ var p=k[i].split('__');
-      if(document.getElementById('card-'+p[0])){ goQaCard(p[0]); return p[0]; } }
+    /* 音频方案已移除：改为取第一张「有语料佐证且在 DOM 中」的卡 */
+    for(var i=0;i<QA.length;i++){
+      var c=QA[i];
+      if((c.evidence||c.answer||[]).length && document.getElementById('card-'+c.qaId)){
+        goQaCard(c.qaId); return c.qaId;
+      }
+    }
     return 'none';
   })()`);
   console.log('[目标卡]', qa);

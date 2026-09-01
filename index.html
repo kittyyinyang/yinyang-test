@@ -2775,11 +2775,9 @@ function qaChapterOf(c){
   if(g==='灵性成长') return hit(['ch12','ch15','ch16','ch17'])||'ch12';
   /* 2) 成长课题：锁定第二阶段七章 */
   if(g==='成长课题') return hit(['ch5','ch6','ch7','ch8','ch9','ch10','ch11'])||'ch11';
-  /* 3) 其余（阴阳能量/四型人格/关系与配对）：先按 kpId 系列精确映射 */
+  /* 3) 其余（阴阳能量/四型人格/关系与配对）→ 一律归第一阶段，
+        按 kpId 系列精确映射；不再被第二阶段关键词吸走，保证阶段边界清晰 */
   if(SERIES_CH[sk]) return SERIES_CH[sk];
-  /* 4) 兜底：全表关键词 → 再按 category */
-  var h=hit(['ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8','ch9','ch10','ch11','ch12','ch15','ch16','ch17']);
-  if(h) return h;
   if(g==='关系与配对') return 'ch4';
   if(g==='四型人格') return 'ch3';
   return 'ch2';

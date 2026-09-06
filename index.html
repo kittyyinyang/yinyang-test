@@ -924,6 +924,68 @@ details.deep-wrap[open] summary::before{background:linear-gradient(135deg,var(--
 .qcard[data-pol="yang"].open .qcard-body{border-top-color:rgba(232,145,58,.55);}
 .qcard[data-pol="yin"].open .qcard-body{border-top-color:rgba(78,110,158,.55);}
 .qcard[data-pol="both"].open .qcard-body{border-top-color:rgba(212,165,116,.6);}
+
+/* ═══════════════════════════════════════════════════════════════
+   安卓 / 旧内核兼容补丁
+   目标：微信 X5（Chrome 57）、系统浏览器 Chrome<84、UC/QQ 内核
+   主因：这些内核不支持 flex `gap`，导致 91 处间距全部失效 → 元素挤成一团
+   ═══════════════════════════════════════════════════════════════ */
+
+/* 1) flex gap 降级：内核不支持 gap 时用 margin 补间距（@supports 在 Chrome 28+ 可用） */
+@supports not (gap: 1px) {
+  .tn-nav>*,.chip-row>*,.ch>*,.scene-chips>*,.q-scene>*,.k-row>*,.light-scale>*,
+  .r-tag>*,.verdict-head>*,.cat-badge,.scene-chip{margin-right:8px;margin-bottom:6px}
+  .hero>*,.hero-seals>*,.plate>*,.plate-top>*,.gender-cards>*,.journey>*,
+  .journey-node>*,.journey-preview>*,.jp-item>*,.journey-recap>*,.jr-node>*,
+  .q-nav>*,.ev-head>*,.qcard-foot>*,.last-strip>*,.spinner-wrap>*,.ch-ticks>*,
+  .hero-meta>*,.links>*,.qa-crumbs>*,.qa-series-grid>*,.qa-titles>*,.qa-tree>*,
+  .qa-single-nav>*,.reco-box>*,.ev-acts>*{margin-right:8px;margin-bottom:8px}
+  .qa-grid>*{margin-bottom:12px}
+  .ev-item>*{margin-right:8px}
+  .qtitle-item,.qts-item,.qcard{margin-bottom:6px}
+  .insight-item{margin-bottom:6px}
+}
+
+/* 2) aspect-ratio 降级（Chrome<88）：用 padding-top 撑起 16:9 */
+@supports not (aspect-ratio: 16 / 9) {
+  .evp-frame,.evp-spin,.ev-player>iframe{height:0;padding-top:56.25%;position:relative;display:block}
+  .evp-frame{position:absolute;top:0;left:0;width:100%;height:100%;padding-top:0}
+  .ev-player{position:relative}
+}
+
+/* 3) 长文本 / 长链接换行，防止撑破容器 */
+.qcard,.ev-quote,.qti-t,.qts-item,.a-text,.qt-name,.qsc-name,.qts-head,
+.qc-item,.reco-item,.verdict-head,.insight-item,.ev-item{
+  word-break:break-word;overflow-wrap:anywhere;
+}
+a{word-break:break-all;overflow-wrap:anywhere}
+
+/* 4) 横向溢出兜底：任何情况下不允许出现左右滚动 */
+html,body{max-width:100%;overflow-x:hidden;overflow-x:clip}
+.qa-grid,.qa-tree,.qa-series-grid,.qa-titles,.ev-item,.qcard{max-width:100%}
+img,svg,video,iframe{max-width:100%;height:auto}
+
+/* 5) 前缀补全 + 移动端点击体验 */
+.bd-head,.sticky-bar,.q-nav,.nav-bar{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+*{-webkit-tap-highlight-color:transparent}
+button,a,input,select,textarea{touch-action:manipulation}
+
+/* 6) 安全区（刘海屏 / 手势条），安卓同样受益 */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .nav-bar,.sticky-bar,.q-nav{padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+  body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+}
+
+/* 7) 极小屏（<=360px）收紧内边距，避免换行错位 */
+@media (max-width:360px){
+  .qcard{padding:12px 12px}
+  .ev-item{padding:9px 10px;font-size:12.5px}
+  .qt-branch{padding:12px 12px}
+  .qt-name{font-size:14px}
+  .qsn-btn{padding:8px 12px;font-size:12px}
+  .qa-search-input{font-size:13px;padding:9px 12px}
+}
+
 </style>
 
 <div class="toast" id="toast"></div>

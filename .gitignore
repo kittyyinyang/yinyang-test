@@ -20,3 +20,6 @@ data/_kp_fix_*/
 scripts/_tmp*/
 data/audio_manifest.js
 audio/
+
+# 语料分片（备选架构，暂不入库）
+data/corpus_shard_[0-9]*.js

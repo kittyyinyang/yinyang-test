@@ -986,6 +986,31 @@ button,a,input,select,textarea{touch-action:manipulation}
   .qa-search-input{font-size:13px;padding:9px 12px}
 }
 
+
+/* ── 智能问答（问一问顶部）── */
+.qa-ask-wrap{margin:0 0 14px;padding:14px;background:linear-gradient(135deg,rgba(232,145,58,.07),rgba(78,110,158,.07));border:1px solid var(--card-line);border-radius:var(--r-md)}
+.qa-ask-head{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:9px}
+.qa-ask-icon{color:var(--yang);font-size:14px}
+.qa-ask-row{display:flex;gap:8px}
+.qa-ask-input{flex:1;min-width:0;padding:10px 14px;font-size:14px;font-family:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:999px;outline:none}
+.qa-ask-input:focus{border-color:var(--yang)}
+.qa-ask-btn{flex:none;padding:10px 20px;font-size:14px;font-family:inherit;font-weight:600;color:#fff;background:var(--yang);border:none;border-radius:999px;cursor:pointer}
+.qa-ask-egs{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.qa-ask-eg{padding:5px 11px;font-size:12px;color:var(--ink-2);background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:999px;cursor:pointer}
+.qa-ask-eg:hover{border-color:var(--yang);color:var(--yang)}
+.qa-ans{margin-top:12px;padding:13px;background:var(--card);border:1px solid var(--card-line);border-radius:var(--r-sm)}
+.qa-ans-top{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.qa-ans-q{font-size:13.5px;font-weight:600;color:var(--ink);flex:1;min-width:0}
+.qa-ans-score{font-size:11px;color:var(--fog);flex:none}
+.qa-ans-body{font-size:14px;line-height:1.75;color:var(--ink-2);padding:10px 12px;background:var(--yang-soft);border-left:3px solid var(--yang);border-radius:6px;margin-bottom:10px}
+.qa-ans-sub{font-size:12px;color:var(--fog);margin:10px 0 6px}
+.qa-ans-ev{padding:9px 11px;background:var(--soft);border-radius:6px;margin-bottom:7px;font-size:13px;line-height:1.7}
+.qa-ans-ev-meta{display:flex;align-items:center;gap:10px;margin-top:5px;font-size:11.5px}
+.qa-ans-rel{display:flex;flex-direction:column;gap:5px}
+.qa-ans-rel-item{padding:8px 11px;background:var(--card);border:1px solid var(--line);border-radius:6px;font-size:13px;cursor:pointer}
+.qa-ans-rel-item:hover{border-color:var(--yin);color:var(--yin)}
+.qa-ans-empty{padding:12px;font-size:13px;color:var(--fog);text-align:center}
+
 </style>
 
 <div class="toast" id="toast"></div>
@@ -1206,6 +1231,17 @@ button,a,input,select,textarea{touch-action:manipulation}
       </div>
       -->
       <!-- 知识树导引：搜索 + 分叉图 → 板块目录 → 卡片清单 → 单卡浏览 -->
+      <!-- 智能问答（语料检索式）：问 → 匹配卡片 + 老师原话 + B站精确秒 -->
+      <div class="qa-ask-wrap">
+        <div class="qa-ask-head"><span class="qa-ask-icon">✦</span><span>问老师 · 用语料回答</span></div>
+        <div class="qa-ask-row">
+          <input id="qaAskInput" class="qa-ask-input" type="search" placeholder="问一句，比如：为什么阴总是内耗？" onkeydown="if(event.key==='Enter')qaAsk()" autocomplete="off">
+          <button class="qa-ask-btn" onclick="qaAsk()">问</button>
+        </div>
+        <div class="qa-ask-egs" id="qaAskEgs"></div>
+        <div id="qaAskResult"></div>
+      </div>
+      <!-- 知识树导引 -->
       <div id="qaNav"></div>
       <div id="qaFilterBar">
         <div class="chip-row" id="qaGroups"></div>
@@ -2770,7 +2806,7 @@ function renderQa(){
   $('qaList').innerHTML = list.length
     ? list.map(function(c){ return qaCardHtml(c,''); }).join('')
     : '<div class="empty-tip">此卷尚未抄录，笔墨仍在路上。</div>';
-  try{ renderQaNav(); }catch(e){}
+  try{ renderQaNav(); renderQaAskEgs(); }catch(e){}
 }
 /* ══════ 知识树导引（问一问入口）══════
    四层下钻：分叉图(tree) → 板块目录(series) → 卡片清单(list) → 单卡浏览(card)
@@ -2869,6 +2905,140 @@ function qaSeriesKey(kp){
 function qaSeriesName(k){ return SERIES_CN[k]||k; }
 function qaGroupCards(g){ return QA.filter(function(c){ return (c.category||'其他')===g; }); }
 function qaSeriesCards(g,s){ return qaGroupCards(g).filter(function(c){ return qaSeriesKey(c.kpId)===s; }); }
+
+
+/* ══════ 智能问答（语料检索式，零依赖纯前端）═════
+   问句 → 匹配 265 张卡 + 513 条佐证原话 → 返回老师原话 + B站精确秒 + 相关卡片 */
+var QA_ASK_STOP=('的 了 是 在 我 有 和 就 不 人 都 一 一个 上 也 很 到 说 要 去 你 会 着 没有 看 好 自己 这 那 '+
+  '什么 为什么 怎么 如何 吗 呢 吧 啊 请问 一下 可以 能 它 他 她 我们 你们 他们 因为 所以 但是 如果 真的 到底 总是 一直 常常 觉得 感觉').split(' ');
+var QA_ASK_EGS=['为什么阴总是内耗','阳和阴怎么判断','男阳为什么不会求助','女阴为什么越爱越抓','怎么生发对侧能量','四型人格怎么来的'];
+var _qaAskIdx=null;
+function qaAskIdx(){
+  if(_qaAskIdx) return _qaAskIdx;
+  _qaAskIdx=QA.map(function(c){
+    return {c:c,q:c.question||'',a:c.answerBrief||'',ins:(c.insight||[]).join(' '),qt:c.quote||'',evs:(c.evidence||c.answer||[])};
+  });
+  return _qaAskIdx;
+}
+function qaAskTokens(s){
+  var t=(s||'').replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g,' ').toLowerCase().split(/\s+/)
+    .filter(function(w){ return w && QA_ASK_STOP.indexOf(w)<0; });
+  var g=[];
+  t.forEach(function(w){
+    if(/[\u4e00-\u9fa5]/.test(w)){
+      if(w.length<=2){ g.push(w); }
+      else{ g.push(w); for(var i=0;i<w.length-1;i++) g.push(w.substr(i,2)); }
+    } else if(w.length>1){ g.push(w); }
+  });
+  return g;
+}
+function qaAskScore(it,g){
+  var evTxt=it.evs.map(function(e){ return e.text||''; }).join(' ');
+  var s=0,hit=0;
+  for(var i=0;i<g.length;i++){
+    var w=g[i],f=0;
+    if(it.q.indexOf(w)>=0) f=6;
+    if(!f && it.a.indexOf(w)>=0) f=4;
+    if(!f && it.qt.indexOf(w)>=0) f=3;
+    if(!f && evTxt.indexOf(w)>=0) f=3;
+    if(!f && it.ins.indexOf(w)>=0) f=2;
+    if(f){ s+=f; hit++; }
+  }
+  return s>0?{s:s+hit*hit,hit:hit}:null;
+}
+function qaAskSearch(q,topN){
+  var g=qaAskTokens(q); if(!g.length) return [];
+  var out=[];
+  qaAskIdx().forEach(function(it){ var r=qaAskScore(it,g); if(r) out.push({c:it.c,evs:it.evs,s:r.s,hit:r.hit}); });
+  out.sort(function(a,b){ return b.s-a.s; });
+  return out.slice(0,topN||3);
+}
+/* 全量语料懒加载：首次提问时才载入 2.21MB（29,389 段），之后常驻内存 */
+var _cc=null,_ccLoading=false,_ccCbs=[];
+function loadCorpus(cb){
+  if(_cc){ cb(_cc); return; }
+  _ccCbs.push(cb);
+  if(_ccLoading) return;
+  _ccLoading=true;
+  var sc=document.createElement("script");
+  sc.src="data/corpus_chunks.js";
+  sc.onload=function(){
+    _cc=(typeof CORPUS_CHUNKS!=="undefined")?CORPUS_CHUNKS:null;
+    var cbs=_ccCbs; _ccCbs=[]; cbs.forEach(function(f){ f(_cc); });
+  };
+  sc.onerror=function(){ var cbs=_ccCbs; _ccCbs=[]; cbs.forEach(function(f){ f(null); }); };
+  document.head.appendChild(sc);
+}
+function searchCorpus(g,topN){
+  if(!_cc||!_cc.d) return [];
+  var out=[],V=_cc.v,D=_cc.d;
+  for(var i=0;i<D.length;i++){
+    var d=D[i],t=d[2],sc=0,hit=0;
+    for(var j=0;j<g.length;j++){ if(g[j].length>=2 && t.indexOf(g[j])>=0){ sc+=3; hit++; } }
+    if(hit>0) out.push({bv:V[d[0]],sec:d[1],text:t,s:sc+hit*hit,hit:hit});
+  }
+  out.sort(function(a,b){ return b.s-a.s; });
+  return out.slice(0,topN||5);
+}
+function qaAsk(){
+  var el=$("qaAskInput"),q=(el&&el.value||"").trim(),box=$("qaAskResult");
+  if(!box) return;
+  if(!q){ box.innerHTML="<div class=\"qa-ans-empty\">先写个问题</div>"; return; }
+  box.innerHTML="<div class=\"qa-ans-empty\">正在检索 29,389 段语料…</div>";
+  var g=qaAskTokens(q), cards=qaAskSearch(q,3);
+  loadCorpus(function(cc){
+    var evs=cc?searchCorpus(g,5):[];
+    if(!cards.length && !evs.length){
+      box.innerHTML="<div class=\"qa-ans\"><div class=\"qa-ans-empty\">语料里没找到相关的，换个说法试试（试试「内耗」「男阳」「边界」）</div></div>";
+      return;
+    }
+    var h="<div class=\"qa-ans\">";
+    h+="<div class=\"qa-ans-top\"><span class=\"qa-ans-q\">"+esc(q)+"</span><span class=\"qa-ans-score\">语料 "+evs.length+" 段 · 卡片 "+cards.length+" 张</span></div>";
+    var c=cards.length?cards[0].c:null;
+    var body=(c&&c.answerBrief)||(c&&c.insight&&c.insight[0])||(evs[0]&&evs[0].text)||"";
+    if(body) h+="<div class=\"qa-ans-body\">"+esc(body)+"</div>";
+    if(evs.length){
+      h+="<div class=\"qa-ans-sub\">老师原话 · 全量语料</div>";
+      evs.forEach(function(e,i){
+        var mm=Math.floor(e.sec/60)+":"+String(e.sec%60).padStart(2,"0");
+        h+="<div class=\"qa-ans-ev\">"+String(i+1)+". "+esc(e.text)+"<div class=\"qa-ans-ev-meta\">"
+          +"<a class=\"ev-go\" href=\"javascript:void(0)\" onclick=\"event.stopPropagation();qaAskPlay(this,'"+e.bv+"',"+e.sec+")\" title=\"网页内嵌播放\">▶ "+mm+"</a>"
+          +"<a class=\"ev-ext\" href=\"https://www.bilibili.com/video/"+e.bv+"/?t="+e.sec+"\" target=\"_blank\" rel=\"noopener\">B站 ↗</a>"
+          +"</div></div>";
+      });
+    }
+    if(c&&c.quote) h+="<div class=\"qa-ans-sub\">金句</div><div class=\"qa-ans-body\" style=\"background:var(--yin-soft);border-left-color:var(--yin)\">"+esc(c.quote)+"</div>";
+    if(cards.length){
+      h+="<div class=\"qa-ans-sub\">相关卡片</div><div class=\"qa-ans-rel\">";
+      cards.forEach(function(x){
+        h+="<div class=\"qa-ans-rel-item\" onclick=\"qaNavCardDirect('"+esc(x.c.qaId)+"')\">▸ "+esc(x.c.question||"")+"</div>";
+      });
+      h+="</div>";
+    }
+    h+="</div>";
+    box.innerHTML=h;
+  });
+}
+function qaAskPlay(btn,bv,sec){
+  var box=$('qaAskResult'); if(!box) return;
+  var old=box.querySelector('.qa-ask-player'); if(old) old.remove();
+  var d=document.createElement('div'); d.className='qa-ask-player';
+  d.style.cssText='margin-top:10px;position:relative;padding-top:56.25%';
+  var ifr=document.createElement('iframe');
+  ifr.src='https://player.bilibili.com/player.html?bvid='+bv+'&page=1&high_quality=1&danmaku=0'
+    +(isMobileDevice()?'':'&autoplay=1')+(sec?('&t='+sec):'');
+  ifr.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:8px';
+  ifr.setAttribute('scrolling','no'); ifr.setAttribute('frameborder','0');
+  d.appendChild(ifr); box.appendChild(d);
+  try{ d.scrollIntoView({behavior:'smooth',block:'nearest'}); }catch(e){}
+}
+function renderQaAskEgs(){
+  var box=$('qaAskEgs'); if(!box) return;
+  box.innerHTML=QA_ASK_EGS.map(function(t){
+    return '<span class="qa-ask-eg" onclick="qaAskFill(this.textContent)">'+esc(t)+'</span>';
+  }).join('');
+}
+function qaAskFill(t){ var el=$('qaAskInput'); if(el){ el.value=t; qaAsk(); } }
 
 function renderQaNav(){
   var box=$('qaNav'); if(!box) return;

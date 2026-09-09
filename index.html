@@ -1320,6 +1320,8 @@ button,a,input,select,textarea{touch-action:manipulation}
 <script src="data/data_corpus.js"></script>
 <script src="data/data_pair.js"></script>
 <script src="data/data_qa.js"></script>
+<script src="data/qa_terms.js"></script>
+<script src="data/qa_generic.js"></script>
 <script src="data/qa_core.js"></script>
 <script src="data/deprecated_qa.js"></script>
 <script src="data/qa_core2.js"></script>
@@ -2910,8 +2912,9 @@ function qaSeriesCards(g,s){ return qaGroupCards(g).filter(function(c){ return q
 /* ══════ 智能问答（语料检索式，零依赖纯前端）═════
    问句 → 匹配 265 张卡 + 513 条佐证原话 → 返回老师原话 + B站精确秒 + 相关卡片 */
 var QA_ASK_STOP=('的 了 是 在 我 有 和 就 不 人 都 一 一个 上 也 很 到 说 要 去 你 会 着 没有 看 好 自己 这 那 '+
-  '什么 为什么 怎么 如何 吗 呢 吧 啊 请问 一下 可以 能 它 他 她 我们 你们 他们 因为 所以 但是 如果 真的 到底 总是 一直 常常 觉得 感觉').split(' ');
-var QA_ASK_EGS=['为什么阴总是内耗','阳和阴怎么判断','男阳为什么不会求助','女阴为什么越爱越抓','怎么生发对侧能量','四型人格怎么来的'];
+  '什么 为什么 怎么 如何 吗 呢 吧 啊 请问 一下 可以 能 它 他 她 我们 你们 他们 因为 所以 但是 如果 真的 到底 总是 一直 常常 觉得 感觉 '+
+  '怎么办 什么样 是不是 有没有 该不该 会不会 正不正常 如何做 怎样做 为什么总是 凭什么 老是 老是都 求问 想问 请教').split(' ');
+var QA_ASK_EGS=['为什么阴总是内耗','假自体是什么意思','边界感怎么建立','我到底是阴还是阳','怎么生发对侧能量','阴阳是什么'];
 var _qaAskIdx=null;
 function qaAskIdx(){
   if(_qaAskIdx) return _qaAskIdx;
@@ -2920,29 +2923,71 @@ function qaAskIdx(){
   });
   return _qaAskIdx;
 }
+/* 切词：术语词典长词优先最大匹配（权重按长度分级）→ 剩余片段 2-gram（剔除停用词+泛词）
+   token 结构 {w:词, wt:权重}；≥4字:12 / 3字:9 / 2字术语:6 / 普通 2-gram:2 / 英文:3 */
+var _qaTermSet=null;
+function qaTermSet(){
+  if(_qaTermSet) return _qaTermSet;
+  _qaTermSet={};
+  if(typeof QA_TERMS!=='undefined'){
+    for(var i=0;i<QA_TERMS.length;i++) _qaTermSet[QA_TERMS[i]]=QA_TERMS[i].length>=4?12:(QA_TERMS[i].length===3?9:6);
+  }
+  return _qaTermSet;
+}
 function qaAskTokens(s){
-  var t=(s||'').replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g,' ').toLowerCase().split(/\s+/)
-    .filter(function(w){ return w && QA_ASK_STOP.indexOf(w)<0; });
-  var g=[];
-  t.forEach(function(w){
-    if(/[\u4e00-\u9fa5]/.test(w)){
-      if(w.length<=2){ g.push(w); }
-      else{ g.push(w); for(var i=0;i<w.length-1;i++) g.push(w.substr(i,2)); }
-    } else if(w.length>1){ g.push(w); }
+  var raw=(s||'').replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g,' ').toLowerCase();
+  var out=[],seen={};
+  function add(w,wt){ if(!w||seen[w])return; seen[w]=1; out.push({w:w,wt:wt}); }
+  // ① 术语最大正向匹配（长词优先，命中后跳过大词，不再拆 2-gram）
+  var T=qaTermSet();
+  var covered=[],i=0;
+  while(i<raw.length){
+    var hit=null;
+    for(var L=Math.min(6,raw.length-i);L>=2;L--){
+      var sub=raw.substr(i,L);
+      if(T[sub]){ hit=sub; break; }
+    }
+    if(hit){ add(hit,T[hit]); for(var k=0;k<hit.length;k++) covered[i+k]=1; i+=hit.length; }
+    else i++;
+  }
+  // ② 剩余片段走 2-gram（剔除停用词与泛词）
+  raw.split(/\s+/).forEach(function(seg){
+    if(!seg) return;
+    var cn=seg.match(/[\u4e00-\u9fa5]+/g)||[];
+    cn.forEach(function(p){
+      if(p.length<=2){ if(QA_ASK_STOP.indexOf(p)<0 && !T[p]) add(p,2); return; }
+      for(var k=0;k<p.length-1;k++){
+        var g2=p.substr(k,2);
+        if(QA_ASK_STOP.indexOf(g2)>=0) continue;
+        if(typeof QA_GENERIC!=='undefined' && QA_GENERIC.indexOf(g2)>=0) continue;
+        add(g2,2);
+      }
+    });
+    var en=seg.match(/[a-z0-9]{2,}/g)||[];
+    en.forEach(function(w){ add(w,3); });
   });
-  return g;
+  /* ③ 口语单字归一：问句出现「阴 / 阳」单字但未被术语覆盖时，补对应核心术语
+     例：「我到底是阴还是阳」→ 阴性 + 阳性 */
+  function hasTermOf(ch){
+    for(var k=0;k<out.length;k++){ if(out[k].wt>=6 && out[k].w.indexOf(ch)>=0) return true; }
+    return false;
+  }
+  var rawCn=raw.replace(/[^\u4e00-\u9fa5]/g,'');
+  if(rawCn.indexOf('阴')>=0 && !hasTermOf('阴')) add('阴性',6);
+  if(rawCn.indexOf('阳')>=0 && !hasTermOf('阳')) add('阳性',6);
+  return out;
 }
 function qaAskScore(it,g){
   var evTxt=it.evs.map(function(e){ return e.text||''; }).join(' ');
   var s=0,hit=0;
   for(var i=0;i<g.length;i++){
-    var w=g[i],f=0;
-    if(it.q.indexOf(w)>=0) f=6;
-    if(!f && it.a.indexOf(w)>=0) f=4;
-    if(!f && it.qt.indexOf(w)>=0) f=3;
-    if(!f && evTxt.indexOf(w)>=0) f=3;
-    if(!f && it.ins.indexOf(w)>=0) f=2;
-    if(f){ s+=f; hit++; }
+    var w=g[i].w,wt=g[i].wt,f=0;
+    if(it.q.indexOf(w)>=0) f=wt*1.5;
+    if(!f && it.a.indexOf(w)>=0) f=wt;
+    if(!f && it.qt.indexOf(w)>=0) f=wt*0.8;
+    if(!f && evTxt.indexOf(w)>=0) f=wt*0.7;
+    if(!f && it.ins.indexOf(w)>=0) f=wt*0.5;
+    if(f){ s+=f; hit+=wt>=6?2:1; }
   }
   return s>0?{s:s+hit*hit,hit:hit}:null;
 }
@@ -2972,10 +3017,27 @@ function loadCorpus(cb){
 function searchCorpus(g,topN){
   if(!_cc||!_cc.d) return [];
   var out=[],V=_cc.v,D=_cc.d;
+  /* 命中术语时，术语主导排序；普通 2-gram 退化为微调，避免口语碎片抢榜 */
+  var hasTerm=false;
+  for(var m=0;m<g.length;m++){ if(g[m].wt>=6){ hasTerm=true; break; } }
   for(var i=0;i<D.length;i++){
     var d=D[i],t=d[2],sc=0,hit=0;
-    for(var j=0;j<g.length;j++){ if(g[j].length>=2 && t.indexOf(g[j])>=0){ sc+=3; hit++; } }
-    if(hit>0) out.push({bv:V[d[0]],sec:d[1],text:t,s:sc+hit*hit,hit:hit});
+    for(var j=0;j<g.length;j++){
+      var tk=g[j];
+      if(tk.w.length>=2 && t.indexOf(tk.w)>=0){
+        var w2=(hasTerm&&tk.wt<6)?tk.wt*0.35:tk.wt;
+        sc+=w2; hit+=(tk.wt>=6?2:1);
+      }
+    }
+    if(hit>0){
+      /* 权重修正：长段降权（口水段霸榜），过短段也降权（多为追问/接话，信息量低） */
+      var pen=1+Math.max(0,t.length-70)/160;
+      if(t.length<25) pen*=1.8;
+      /* 同 BV 的下一段接续，让「老师原话」读起来完整 */
+      var nx=D[i+1],ext='';
+      if(nx && nx[0]===d[0] && nx[1]-d[1]<=45) ext=nx[2];
+      out.push({bv:V[d[0]],sec:d[1],text:(ext?t+' '+ext:t),s:(sc+hit*hit*2)/pen,hit:hit});
+    }
   }
   out.sort(function(a,b){ return b.s-a.s; });
   return out.slice(0,topN||5);

@@ -255,12 +255,18 @@ def load_clips_new():
 
 def main():
     qa, seen = [], set()
+    # kpId 撞车修正：四型功课卡（q-kp-b*-nanyang/nvyang 等）与 qa_core4 画像卡共用 kpId，
+    # 装配时被 coreKp 过滤出池 → 加 -gk 后缀保持唯一（qaId 不变，GUIDE 引用不受影响）。
+    KP_GK_SUFFIX = {"kp-b1-nanyang": "kp-b1-nanyang-gk", "kp-b2-nvyang": "kp-b2-nvyang-gk",
+                    "kp-b3-nvyin": "kp-b3-nvyin-gk", "kp-b4-nanyin": "kp-b4-nanyin-gk"}
     for f in FILES:
         d = json.load(open(os.path.join(SRC_DIR, f), encoding="utf-8"))
         cards = d.get("cards", [d])
         for c in cards:
             item = convert_card(c)
             if item and item["qaId"] not in seen:
+                if item.get("kpId") in KP_GK_SUFFIX:
+                    item["kpId"] = KP_GK_SUFFIX[item["kpId"]]
                 seen.add(item["qaId"])
                 qa.append(item)
     n_src1 = len(qa)

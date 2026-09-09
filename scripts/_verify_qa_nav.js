@@ -45,7 +45,7 @@ async function main() {
   await sleep(900);
   console.log('   ', await ev(`JSON.stringify({
     crumbs: [...document.querySelectorAll('.qc-item')].map(function(x){return x.textContent}),
-    series: [...document.querySelectorAll('.qs-card')].slice(0,8).map(function(x){
+    chapters: [...document.querySelectorAll('.qs-card')].map(function(x){
       return x.querySelector('.qsc-name').textContent + ':' + x.querySelector('.qsc-num').textContent.replace(' 张','');
     }),
     filterHidden: $('qaFilterBar').style.display === 'none'

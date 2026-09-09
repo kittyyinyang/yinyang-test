@@ -300,6 +300,15 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
 .ev-item .ev-quote{color:#5a5866;font-style:normal}
 .ev-item .ev-go{flex:none;width:30px;height:30px;display:flex;align-items:center;justify-content:center;color:#E8913A;font-size:13px;text-decoration:none;border:1.5px solid rgba(232,145,58,.55);border-radius:50%;background:rgba(232,145,58,.06);transition:all .2s}
 .ev-item .ev-go:hover{background:#E8913A;color:#fff;border-color:#E8913A}
+.ev-item .ev-go[data-on="1"]{background:#3A5480;color:#fff;border-color:#3A5480}
+.ev-item .ev-ext{flex:none;font-size:11px;color:var(--fog);text-decoration:none;border-bottom:1px dashed rgba(120,120,140,.5);line-height:1.6;margin-top:6px;transition:color .2s,border-color .2s}
+.ev-item .ev-ext:hover{color:var(--yin);border-bottom-color:var(--yin)}
+.ev-player{flex:0 0 100%;margin:2px 0 4px}
+.evp-frame{width:100%;aspect-ratio:16/9;border-radius:10px;border:1px solid rgba(212,165,116,.35);background:#1c1c24;display:block;animation:evpIn .25s ease}
+.evp-spin{width:100%;aspect-ratio:16/9;border-radius:10px;border:1px solid rgba(212,165,116,.35);background:#1c1c24;display:flex;align-items:center;justify-content:center}
+.evp-spin::after{content:"";width:26px;height:26px;border:3px solid rgba(232,145,58,.25);border-top-color:#E8913A;border-radius:50%;animation:evpSpin .8s linear infinite}
+@keyframes evpIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes evpSpin{to{transform:rotate(360deg)}}
 /* 标题加粗；要点正文常规、仅引导词粗体（条内分层） */
 .qcard .qcard-q{font-weight:800}
 .insight-item{font-weight:400;color:#4a4956}
@@ -452,6 +461,14 @@ details.deep-wrap[open] summary::before{content:'▾ ';}
 <script src="data/qa_core2.js"></script>
 <script src="data/qa_core3.js"></script>
 <script src="data/qa_core4.js"></script>
+<script src="data/qa_core5.js"></script>
+<script src="data/qa_core6.js"></script>
+<script src="data/qa_core7.js"></script>
+<script src="data/qa_core8.js"></script>
+<script src="data/qa_core9.js"></script>
+<script src="data/qa_core10.js"></script>
+<script src="data/qa_core11.js"></script>
+<script src="data/qa_core12.js"></script>
 <script src="data/qa_clips_new.js"></script>
 <script src="data/quiz_male.js"></script>
 <script src="data/quiz_female.js"></script>
@@ -487,6 +504,14 @@ var QA = [];
   if(typeof QA_CORE2 !== 'undefined') absorbCore(QA_CORE2);
   if(typeof QA_CORE3 !== 'undefined') absorbCore(QA_CORE3);
   if(typeof QA_CORE4 !== 'undefined') absorbCore(QA_CORE4);
+  if(typeof QA_CORE5 !== 'undefined') absorbCore(QA_CORE5);
+  if(typeof QA_CORE6 !== 'undefined') absorbCore(QA_CORE6);
+  if(typeof QA_CORE7 !== 'undefined') absorbCore(QA_CORE7);
+  if(typeof QA_CORE8 !== 'undefined') absorbCore(QA_CORE8);
+  if(typeof QA_CORE9 !== 'undefined') absorbCore(QA_CORE9);
+  if(typeof QA_CORE10 !== 'undefined') absorbCore(QA_CORE10);
+  if(typeof QA_CORE11 !== 'undefined') absorbCore(QA_CORE11);
+  if(typeof QA_CORE12 !== 'undefined') absorbCore(QA_CORE12);
   // ② 长尾层：data_qa（含切片）→ qa_clips_new 兜底；同 kpId 已被核心覆盖的不再入池
   var DEP = (typeof DEPRECATED_QA !== 'undefined') ? DEPRECATED_QA : [];
   var depSet = {};
@@ -712,6 +737,44 @@ function qaEvidenceHtml(c){
   if(!ans.length) html='<div class="ev-item">（本条为编辑整理，未附原文切片）</div>';
   return html;
 }
+/* ─────────── B站切片站内播放 ─────────── */
+function parseBili(link){
+  var m=/video\/(BV[\w]+)/.exec(link||''), t=/[?&]t=(\d+)/.exec(link||'');
+  return { bv:(m?m[1]:''), sec:(t?parseInt(t[1],10):-1) };
+}
+function isMobileDevice(){
+  try{ return window.matchMedia && window.matchMedia('(max-width:768px)').matches; }catch(e){ return false; }
+}
+function toggleEvPlayer(btn){
+  if(!btn) return;
+  var qaId=btn.getAttribute('data-qa'), idx=parseInt(btn.getAttribute('data-idx'),10);
+  var wrap=document.getElementById('evp-'+qaId+'-'+idx);
+  if(!wrap) return;
+  if(btn.getAttribute('data-on')==='1'){ destroyEvPlayer(qaId,idx,btn); return; }
+  var c=qaById(qaId);
+  if(!c || !c.evidence || !c.evidence[idx]) return;
+  var e=c.evidence[idx], p=parseBili(e.link||'');
+  if(!p.bv || isMobileDevice()){ window.open(e.link||'#','_blank'); return; }
+  var others=document.querySelectorAll('.ev-go[data-on="1"]');
+  for(var i=0;i<others.length;i++){ if(others[i]!==btn) destroyEvPlayer(others[i].getAttribute('data-qa'),parseInt(others[i].getAttribute('data-idx'),10),others[i]); }
+  btn.setAttribute('data-on','1'); btn.innerHTML='▣';
+  wrap.innerHTML='<div class="evp-spin"></div>';
+  var ifr=document.createElement('iframe');
+  ifr.className='evp-frame';
+  ifr.src='https://player.bilibili.com/player.html?bvid='+p.bv+'&page=1&high_quality=1&danmaku=0&autoplay=1'+(p.sec>=0?('&t='+p.sec):'');
+  ifr.setAttribute('scrolling','no');
+  ifr.setAttribute('frameborder','no');
+  ifr.setAttribute('allowfullscreen','true');
+  ifr.setAttribute('loading','lazy');
+  ifr.setAttribute('allow','autoplay; fullscreen');
+  ifr.onload=function(){ var sp=wrap.querySelector('.evp-spin'); if(sp) sp.style.display='none'; };
+  wrap.appendChild(ifr);
+}
+function destroyEvPlayer(qaId,idx,btn){
+  var wrap=document.getElementById('evp-'+qaId+'-'+idx);
+  if(wrap) wrap.innerHTML='';
+  if(btn){ btn.removeAttribute('data-on'); btn.innerHTML='▶'; }
+}
 function qaCardHtml(c, q){
   var scenes=(c.scene||[]).map(function(s){
     var m={love:['💗 情感','scene-love'],work:['💼 职场','scene-work'],family:['🏠 家庭','scene-family'],school:['📚 校园','scene-work'],self:['🌙 独处','scene-work']};
@@ -735,10 +798,13 @@ function qaCardHtml(c, q){
       + '</div>';
   }
   var evidenceHtml=(c.evidence && c.evidence.length)
-    ? '<div class="ev-head">▶ 语料佐证 · 原话 '+c.evidence.length+' 条 —— 点右侧播放按钮，跳到B站视频对应位置</div>'
-      + c.evidence.map(function(e){
+    ? '<div class="ev-head">▶ 语料佐证 · 原话 '+c.evidence.length+' 条 —— 点 ▶ 站内看切片，或去 B站看原话</div>'
+      + c.evidence.map(function(e,i){
+          var evLink=esc(e.link||'#');
           return '<div class="ev-item"><span class="ev-quote">「'+hl(e.text||'',q)+'」</span>'
-            +'<a class="ev-go" href="'+esc(e.link||('#'))+'" target="_blank" rel="noopener" title="去B站看原话" aria-label="去B站看原话" onclick="event.stopPropagation()">▶</a></div>';
+            +'<a class="ev-go" href="javascript:void(0)" data-qa="'+esc(c.qaId)+'" data-idx="'+i+'" onclick="event.stopPropagation();toggleEvPlayer(this)" title="站内看切片" aria-label="站内看切片">▶</a>'
+            +'<a class="ev-ext" href="'+evLink+'" target="_blank" rel="noopener" title="去B站看原话">B站 ↗</a>'
+            +'<div class="ev-player" id="evp-'+esc(c.qaId)+'-'+i+'"></div></div>';
         }).join('')
     : qaEvidenceHtml(c);
   return '<div class="qcard" id="card-'+esc(c.qaId)+'" onclick="toggleQa(this)">'
@@ -770,7 +836,11 @@ function toggleQa(el){
   if(!el) return;
   var wasOpen=el.classList.contains('open');
   var cards=document.querySelectorAll('.qcard.open');
-  for(var i=0;i<cards.length;i++) cards[i].classList.remove('open');
+  for(var i=0;i<cards.length;i++){
+    var evs=cards[i].querySelectorAll('.ev-go[data-on="1"]');
+    for(var j=0;j<evs.length;j++) destroyEvPlayer(evs[j].getAttribute('data-qa'),parseInt(evs[j].getAttribute('data-idx'),10),evs[j]);
+    cards[i].classList.remove('open');
+  }
   if(!wasOpen) el.classList.add('open');
 }
 

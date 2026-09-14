@@ -1232,7 +1232,9 @@ button,a,input,select,textarea{touch-action:manipulation}
       -->
       <!-- 知识树导引：搜索 + 分叉图 → 板块目录 → 卡片清单 → 单卡浏览 -->
       <!-- 智能问答（语料检索式）：问 → 匹配卡片 + 老师原话 + B站精确秒 -->
-      <div class="qa-ask-wrap">
+      <!-- 2026-09-15 暂时下线：语料堆叠、与正文关联弱，体验未达标。代码全部保留，
+           重做完成后删掉下面这行的 style="display:none" 即可恢复入口。 -->
+      <div class="qa-ask-wrap" style="display:none">
         <div class="qa-ask-head"><span class="qa-ask-icon">✦</span><span>问老师 · 用语料回答</span></div>
         <div class="qa-ask-row">
           <input id="qaAskInput" class="qa-ask-input" type="search" placeholder="问一句，比如：为什么阴总是内耗？" onkeydown="if(event.key==='Enter')qaAsk()" autocomplete="off">

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 430" width="100%">
+<title>阴阳人格四型 IP · 矢量简笔版 v1</title>
+<desc>纯代码绘制的四型吉祥物：男阳·承重者 / 女阳·破局者 / 女阴·连接者 / 男阴·深潜者，含动物伙伴</desc>
+
+<!-- ===== 共用色板 =====
+  男阳 主色 #C8762E  深 #A8621B  最深 #8B4A12
+  女阳 主色 #D2453C  深 #B8352E
+  女阴 主色 #4A9A94  深 #3D827D
+  男阴 主色 #3F5C8C  深 #33507C
+  肤色 #F7DCC4  领口 #F5D5B8
+  头发 #3A2E28 / #2E2422 / #33292B / #2A2A38
+  眼嘴 #2C2C2A / #8B5A3C
+  木柄 #7A6A52  金饰 #B8860B
+===== -->
+
+<!-- 男阳 · 承重者 -->
+<g id="ip-yang-male">
+  <circle cx="115" cy="170" r="78" fill="#FAEEDA" opacity="0.55"/>
+  <path d="M 68,205 L 115,100 L 162,205 Z" fill="#A8621B"/>
+  <path d="M 92,152 L 115,100 L 138,152 Z" fill="#C8762E"/>
+  <path d="M 75,192 L 155,192 L 145,258 L 85,258 Z" fill="#C8762E"/>
+  <path d="M 75,192 L 155,192 L 152,205 L 78,205 Z" fill="#B0651F"/>
+  <rect x="82" y="222" width="66" height="9" rx="3" fill="#8B4A12"/>
+  <path d="M 100,192 L 115,208 L 130,192 Z" fill="#F5D5B8"/>
+  <circle cx="115" cy="160" r="30" fill="#F7DCC4"/>
+  <path d="M 87,152 Q 115,122 143,152 Q 115,136 87,152 Z" fill="#3A2E28"/>
+  <circle cx="103" cy="159" r="3.5" fill="#2C2C2A"/>
+  <circle cx="127" cy="159" r="3.5" fill="#2C2C2A"/>
+  <path d="M 108,173 Q 115,177 122,173" fill="none" stroke="#8B5A3C" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="72" cy="243" r="11" fill="#8FA86B"/>
+  <circle cx="72" cy="243" r="7" fill="#A8621B"/>
+  <text x="115" y="292" text-anchor="middle" font-size="13" font-weight="500" fill="#633806">男阳 · 承重者</text>
+  <text x="115" y="310" text-anchor="middle" font-size="11" fill="#854F0B">伙伴：山龟</text>
+</g>
+
+<!-- 女阳 · 破局者 -->
+<g id="ip-yang-female">
+  <circle cx="265" cy="170" r="78" fill="#FCEBEB" opacity="0.6"/>
+  <path d="M 232,192 L 298,192 L 312,258 L 218,258 Z" fill="#D2453C"/>
+  <path d="M 232,192 L 298,192 L 300,205 L 230,205 Z" fill="#B8352E"/>
+  <path d="M 320,126 L 336,240" fill="none" stroke="#7A6A52" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 312,140 L 330,133" fill="none" stroke="#B8860B" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="265" cy="160" r="30" fill="#F7DCC4"/>
+  <path d="M 237,154 Q 265,120 293,154 Q 265,136 237,154 Z" fill="#2E2422"/>
+  <path d="M 293,148 Q 318,142 330,158" fill="none" stroke="#2E2422" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 252,154 L 261,150" fill="none" stroke="#2C2C2A" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 275,154 L 284,150" fill="none" stroke="#2C2C2A" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="258" cy="161" r="3.2" fill="#2C2C2A"/>
+  <circle cx="279" cy="161" r="3.2" fill="#2C2C2A"/>
+  <path d="M 260,173 Q 265,177 271,173" fill="none" stroke="#A32D2D" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 300,205 L 314,205" fill="none" stroke="#F7DCC4" stroke-width="8" stroke-linecap="round"/>
+  <text x="265" y="292" text-anchor="middle" font-size="13" font-weight="500" fill="#791F1F">女阳 · 破局者</text>
+  <text x="265" y="310" text-anchor="middle" font-size="11" fill="#A32D2D">伙伴：破晓鹰</text>
+</g>
+
+<!-- 女阴 · 连接者 -->
+<g id="ip-yin-female">
+  <circle cx="415" cy="170" r="78" fill="#E1F5EE" opacity="0.6"/>
+  <path d="M 382,192 Q 372,228 378,258 L 452,258 Q 458,228 448,192 Z" fill="#4A9A94"/>
+  <path d="M 382,192 Q 378,208 379,222 L 451,222 Q 452,208 448,192 Z" fill="#3D827D"/>
+  <circle cx="479" cy="207" r="20" fill="#F7DC6F" opacity="0.25"/>
+  <circle cx="479" cy="207" r="13" fill="#F7DC6F"/>
+  <path d="M 452,203 L 466,204" fill="none" stroke="#7A6A52" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="415" cy="160" r="30" fill="#F7DCC4"/>
+  <path d="M 387,152 Q 415,120 443,152 L 447,192 Q 441,168 434,154 L 396,154 Q 389,168 383,192 Z" fill="#33292B"/>
+  <path d="M 403,158 Q 408,152 413,158" fill="none" stroke="#2C2C2A" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M 422,158 Q 427,152 432,158" fill="none" stroke="#2C2C2A" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M 410,173 Q 415,177 420,173" fill="none" stroke="#C0705F" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 448,200 L 458,203" fill="none" stroke="#F7DCC4" stroke-width="8" stroke-linecap="round"/>
+  <text x="415" y="292" text-anchor="middle" font-size="13" font-weight="500" fill="#04342C">女阴 · 连接者</text>
+  <text x="415" y="310" text-anchor="middle" font-size="11" fill="#0F6E56">伙伴：月光鹿</text>
+</g>
+
+<!-- 男阴 · 深潜者 -->
+<g id="ip-yin-male">
+  <circle cx="565" cy="170" r="78" fill="#E6F1FB" opacity="0.6"/>
+  <path d="M 534,190 L 596,190 L 599,250 L 531,250 Z" fill="#3F5C8C"/>
+  <path d="M 534,190 L 596,190 L 597,203 L 533,203 Z" fill="#33507C"/>
+  <path d="M 531,250 Q 540,240 549,250" fill="none" stroke="#2C4470" stroke-width="2.5"/>
+  <circle cx="617" cy="168" r="25" fill="#1F3A5F"/>
+  <circle cx="617" cy="168" r="25" fill="none" stroke="#3F5C8C" stroke-width="3.5"/>
+  <path d="M 597,176 Q 606,168 617,176 Q 628,184 637,176" fill="none" stroke="#85B7EB" stroke-width="2"/>
+  <circle cx="610" cy="160" r="2.5" fill="#9FE1CB"/>
+  <path d="M 617,193 L 617,250" fill="none" stroke="#7A6A52" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="565" cy="155" r="30" fill="#F7DCC4"/>
+  <path d="M 537,148 Q 565,118 593,148 L 596,178 Q 590,162 585,152 L 545,152 Q 540,162 534,178 Z" fill="#2A2A38"/>
+  <path d="M 553,152 L 562,152" fill="none" stroke="#2C2C2A" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M 573,152 L 582,152" fill="none" stroke="#2C2C2A" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M 559,168 L 573,168" fill="none" stroke="#8B5A3C" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="524" cy="212" r="11" fill="#3F5C8C"/>
+  <path d="M 517,204 L 519,196 L 526,202 Z" fill="#3F5C8C"/>
+  <path d="M 531,204 L 533,196 L 538,203 Z" fill="#3F5C8C"/>
+  <path d="M 537,222 Q 546,216 552,224" fill="none" stroke="#3F5C8C" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="565" y="292" text-anchor="middle" font-size="13" font-weight="500" fill="#042C53">男阴 · 深潜者</text>
+  <text x="565" y="310" text-anchor="middle" font-size="11" fill="#185FA5">伙伴：深海猫</text>
+</g>
+</svg>
